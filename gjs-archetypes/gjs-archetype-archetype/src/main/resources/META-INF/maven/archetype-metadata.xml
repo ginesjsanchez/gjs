@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor xsi:schemaLocation="https://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0 http://maven.apache.org/xsd/archetype-descriptor-1.1.0.xsd" name="semilla-sb-back-archetype"
+    xmlns="https://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <requiredProperties>
+		<!-- These properties function as constants -->
+		<requiredProperty key="defaultVersion">
+			<defaultValue>1.0.0-SNAPSHOT</defaultValue>
+		</requiredProperty>
+		<requiredProperty key="defaultPackaging">
+			<defaultValue>jar</defaultValue>
+		</requiredProperty>
+		<requiredProperty key="defaultYes">
+			<defaultValue>y</defaultValue>
+		</requiredProperty>
+		<requiredProperty key="defaultNo">
+			<defaultValue>n</defaultValue>
+		</requiredProperty>
+		<requiredProperty key="package"> <!-- Not using -->
+			<defaultValue>org.gjs</defaultValue>
+		</requiredProperty>
+		
+		<!-- Real properties -->
+		<requiredProperty key="prefix">
+			<validationRegex>[a-z]{3,5}</validationRegex>
+		</requiredProperty>
+		<requiredProperty key="shortName">
+			<validationRegex>[a-z]{2,}(-[a-z]{2,})</validationRegex>
+		</requiredProperty>
+		<requiredProperty key="lan">
+			<validationRegex>c|c\+\+|c#|java|python|php|npm|[a-z+\-#]+</validationRegex>
+		</requiredProperty>
+		<requiredProperty key="ext">
+			<defaultValue>${lan}</defaultValue>
+			<validationRegex>[a-z]{1,4}</validationRegex>
+		</requiredProperty>
+ 		<requiredProperty key="packaging">
+			<defaultValue>${defaultPackaging}</defaultValue>
+			<validationRegex>[a-z]+</validationRegex>
+		</requiredProperty>
+		<requiredProperty key="groupId">
+			<defaultValue>org.${prefix}.maven.archetypes</defaultValue>
+		</requiredProperty>
+		<requiredProperty key="artifactId">
+			<defaultValue>${prefix}-${shortName}-archetype</defaultValue>
+		</requiredProperty>
+		<requiredProperty key="version">
+			<defaultValue>${defaultVersion}</defaultValue>
+		</requiredProperty>
+ 		<requiredProperty key="projectParentGroupId">
+			<defaultValue>[a-z]{2,}.[a-z]{2,}){2,}</defaultValue>
+			<validationRegex>[a-z]{2,}(.[a-z]{2,}){2,}</validationRegex>
+		</requiredProperty>
+		<requiredProperty key="projectParentArtifactId">
+			<defaultValue>${shortName}</defaultValue>
+			<validationRegex>[a-z]{2,}(-[a-z]{2,})+</validationRegex>
+		</requiredProperty>
+ 		<requiredProperty key="projectParentVersion">
+			<defaultValue>${defaultVersion}</defaultValue>
+			<validationRegex>^[1-9][0-9]*\.[0-9]+\.[0-9]+(-SNAPSHOT|-RC\.[0-9]+)?</validationRegex>
+		</requiredProperty>
+    </requiredProperties>
+	
+	<fileSets>
+		<fileSet filtered="true" packaged="false" encoding="UTF-8">
+		  <directory></directory>
+			  <includes>
+				<include>pom.xml</include>
+				<include>README.md</include>
+				<include>changelog.md</include>
+			  </includes>
+		</fileSet>
+		<fileSet filtered="true" packaged="false" encoding="UTF-8">
+		  <directory>src/main/resources/archetype-resources</directory>
+			  <includes>
+				<include>pom.xml</include>
+				<include>README.md</include>
+				<include>changelog.md</include>
+			  </includes>
+		</fileSet>
+		<fileSet filtered="true" packaged="false" encoding="UTF-8">
+		  <directory>src/main/resources/archetype-resources/src/main/_lan_</directory>
+			  <includes>
+				<include>**</include>
+			  </includes>
+		</fileSet>
+		<fileSet filtered="true" packaged="false" encoding="UTF-8">
+		  <directory>src/main/resources/archetype-resources/src/main/resources</directory>
+			  <includes>
+				<include>**</include>
+			  </includes>
+		</fileSet>
+		<fileSet filtered="true" packaged="false" encoding="UTF-8">
+		  <directory>src/main/resources/archetype-resources/src/test/_lan_</directory>
+			  <includes>
+				<include>**</include>
+			  </includes>
+		</fileSet>
+		<fileSet filtered="true" packaged="false" encoding="UTF-8">
+			<directory>src/main/resources/archetype-resources/src/test/resources</directory>
+			<includes>
+				<include>**</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="true" packaged="false" encoding="UTF-8">
+			<directory>src/main/resources/META-INF</directory>
+			<includes>
+				<include>*.groovy</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="true" packaged="false" encoding="UTF-8">
+			<directory>src/main/resources/META-INF/maven</directory>
+			<includes>
+				<include>archetype-metadata.xml</include>
+			</includes>
+		</fileSet>
+	</fileSets>
+</archetype-descriptor>

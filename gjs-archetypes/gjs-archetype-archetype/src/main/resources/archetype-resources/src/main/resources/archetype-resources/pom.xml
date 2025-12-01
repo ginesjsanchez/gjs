@@ -1,0 +1,46 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+#set( $capitalizedName = $shortName.substring(0,1).toUpperCase() + $shortName.substring(1))
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+		<groupId>${projectParentGroupId}</groupId>
+		<artifactId>${projectParentArtifactId}</artifactId>
+		<version>${projectParentVersion}</version>
+        <relativePath />
+    </parent>
+
+    <groupId>${symbol_dollar}{groupId}</groupId>
+    <artifactId>${symbol_dollar}{artifactId}</artifactId>
+    <version>${symbol_dollar}{version}</version>
+    <packaging>${packaging}</packaging>
+	
+    <name>${symbol_dollar}{capitalizedName}</name>
+    <description>Project ${symbol_dollar}{capitalizedName} in language ${symbol_dollar}{lan}</description>
+
+    <properties>
+		<!-- Language features -->
+		<gjs.source.language>${lan}</gjs.source.language>
+		<gjs.source.extension>${ext}</gjs.source.extension>
+		
+		<!-- Compiler options -->
+				
+		<!-- Dependency versions -->
+		
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+    </build>
+
+    <profiles>
+    </profiles>
+
+</project>

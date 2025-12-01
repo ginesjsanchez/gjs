@@ -1,0 +1,310 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+
+	<parent>
+		<groupId>org.gjs.java.maven</groupId>
+		<artifactId>gjs-java-maven-base-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>    
+		<relativePath>../../gjs-java-base-parents/gjs-java-maven-base-parent</relativePath>
+	</parent>	
+
+    <groupId>org.gjs.java.maven</groupId>
+    <artifactId>gjs-java-maven-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>GJS Java maven plugins parent</name>
+	<description>
+		Maven parent pom for Maven plugins.
+	</description>
+
+	<properties>
+		<gjs-maven-base.version>1.0.0-SNAPSHOT</gjs-maven-base.version>
+		
+		<!-- Apache libraries -->
+		<maven-common-artifact-filters.version>3.4.0</maven-common-artifact-filters.version>
+		<maven-dependency-tree.version>3.3.0</maven-dependency-tree.version>
+		<maven-resolver-api.version>2.0.13</maven-resolver-api.version>
+		<surefire-api.version>3.5.4</surefire-api.version>
+		<ant.version>1.10.15</ant.version>
+		<bcel.version>6.11.0</bcel.version>
+		
+		<!-- Plexus -->
+		<plexus-compiler-api.version>2.16.1</plexus-compiler-api.version>
+		<plexus-container-default.version>2.1.1</plexus-container-default.version>
+		<plexus-utils.version>4.0.2</plexus-utils.version>
+		<plexus-archiver.version>4.10.4</plexus-archiver.version>
+		<plexus-build-api.version>1.2.0</plexus-build-api.version>
+		<sisu-guava.version>0.11.1</sisu-guava.version>
+		<sisu-inject-plexus.version>2.6.0</sisu-inject-plexus.version>
+		
+		<!-- Apache extensions -->
+		<wagon-webdav-jackrabbit.version>3.5.3</wagon-webdav-jackrabbit.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- Gjs -->
+			<dependency>
+				<groupId>org.gjs.java.maven.base</groupId>
+				<artifactId>gjs-maven-common-base</artifactId>
+				<version>${gjs-maven-base.version}</version>
+			</dependency>
+			
+			<!-- Apache maven -->
+			<dependency>
+				<groupId>org.apache.maven</groupId>
+				<artifactId>maven-plugin-api</artifactId>
+				<version>${maven.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.maven</groupId>
+				<artifactId>maven-artifact</artifactId>
+				<version>${maven.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.maven</groupId>
+				<artifactId>maven-compat</artifactId>
+				<version>${maven.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.maven</groupId>
+				<artifactId>maven-core</artifactId>
+				<version>${maven.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.maven</groupId>
+				<artifactId>maven-model</artifactId>
+				<version>${maven.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			
+			<!-- Apache libraries -->
+			<dependency>
+				<groupId>org.apache.ant</groupId>
+				<artifactId>ant</artifactId>
+				<version>${ant.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.bcel</groupId>
+				<artifactId>bcel</artifactId>
+				<version>${bcel.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.maven.shared</groupId>
+				<artifactId>maven-common-artifact-filters</artifactId>
+				<version>${maven-common-artifact-filters.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.maven.shared</groupId>
+				<artifactId>maven-dependency-tree</artifactId>
+				<version>${maven-dependency-tree.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.maven.surefire</groupId>
+				<artifactId>surefire-api</artifactId>
+				<version>${surefire-api.version}</version>
+			</dependency>			
+			<dependency>
+				<groupId>org.apache.maven.surefire</groupId>
+				<artifactId>surefire-booter</artifactId>
+				<version>${surefire-api.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.maven.surefire</groupId>
+				<artifactId>maven-surefire-common</artifactId>
+				<version>${surefire-api.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.maven.resolver</groupId>
+				<artifactId>maven-resolver-api</artifactId>
+				<version>${maven-resolver-api.version}</version>
+			</dependency>	
+			<dependency>
+				<groupId>org.apache.maven.resolver</groupId>
+				<artifactId>maven-resolver-util</artifactId>
+				<version>${maven-resolver-api.version}</version>
+			</dependency>	
+			
+			<!-- Plexus -->
+			<dependency>
+				<groupId>org.codehaus.plexus</groupId>
+				<artifactId>plexus-compiler-api</artifactId>
+				<version>${plexus-compiler-api.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.plexus</groupId>
+				<artifactId>plexus-container-default</artifactId>
+				<version>${plexus-container-default.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.plexus</groupId>
+				<artifactId>plexus-utils</artifactId>
+				<version>${plexus-utils.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.plexus</groupId>
+				<artifactId>plexus-archiver</artifactId>
+				<version>${plexus-archiver.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.codehaus.plexus</groupId>
+						<artifactId>plexus-component-api</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.plexus</groupId>
+				<artifactId>plexus-build-api</artifactId>
+				<version>${plexus-build-api.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.sonatype.sisu</groupId>
+				<artifactId>sisu-guava</artifactId>
+				<version>${sisu-guava.version}</version>
+			</dependency>
+			<!-- TODO Update org.sonatype.sisu.sisu-inject-plexus to
+			<dependency>
+				<groupId>org.eclipse.sisu</groupId>
+				<artifactId>org.eclipse.sisu.plexus</artifactId>
+				<version>0.9.0.M4</version>
+			</dependency>
+			-->
+			<dependency>
+				<groupId>org.sonatype.sisu</groupId>
+				<artifactId>sisu-inject-plexus</artifactId>
+				<version>${sisu-inject-plexus.version}</version>
+			</dependency>			
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.gjs.java.maven.base</groupId>
+			<artifactId>gjs-maven-common-base</artifactId>
+		</dependency>
+		
+		<!-- Apache maven -->
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-plugin-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-artifact</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-compat</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-model</artifactId>
+		</dependency>
+		
+		<!-- Apache libraries -->
+		<dependency>
+			<groupId>org.apache.ant</groupId>
+			<artifactId>ant</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.bcel</groupId>
+			<artifactId>bcel</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.shared</groupId>
+			<artifactId>maven-common-artifact-filters</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.shared</groupId>
+			<artifactId>maven-dependency-tree</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.surefire</groupId>
+			<artifactId>surefire-api</artifactId>
+		</dependency>			
+		<dependency>
+			<groupId>org.apache.maven.surefire</groupId>
+			<artifactId>surefire-booter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.surefire</groupId>
+			<artifactId>maven-surefire-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.resolver</groupId>
+			<artifactId>maven-resolver-api</artifactId>
+		</dependency>	
+		<dependency>
+			<groupId>org.apache.maven.resolver</groupId>
+			<artifactId>maven-resolver-util</artifactId>
+		</dependency>	
+		
+		<!-- Plexus -->
+		<dependency>
+			<groupId>org.codehaus.plexus</groupId>
+			<artifactId>plexus-compiler-api</artifactId>				
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.plexus</groupId>
+			<artifactId>plexus-container-default</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.plexus</groupId>
+			<artifactId>plexus-utils</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.plexus</groupId>
+			<artifactId>plexus-archiver</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.plexus</groupId>
+			<artifactId>plexus-build-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.sonatype.sisu</groupId>
+			<artifactId>sisu-guava</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.sonatype.sisu</groupId>
+			<artifactId>sisu-inject-plexus</artifactId>
+		</dependency>
+		
+		<!-- Xml serialization -->
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>xml-apis</groupId>
+			<artifactId>xml-apis</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+			</plugins>
+		</pluginManagement>		
+
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-webdav-jackrabbit</artifactId>
+				<version>${wagon-webdav-jackrabbit.version}</version>
+			</extension>
+		</extensions>
+
+		<plugins>
+		</plugins>
+	</build>		
+</project>

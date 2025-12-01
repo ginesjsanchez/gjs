@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">    
+    <modelVersion>4.0.0</modelVersion>    
+	<parent>
+		<groupId>org.gjs.maven.archetypes</groupId>    
+		<artifactId>gjs-archetype-parent</artifactId>    
+		<version>1.0.0-SNAPSHOT</version>    
+		<relativePath>../gjs-archetype-parent</relativePath>
+	</parent>	
+    
+    <groupId>org.gjs.maven.archetypes</groupId>    
+    <artifactId>gjs-archetype-archetype</artifactId>    
+    <version>1.0.0-SNAPSHOT</version>    
+    <packaging>maven-archetype</packaging>    
+    
+    <name>GJS archetype's archetype</name>    
+    <description>    
+  --------------------------------------------------------    
+  Project gjs-archetype-archetype    
+  --------------------------------------------------------    
+    
+  Archetype to generate the basic structure of a generic Maven archetype project.
+  Example of use: This command generates the gjs-c-lib-archetype project:    
+     
+    mvn archetype:generate \
+		-DarchetypeGroupId=org.gjs.maven.archetypes \
+		-DarchetypeArtifactId=gjs-archetype-archetype \
+		-DarchetypeVersion=1.0.0-SNAPSHOT  \
+		-Dprefix=gjs -DshortName=c-lib -Dlan=c -Dext=c -Dpackaging=nar \
+		-DprojectParentGroupId=org.gjs \
+		-DprojectParentArtifactId=gjs-parent \
+		-DprojectParentVersion=1.0.0-SNAPSHOT 							    
+    
+  ====================================================================================    
+	Archetype Parameters:
+
+	* prefix: Prefix of the archetype's name. Always lowercase.
+
+	* shortName: Name of the archetype. Always lowercase. Allows two words separated by a hyphen.
+
+	* groupId: The group of the archetype artifact. Default is org.${prefix}.maven.archetypes. Not required.
+
+	* artifactId: The name of the archetype artifact. Default is ${prefix}-${shortName}-archetype. Not required.
+
+	* lan: The project's programming language. Enabled: c|c++|c#|java|python|php
+
+	* ext: The programming language code file extensin. Default is ${lan}
+
+	* packaging: The project's artifact packagind. Default is jar.
+
+	* version: The archetype version. Default is 1.0.0-SNAPSHOT. Not required.           
+	
+ 	* projectParentGroupId: The group of the parent pom of the generated projects. 
+
+	* projectParentArtifactId: The name of the parent pom of the generated projects.
+
+ 	* projectParentVersion: The version of the parent pom of the generated projects.           
+                   
+  ====================================================================================    
+      
+    </description>    
+      
+    <properties>    
+    </properties>    
+    
+    <build>    
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+    </build>    
+    
+</project>    

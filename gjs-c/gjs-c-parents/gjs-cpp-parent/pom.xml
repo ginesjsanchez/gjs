@@ -1,0 +1,66 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.gjs.c</groupId>
+		<artifactId>gjs-c-nar-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../gjs-c-nar-parent</relativePath>
+	</parent>
+
+    <artifactId>gjs-cpp-parent</artifactId>
+	<packaging>pom</packaging>
+	
+	<name>Maven C++ NAR Parent Pom</name>
+	<description>Parent pom for C++ projects using the nar-maven-plugin.</description>
+	
+	<properties>
+		<!-- Language features -->
+		<gjs.source.language>c++</gjs.source.language>
+		<gjs.source.extension>cpp</gjs.source.extension>
+
+		<!-- Compiler options -->
+		<gjs.nar.compiler>g++</gjs.nar.compiler>
+		<gjs.nar.linker>g++</gjs.nar.linker>		
+		<gjs.nar.compiler.language>c++</gjs.nar.compiler.language>
+		<gjs.nar.cpp.version>20</gjs.nar.cpp.version>
+		<gjs.nar.language.standard>c++${gjs.nar.cpp.version}</gjs.nar.language.standard>
+		<!-- TODO: Asegurar que cppcheck es la última version. La version actual que tengo no implementa C++20 por eso hay que usar la c++14 -->
+		<gjs.nar.cpp.language.option>--std=${gjs.nar.language.standard}</gjs.nar.cpp.language.option>
+	</properties>
+	
+	<dependencyManagement>
+		<dependencies>
+		</dependencies>
+	</dependencyManagement>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.gjs.java.maven.plugins</groupId>
+				<artifactId>nar-maven-plugin</artifactId>
+				<configuration>
+					<cpp>
+						<options combine.children="append">
+							<option>${gjs.nar.cpp.language.option}</option>
+						</options>
+
+						<includePaths combine.children="append">
+							<includePath>
+								<path>${glibDirInclude}</path>
+							</includePath>
+						</includePaths>						
+					</cpp>
+					
+					<linker>
+						<testOptions combine.children="append">
+							<!--option> -Wl,++wrap=exit</option--> 
+							<!--option> -Wl,++wrap=getenv</option--> 
+						</testOptions>
+					</linker>
+					
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>	
+</project>

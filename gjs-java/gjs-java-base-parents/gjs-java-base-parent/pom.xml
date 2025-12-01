@@ -1,0 +1,348 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.gjs</groupId>
+		<artifactId>gjs-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../../../gjs-parent</relativePath>
+	</parent>	
+
+    <groupId>org.gjs.java</groupId>
+    <artifactId>gjs-java-base-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>GJS common Java base parent</name>
+	<description>
+		Maven Java general parent pom.
+		.
+		.	Pom organization:
+		.
+		.	/gjs-parent
+		.		|
+		.		|--/gjs-java-base-parent
+		.	   			|
+		.				|--/gjs-java-parent
+		.				|       |
+		.		     	|       |--/gjs-java-artifact-parent
+		.		      	|       |
+		.		       	|       |--/gjs-java-war-parent
+		.	  	 		|       		|
+		.				|       		|--/gjs-springboot-parent
+		.		     	|
+		.		      	|--/gjs-java-maven-base-parent
+		.		     	        |
+		.		      		  	|--/gjs-java-maven-parent
+		.
+		Needs profile cpp with special properties in settings.xml file: 
+		
+			* jdk25Dir : Directory of Java Jdk-25 installation
+		
+			* jdk21Dir : Directory of Java Jdk-21 installation
+		
+			* jdk17Dir : Directory of Java Jdk-17installation
+		
+			* jdk11Dir : Directory of Java Jdk-11 installation
+		
+			* jdk8Dir  : Directory of Java Jdk-8 installation
+	</description>
+
+	<properties>
+		<!-- Default programming language features -->
+		<gjs.source.language>java</gjs.source.language>
+		<gjs.source.extension>java</gjs.source.extension>
+		
+		<!-- Compilation config -->
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+		
+		<!-- Dependency versions -->
+		<!-- Gjs versions -->
+		<gjs-java-common-test-base.version>1.0.0-SNAPSHOT</gjs-java-common-test-base.version>
+		
+		<!-- Apache reporting plugins -->
+		<maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
+		<maven-jxr-plugin.version>3.6.0</maven-jxr-plugin.version>		
+		
+		<!-- Apache commons-->
+		<apache.commons-io.version>2.19.0</apache.commons-io.version>
+		<apache.commons-collections.version>4.4</apache.commons-collections.version>
+        <apache.commons-text.version>1.14.0</apache.commons-text.version>
+		
+		<!-- Xml serialization -->
+		<xerces.version>2.12.2</xerces.version>
+		<xml-apis.version>2.0.2</xml-apis.version>
+		
+		<!-- Logging -->
+		<slf4j.version>2.0.17</slf4j.version>
+		<logback.version>1.5.21</logback.version>
+
+		<!-- JUnit -->
+		<junit-jupiter.version>6.0.1</junit-jupiter.version>
+		
+		<!-- Mockito -->
+		<mockito.version>5.20.0</mockito.version>
+		
+		<!-- Lombok -->
+		<lombok.version>1.18.42</lombok.version>
+	</properties>
+	
+	<dependencyManagement>
+		<dependencies>
+            <!-- Apache commons -->
+			<dependency>
+			    <groupId>commons-io</groupId>
+			    <artifactId>commons-io</artifactId>
+			    <version>${apache.commons-io.version}</version>
+			</dependency>
+			<dependency>
+			    <groupId>org.apache.commons</groupId>
+			    <artifactId>commons-collections4</artifactId>
+			    <version>${apache.commons-collections.version}</version>
+			</dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-text</artifactId>
+                <version>${apache.commons-text.version}</version>
+            </dependency>
+
+			<!-- Xml serialization -->
+			<dependency>
+				<groupId>xerces</groupId>
+				<artifactId>xercesImpl</artifactId>
+				<version>${xerces.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>xml-apis</groupId>
+				<artifactId>xml-apis</artifactId>
+				<version>${xml-apis.version}</version>
+			</dependency>
+			
+			<!-- Lombok Extension -->
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${lombok.version}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<!-- Logging -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-core</artifactId>
+				<version>${logback.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${logback.version}</version>
+				<scope>compile</scope>
+			</dependency>	
+			
+			<!-- Test -->
+			<dependency>
+				<groupId>org.gjs.java.base</groupId>
+				<artifactId>gjs-java-common-test-base</artifactId>
+				<version>${gjs-java-common-test-base.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter</artifactId>
+				<version>${junit-jupiter.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-api</artifactId>
+				<version>${junit-jupiter.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-junit-jupiter</artifactId>
+				<version>${mockito.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>${mockito.version}</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<!-- Logging -->
+		<!--
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		-->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+
+		<!-- Lombok Extension -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+		
+		<!-- Test -->
+	    <dependency>
+	        <groupId>org.junit.jupiter</groupId>
+	        <artifactId>junit-jupiter</artifactId>
+	    </dependency>
+      	<dependency>
+	        <groupId>org.junit.jupiter</groupId>
+	        <artifactId>junit-jupiter-api</artifactId>
+      	</dependency>
+		<dependency>
+		    <groupId>org.mockito</groupId>
+		    <artifactId>mockito-junit-jupiter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+		</dependency>
+	</dependencies>
+	
+	<build>
+		<pluginManagement>
+			<plugins>
+			</plugins>
+		</pluginManagement>		
+
+		<extensions>
+		</extensions>
+
+		<plugins>
+		</plugins>
+	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${maven-javadoc-plugin.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>${maven-jxr-plugin.version}</version>
+			</plugin>
+		</plugins>
+	</reporting>
+	
+	<profiles>
+		<profile>
+			<id>java</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-enforcer-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>enforce-environment-ok</id>
+								<goals>
+									<goal>enforce</goal>
+								</goals>
+								<configuration>
+									<rules>
+										<banDuplicatePomDependencyVersions/>
+										<requireMavenVersion>
+											<version>3.8</version>
+										</requireMavenVersion>
+										<requireJavaVersion>
+											<version>${java.version}</version>
+										</requireJavaVersion>
+									</rules>
+									<fail>true</fail>
+								</configuration>
+							</execution>
+							<execution>
+								<id>enforce-profiles-ok</id>
+								<goals>
+									<goal>enforce</goal>
+								</goals>
+								<configuration>
+									<rules>
+										<requireActiveProfile>
+											<profiles>jdk-25,jdk-21,jdk-17,jdk-11,jdk-8</profiles>
+											<all>false</all>
+										</requireActiveProfile>
+									</rules>
+									<fail>true</fail>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>  
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>jdk-25</id>
+			<properties>				
+				<!-- Compilation config -->
+				<java.version>21</java.version>
+				<!-- Jdk -->
+				<gjs.java.jdk.dir>${jdk21Dir}</gjs.java.jdk.dir>
+			</properties>
+		</profile>
+		<profile>
+			<id>jdk-21</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>				
+				<!-- Compilation config -->
+				<java.version>21</java.version>
+				<!-- Jdk -->
+				<gjs.java.jdk.dir>${jdk21Dir}</gjs.java.jdk.dir>
+			</properties>
+		</profile>
+		<profile>
+			<id>jdk-17</id>
+			<properties>				
+				<!-- Compilation config -->
+				<java.version>17</java.version>
+				<!-- Jdk -->
+				<gjs.java.jdk.dir>${jdk17Dir}</gjs.java.jdk.dir>
+			</properties>
+		</profile>
+		<profile>
+			<id>jdk-11</id>
+			<properties>				
+				<!-- Compilation config -->
+				<java.version>11</java.version>
+				<!-- Jdk -->
+				<gjs.java.jdk.dir>${jdk11Dir}</gjs.java.jdk.dir>
+			</properties>
+		</profile>
+		<profile>
+			<id>jdk-8</id>
+			<properties>				
+				<!-- Compilation config -->
+				<java.version>8</java.version>
+				<!-- Jdk -->
+				<gjs.java.jdk.dir>${jdk8Dir}</gjs.java.jdk.dir>
+			</properties>
+		</profile>
+	</profiles>
+</project>

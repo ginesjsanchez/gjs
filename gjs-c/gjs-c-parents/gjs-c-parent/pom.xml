@@ -1,0 +1,30 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.gjs.c</groupId>
+		<artifactId>gjs-c-nar-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../gjs-c-nar-parent</relativePath>
+	</parent>
+
+    <artifactId>gjs-c-parent</artifactId>
+	<packaging>pom</packaging>
+	
+	<name>Maven C NAR Parent Pom</name>
+	<description>Parent pom for C projects using the nar-maven-plugin.</description>
+
+	<properties>
+		<!-- Language features -->
+		<gjs.source.language>c</gjs.source.language>
+		<gjs.source.extension>c</gjs.source.extension>
+
+		<!-- Compiler oprions -->
+		<gjs.nar.compiler>gcc</gjs.nar.compiler>
+		<gjs.nar.linker>gcc</gjs.nar.linker>
+		
+		<gjs.nar.compiler.language>c</gjs.nar.compiler.language>
+		<gjs.nar.language.standard>c99</gjs.nar.language.standard>
+	</properties>
+	
+</project>

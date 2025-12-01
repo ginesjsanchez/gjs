@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.gjs.c</groupId>
+    <artifactId>gjs-c-parents</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+	
+    <name>GJS C/C++ parent poms</name>
+    <description>
+		Pom parent's grouper for C/C++
+	</description>
+     
+    <modules>
+        <module>gjs-c-common-parent</module>
+        <module>gjs-c-nar-parent</module>
+        <module>gjs-c-makefile-parent</module>
+        <module>gjs-c-parent</module>
+        <module>gjs-cpp-parent</module>
+		<module>gjs-c-lib-parent</module>
+		<module>gjs-c-stlib-parent</module>
+		<module>gjs-c-exe-parent</module>
+		<module>gjs-cpp-lib-parent</module>
+		<module>gjs-cpp-stlib-parent</module>
+		<module>gjs-cpp-exe-parent</module>
+    </modules>
+    
+ </project>

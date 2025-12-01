@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">    
+    <modelVersion>4.0.0</modelVersion>    
+
+	<parent>
+		<groupId>org.gjs</groupId>    
+		<artifactId>gjs-parent</artifactId>    
+		<version>1.0.0-SNAPSHOT</version>    
+		<relativePath>../../gjs-parent</relativePath>
+	</parent>	
+ 
+    <groupId>org.gjs.maven.archetypes</groupId>    
+    <artifactId>gjs-archetype-parent</artifactId>    
+    <version>1.0.0-SNAPSHOT</version>    
+    <packaging>pom</packaging>    
+   
+    <name>GSJ archetype parent</name>    
+    <description>Parent pom for Maven archetypes.</description>    
+       
+    <properties>    
+		<archetype.test.noLog>true</archetype.test.noLog>
+		<archetype.test.streamLogs>true</archetype.test.streamLogs>
+		
+		<!-- Maven plugin versions -->
+        <maven.archetype.version>3.3.0</maven.archetype.version>    
+		
+		<!-- Dependency versions -->
+        <wagon.webdav.jackrabbit.version>3.5.3</wagon.webdav.jackrabbit.version>    
+   </properties>    
+    
+    <build>    
+        <extensions>    
+            <extension>    
+                <groupId>org.apache.maven.wagon</groupId>    
+                <artifactId>wagon-webdav-jackrabbit</artifactId>    
+                <version>${wagon.webdav.jackrabbit.version}</version>    
+            </extension>    
+            <extension>    
+                <groupId>org.apache.maven.archetype</groupId>    
+                <artifactId>archetype-packaging</artifactId>    
+                <version>${maven.archetype.version}</version>    
+             </extension>    
+        </extensions>    
+    
+        <pluginManagement>    
+            <plugins>    
+                <plugin>    
+					<groupId>org.apache.maven.plugins</groupId>    
+                    <artifactId>maven-archetype-plugin</artifactId>    
+                    <version>${maven.archetype.version}</version> 
+					<!--
+					<executions>
+						<execution>
+							<id>local-install</id>
+							<goals>
+								<goal>update-local-catalog</goal>
+							</goals>
+							<phase>post-install</phase>
+						</execution>
+					</executions>
+					-->
+			    </plugin>    
+                <plugin>    
+					<groupId>org.apache.maven.plugins</groupId>    
+					<artifactId>maven-resources-plugin</artifactId>    
+					<configuration>    
+						<includeEmptyDirs>true</includeEmptyDirs>    
+					</configuration>    
+                </plugin>    
+            </plugins>    
+        </pluginManagement>          
+    </build>    
+ 	
+</project>    

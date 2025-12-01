@@ -1,0 +1,64 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+#set( $capitalizedName = $shortName.substring(0,1).toUpperCase() + $shortName.substring(1))
+<?xml version="1.0" encoding="UTF-8"?>    
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">    
+    <modelVersion>4.0.0</modelVersion>    
+    
+	<parent>
+		<groupId>org.gjs.maven.archetypes</groupId>    
+		<artifactId>gjs-archetype-parent</artifactId>    
+		<version>1.0.0-SNAPSHOT</version>    
+		<relativePath/>
+	</parent>	
+
+    <groupId>${groupId}</groupId>    
+    <artifactId>${artifactId}</artifactId>    
+    <version>${version}</version>    
+    <packaging>maven-archetype</packaging>    
+    
+    <name>${capitalizedName} Maven archetype</name>    
+    <description>    
+      
+  --------------------------------------------------------    
+  ${capitalizedName} Maven archetype   
+  --------------------------------------------------------    
+    
+  Archetype to generate the basic structure of a simple project in language ${lan}.
+  Example of use: This command generates the test-project project:    
+     
+    mvn archetype:generate \
+		-DarchetypeGroupId=${groupId} \
+		-DarchetypeArtifactId=${artifactId} \
+		-DarchetypeVersion=${version} \
+		-DshortName=test-project \
+		-DgroupId=org.gjs.test  \
+		-DartifactId=test-project  \
+		-Dpackage=org.gjs.test \
+		-Dversion=1.0.0-SNAPSHOT
+    
+  ====================================================================================    
+	Archetype Parameters:
+
+	* shortName: Name of the project. Always lowercase. Allows two words separated by a hyphen.
+
+	* groupId: The group of the project artifact. 
+
+	* artifactId: The name of the project artifact. Default is ${shortName}. Not required.
+
+	* package: The project packaging of the sourc code. Default is ${groupId}. Not required.
+
+	* version: The project version. Default is 1.0.0-SNAPSHOT. Not required.
+                 
+  ====================================================================================    
+      
+    </description>    
+      
+    <properties>    
+	</properties>    
+    
+    <build>    
+    </build>    
+    	
+</project>    

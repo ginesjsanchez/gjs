@@ -1,0 +1,41 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.gjs.c</groupId>
+		<artifactId>gjs-cpp-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../gjs-cpp-parent</relativePath>
+	</parent>
+
+    <artifactId>gjs-cpp-lib-parent</artifactId>
+	<packaging>pom</packaging>
+
+	<name>Maven C++ Library Parent Pom</name>
+	<description>Parent pom for generate a C++ dynamic library using the nar-maven-plugin.</description>
+	
+	<properties>
+		<finalPrefix>${libFinalPrefix}</finalPrefix>
+		<checkSeverity>style</checkSeverity>	
+	</properties>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<!--
+				<groupId>org.gjs.java.maven.plugins</groupId>
+				-->
+				<groupId>com.github.maven-nar</groupId>
+				<artifactId>nar-maven-plugin</artifactId>
+				<configuration>
+					<libraries>
+						<library>
+							<type>shared</type>
+							<narSystemPackage>${project.groupId}</narSystemPackage>
+						</library>
+					</libraries>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

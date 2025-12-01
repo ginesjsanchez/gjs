@@ -1,0 +1,146 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.gjs</groupId>
+		<artifactId>gjs-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../../../gjs-parent</relativePath>
+	</parent>	
+
+    <groupId>org.gjs.c</groupId>
+    <artifactId>gjs-c-common-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>GJS common C/C++ parent</name>
+	<description>
+		Maven C/C++ general parent pom.
+		.
+		.	Pom organization:
+		.
+		.	/gjs-parent
+		.		|
+		.		|--/gjs-c-common-parent
+		.		        |
+		.		        |--/gjs-c-nar-parent
+		.	  	 				|
+		.						|--/gjs-c-parent
+		.								|
+		.								|--/gjs-c-lib-parent
+		.								|
+		.								|--/gjs-c-stlib-parent
+		.								|
+		.								|--/gjs-c-exe-parent
+		.						|
+		.						|--/gjs-cpp-parent
+		.								|
+		.								|--/gjs-cpp-lib-parent
+		.								|
+		.								|--/gjs-cpp-stlib-parent
+		.								|
+		.								|--/gjs-cpp-exe-parent
+		.
+		Needs profile cpp with special properties in settings.xml file: 
+		
+			* cygwinDir : Directory of Cygwin installation (from gjs-parent)
+			
+			* oracleDir : Directory of Oracle installation
+	</description>
+
+	<properties>
+		<!-- NAR -->
+		<nar-maven-plugin.version>4.0.0-SNAPSHOT280</nar-maven-plugin.version>
+
+		<!-- Default programming language features -->
+		<gjs.source.language>c</gjs.source.language>
+		<gjs.source.extension>c</gjs.source.extension>
+
+		<!-- Binary prefixes -->
+		<exeFinalPrefix></exeFinalPrefix>
+		<libFinalPrefix>lib</libFinalPrefix>
+		
+		<!-- System Libraries directories -->
+		<sysLibDir1>${cygwinDir}/lib</sysLibDir1>		
+		<sysLibDir2>${cygwinDir}/usr/local/lib</sysLibDir2>
+		<sysIncDir>${cygwinDir}/usr/include</sysIncDir>
+		<sysIncDir2>${cygwinDir}/usr/local/include</sysIncDir2>
+		
+		<!-- CppCheck Tool directory -->
+		<cppCheckDir>${cygwinDir}/bin</cppCheckDir>
+		
+		<!-- GLib  directory -->
+		<glibDir>${cygwinDir}/lib/glib-2.0</glibDir>
+		<glibDirInclude>${glibDir}/include</glibDirInclude>
+		
+		<!-- Open Xml parser directory -->
+		<xmlDir>${cygwinDir}/usr/x86_64-w64-mingw32/sys-root/mingw/lib/cmake/libxml2</xmlDir>
+		<xmlDirInclude>${xmlDir}/include</xmlDirInclude>
+		
+		<!-- Open SSL directory -->
+		<sslDir>${cygwinDir}/lib/openssl-1.0</sslDir>
+		<sslDirInclude>${sslDir}/include</sslDirInclude>
+
+		<!-- Oracle client directory -->
+		<oraClientDir>${oraDir}/instantclient_19_12</oraClientDir>
+		<oraDirInclude>${oraDir}/sdk/include</oraDirInclude>
+	</properties>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<!-- Apache Maven plugins -->
+				
+				<!--
+				<plugin>
+					<groupId>org.sonatype.plugins</groupId>
+					<artifactId>nexus-staging-maven-plugin</artifactId>
+					<version>1.6.13</version>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>wagon-maven-plugin</artifactId>
+					<version>2.0.2</version>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>wagon-ssh-external</artifactId>
+					<version>3.5.2</version>
+				</plugin>
+				-->
+			</plugins>
+		</pluginManagement>		
+
+		<extensions>
+			<!--
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ftp</artifactId>
+			</extension>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ssh</artifactId>
+			</extension>
+			-->
+		</extensions>
+
+		<plugins>
+			<plugin>
+			   <groupId>org.apache.maven.plugins</groupId>
+			   <artifactId>maven-deploy-plugin</artifactId>
+			   <configuration>
+				  <skip>true</skip>
+			   </configuration>
+			</plugin>		
+		</plugins>
+	</build>
+		
+	<profiles>
+		<profile>
+			<id>cpp</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+	</profiles>
+</project>

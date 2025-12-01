@@ -1,0 +1,45 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.gjs.c</groupId>
+		<artifactId>gjs-c-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../gjs-c-parent</relativePath>
+	</parent>
+
+    <artifactId>gjs-c-stlib-parent</artifactId>
+	<packaging>pom</packaging>
+
+	<properties>
+		<finalPrefix>${libFinalPrefix}</finalPrefix>
+		<checkSeverity>style</checkSeverity>	
+	</properties>
+	
+	<name>Maven C Static Library Parent Pom</name>
+	<description>Parent pom for generate a C++ static library using the nar-maven-plugin.</description>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<!--
+				<groupId>org.gjs.java.maven.plugins</groupId>
+				-->
+				<groupId>com.github.maven-nar</groupId>
+				<artifactId>nar-maven-plugin</artifactId>
+				<configuration>
+					<libraries>
+						<library>
+							<type>static</type>
+							<narSystemPackage>${project.grouupId}</narSystemPackage>
+						</library>
+					</libraries>
+					<linker>
+						<options combine.self="override">
+						</options>
+					</linker>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

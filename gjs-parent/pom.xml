@@ -1,0 +1,520 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.gjs</groupId>
+    <artifactId>gjs-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+    <name>GJS Parent</name>    
+    <description>
+	Common parent pom for all kind of projects and archetypes.
+	
+	Profiles:
+		* win | linux : It is automatically selected based on the operating system
+		
+		* cygwin      : It is activated if the operating system is Windows and the CYGWIN environment variable has been defined.
+	
+		* debug		  : It is activated if the DEBUG porperty has been defined
+	
+	Environtment propeties:
+	
+		* CYGWIN: To activate cygwin profile instead the windows profile 
+					export CYGWIN=1
+				  To deactivate cygwin profile 		
+					export CYGWIN
+					
+	Needs properties in settings.xml file: 
+		
+		* cygwinDir : Directory of Cygwin installation (indirectly, only for cygwin profile)
+					
+	</description>    
+
+    <organization>    
+        <name>GJ Software</name>    
+    </organization> 
+	
+    <licenses>    
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+    </licenses>    
+ 	<inceptionYear>2025</inceptionYear>
+	<developers>
+		<developer>
+			<id>gjs</id>
+			<name>GJS</name>
+			<email>gjsoft@gmx.es</email>
+			<roles>
+				<role>Master</role>
+			</roles>
+			<timezone>+1</timezone>			
+		</developer>
+	</developers>
+     
+    <properties>   
+		<!-- Encoding -->
+ 		<encoding>UTF-8</encoding>
+ 		<source.encoding>${encoding}</source.encoding>
+ 		<resources.encoding>${encoding}</resources.encoding>
+ 		<reporting.encoding>${encoding}</reporting.encoding>
+
+		<project.build.sourceEncoding>${source.encoding}</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>${resources.encoding}</project.reporting.outputEncoding>
+		<project.resources.sourceEncoding>${reporting.encoding}</project.resources.sourceEncoding>
+
+		<!-- Aggregational platform specific compilation options -->
+		<platformOptions></platformOptions>
+		<platformLinkOptions></platformLinkOptions>
+		
+		<!-- Maven plugins -->
+        <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
+		<maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
+        <maven-site-plugin.version>3.11.0</maven-site-plugin.version>
+        <maven-scm-plugin.version>1.11.2</maven-scm-plugin.version>
+		<maven-help-plugin.version>3.5.1</maven-help-plugin.version>
+        <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
+		<maven-assembly-plugin.version>3.8.0</maven-assembly-plugin.version>
+		<maven-dependency-plugin.version>3.9.0</maven-dependency-plugin.version>
+		<maven-source-plugin.version>3.4.0</maven-source-plugin.version>
+        <maven-assemby-plugin.version>3.7.1</maven-assemby-plugin.version>
+		<maven-surefire-plugin.version>3.0.0</maven-surefire-plugin.version>
+        <maven-install-plugin.version>2.5.2</maven-install-plugin.version>
+        <maven-deploy-plugin.version>3.1.4</maven-deploy-plugin.version>
+        <maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
+        <maven-failsafe-plugin.version>3.5.3</maven-failsafe-plugin.version>
+		<maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version>
+		<maven-verifier-plugin.version>1.1</maven-verifier-plugin.version>
+        <maven-project-info-reports-plugin.version>3.8.0</maven-project-info-reports-plugin.version>
+		<maven-release-plugin.version>3.2.0</maven-release-plugin.version>
+		<maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
+		<maven-invoker-plugin.version>3.9.1</maven-invoker-plugin.version>
+ 
+		<!-- Additional Maven plugins -->
+		<copy-rename-maven-plugin.version>1.0.1</copy-rename-maven-plugin.version>
+        <exec-maven-plugin.version>3.5.1</exec-maven-plugin.version>
+        <groovy-maven-plugin-version>2.1.1</groovy-maven-plugin-version>
+        <build-helper-maven-plugin.version>3.6.1</build-helper-maven-plugin.version>
+        <maven-replacer-plugin.version>1.4.1</maven-replacer-plugin.version>
+		<maven-buildnumber-plugin.version>3.2.1</maven-buildnumber-plugin.version>
+		<license-maven-plugin.version>2.7.0</license-maven-plugin.version>
+	</properties>
+
+	<build>
+		<defaultGoal>install</defaultGoal>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+				<includes>
+                    <include>**/**</include>
+                </includes>
+                <excludes>
+                    <exclude>bin/**</exclude>
+                    <exclude>data/**</exclude>
+                    <exclude>cacerts/**</exclude>
+                </excludes>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+                <includes>
+                    <include>bin/**</include>
+                    <include>data/**</include>
+                    <include>cacerts/**</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+        <testResources>
+            <testResource>
+                <directory>${project.basedir}/src/test/resources</directory>
+                <includes>
+                    <include>**/**</include>
+                </includes>
+                <excludes>
+                    <exclude>bin/**</exclude>
+                    <exclude>data/**</exclude>
+                    <exclude>cacerts/**</exclude>
+                </excludes>
+                <filtering>true</filtering>
+            </testResource>
+            <testResource>
+                <directory>${project.basedir}/src/test/resources</directory>
+                <includes>
+                    <include>bin/**</include>
+                    <include>data/**</include>
+                    <include>cacerts/**</include>
+                </includes>
+                <filtering>false</filtering>
+            </testResource>
+        </testResources>
+
+		<pluginManagement>
+			<plugins>
+				<!-- Maven plugins -->
+				<plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <showDeprecation>false</showDeprecation>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven-jar-plugin.version}</version>
+                </plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>${maven-assembly-plugin.version}</version>
+				</plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>${maven-install-plugin.version}</version>
+                </plugin>
+				<plugin>
+				   <groupId>org.apache.maven.plugins</groupId>
+				   <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${maven-deploy-plugin.version}</version>
+				</plugin>		
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-help-plugin</artifactId>
+                    <version>${maven-help-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>${maven-site-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-scm-plugin</artifactId>
+                    <version>${maven-scm-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>${maven-antrun-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven-resources-plugin.version}</version>
+					<configuration>
+						<includeEmptyDirs>true</includeEmptyDirs>
+						<propertiesEncoding>${resources.encoding}</propertiesEncoding>
+        			</configuration>
+                </plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>${maven-source-plugin.version}</version>
+				</plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>${maven-dependency-plugin.version}</version>
+                </plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-failsafe-plugin</artifactId>
+					<version>${maven-failsafe-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-verifier-plugin</artifactId>
+					<version>${maven-verifier-plugin.version}</version>
+				</plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>${maven-enforcer-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-project-info-reports-plugin</artifactId>
+                    <version>${maven-project-info-reports-plugin.version}</version>
+                </plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>${maven-release-plugin.version}</version>
+				</plugin> 
+				<!-- Aditional Maven plugins -->
+                <plugin>
+                    <groupId>org.codehaus.gmaven</groupId>
+                    <artifactId>groovy-maven-plugin</artifactId>
+                    <version>${groovy-maven-plugin-version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>com.coderplus.maven.plugins</groupId>
+                    <artifactId>copy-rename-maven-plugin</artifactId>
+                    <version>${copy-rename-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>${exec-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>buildnumber-maven-plugin</artifactId>
+                    <version>${maven-buildnumber-plugin.version}</version>
+                    <configuration>
+                        <items>
+                            <item>buildNumber</item>
+                        </items>
+                        <doCheck>false</doCheck>
+                        <doUpdate>false</doUpdate>
+                        <revisionOnScmFailure>unknownBuildNumber</revisionOnScmFailure>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>validate</phase>
+                            <goals>
+                                <goal>create</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+ 				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<version>${build-helper-maven-plugin.version}</version>
+				</plugin>	
+				<plugin>
+					<groupId>com.google.code.maven-replacer-plugin</groupId>
+					<artifactId>maven-replacer-plugin</artifactId>
+					<version>${maven-replacer-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>license-maven-plugin</artifactId>
+					<version>${license-maven-plugin.version}</version>
+					<configuration>
+						<inceptionYear>2025</inceptionYear>
+						<organizationName>GJ Software</organizationName>
+						<projectName>${project.name}</projectName>
+						<licenseName>gpl_v3</licenseName>
+
+						<roots>
+							<root>src/main/java</root>
+							<root>src/main/c</root>
+							<root>src/main/c++</root>
+							<root>src/main/include</root>
+						</roots>
+						<includes>
+							<include>*.java</include>
+							<include>*.c</include>
+							<include>*.cpp</include>
+							<include>*.h</include>
+							<include>*.js</include>
+							<include>*.css</include>
+						</includes>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-invoker-plugin</artifactId>
+					<version>${maven-invoker-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-gpg-plugin</artifactId>
+					<version>${maven-gpg-plugin.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>		
+		
+		<plugins>
+		    <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-help-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>info-profiles</id>
+                        <goals>
+                            <goal>active-profiles</goal>
+                        </goals>
+                        <phase>validate</phase>
+                    </execution>
+                </executions>
+            </plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>win</id>
+			<activation>
+                <property>
+					<name>!env.CYGWIN</name>
+				</property>
+				<os>
+					<family>Windows</family>
+				</os>
+			</activation>
+            <properties>
+                <osFamily>windows</osFamily>
+                <osName>Windows</osName>
+                <console>cmd</console>
+                <consoleArgs>/c</consoleArgs>
+				<platformOptions>-DWINDOWS</platformOptions>
+				<platformLinkOption>-Wl,-mwindows</platformLinkOption>
+				<exeFinalExtension>.exe</exeFinalExtension>
+				<rootDir></rootDir>
+            </properties>
+		</profile>
+		<profile>
+			<id>linux</id>
+			<activation>
+				<os>
+					<family>Linux</family>
+				</os>
+			</activation>
+            <properties>
+                <osFamily>linux</osFamily>
+                <osName>Linux</osName>
+                <console>${env.BASH}</console>
+                <consoleArgs></consoleArgs>
+				<exeFinalExtension></exeFinalExtension>
+				<rootDir></rootDir>
+				<!-- Esta propiedad se genera para windows -->
+				<projectDir>${project.basedir}</projectDir>
+            </properties>
+		</profile>
+		<profile>
+			<id>cygwin</id>
+			<activation>
+                <property>
+					<name>env.CYGWIN</name>
+				</property>
+				<os>
+					<family>Windows</family>
+				</os>
+			</activation>
+            <properties>
+                <osFamily>windows</osFamily>
+                <osName>Windows</osName>
+                <console>${env.SHELL}</console>
+                <consoleArgs></consoleArgs>
+				<platformOptions>-DCYGWIN</platformOptions>
+				<platformLinkOption>-Wl,-mcygwin</platformLinkOption>
+				<exeFinalExtension>.exe</exeFinalExtension>
+				<rootDir>${cygwinDir}</rootDir>
+            </properties>
+		</profile>
+		<profile>
+			<id>debug</id>
+			<activation>
+                <property>
+                    <name>DEBUG</name>
+                </property>
+			</activation>
+		</profile>
+		<profile>
+			<id>eclipse</id>
+			<activation>
+				<property>
+					<name>m2e.version</name>
+				</property>
+			</activation>
+			<build>
+				<pluginManagement>
+					<plugins>
+				<!-- This plugin's configuration is used to store Eclipse m2e settings
+					 only. It has no influence on the Maven build itself. -->
+					<plugin>
+						<groupId>org.eclipse.m2e</groupId>
+						<artifactId>lifecycle-mapping</artifactId>
+						<version>1.0.0</version>
+						<configuration>
+							<lifecycleMappingMetadata>
+								<pluginExecutions>
+									<pluginExecution>
+										<pluginExecutionFilter>
+											<groupId>org.apache.maven.plugins</groupId>
+											<artifactId>maven-enforcer-plugin</artifactId>
+											<versionRange>[1.0.0,)</versionRange>
+											<goals>
+												<goal>enforce</goal>
+											</goals>
+										</pluginExecutionFilter>
+										<action>
+											<ignore />
+										</action>
+									</pluginExecution>
+									<pluginExecution>
+										<pluginExecutionFilter>
+											<groupId>org.apache.maven.plugins</groupId>
+											<artifactId>maven-help-plugin</artifactId>
+											<versionRange>[1.0.0,)</versionRange>
+											<goals>
+												<goal>active-profiles</goal>
+												<goal>system</goal>
+											</goals>
+										</pluginExecutionFilter>
+										<action>
+											<ignore />
+										</action>
+									</pluginExecution>
+									<pluginExecution>
+										<pluginExecutionFilter>
+											<groupId>org.apache.maven.plugins</groupId>
+											<artifactId>maven-dependency-plugin</artifactId>
+											<versionRange>[1.0.0,)</versionRange>
+											<goals>
+												<goal>unpack-dependencies</goal>
+											</goals>
+										</pluginExecutionFilter>
+										<action>
+											<ignore />
+										</action>
+									</pluginExecution>
+									<pluginExecution>
+										<pluginExecutionFilter>
+											<groupId>org.apache.maven.plugins</groupId>
+											<artifactId>maven-antrun-plugin</artifactId>
+											<versionRange>[1.0.0,)</versionRange>
+											<goals>
+												<goal>run</goal>
+											</goals>
+										</pluginExecutionFilter>
+										<action>
+											<ignore />
+										</action>
+									</pluginExecution>
+									<pluginExecution>
+										<pluginExecutionFilter>
+											<groupId>org.codehaus.gmaven</groupId>
+											<artifactId>groovy-maven-plugin</artifactId>
+											<versionRange>[1.0.0,)</versionRange>
+											<goals>
+												<goal>execute</goal>
+											</goals>
+										</pluginExecutionFilter>
+										<action>
+											<ignore />
+										</action>
+									</pluginExecution>
+								</pluginExecutions>
+							</lifecycleMappingMetadata>
+						</configuration>
+					</plugin>
+				  </plugins>
+				</pluginManagement>
+			</build>
+		</profile>
+	</profiles>
+</project>
