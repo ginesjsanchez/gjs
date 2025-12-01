@@ -1,2 +1,2 @@
 # gjs
-Maven parent poms, arquetipes and basic support libraries
+Maven parent poms, Maven arquetypes, Maven plugins and basic support libraries for the arqutypes.
