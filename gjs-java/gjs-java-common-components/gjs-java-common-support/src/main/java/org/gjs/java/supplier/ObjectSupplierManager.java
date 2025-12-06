@@ -1,0 +1,166 @@
+package org.gjs.java.supplier;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Objects;
+import java.util.Set;
+
+import org.gjs.java.log.LogManager;
+import org.slf4j.Logger;
+
+/**
+ * The Class ObjectSupplierManager.
+ *
+ * Clase de datos de la librería Semilla
+ *
+ * Gestor de generadores de objetos aleatorios: puede manejar tantos generadores
+ * de objetos como se quiera.
+ *
+ * --------------------------------------------------------------------------------------------------------------------
+ * Este software es propiedad del Ministerio del Interior CETSE - 2025
+ *
+ * Queda estrictamente prohibido el uso de programas informáticos sin la
+ * correspondiente licencia en los activos de la SES. Los programas informáticos
+ * propiedad de la SES están protegidos por la propiedad intelectual, y por
+ * tanto está estrictamente prohibida su reproducción, modificación, cesión o
+ * comunicación sin la debida autorización. Queda estrictamente prohibido el
+ * uso, reproducción, cesión, transformación o comunicación pública de cualquier
+ * otro tipo de obra o invención protegida por la propiedad intelectual sin la
+ * debida autorización.
+ *
+ * Subdirección General de Sistemas de la Información y Comunicaciones para la
+ * Seguridad Ministerio del Interior Gobierno de España
+ * --------------------------------------------------------------------------------------------------------------------
+ *
+ * @author Semilla
+ * @version 4.0.0
+ * @since 3.0.0
+ *
+ */
+public class ObjectSupplierManager extends LogManager {
+
+	/** The map object supplier. */
+	private final Map<String, AbstractObjectSupplier<?>> mapObjectSupplier;
+
+	/**
+	 * Instantiates a new object supplier manager.
+	 */
+	public ObjectSupplierManager() {
+		this(null);
+	}
+
+	/**
+	 * Instantiates a new object supplier manager.
+	 *
+	 * @param logger the logger
+	 */
+	public ObjectSupplierManager(Logger logger) {
+		super(logger);
+		mapObjectSupplier = new HashMap<>();
+	}
+
+	/**
+	 * Gets the managed classes.
+	 *
+	 * @return the managed classes
+	 */
+	public Set<String> getManagedClassNames() {
+		return this.mapObjectSupplier.keySet();
+
+	}
+
+	/**
+	 * Gets the managed classes.
+	 *
+	 * @return the managed classes
+	 * @throws ClassNotFoundException the class not found exception
+	 */
+	public List<Class<?>> getManagedClasses() throws ClassNotFoundException {
+		final List<Class<?>> list = new ArrayList<>();
+		for (final String className : this.mapObjectSupplier.keySet()) {
+			try {
+				list.add(Class.forName(className));
+			} catch (final ClassNotFoundException e) {
+				error(e.getMessage());
+				throw e;
+			}
+		}
+		return list;
+	}
+
+	/**
+	 * Gets the managed class.
+	 *
+	 * @param className the class name
+	 * @return the managed class
+	 * @throws ClassNotFoundException the class not found exception
+	 */
+	public Class<?> getManagedClass(String className) throws ClassNotFoundException {
+		Class<?> res = null;
+		if (this.mapObjectSupplier.containsKey(className)) {
+			try {
+				res = Class.forName(className);
+			} catch (final ClassNotFoundException e) {
+				error(e.getMessage());
+				throw e;
+			}
+		}
+		return res;
+	}
+
+	/**
+	 * Register supplier.
+	 *
+	 * @param className      the class name
+	 * @param objectSupplier the object supplier
+	 */
+	public void registerSupplier(String className, AbstractObjectSupplier<?> objectSupplier) {
+		mapObjectSupplier.put(className, objectSupplier);
+	}
+
+	/**
+	 * Find supplier.
+	 *
+	 * @param className the class name
+	 * @return the abstract object supplier
+	 */
+	public AbstractObjectSupplier<?> findSupplier(String className) {
+		return mapObjectSupplier.get(className);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see org.gjs.java.test.log.LogManager#setLogger(org.slf4j.Logger)
+	 */
+
+	@Override
+	public void setLogger(Logger logger) {
+		super.setLogger(logger);
+		if (Objects.nonNull(mapObjectSupplier)) {
+			for (final Entry<String, AbstractObjectSupplier<?>> objectSupplier : mapObjectSupplier.entrySet()) {
+				objectSupplier.getValue().setLogger(logger);
+			}
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see java.lang.Object#toString()
+	 */
+
+	@Override
+	public String toString() {
+		final StringBuilder out = new StringBuilder(1024);
+		out.append("ObjectSupplierManager [ ManagersRegisteredForClasses=");
+		for (final String type : mapObjectSupplier.keySet()) {
+			out.append(type).append("; ");
+		}
+		out.append(']');
+		return out.toString();
+	}
+}

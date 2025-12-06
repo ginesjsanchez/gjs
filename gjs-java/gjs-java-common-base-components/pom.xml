@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.gjs.java.cc</groupId>
+    <artifactId>gjs-java-common-base-components</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+	
+    <name>GJS Java Common Base Components</name>
+    <description>
+		Pom grouper for Java Common Components
+	</description>
+     
+    <modules>
+		<module>gjs-java-common-test-base</module>
+		<module>gjs-java-common-base</module>
+   </modules>
+    
+ </project>

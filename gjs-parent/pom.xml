@@ -45,7 +45,7 @@
 	<developers>
 		<developer>
 			<id>gjs</id>
-			<name>GJS</name>
+			<name>Ginés Jiménez Sánchez</name>
 			<email>gjsoft@gmx.es</email>
 			<roles>
 				<role>Master</role>
@@ -91,8 +91,10 @@
 		<maven-release-plugin.version>3.2.0</maven-release-plugin.version>
 		<maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
 		<maven-invoker-plugin.version>3.9.1</maven-invoker-plugin.version>
+        <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
  
 		<!-- Additional Maven plugins -->
+        <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
 		<copy-rename-maven-plugin.version>1.0.1</copy-rename-maven-plugin.version>
         <exec-maven-plugin.version>3.5.1</exec-maven-plugin.version>
         <groovy-maven-plugin-version>2.1.1</groovy-maven-plugin-version>
@@ -197,7 +199,12 @@
                     <artifactId>maven-scm-plugin</artifactId>
                     <version>${maven-scm-plugin.version}</version>
                 </plugin>
-                <plugin>
+                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>${maven-javadoc-plugin.version}</version>
+                </plugin>
+               <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-antrun-plugin</artifactId>
                     <version>${maven-antrun-plugin.version}</version>
@@ -257,7 +264,12 @@
                     <artifactId>groovy-maven-plugin</artifactId>
                     <version>${groovy-maven-plugin-version}</version>
                 </plugin>
-                <plugin>
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>${jacoco-maven-plugin.version}</version>
+                 </plugin>
+				<plugin>
                     <groupId>com.coderplus.maven.plugins</groupId>
                     <artifactId>copy-rename-maven-plugin</artifactId>
                     <version>${copy-rename-maven-plugin.version}</version>

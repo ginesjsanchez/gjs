@@ -1,0 +1,49 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.gjs.java</groupId>
+		<artifactId>gjs-java-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>    
+		<relativePath>../gjs-java-parent</relativePath>
+	</parent>	
+
+    <groupId>org.gjs.java</groupId>
+    <artifactId>gjs-java-web-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>GJS Java web artifacts parent</name>
+	<description>
+		Maven parent pom for general Java web artifacts (war).
+	</description>
+
+	<properties>
+		<!-- JWT -->
+		<jjwt-api.version>0.13.0</jjwt-api.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>io.jsonwebtoken</groupId>
+				<artifactId>jjwt-api</artifactId>
+				<version>${jjwt-api.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+			</plugins>
+		</pluginManagement>		
+
+		<extensions>
+		</extensions>
+
+		<plugins>
+		</plugins>
+	</build>
+		
+</project>

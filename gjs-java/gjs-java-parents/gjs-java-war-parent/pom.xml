@@ -3,9 +3,9 @@
 
 	<parent>
 		<groupId>org.gjs.java</groupId>
-		<artifactId>gjs-java-parent</artifactId>
+		<artifactId>gjs-java-web-parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>    
-		<relativePath>../gjs-java-parent</relativePath>
+		<relativePath>../gjs-java-web-parent</relativePath>
 	</parent>	
 
     <groupId>org.gjs.java</groupId>

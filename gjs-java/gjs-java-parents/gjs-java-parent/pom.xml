@@ -54,6 +54,14 @@
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		
 		<!-- Dependency versions -->
+		<!-- Gjs versions -->
+		<gjs-java-common-support.version>1.0.0-SNAPSHOT</gjs-java-common-support.version>
+		<gjs-java-common-test-support.version>1.0.0-SNAPSHOT</gjs-java-common-test-support.version>
+		<gjs-java-common.version>1.0.0-SNAPSHOT</gjs-java-common.version>
+		<gjs-java-common-test-mocks.version>1.0.0-SNAPSHOT</gjs-java-common-test-mocks.version>
+		<gjs-java-common-utilities.version>1.0.0-SNAPSHOT</gjs-java-common-utilities.version>
+		<gjs-java-common-test.version>1.0.0-SNAPSHOT</gjs-java-common-test.version>
+
 		<!-- Apache commons-->
 		<apache.commons-io.version>2.19.0</apache.commons-io.version>
 		<apache.commons-collections.version>4.4</apache.commons-collections.version>
@@ -68,7 +76,24 @@
 	
 	<dependencyManagement>
 		<dependencies>
-            <!-- Apache commons -->
+ 			<!-- Gjs -->
+			<dependency>
+				<groupId>org.gjs.java.common</groupId>
+				<artifactId>gjs-java-common-support</artifactId>
+				<version>${gjs-java-common-support.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.gjs.java.common</groupId>
+				<artifactId>gjs-java-common</artifactId>
+				<version>${gjs-java-common.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.gjs.java.common</groupId>
+				<artifactId>gjs-java-common-utilities</artifactId>
+				<version>${gjs-java-common-utilities.version}</version>
+			</dependency>
+
+           <!-- Apache commons -->
 			<dependency>
 			    <groupId>commons-io</groupId>
 			    <artifactId>commons-io</artifactId>
@@ -93,6 +118,26 @@
 			</dependency>
 			
 			<!-- Test -->
+ 			<!-- Gjs -->
+			<dependency>
+				<groupId>org.gjs.java.common</groupId>
+				<artifactId>gjs-java-common-test-support</artifactId>
+				<version>${gjs-java-common-test-support.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.gjs.java.common</groupId>
+				<artifactId>gjs-java-common-test-mocks</artifactId>
+				<version>${gjs-java-common-test-mocks.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.gjs.java.common</groupId>
+				<artifactId>gjs-java-common-test</artifactId>
+				<version>${gjs-java-common-test.version}</version>
+				<scope>test</scope>
+			</dependency>
+
 			<dependency>
 				<groupId>org.junit.jupiter</groupId>
 				<artifactId>junit-jupiter</artifactId>
@@ -121,6 +166,22 @@
 	</dependencyManagement>
 
 	<dependencies>
+		<!-- Gjs -->
+		<dependency>
+			<groupId>org.gjs.java.common</groupId>
+			<artifactId>gjs-java-common-base</artifactId>
+		</dependency>
+		
+		<!-- Apache -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+        </dependency>
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-collections4</artifactId>
+		</dependency>
+		
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -128,6 +189,10 @@
 		</dependency>
 		
 		<!-- Test -->
+        <dependency>
+            <groupId>org.gjs.java.common</groupId>
+            <artifactId>gjs-java-common-test-base</artifactId>
+        </dependency>
 	    <dependency>
 	        <groupId>org.junit.jupiter</groupId>
 	        <artifactId>junit-jupiter</artifactId>

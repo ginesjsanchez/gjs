@@ -12,7 +12,8 @@
      
     <modules>
         <module>gjs-java-base-parent</module>
-        <module>gjs-java-maven-base-parent</module>
+        <module>gjs-java-test-base-parent</module>
+		<module>gjs-java-maven-base-parent</module>
     </modules>
     
  </project>

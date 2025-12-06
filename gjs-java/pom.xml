@@ -12,9 +12,10 @@
      
     <modules>
         <module>gjs-java-base-parents</module>
-        <module>gjs-java-common-components</module>
+        <module>gjs-java-common-base-components</module>
         <module>gjs-maven-common-components</module>
         <module>gjs-java-parents</module>
-    </modules>
+         <module>gjs-java-common-components</module>
+   </modules>
     
  </project>

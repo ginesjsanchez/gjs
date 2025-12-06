@@ -24,16 +24,16 @@
 		.		|--/gjs-java-base-parent
 		.	   			|
 		.				|--/gjs-java-parent
-		.				|       |
-		.		     	|       |--/gjs-java-artifact-parent
-		.		      	|       |
-		.		       	|       |--/gjs-java-war-parent
-		.	  	 		|       		|
-		.				|       		|--/gjs-springboot-parent
+		.				|			 |
+		.		     	|			 |--/gjs-java-artifact-parent
+		.						|			 |
+		.					 	|			 |--/gjs-java-war-parent
+		.	  	 		|			 		|
+		.				|			 		|--/gjs-springboot-parent
 		.		     	|
-		.		      	|--/gjs-java-maven-base-parent
-		.		     	        |
-		.		      		  	|--/gjs-java-maven-parent
+		.						|--/gjs-java-maven-base-parent
+		.		     					|
+		.									|--/gjs-java-maven-parent
 		.
 		Needs profile cpp with special properties in settings.xml file: 
 		
@@ -60,6 +60,7 @@
 		<!-- Dependency versions -->
 		<!-- Gjs versions -->
 		<gjs-java-common-test-base.version>1.0.0-SNAPSHOT</gjs-java-common-test-base.version>
+		<gjs-java-common-base.version>1.0.0-SNAPSHOT</gjs-java-common-base.version>
 		
 		<!-- Apache reporting plugins -->
 		<maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
@@ -68,7 +69,7 @@
 		<!-- Apache commons-->
 		<apache.commons-io.version>2.19.0</apache.commons-io.version>
 		<apache.commons-collections.version>4.4</apache.commons-collections.version>
-        <apache.commons-text.version>1.14.0</apache.commons-text.version>
+		<apache.commons-text.version>1.14.0</apache.commons-text.version>
 		
 		<!-- Xml serialization -->
 		<xerces.version>2.12.2</xerces.version>
@@ -80,6 +81,7 @@
 
 		<!-- JUnit -->
 		<junit-jupiter.version>6.0.1</junit-jupiter.version>
+		<junit.version>${junit-jupiter.version}</junit.version>
 		
 		<!-- Mockito -->
 		<mockito.version>5.20.0</mockito.version>
@@ -90,22 +92,29 @@
 	
 	<dependencyManagement>
 		<dependencies>
-            <!-- Apache commons -->
+			<!-- Gjs -->
 			<dependency>
-			    <groupId>commons-io</groupId>
-			    <artifactId>commons-io</artifactId>
-			    <version>${apache.commons-io.version}</version>
+				<groupId>org.gjs.java.common</groupId>
+				<artifactId>gjs-java-common-base</artifactId>
+				<version>${gjs-java-common-base.version}</version>
+			</dependency>
+
+			<!-- Apache commons -->
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${apache.commons-io.version}</version>
 			</dependency>
 			<dependency>
-			    <groupId>org.apache.commons</groupId>
-			    <artifactId>commons-collections4</artifactId>
-			    <version>${apache.commons-collections.version}</version>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-collections4</artifactId>
+				<version>${apache.commons-collections.version}</version>
 			</dependency>
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-text</artifactId>
-                <version>${apache.commons-text.version}</version>
-            </dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-text</artifactId>
+				<version>${apache.commons-text.version}</version>
+			</dependency>
 
 			<!-- Xml serialization -->
 			<dependency>
@@ -147,7 +156,7 @@
 			
 			<!-- Test -->
 			<dependency>
-				<groupId>org.gjs.java.base</groupId>
+				<groupId>org.gjs.java.common</groupId>
 				<artifactId>gjs-java-common-test-base</artifactId>
 				<version>${gjs-java-common-test-base.version}</version>
 				<scope>test</scope>
@@ -163,6 +172,96 @@
 				<groupId>org.junit.jupiter</groupId>
 				<artifactId>junit-jupiter-api</artifactId>
 				<version>${junit-jupiter.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-engine</artifactId>
+				<version>${junit-jupiter.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-migrationsupport</artifactId>
+				<version>${junit-jupiter.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-params</artifactId>
+				<version>${junit-jupiter.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.platform</groupId>
+				<artifactId>junit-platform-commons</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.platform</groupId>
+				<artifactId>junit-platform-console</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.platform</groupId>
+				<artifactId>junit-platform-engine</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.platform</groupId>
+				<artifactId>junit-platform-jfr</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.platform</groupId>
+				<artifactId>junit-platform-launcher</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.platform</groupId>
+				<artifactId>junit-platform-reporting</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.platform</groupId>
+				<artifactId>junit-platform-runner</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.platform</groupId>
+				<artifactId>junit-platform-suite</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.platform</groupId>
+				<artifactId>junit-platform-suite-api</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.platform</groupId>
+				<artifactId>junit-platform-suite-commons</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.platform</groupId>
+				<artifactId>junit-platform-suite-engine</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.platform</groupId>
+				<artifactId>junit-platform-testkit</artifactId>
+				<version>${junit.version}</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
@@ -194,20 +293,20 @@
 		</dependency>
 
 		<!-- Lombok Extension -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
 		
 		<!-- Test -->
 	    <dependency>
-	        <groupId>org.junit.jupiter</groupId>
-	        <artifactId>junit-jupiter</artifactId>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
 	    </dependency>
-      	<dependency>
-	        <groupId>org.junit.jupiter</groupId>
-	        <artifactId>junit-jupiter-api</artifactId>
-      	</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+		</dependency>
 		<dependency>
 		    <groupId>org.mockito</groupId>
 		    <artifactId>mockito-junit-jupiter</artifactId>

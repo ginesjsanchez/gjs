@@ -1,0 +1,179 @@
+package org.gjs.java.data;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import org.apache.commons.lang3.StringUtils;
+
+import org.gjs.java.common.ConditionUtils;
+
+/**
+ * The Class DataKey.
+ *
+ * Clase de datos de la librería Semilla
+ *
+ * Representa una lista de atributos que compone una clave única de algún objeto de datos.
+ *
+ * --------------------------------------------------------------------------------------------------------------------
+ * Este software es propiedad del Ministerio del Interior CETSE - 2025
+ *
+ * Queda estrictamente prohibido el uso de programas informáticos sin la correspondiente licencia en los activos de la
+ * SES. Los programas informáticos propiedad de la SES están protegidos por la propiedad intelectual, y por tanto está
+ * estrictamente prohibida su reproducción, modificación, cesión o comunicación sin la debida autorización. Queda
+ * estrictamente prohibido el uso, reproducción, cesión, transformación o comunicación pública de cualquier otro tipo de
+ * obra o invención protegida por la propiedad intelectual sin la debida autorización.
+ *
+ * Subdirección General de Sistemas de la Información y Comunicaciones para la Seguridad Ministerio del Interior
+ * Gobierno de España
+ * --------------------------------------------------------------------------------------------------------------------
+ *
+ * @author Semilla
+ * @version 4.0.0
+ * @since 3.0.0
+ *
+ */
+public class DataKey {
+
+    /** The fields. */
+    protected final List<String> fields = new ArrayList<>();
+
+    /**
+     * Instantiates a new data key.
+     */
+    public DataKey() {
+    }
+
+    /**
+     * Instantiates a new data key.
+     *
+     * @param fields
+     *            the fields
+     */
+    public DataKey(String... fields) {
+        for (final String field : fields) {
+            addField(field);
+        }
+    }
+
+    /**
+     * Gets the fields.
+     *
+     * @return the fields
+     */
+    public List<String> getFields() {
+        return fields;
+    }
+
+    /**
+     * Adds the field.
+     *
+     * @param field
+     *            the field
+     */
+    public void addField(String field) {
+        if (!ConditionUtils.oneIsTrue(StringUtils.isAllBlank(field), fields.contains(field))) {
+            fields.add(field);
+        }
+    }
+
+    /**
+     * Exists field.
+     *
+     * @param field
+     *            the field
+     * @return true, if successful
+     */
+    public boolean existsField(String field) {
+        boolean res = false;
+        if (!StringUtils.isAllBlank(field)) {
+            res = fields.contains(field);
+        }
+        return res;
+    }
+
+    /**
+     * Gets the field.
+     *
+     * @param index
+     *            the index
+     * @return the field
+     */
+    public String getField(int index) {
+        String res = null;
+        if (!ConditionUtils.oneIsTrue((index < 0), (index >= fields.size()))) {
+            res = fields.get(index);
+        }
+        return res;
+    }
+
+    /**
+     * Count fields.
+     *
+     * @return the int
+     */
+    public int countFields() {
+        return fields.size();
+    }
+
+    /**
+     * Clear.
+     */
+    public void clear() {
+        fields.clear();
+    }
+
+    /* (non-Javadoc)
+     *
+     * @see java.lang.Object#hashCode() */
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(fields);
+    }
+
+    /* (non-Javadoc)
+     *
+     * @see java.lang.Object#equals(java.lang.Object) */
+
+    @Override
+    public boolean equals(Object obj) {
+        boolean res = false;
+        if (this == obj) {
+            res = true;
+        } else if (obj instanceof DataKey) {
+            final DataKey other = (DataKey) obj;
+            if (other.countFields() == countFields()) {
+                res = true;
+                for (final String field : fields) {
+                    if (!other.existsField(field)) {
+                        res = false;
+                        break;
+                    }
+                }
+            }
+        }
+        return res;
+    }
+
+    /* (non-Javadoc)
+     *
+     * @see java.lang.Object#toString() */
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Key=[");
+        boolean begin = true;
+        for (final String field : fields) {
+            if (!begin) {
+                builder.append(", ");
+            }
+            builder.append(field);
+            begin = false;
+        }
+        builder.append(']');
+        return builder.toString();
+    }
+
+}
