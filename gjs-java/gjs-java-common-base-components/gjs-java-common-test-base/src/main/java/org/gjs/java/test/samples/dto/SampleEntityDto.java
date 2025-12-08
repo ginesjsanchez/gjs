@@ -21,7 +21,7 @@ public class SampleEntityDto {
 
 	@Override
 	public String toString() {
-		return "AplicacionDto [ id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", fechaAlta="
+		return "SampleEntityDto [ id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", fechaAlta="
 				+ fechaAlta + ", fechaBaja=" + fechaBaja + ", activo=" + activo + "]";
 	}
 

@@ -1,0 +1,14 @@
+Estimado/a usuario/a de la aplicación DRaVY:
+
+Se le informa que se ha procedido a la apertura del PERIODO DE EVALUACIÓN. Este comienza el ${fechaInicio} y finaliza el ${fechaFin}.
+
+Asegúrese de finalizar y consolidar las evaluaciones de los internos/as PENADOS de su centro antes de que finalice dicho plazo.
+
+${mensajeAviso}
+
+Reciba un cordial saludo
+
+Secretaría General de Instituciones Penitenciarias 
+Dirección General de Ejecución Penal y Reinserción Social
+
+Esta es una notificación automática de la aplicación DRaVY. No responda a este correo.

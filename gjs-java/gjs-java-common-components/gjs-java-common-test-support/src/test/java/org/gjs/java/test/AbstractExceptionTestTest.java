@@ -17,7 +17,7 @@ public class AbstractExceptionTestTest extends BaseUnitTest<AbstractExceptionTes
 
 		@Override
 		protected String getPackage() {
-			return "org.gjs.java.test.sample.exception";
+			return "org.gjs.java.test.samples.exception";
 		}
 
 		@Override

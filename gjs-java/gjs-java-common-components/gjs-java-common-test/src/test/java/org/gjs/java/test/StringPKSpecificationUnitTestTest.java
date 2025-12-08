@@ -10,11 +10,11 @@ import java.util.List;
 import java.util.function.Function;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.gjs.java.common.ConditionUtils;
 import org.gjs.java.test.mock.MockRepository;
 import org.gjs.java.test.mock.MockSpecification;
 import org.gjs.java.test.sample.model.SampleStringEntity;
 import org.gjs.java.test.sample.model.filter.SampleEntityFilter;
+import org.gjs.java.util.ConditionUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;

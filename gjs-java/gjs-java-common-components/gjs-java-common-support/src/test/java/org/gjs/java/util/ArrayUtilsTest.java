@@ -8,9 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Objects;
 
-import org.junit.jupiter.api.Test;
-
 import org.gjs.java.test.BaseClassTest;
+import org.junit.jupiter.api.Test;
 
 class ArrayUtilsTest extends BaseClassTest<ArrayUtils> {
 

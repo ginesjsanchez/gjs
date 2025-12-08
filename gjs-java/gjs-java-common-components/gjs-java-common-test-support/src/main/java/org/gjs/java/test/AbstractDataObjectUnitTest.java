@@ -7,35 +7,35 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.gjs.java.common.ConditionUtils;
+import org.gjs.java.util.ConditionUtils;
 
 import io.jsonwebtoken.lang.Arrays;
 
 /**
  * The Class AbstractDataObjectUnitTest.
  *
- * Clase abstracta funcional de la librería Semilla
+ * Clase abstracta funcional de la librería Gjs
  *
- * Clase abstracta base para todos los test unitarios de clases que necesiten manejo de datos de la librería Semilla
+ * Clase abstracta base para todos los test unitarios de clases que necesiten manejo de datos de la librería Gjs
  *
  * --------------------------------------------------------------------------------------------------------------------
- * Este software es propiedad del Ministerio del Interior CETSE - 2025
  *
- * Queda estrictamente prohibido el uso de programas informáticos sin la correspondiente licencia en los activos de la
+ *
+ * correspondiente licencia en los activos de la
  * SES. Los programas informáticos propiedad de la SES están protegidos por la propiedad intelectual, y por tanto está
  * estrictamente prohibida su reproducción, modificación, cesión o comunicación sin la debida autorización. Queda
  * estrictamente prohibido el uso, reproducción, cesión, transformación o comunicación pública de cualquier otro tipo de
  * obra o invención protegida por la propiedad intelectual sin la debida autorización.
  *
- * Subdirección General de Sistemas de la Información y Comunicaciones para la Seguridad Ministerio del Interior
+ *  Seguridad Ministerio del Interior
  * Gobierno de España
  * --------------------------------------------------------------------------------------------------------------------
  *
- * @author Semilla
- * @version 4.0.0
+ * @author Gjs
+ * @version 1.0.0
  * @param <T>
  *            clase a testear
- * @since 3.0.0
+ * @since 1.0.0
  */
 public abstract class AbstractDataObjectUnitTest<T> extends BaseUnitTest<T> {
 

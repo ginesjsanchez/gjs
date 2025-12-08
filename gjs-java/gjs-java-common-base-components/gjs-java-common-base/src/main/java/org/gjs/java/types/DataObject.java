@@ -13,37 +13,36 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.LoggerFactory;
 
 import org.slf4j.Logger;
-
-import org.gjs.java.common.ClazzUtils;
-import org.gjs.java.common.ConditionUtils;
-import org.gjs.java.common.ConversionUtils;
-import org.gjs.java.common.ReflectionUtils;
 import org.gjs.java.enums.ManagedType;
 import org.gjs.java.enums.PrimitiveType;
+import org.gjs.java.util.ClazzUtils;
+import org.gjs.java.util.ConditionUtils;
+import org.gjs.java.util.ConversionUtils;
+import org.gjs.java.util.ReflectionUtils;
 
 /**
  * The Class DataObject.
  *
- * Clase de datos de la librería Semilla
+ * Clase de datos de la librería Gjs
  *
  * Clase útil para contener los datos de cualquier clase de objetos en un simple mapa de atributos con sus valores.
  *
  * --------------------------------------------------------------------------------------------------------------------
- * Este software es propiedad del Ministerio del Interior CETSE - 2025
  *
- * Queda estrictamente prohibido el uso de programas informáticos sin la correspondiente licencia en los activos de la
+ *
+ * correspondiente licencia en los activos de la
  * SES. Los programas informáticos propiedad de la SES están protegidos por la propiedad intelectual, y por tanto está
  * estrictamente prohibida su reproducción, modificación, cesión o comunicación sin la debida autorización. Queda
  * estrictamente prohibido el uso, reproducción, cesión, transformación o comunicación pública de cualquier otro tipo de
  * obra o invención protegida por la propiedad intelectual sin la debida autorización.
  *
- * Subdirección General de Sistemas de la Información y Comunicaciones para la Seguridad Ministerio del Interior
+ *  Seguridad Ministerio del Interior
  * Gobierno de España
  * --------------------------------------------------------------------------------------------------------------------
  *
- * @author Semilla
- * @version 4.0.0
- * @since 3.0.0
+ * @author Gjs
+ * @version 1.0.0
+ * @since 1.0.0
  *
  */
 public class DataObject {

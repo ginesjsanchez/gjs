@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.gjs.java.common.ConversionUtils;
-import org.gjs.java.common.DateUtils;
 import org.gjs.java.supplier.random.RandomDateSupplier;
 import org.gjs.java.test.BaseClassTest;
+import org.gjs.java.util.ConversionUtils;
+import org.gjs.java.util.DateUtils;
 import org.junit.jupiter.api.Test;
 
 public class DateComparatorDescTest extends BaseClassTest<DateComparatorDesc> {

@@ -21,7 +21,7 @@
         <!-- Gjs -->
         <dependency>
             <groupId>org.gjs.java.common</groupId>
-            <artifactId>gjs-java-common-utilities</artifactId>
+            <artifactId>gjs-java-common</artifactId>
         </dependency>
         <dependency>
             <groupId>org.gjs.java.common</groupId>

@@ -9,10 +9,10 @@ import java.util.Objects;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.gjs.java.common.ConditionUtils;
 import org.gjs.java.test.mock.MockRepository;
 import org.gjs.java.test.sample.dao.SampleEntityRepository;
 import org.gjs.java.test.sample.model.SampleEntity;
+import org.gjs.java.util.ConditionUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.jpa.repository.JpaRepository;
 

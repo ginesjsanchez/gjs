@@ -14,7 +14,7 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 	
-    <name>GJS Java common</name>
+    <name>GJS Java common io</name>
     <description>Base classes and tools for Java applications</description>
 
     <properties>
@@ -24,19 +24,27 @@
        <!-- Gjs -->
        <dependency>
             <groupId>org.gjs.java.common</groupId>
-            <artifactId>gjs-java-common-support</artifactId>
+            <artifactId>gjs-java-common-io</artifactId>
         </dependency>
         
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+       </dependency>
+        
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
         </dependency>
-
 		
 		<!-- Test -->
         <dependency>
             <groupId>org.gjs.java.common</groupId>
             <artifactId>gjs-java-common-test-support</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.gjs.java.common</groupId>
+            <artifactId>gjs-java-common-test-mocks</artifactId>
         </dependency>
 	</dependencies>
 </project>

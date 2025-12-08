@@ -17,11 +17,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.gjs.java.common.CollectionUtils;
-import org.gjs.java.common.ConditionUtils;
-import org.gjs.java.common.ConversionUtils;
-import org.gjs.java.common.NormalizationUtils;
-import org.gjs.java.common.ReflectionUtils;
 import org.gjs.java.data.DataKey;
 import org.gjs.java.data.ForeignKey;
 import org.gjs.java.enums.ManagedType;
@@ -31,6 +26,11 @@ import org.gjs.java.test.exception.ParameterizedTypeException;
 import org.gjs.java.types.DataObject;
 import org.gjs.java.types.FieldInfo;
 import org.gjs.java.types.WrappedObject;
+import org.gjs.java.util.CollectionUtils;
+import org.gjs.java.util.ConditionUtils;
+import org.gjs.java.util.ConversionUtils;
+import org.gjs.java.util.NormalizationUtils;
+import org.gjs.java.util.ReflectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
@@ -38,33 +38,33 @@ import org.springframework.core.io.Resource;
 /**
  * The Class MockEntityDataManager.
  *
- * Clase de datos de la librería Semilla
+ * Clase de datos de la librería Gjs
  *
  * Implementa un repositorio de datos sencillo en memoria para cualquier clase
  * de objetos.
  *
  * --------------------------------------------------------------------------------------------------------------------
- * Este software es propiedad del Ministerio del Interior CETSE - 2025
  *
- * Queda estrictamente prohibido el uso de programas informáticos sin la
- * correspondiente licencia en los activos de la SES. Los programas informáticos
- * propiedad de la SES están protegidos por la propiedad intelectual, y por
- * tanto está estrictamente prohibida su reproducción, modificación, cesión o
- * comunicación sin la debida autorización. Queda estrictamente prohibido el
- * uso, reproducción, cesión, transformación o comunicación pública de cualquier
- * otro tipo de obra o invención protegida por la propiedad intelectual sin la
- * debida autorización.
  *
- * Subdirección General de Sistemas de la Información y Comunicaciones para la
- * Seguridad Ministerio del Interior Gobierno de España
+ *
+ *
+ *
+ *
+ *
+ * Gj Software
+ * 2025
+ * 
+ *
+ * 
+ * 
  * --------------------------------------------------------------------------------------------------------------------
  *
  * @param <T>  la clase de la entidad
  * @param <PK> la clave primaria de la entidad
  *
- * @author Semilla
- * @version 4.0.0
- * @since 3.0.0
+ * @author Gjs
+ * @version 1.0.0
+ * @since 1.0.0
  */
 
 public class MockEntityDataManager<T, PK> {
