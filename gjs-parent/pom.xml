@@ -162,6 +162,9 @@
                     <version>${maven-compiler-plugin.version}</version>
                     <configuration>
                         <showDeprecation>false</showDeprecation>
+						<compilerArgs>
+							<arg>-proc:full</arg>
+						</compilerArgs>
                     </configuration>
                 </plugin>
                 <plugin>

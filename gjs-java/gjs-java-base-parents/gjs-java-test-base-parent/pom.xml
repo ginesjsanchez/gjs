@@ -18,10 +18,18 @@
 	</description>
 
 	<properties>
+			<!-- Dependency versions -->
+		<!-- Gjs versions -->
+		<openpojo.version>1.0.0-SNAPSHOT</openpojo.version>
 	</properties>
 	
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>org.gjs.tools</groupId>
+				<artifactId>openpojo</artifactId>
+				<version>${openpojo.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 

@@ -17,7 +17,7 @@ namespace org
 {
 	namespace gjs
 	{
-		namespace c
+		namespace cpp
 		{
             namespace common
             {

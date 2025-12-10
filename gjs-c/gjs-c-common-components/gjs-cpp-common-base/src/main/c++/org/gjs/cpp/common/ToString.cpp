@@ -5,6 +5,7 @@
 //#include <codecvt>
 
 using namespace std;
+using namespace org::gjs::cpp::common;
 
 
 namespace org
@@ -22,7 +23,7 @@ string ToString ( IToString & t )
 	{
 		ostringstream conv;
 
-		conv << t;
+		conv << t.toString();
 		return ( conv.str () );
 	}
 	catch (...)
@@ -35,7 +36,7 @@ string ToString ( IToString * t )
 {
 	if ( t != NULL )
 	{
-		return ( ToString( *t ) );
+	    return ( ToString( *t ) );
 	}
 	else
 	{

@@ -68,17 +68,9 @@
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
         </dependency>
-		<!--
         <dependency>
-            <groupId>com.openpojo</groupId>
+            <groupId>org.gjs.tools</groupId>
             <artifactId>openpojo</artifactId>
-            <version>0.9.1</version>
-        </dependency>
-		-->
-        <dependency>
-            <groupId>org.gjs.java</groupId>
-            <artifactId>openpojo</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>

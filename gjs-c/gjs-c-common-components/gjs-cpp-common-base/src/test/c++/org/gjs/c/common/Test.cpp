@@ -1,7 +1,10 @@
 #include "CppBase.h"
 
+#include <iostream>
 #include <map>
 
+using namespace std;
+using namespace org::gjs::cpp::common;
 
 extern bool TestToString ();
 extern bool TestConcatenar ();
@@ -13,7 +16,6 @@ extern bool TestIToString ();
 int main( int argc, char * argv[] )
 {
 	int iRes = 0;
-	InicializarBase();
 
 	map<string, FUNCION_BOOL> mapTests;
 	mapTests[ "ToString" ] = TestToString;
