@@ -21,6 +21,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.gjs.java.constant.CommonBaseConstants;
 import org.gjs.java.exception.GjsException;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class DateUtils.
  *
@@ -395,30 +396,81 @@ public final class DateUtils {
 		}
 	}
 
-	// TODO
-//	/**
-//	 * To local date.
-//	 *
-//	 * @param date   the date
-//	 * @param format the format
-//	 * @return the local date
-//	 * @throws GjsException the semilla util exception
-//	 */
-//	public static LocalDate toLocalDate(String date, String format) throws GjsException {
-//		return UtilesSemillaFecha.dateALocalDate(toDate(date, format));
-//	}
-//
-//	/**
-//	 * To local date time.
-//	 *
-//	 * @param date   the date
-//	 * @param format the format
-//	 * @return the local date time
-//	 * @throws GjsException the semilla util exception
-//	 */
-//	public static LocalDateTime toLocalDateTime(String date, String format) throws GjsException {
-//		return UtilesSemillaFecha.dateALocalDateTime(toDate(date, format));
-//	}
+	/**
+	 * To date.
+	 *
+	 * @param localDate the local date
+	 * @return the date
+	 */
+	public static Date toDate(LocalDate localDate) {
+		if (Objects.nonNull(localDate)) {
+			return java.util.Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+		}
+		return null;
+	}
+
+	/**
+	 * To date.
+	 *
+	 * @param localDateTime the local date time
+	 * @return the date
+	 */
+	public static Date toDate(LocalDateTime localDateTime) {
+		if (Objects.nonNull(localDateTime)) {
+			return java.util.Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+		}
+		return null;
+	}
+
+	/**
+	 * To local date.
+	 *
+	 * @param date the date
+	 * @return the local date
+	 */
+	public static LocalDate toLocalDate(Date date) {
+		if (Objects.nonNull(date)) {
+			return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		}
+		return null;
+	}
+
+	/**
+	 * To local date time.
+	 *
+	 * @param date the date
+	 * @return the local date time
+	 */
+	public static LocalDateTime toLocalDateTime(Date date) {
+		if (Objects.nonNull(date)) {
+			return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+		}
+		return null;
+	}
+
+	/**
+	 * To local date.
+	 *
+	 * @param date   the date
+	 * @param format the format
+	 * @return the local date
+	 * @throws GjsException the semilla util exception
+	 */
+	public static LocalDate toLocalDate(String date, String format) throws GjsException {
+		return toLocalDate(toDate(date, format));
+	}
+
+	/**
+	 * To local date time.
+	 *
+	 * @param date   the date
+	 * @param format the format
+	 * @return the local date time
+	 * @throws GjsException the semilla util exception
+	 */
+	public static LocalDateTime toLocalDateTime(String date, String format) throws GjsException {
+		return toLocalDateTime(toDate(date, format));
+	}
 
 	/**
 	 * Format.

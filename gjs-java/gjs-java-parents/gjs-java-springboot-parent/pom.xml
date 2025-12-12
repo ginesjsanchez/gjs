@@ -19,11 +19,16 @@
 	</description>
 
 	<properties>
+		<!-- Spring framework -->
 		<springboot.version>3.5.7</springboot.version>
+		
+		<!-- Model mapper -->
+		<modelpaper.version>3.2.6</modelpaper.version>
 	</properties>
 	
     <dependencyManagement>
         <dependencies>
+			<!-- Spring framework -->
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
@@ -31,10 +36,18 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-		   </dependencies>
+		
+			<!-- Model mapper -->
+			<dependency>
+				<groupId>org.modelmapper</groupId>
+				<artifactId>modelmapper</artifactId>
+				<version>3.2.6</version>
+			</dependency>
+		</dependencies>
     </dependencyManagement>
 
     <dependencies>
+		<!-- Spring framework -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
@@ -43,6 +56,12 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
         </dependency>
+	
+		<!-- Model mapper -->
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+		</dependency>
 		
 		<!-- Test -->
 	    <dependency>

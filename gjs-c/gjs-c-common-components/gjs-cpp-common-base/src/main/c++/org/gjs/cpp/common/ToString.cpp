@@ -71,30 +71,24 @@ string ToString ( const wchar_t * t )
 	return ( ToString ( wstring( t ) ) );
 }
 
+// string ToString ( const char t[] )
+// {
+//     if ( t != NULL ) {
+//         return ( string ( t ) );
+//     } else {
+// 		return ( string( "[Object Error]" ) );
+// 	}
+// }
+
+// string ToString ( char t[] )
+// {
+// 	return ( ToString ( (const char *) t ) );
+// }
+
+
 string ToString ( const unsigned char t[] )
 {
-	try
-	{
-		ostringstream conv;
-		conv << '{';
-		conv << hex << uppercase;
-		int iPos = 0;
-		while ( t[ iPos ] != 0x00 )
-		{
-			if ( iPos > 0 )
-			{
-				conv << ", ";
-			}
-			conv << t[ iPos ];
-			iPos = iPos + 1;
-		}
-		conv << '}';
-		return ( conv.str () );
-	}
-	catch (...)
-	{
-		return ( string( "[Object Error]" ) );
-	}
+    return ( ToString ( (const char *) t ) );
 }
 
 string ToString ( const tm * t )

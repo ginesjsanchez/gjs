@@ -19,6 +19,18 @@ public final class CommonBaseConstants {
 	/** The Constant DEFAULT_LOCALE . */
 	public static final Locale DEFAULT_LOCALE = LocaleUtils.toLocale("es_ES");
 
+	/** The Constant SIMPLE_DATETIME__FORMAT. */
+	public static final String SIMPLE_DATETIME_FORMAT = "dd/MM/yyyy HH:mm:ss";
+
+	/** The Constant DATE_OUTPUT_FORMAT. */
+	public static final String DATE_OUTPUT_FORMAT = "yyyy-MM-dd";
+
+	/** The Constant DATETIME_OUTPUT_FORMAT. */
+	public static final String DATETIME_OUTPUT_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
+
+	/** The Constant TIMESTAMP_OUTPUT_FORMAT. */
+	public static final String TIMESTAMP_OUTPUT_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS";
+
 	private CommonBaseConstants() {
 		throw new IllegalStateException(MSG_UTILITY_CLASS);
 	}

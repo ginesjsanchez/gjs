@@ -156,6 +156,15 @@ public:
 		return( sValor );
 	}
 
+	friend string ToString ( PruebaIToString & t )
+	{
+	    return ( ToString ( (IToString &) t ) );
+    }
+
+	friend string ToString ( PruebaIToString * t )
+	{
+	    return ( ToString ( (IToString *) t ) );
+    }
 };
 
 
@@ -164,17 +173,23 @@ static bool TestToString05 ()
 	cout << "Test ToString05:" << endl;
 	bool bRes = true;
 	PruebaIToString * obj = new PruebaIToString( "Valor de test" );
-	string sRes = ToString( /*(IToString *) */obj->Base() );
+	string sRes = ToString( *obj );
 	if ( sRes != "Valor de test" )
 	{
 		cout << "Error caso 1: [" << sRes << "]" << endl;
 		bRes = false;
 	}
-	obj->setValor( "" );
-	sRes = ToString( (IToString *) obj );
-	if ( sRes != "" )
+	sRes = ToString( obj );
+	if ( sRes != "Valor de test" )
 	{
 		cout << "Error caso 2: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	obj->setValor( "" );
+	sRes = ToString( *obj );
+	if ( sRes != "" )
+	{
+		cout << "Error caso 3: [" << sRes << "]" << endl;
 		bRes = false;
 	}
 	delete obj;

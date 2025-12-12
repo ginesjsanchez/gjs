@@ -24,6 +24,7 @@ namespace org
             namespace common
             {
 
+			string ToString ( long t );
 			string ToString ( bool t );
 			string ToString ( wstring t );
 			string ToString ( wchar_t * t );

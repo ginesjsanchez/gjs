@@ -9,7 +9,7 @@ import org.gjs.java.supplier.GjsSupplier;
 import org.gjs.java.supplier.testinggame.TestingGamesSingleton;
 import org.gjs.java.test.BaseClassTest;
 import org.gjs.java.test.samples.dto.SampleEntityDto;
-import org.gjs.java.test.testinggame.DtoTestingGame;
+import org.gjs.java.test.samples.testinggame.DtoTestingGame;
 import org.gjs.java.test.util.AssertionUtils;
 import org.junit.jupiter.api.Test;
 

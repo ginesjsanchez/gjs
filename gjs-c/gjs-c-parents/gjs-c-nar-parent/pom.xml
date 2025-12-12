@@ -136,13 +136,11 @@
 							<incremental>false</incremental>
 							
 							<options>
-								<option>-Wl,${gjs.nar.cpp.language.option}</option> 
 								<option>-v</option> 
 								<option>${gjs.nar.emulation.option}</option> 
 								<option>${gjs.nar.platform.link.options}</option>
 							</options>
 							<testOptions>
-								<option>-Wl,${gjs.nar.cpp.language.option}</option> 
 								<option>-v</option> 
 								<option>${gjs.nar.emulation.option}</option> 
 								<option>${gjs.nar.platform.link.options}</option>

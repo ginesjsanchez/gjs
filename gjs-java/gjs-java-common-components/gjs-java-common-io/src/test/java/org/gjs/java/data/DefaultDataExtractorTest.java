@@ -8,7 +8,7 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.gjs.java.supplier.testinggame.TestingGamesSingleton;
 import org.gjs.java.test.BaseUnitTest;
 import org.gjs.java.test.samples.dto.SampleEntityDto;
-import org.gjs.java.test.testinggame.DtoTestingGame;
+import org.gjs.java.test.samples.testinggame.DtoTestingGame;
 import org.gjs.java.util.ConversionUtils;
 import org.junit.jupiter.api.Test;
 

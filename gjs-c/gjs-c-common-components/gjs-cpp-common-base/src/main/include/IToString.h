@@ -26,11 +26,13 @@ namespace org
 			{
 
 			public:
-				IToString();
-				virtual ~IToString();
+				IToString() {};
+				virtual ~IToString() {};
 
 				virtual string toString() = 0;
-				IToString& Base() const;
+				virtual IToString & Base() const {
+                    return ( (IToString &) *this );
+				};
 
 				friend ostream& operator<< ( ostream & strm, IToString & obj );
 

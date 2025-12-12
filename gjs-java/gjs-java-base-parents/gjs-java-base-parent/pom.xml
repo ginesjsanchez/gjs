@@ -133,7 +133,6 @@
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>
 				<version>${lombok.version}</version>
-				<scope>provided</scope>
 			</dependency>
 
 			<!-- Logging -->
@@ -296,6 +295,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		
 		<!-- Test -->
@@ -399,9 +399,9 @@
 			<id>jdk-25</id>
 			<properties>				
 				<!-- Compilation config -->
-				<java.version>21</java.version>
+				<java.version>25</java.version>
 				<!-- Jdk -->
-				<gjs.java.jdk.dir>${jdk21Dir}</gjs.java.jdk.dir>
+				<gjs.java.jdk.dir>${jdk25Dir}</gjs.java.jdk.dir>
 			</properties>
 		</profile>
 		<profile>

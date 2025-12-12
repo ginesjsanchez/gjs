@@ -37,6 +37,11 @@ static bool TestIToString01 ()
 		cout << "Error caso 1" << endl;
 		bRes = false;
 	}
+	if ( obj1->toString() != "abc" )
+	{
+		cout << "Error caso 1" << endl;
+		bRes = false;
+	}
 	if ( obj2->toString() != "" )
 	{
 		cout << "Error caso 2" << endl;

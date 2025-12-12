@@ -6,19 +6,24 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
+import org.junit.jupiter.api.parallel.Isolated;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.annotation.AliasFor;
-import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
+import org.springframework.test.context.jdbc.SqlConfig;
+import org.springframework.test.context.jdbc.SqlConfig.ErrorMode;
+import org.springframework.test.context.jdbc.SqlConfig.TransactionMode;
 
 /**
- * The Interface SemillaITTest.
+ * The Interface SemillaDatabaseTest.
  *
  * Anotación de la librería Gjs
  *
- * Anotación para las clase de test IT que obliga a usar el perfil testIT que se conecta directamente a la base de datos
- * Oracle.
- *
- * IMPORTANTE: Es importante en estos test considerar el entorno en el persistence.properties
+ * Anotación para las clase de test unitarios SpringBoot con acceso a datos que necesiten garantizar que el juego de
+ * pruebas no se ve afectado por otras clases de test similares.
  *
  * --------------------------------------------------------------------------------------------------------------------
  *
@@ -41,17 +46,12 @@ import org.springframework.test.context.ActiveProfiles;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @SpringBootTest
-@ActiveProfiles("testIT")
+@Sql(scripts = {
+        "classpath:sql/init-db.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_CLASS, config = @SqlConfig(transactionMode = TransactionMode.ISOLATED, errorMode = ErrorMode.CONTINUE_ON_ERROR))
+@Isolated
+@Execution(ExecutionMode.SAME_THREAD)
 @Inherited
-public @interface SemillaITTest {
-
-    /**
-     * Active profiles.
-     *
-     * @return the string[]
-     */
-    @AliasFor(annotation = ActiveProfiles.class, attribute = "profiles")
-    String[] activeProfiles() default { "testIT" };
+public @interface GjsDatabaseTest {
 
     /**
      * Classes.
