@@ -10,8 +10,8 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Set;
 
-import org.gjs.java.data.DataKey;
-import org.gjs.java.data.ForeignKey;
+import org.gjs.java.common.data.DataKey;
+import org.gjs.java.common.data.ForeignKey;
 import org.gjs.java.test.AbstractUnitTest;
 import org.gjs.java.test.samples.pojos.SampleContainerPojo;
 import org.gjs.java.test.samples.pojos.SampleContainerWithRenamePojo;

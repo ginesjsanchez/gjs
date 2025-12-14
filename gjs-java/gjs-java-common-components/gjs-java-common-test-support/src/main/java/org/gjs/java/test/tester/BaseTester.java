@@ -1,6 +1,7 @@
 package org.gjs.java.test.tester;
 
-import org.gjs.java.log.LogManager;
+import org.gjs.java.common.log.LogManager;
+import org.gjs.java.common.util.LogUtils;
 
 import com.openpojo.reflection.PojoClass;
 import com.openpojo.validation.affirm.Affirm;
@@ -21,8 +22,7 @@ import com.openpojo.validation.test.Tester;
  *
  *
  *
- * Gj Software
- * 2025
+ * Gj Software 2025
  * 
  *
  * 
@@ -100,13 +100,14 @@ public abstract class BaseTester extends LogManager implements Tester {
 	 * @param condition the condition
 	 */
 	protected void affirmTrue(final String message, final boolean condition) {
+		final String _METHOD_ = LogUtils.getMethodName();
 		try {
 			Affirm.affirmTrue(message, condition);
 		} catch (final AssertionError e) {
 			if (stopOnError) {
 				throw e;
 			}
-			error(message);
+			logError(_METHOD_, message);
 		}
 
 	}
@@ -118,13 +119,14 @@ public abstract class BaseTester extends LogManager implements Tester {
 	 * @param condition the condition
 	 */
 	protected void affirmFalse(final String message, final boolean condition) {
+		final String _METHOD_ = LogUtils.getMethodName();
 		try {
 			Affirm.affirmFalse(message, condition);
 		} catch (final AssertionError e) {
 			if (stopOnError) {
 				throw e;
 			}
-			error(message);
+			logError(_METHOD_, message);
 		}
 
 	}
@@ -136,13 +138,14 @@ public abstract class BaseTester extends LogManager implements Tester {
 	 * @param object  the object
 	 */
 	protected void affirmNotNull(final String message, final Object object) {
+		final String _METHOD_ = LogUtils.getMethodName();
 		try {
 			Affirm.affirmNotNull(message, object);
 		} catch (final AssertionError e) {
 			if (stopOnError) {
 				throw e;
 			}
-			error(message);
+			logError(_METHOD_, message);
 		}
 
 	}
@@ -154,13 +157,14 @@ public abstract class BaseTester extends LogManager implements Tester {
 	 * @param object  the object
 	 */
 	protected void affirmNull(final String message, final Object object) {
+		final String _METHOD_ = LogUtils.getMethodName();
 		try {
 			Affirm.affirmNull(message, object);
 		} catch (final AssertionError e) {
 			if (stopOnError) {
 				throw e;
 			}
-			error(message);
+			logError(_METHOD_, message);
 		}
 
 	}
@@ -173,13 +177,14 @@ public abstract class BaseTester extends LogManager implements Tester {
 	 * @param actual   the actual
 	 */
 	protected void affirmEquals(final String message, final Object expected, final Object actual) {
+		final String _METHOD_ = LogUtils.getMethodName();
 		try {
 			Affirm.affirmEquals(message, expected, actual);
 		} catch (final AssertionError e) {
 			if (stopOnError) {
 				throw e;
 			}
-			error(message);
+			logError(_METHOD_, message);
 		}
 
 	}
@@ -192,13 +197,14 @@ public abstract class BaseTester extends LogManager implements Tester {
 	 * @param second  the second
 	 */
 	protected void affirmSame(final String message, final Object first, final Object second) {
+		final String _METHOD_ = LogUtils.getMethodName();
 		try {
 			Affirm.affirmSame(message, first, second);
 		} catch (final AssertionError e) {
 			if (stopOnError) {
 				throw e;
 			}
-			error(message);
+			logError(_METHOD_, message);
 		}
 
 	}

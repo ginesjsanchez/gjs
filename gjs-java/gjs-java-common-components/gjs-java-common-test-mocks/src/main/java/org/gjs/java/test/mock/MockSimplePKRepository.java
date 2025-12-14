@@ -2,8 +2,8 @@ package org.gjs.java.test.mock;
 
 import java.io.IOException;
 
-import org.gjs.java.idgenerator.IdGenerator;
-import org.gjs.java.idgenerator.SequenceIdGenerator;
+import org.gjs.java.common.idgenerator.IdGenerator;
+import org.gjs.java.common.idgenerator.SequenceIdGenerator;
 import org.springframework.core.io.Resource;
 
 /**

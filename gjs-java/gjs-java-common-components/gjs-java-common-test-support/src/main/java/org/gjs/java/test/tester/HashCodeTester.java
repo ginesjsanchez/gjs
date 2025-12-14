@@ -1,6 +1,6 @@
 package org.gjs.java.test.tester;
 
-import org.gjs.java.supplier.GenericObjectSupplier;
+import org.gjs.java.common.supplier.GenericObjectSupplier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

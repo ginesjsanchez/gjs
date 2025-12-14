@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.gjs.java.types.WrappedObject;
+import org.gjs.java.common.type.WrappedObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

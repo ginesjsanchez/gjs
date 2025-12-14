@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.gjs.java.util.ConditionUtils;
+import org.gjs.java.common.util.ConditionUtils;
 
 import com.openpojo.validation.Validator;
 import com.openpojo.validation.ValidatorBuilder;

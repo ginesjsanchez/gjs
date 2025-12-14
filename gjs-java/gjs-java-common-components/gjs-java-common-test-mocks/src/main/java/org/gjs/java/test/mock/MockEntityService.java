@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import org.gjs.java.enums.PrimitiveType;
-import org.gjs.java.util.CollectionUtils;
-import org.gjs.java.util.ConditionUtils;
-import org.gjs.java.util.IdUtils;
-import org.gjs.java.util.ReflectionUtils;
+import org.gjs.java.common.enums.PrimitiveType;
+import org.gjs.java.common.util.CollectionUtils;
+import org.gjs.java.common.util.ConditionUtils;
+import org.gjs.java.common.util.IdUtils;
+import org.gjs.java.common.util.ReflectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.support.MutableSortDefinition;

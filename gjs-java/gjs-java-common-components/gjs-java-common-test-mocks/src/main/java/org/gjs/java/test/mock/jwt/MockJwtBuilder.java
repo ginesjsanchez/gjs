@@ -10,7 +10,7 @@ import java.util.Map;
 
 import javax.crypto.SecretKey;
 
-import org.gjs.java.supplier.random.RandomAlphanumericStringSupplier;
+import org.gjs.java.common.supplier.random.RandomAlphanumericStringSupplier;
 
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.SignatureAlgorithm;

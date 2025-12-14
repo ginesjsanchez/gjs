@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.gjs.java.idgenerator.IdGenerator;
-import org.gjs.java.idgenerator.SequenceIdGenerator;
+import org.gjs.java.common.idgenerator.IdGenerator;
+import org.gjs.java.common.idgenerator.SequenceIdGenerator;
 import org.gjs.java.test.AbstractUnitTest;
 import org.gjs.java.test.samples.pojos.SampleContainerPojo;
 import org.gjs.java.test.samples.pojos.SamplePojo;

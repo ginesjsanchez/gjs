@@ -6,8 +6,8 @@ import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.gjs.java.supplier.testinggame.TestingGamesSingleton;
 import org.gjs.java.test.junit.GjsJUnitExtension;
+import org.gjs.java.test.supplier.testinggame.TestingGamesSingleton;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 /**
@@ -20,15 +20,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
  * --------------------------------------------------------------------------------------------------------------------
  *
  *
- * correspondiente licencia en los activos de la SES. Los programas informáticos
- * propiedad de la SES están protegidos por la propiedad intelectual, y por
- * tanto está estrictamente prohibida su reproducción, modificación, cesión o
- * comunicación sin la debida autorización. Queda estrictamente prohibido el
- * uso, reproducción, cesión, transformación o comunicación pública de cualquier
- * otro tipo de obra o invención protegida por la propiedad intelectual sin la
- * debida autorización.
  *
- * Seguridad Ministerio del Interior Gobierno de España
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
  * --------------------------------------------------------------------------------------------------------------------
  *
  * @author Gjs

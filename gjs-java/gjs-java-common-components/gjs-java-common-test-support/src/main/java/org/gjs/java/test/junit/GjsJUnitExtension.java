@@ -3,9 +3,9 @@ package org.gjs.java.test.junit;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-import org.gjs.java.supplier.ObjectSupplierManager;
-import org.gjs.java.supplier.testinggame.TestingGamesSingleton;
-import org.gjs.java.util.ClazzUtils;
+import org.gjs.java.common.supplier.ObjectSupplierManager;
+import org.gjs.java.common.util.ClazzUtils;
+import org.gjs.java.test.supplier.testinggame.TestingGamesSingleton;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.mockito.junit.jupiter.MockitoExtension;

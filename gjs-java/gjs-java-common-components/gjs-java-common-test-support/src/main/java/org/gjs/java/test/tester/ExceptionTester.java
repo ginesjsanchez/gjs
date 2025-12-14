@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.gjs.java.util.ReflectionUtils;
+import org.gjs.java.common.util.ReflectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

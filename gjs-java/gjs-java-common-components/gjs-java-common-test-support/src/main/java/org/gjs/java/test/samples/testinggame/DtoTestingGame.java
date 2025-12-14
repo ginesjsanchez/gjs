@@ -1,7 +1,7 @@
 package org.gjs.java.test.samples.testinggame;
 
-import org.gjs.java.supplier.AbstractObjectSupplier;
-import org.gjs.java.supplier.ObjectSupplierManager;
+import org.gjs.java.common.supplier.AbstractObjectSupplier;
+import org.gjs.java.common.supplier.ObjectSupplierManager;
 import org.gjs.java.test.samples.dto.SampleEntityDto;
 import org.gjs.java.test.samples.dto.SampleWithFKEntityDto;
 import org.slf4j.Logger;

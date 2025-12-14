@@ -14,7 +14,7 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 	
-    <name>GJS Java common io</name>
+    <name>GJS Java common</name>
     <description>Base classes and tools for Java applications</description>
 
     <properties>

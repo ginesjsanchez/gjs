@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.gjs.java.util.ConditionUtils;
+import org.gjs.java.common.util.ConditionUtils;
 
 import io.jsonwebtoken.lang.Arrays;
 

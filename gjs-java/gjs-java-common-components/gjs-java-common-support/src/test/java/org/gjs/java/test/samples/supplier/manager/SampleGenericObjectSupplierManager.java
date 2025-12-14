@@ -1,7 +1,7 @@
 package org.gjs.java.test.samples.supplier.manager;
 
-import org.gjs.java.supplier.AbstractObjectSupplier;
-import org.gjs.java.supplier.ObjectSupplierManager;
+import org.gjs.java.common.supplier.AbstractObjectSupplier;
+import org.gjs.java.common.supplier.ObjectSupplierManager;
 import org.gjs.java.test.samples.pojos.SampleMaterialized1;
 import org.gjs.java.test.samples.pojos.SampleMaterialized2;
 import org.gjs.java.test.samples.pojos.SampleMaterializedContainer;

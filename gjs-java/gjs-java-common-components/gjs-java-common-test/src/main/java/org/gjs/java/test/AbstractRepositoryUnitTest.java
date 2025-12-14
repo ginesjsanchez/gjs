@@ -3,8 +3,8 @@ package org.gjs.java.test;
 import java.util.Map;
 import java.util.Objects;
 
-import org.gjs.java.jpa.JpaRepositoryWrapper;
-import org.gjs.java.util.ConditionUtils;
+import org.gjs.java.common.jpa.JpaRepositoryWrapper;
+import org.gjs.java.common.util.ConditionUtils;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,6 +1,6 @@
 package org.gjs.java.test;
 
-import org.gjs.java.util.ConditionUtils;
+import org.gjs.java.common.util.ConditionUtils;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

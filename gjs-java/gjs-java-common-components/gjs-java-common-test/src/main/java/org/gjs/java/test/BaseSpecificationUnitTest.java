@@ -10,8 +10,8 @@ import java.util.Objects;
 import java.util.function.Function;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.gjs.java.util.ClazzUtils;
-import org.gjs.java.util.ReflectionUtils;
+import org.gjs.java.common.util.ClazzUtils;
+import org.gjs.java.common.util.ReflectionUtils;
 import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
 import org.springframework.data.jpa.domain.Specification;

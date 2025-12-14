@@ -2,8 +2,8 @@ package org.gjs.java.test.mock;
 
 import java.util.List;
 
-import org.gjs.java.util.ConversionUtils;
-import org.gjs.java.util.ReflectionUtils;
+import org.gjs.java.common.util.ConversionUtils;
+import org.gjs.java.common.util.ReflectionUtils;
 
 /**
  * The Class MockEntityFromRepositoryService.

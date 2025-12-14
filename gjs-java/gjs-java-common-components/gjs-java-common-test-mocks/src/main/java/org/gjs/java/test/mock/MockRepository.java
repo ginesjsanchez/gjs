@@ -8,10 +8,10 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
-import org.gjs.java.idgenerator.IdGenerator;
-import org.gjs.java.util.ComparatorUtils;
-import org.gjs.java.util.ConditionUtils;
-import org.gjs.java.util.ReflectionUtils;
+import org.gjs.java.common.idgenerator.IdGenerator;
+import org.gjs.java.common.util.ComparatorUtils;
+import org.gjs.java.common.util.ConditionUtils;
+import org.gjs.java.common.util.ReflectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;

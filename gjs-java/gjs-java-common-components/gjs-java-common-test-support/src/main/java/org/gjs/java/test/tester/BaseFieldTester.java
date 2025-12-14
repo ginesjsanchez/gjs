@@ -1,5 +1,6 @@
 package org.gjs.java.test.tester;
 
+import org.gjs.java.common.util.LogUtils;
 import org.slf4j.Logger;
 
 import com.openpojo.reflection.PojoClass;
@@ -19,8 +20,7 @@ import com.openpojo.reflection.PojoClass;
  *
  *
  *
- * Gj Software
- * 2025
+ * Gj Software 2025
  * 
  *
  * 
@@ -89,10 +89,11 @@ public abstract class BaseFieldTester extends BaseTester {
 	 * @param totalFields the total fields
 	 */
 	protected void beginClass(String className, int totalFields) {
+		final String _METHOD_ = LogUtils.getMethodName();
 		this.className = className;
 		this.fieldsTested = 0;
 		this.totalFields = totalFields;
-		info("{} Tester for class {}", this.testerName, this.className);
+		logFormattedInfo(_METHOD_, "{} Tester for class {}", this.testerName, this.className);
 	}
 
 	/**
@@ -106,7 +107,8 @@ public abstract class BaseFieldTester extends BaseTester {
 	 * End class.
 	 */
 	protected void endClass() {
-		info("Class {}: fields tested{}/{}", className, fieldsTested, totalFields);
+		final String _METHOD_ = LogUtils.getMethodName();
+		logFormattedInfo(_METHOD_, "Class {}: fields tested{}/{}", className, fieldsTested, totalFields);
 	}
 
 }

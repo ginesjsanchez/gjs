@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-import org.gjs.java.util.ReflectionUtils;
+import org.gjs.java.common.util.ReflectionUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.jpa.repository.JpaRepository;
 

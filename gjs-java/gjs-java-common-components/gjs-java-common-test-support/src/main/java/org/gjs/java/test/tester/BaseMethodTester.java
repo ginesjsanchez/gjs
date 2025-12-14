@@ -2,10 +2,10 @@ package org.gjs.java.test.tester;
 
 import java.lang.reflect.Parameter;
 
-import org.gjs.java.enums.ManagedType;
-import org.gjs.java.enums.PrimitiveType;
-import org.gjs.java.util.ClazzUtils;
-import org.gjs.java.util.ReflectionUtils;
+import org.gjs.java.common.enums.ManagedType;
+import org.gjs.java.common.enums.PrimitiveType;
+import org.gjs.java.common.util.ClazzUtils;
+import org.gjs.java.common.util.ReflectionUtils;
 import org.slf4j.Logger;
 
 import com.openpojo.reflection.PojoClass;

@@ -1,6 +1,6 @@
 package org.gjs.java.test.samples.supplier.manager;
 
-import org.gjs.java.supplier.AbstractObjectSupplier;
+import org.gjs.java.common.supplier.AbstractObjectSupplier;
 import org.gjs.java.test.samples.type.AllArraysType;
 
 public class SampleArraysSupplierNotManaged extends AbstractObjectSupplier<AllArraysType> {

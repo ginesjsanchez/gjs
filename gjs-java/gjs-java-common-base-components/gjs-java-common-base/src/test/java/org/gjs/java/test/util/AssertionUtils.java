@@ -10,10 +10,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.ObjectUtils;
-import org.gjs.java.constant.CommonBaseConstants;
-import org.gjs.java.util.CalculusUtils;
-import org.gjs.java.util.ConditionUtils;
-import org.gjs.java.util.ConversionUtils;
+import org.gjs.java.common.constant.CommonBaseConstants;
+import org.gjs.java.common.util.CalculusUtils;
+import org.gjs.java.common.util.ConditionUtils;
+import org.gjs.java.common.util.ConversionUtils;
 import org.opentest4j.AssertionFailedError;
 import org.slf4j.Logger;
 

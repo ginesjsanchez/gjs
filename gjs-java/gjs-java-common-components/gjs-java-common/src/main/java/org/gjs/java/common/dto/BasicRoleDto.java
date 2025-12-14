@@ -1,0 +1,120 @@
+package org.gjs.java.common.dto;
+
+import java.util.Objects;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
+import lombok.Getter;
+import lombok.Setter;
+
+/**
+ * The Class RolDto.
+ *
+ * Clase de datos de la librería Gjs
+ *
+ * Clase DTO para almacenar los datos de un rol.
+ *
+ * --------------------------------------------------------------------------------------------------------------------
+ * Gj Software
+ *
+ * 2025
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ * --------------------------------------------------------------------------------------------------------------------
+ *
+ * @author Gjs
+ * @version 4.0.0
+ * @since 3.0.0
+ *
+ */
+@Getter
+@Setter
+public class BasicRoleDto implements Comparable<BasicRoleDto> {
+
+	/** The nombre. */
+	protected String name;
+
+	/**
+	 * Instantiates a new rol dto.
+	 */
+	public BasicRoleDto() {
+		// No hace nada
+	}
+
+	/**
+	 * Instantiates a new rol dto.
+	 *
+	 * @param id the id
+	 */
+	public BasicRoleDto(String name) {
+		this.name = name;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see es.mir.semilla.util.dto.EntidadDto#equals(java.lang.Object)
+	 */
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof final BasicRoleDto other)) {
+			return false;
+		}
+		return (compareTo(other) == 0);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see es.mir.semilla.util.dto.EntidadDto#hashCode()
+	 */
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(name);
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see es.mir.semilla.util.dto.EntidadDto#compareTo(es.mir.semilla.util.dto.
+	 * EntidadDto)
+	 */
+
+	@Override
+	public int compareTo(BasicRoleDto o) {
+		int res = -1;
+		if (Objects.nonNull(o)) {
+			res = StringUtils.compare(name, o.getName());
+		}
+		return res;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see java.lang.Object#toString()
+	 */
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append("name", name).toString();
+	}
+}
