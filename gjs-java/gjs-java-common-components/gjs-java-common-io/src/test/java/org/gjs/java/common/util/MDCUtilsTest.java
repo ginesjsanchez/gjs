@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.gjs.java.common.util.MDCUtils;
 import org.gjs.java.test.BaseClassTest;
 import org.gjs.java.test.samples.dto.SampleEntityDto;
 import org.junit.jupiter.api.Test;

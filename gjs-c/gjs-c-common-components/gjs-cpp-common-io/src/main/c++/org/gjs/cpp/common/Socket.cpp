@@ -1,0 +1,208 @@
+#include "CommonIoConfig.h"
+
+#include "Socket.h"
+
+
+
+using namespace org::gjs::cpp::common;
+
+
+namespace org
+{
+	namespace gjs
+	{
+		namespace cpp
+		{
+            namespace common
+            {
+
+Socket::Socket()
+{
+	memset( &sockaddrSocket, 0, sizeof( sockaddrSocket ) );
+	iSocket = -1;
+}
+
+Socket::~Socket()
+{
+	Cerrar();
+}
+
+bool Socket::EsValido()
+{
+	return ( iSocket !=-1 );
+}
+
+bool Socket::EstaConectado()
+{
+	bool bRes = false;
+	if( EsValido() ) 
+	{
+		char buffer;
+		bRes = ( recv( iSocket, &buffer, 1, MSG_PEEK | MSG_DONTWAIT ) == 0 );
+	}
+	return( bRes );
+}
+
+bool Socket::AceptaConexiones()
+{
+	bool bRes = false;
+	if( EsValido() ) 
+	{
+		int valor = 0;
+		socklen_t lon = sizeof( int );
+		if ( getsockopt( iSocket, SOL_SOCKET, SO_ACCEPTCONN, &valor, &lon ) == 0 )
+		{
+			bRes = ( valor == 1 );
+		}
+	}
+	return( bRes );
+}
+
+int Socket::getId()
+{
+	return( iSocket );
+}
+
+void Socket::setId( int valor )
+{
+	if ( valor < -1 )
+	{
+		valor = - 1;
+	}
+	iSocket = valor;
+}
+
+int Socket::getPuerto()
+{
+	int iPuerto = 0;
+	if( EsValido() ) 
+	{
+		struct sockaddr_in sockaddrLocal;
+		socklen_t address_length = sizeof( sockaddrLocal );
+		getsockname( iSocket, (struct sockaddr*)&sockaddrLocal, &address_length );
+		iPuerto = ntohs( sockaddrLocal.sin_port );
+	}
+	return( iPuerto );
+}
+
+string Socket::getHost()
+{
+	string sHost;
+	if( EsValido() ) 
+	{
+		struct sockaddr_in sockaddrLocal;
+		socklen_t address_length = sizeof(sockaddrLocal);
+		getsockname( iSocket, (struct sockaddr*)&sockaddrLocal, &address_length );
+		sHost = string( inet_ntoa( sockaddrLocal.sin_addr ) );
+	}
+	return( sHost );
+}
+
+bool Socket::Crear()
+{
+	bool bRes = false;
+	iSocket = socket( PF_INET, SOCK_STREAM, 0 );
+	if( EsValido() ) 
+	{
+		int valor = 1;		
+		bRes = ( setsockopt( iSocket, SOL_SOCKET, SO_REUSEADDR, &valor, sizeof( int ) ) == 0 );
+	}
+	return( bRes );
+}
+
+bool Socket::Enlazar( int iPuerto )
+{
+	bool bRes = false;
+	if( EsValido() )
+	{
+		sockaddrSocket.sin_family = AF_INET;
+		sockaddrSocket.sin_port = htons( iPuerto );
+		memset( sockaddrSocket.sin_zero, '\0', sizeof( sockaddrSocket.sin_zero ) );
+
+		bRes = ( bind( iSocket, (struct sockaddr *)&sockaddrSocket, sizeof( sockaddrSocket ) ) == 0 );
+	}
+	return( bRes );
+}
+
+bool Socket::Conectar( int iIP, int iPuerto )
+{
+	bool bRes = false;
+	if( EsValido() && ( iIP != INADDR_ANY ) && ( iPuerto > 0 ) )
+	{
+		sockaddrSocket.sin_family = AF_INET;
+		sockaddrSocket.sin_port = htons(iPuerto);
+		sockaddrSocket.sin_addr.s_addr = iIP;
+
+		bRes = ( connect( iSocket, (sockaddr *)&sockaddrSocket, sizeof( sockaddrSocket ) ) == 0 );
+	}
+	return( bRes );
+}
+
+bool Socket::Conectar( const string & sIP, int iPuerto )
+{
+	int iIP = ResolverIP( sIP );
+	return ( Conectar( iIP, iPuerto ) );
+}
+
+bool Socket::Escuchar( int iTamCola )
+{
+	bool bRes = false;
+	if( EsValido() )
+	{
+		bRes = ( listen( iSocket, iTamCola ) == 0 );
+	}
+	return( bRes );
+}
+
+int Socket::Aceptar()
+{
+	int iRes = -1;
+	if( EsValido() )
+	{
+		int iTam = sizeof( sockaddrSocket );
+		iRes = accept( iSocket, (struct sockaddr *)&sockaddrSocket, (socklen_t *) &iTam );
+	}
+	return( iRes );
+}
+
+int Socket::Enviar( const string & sMensaje ) 
+{
+	int iRes = 0;
+	if( EsValido() )
+	{
+		iRes = send( iSocket, sMensaje.c_str(), sMensaje.length(), 0x0 );
+	}
+	return( iRes );
+}
+
+int Socket::Recibir( string & sMensaje, int iMaxTam )
+{
+	int iRes = 0;
+	if( EsValido() && ( iMaxTam > 0 ) )
+	{
+		sMensaje.clear();
+		char buffer[ iMaxTam + 5 ];
+		iRes = recv( iSocket, buffer, iMaxTam, 0x0 );
+		if( iRes > 0 )
+		{
+			sMensaje.assign( buffer, iRes );
+		}
+	}
+	return( iRes );
+}
+
+bool Socket::Cerrar()
+{
+	bool bRes = false;
+	if( EsValido() )
+	{
+		bRes = ( close( iSocket ) == 0 );
+		iSocket = -1;
+	}
+	return( bRes );
+}
+
+ 			}
+		}
+	}
+}

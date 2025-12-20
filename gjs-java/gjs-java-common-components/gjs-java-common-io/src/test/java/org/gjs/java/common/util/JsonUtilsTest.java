@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.gjs.java.common.supplier.GjsSupplier;
-import org.gjs.java.common.util.ConversionUtils;
-import org.gjs.java.common.util.JsonUtils;
 import org.gjs.java.test.BaseClassTest;
 import org.gjs.java.test.samples.dto.SampleEntityDto;
 import org.gjs.java.test.samples.testinggame.DtoTestingGame;

@@ -3,7 +3,6 @@ package org.gjs.java.common.util;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.gjs.java.common.util.BitwiseUtils;
 import org.gjs.java.test.BaseUnitTest;
 import org.junit.jupiter.api.Test;
 

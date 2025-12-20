@@ -25,12 +25,73 @@
 		<gjs.nar.compiler.language>c++</gjs.nar.compiler.language>
 		<gjs.nar.cpp.version>20</gjs.nar.cpp.version>
 		<gjs.nar.language.standard>c++${gjs.nar.cpp.version}</gjs.nar.language.standard>
-		<!-- TODO: Asegurar que cppcheck es la última version. La version actual que tengo no implementa C++20 por eso hay que usar la c++14 -->
-		<gjs.nar.cpp.language.option>--std=${gjs.nar.language.standard}</gjs.nar.cpp.language.option>
+		
+		<!-- Dependency versions -->
+		<!-- Gjs versions -->
+		<gjs-cpp-common-base.version>1.0.0-SNAPSHOT</gjs-cpp-common-base.version>
+		<gjs-cpp-common-support.version>1.0.0-SNAPSHOT</gjs-cpp-common-support.version>
+		<gjs-cpp-common-io.version>1.0.0-SNAPSHOT</gjs-cpp-common-io.version>
+		<gjs-cpp-common-log.version>1.0.0-SNAPSHOT</gjs-cpp-common-log.version>
+		<gjs-cpp-common-database.version>1.0.0-SNAPSHOT</gjs-cpp-common-database.version>
+		<gjs-cpp-common-test-mocks.version>1.0.0-SNAPSHOT</gjs-cpp-common-test-mocks.version>
+		<gjs-cpp-common-test.version>1.0.0-SNAPSHOT</gjs-cpp-common-test.version>
+		<gjs-cpp-common.version>1.0.0-SNAPSHOT</gjs-cpp-common.version>
 	</properties>
 	
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>org.gjs.c.common</groupId>
+				<artifactId>gjs-cpp-common-base</artifactId>
+				<version>${gjs-cpp-common-base.version}</version>
+				<type>nar</type>
+			</dependency>
+			<dependency>
+				<groupId>org.gjs.c.common</groupId>
+				<artifactId>gjs-cpp-common-support</artifactId>
+				<version>${gjs-cpp-common-support.version}</version>
+				<type>nar</type>
+			</dependency>
+			<dependency>
+				<groupId>org.gjs.c.common</groupId>
+				<artifactId>gjs-cpp-common-io</artifactId>
+				<version>${gjs-cpp-common-io.version}</version>
+				<type>nar</type>
+			</dependency>
+			<dependency>
+				<groupId>org.gjs.c.common</groupId>
+				<artifactId>gjs-cpp-common-log</artifactId>
+				<version>${gjs-cpp-common-log.version}</version>
+				<type>nar</type>
+			</dependency>
+			<dependency>
+				<groupId>org.gjs.c.common</groupId>
+				<artifactId>gjs-cpp-common-database</artifactId>
+				<version>${gjs-cpp-common-database.version}</version>
+				<type>nar</type>
+			</dependency>
+			<dependency>
+				<groupId>org.gjs.c.common</groupId>
+				<artifactId>gjs-cpp-common</artifactId>
+				<version>${gjs-cpp-common.version}</version>
+				<type>nar</type>
+			</dependency>
+			
+			<!-- Test -->
+			<dependency>
+				<groupId>org.gjs.c.common</groupId>
+				<artifactId>gjs-cpp-common-test-mocks</artifactId>
+				<version>${gjs-cpp-common-test-mocks.version}</version>
+				<type>nar</type>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.gjs.c.common</groupId>
+				<artifactId>gjs-cpp-common-test</artifactId>
+				<version>${gjs-cpp-common-test.version}</version>
+				<type>nar</type>
+				<scope>test</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	
@@ -46,6 +107,8 @@
 					<cpp>
 						<options combine.children="append">
 							<option>${gjs.nar.cpp.language.option}</option>
+							<option>-Wno-conversion-null</option>
+							<option>-fpermissive</option>
 						</options>
 
 						<includePaths combine.children="append">

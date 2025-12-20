@@ -12,7 +12,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.gjs.java.common.files.FileObjects;
 import org.gjs.java.common.type.DataObject;
 import org.gjs.java.common.util.ConversionUtils;
 import org.gjs.java.test.BaseUnitTest;

@@ -8,8 +8,9 @@
 		<relativePath>../../gjs-c-parents/gjs-c-lib-parent</relativePath>
 	</parent>	
 
-	<groupId>org.gjs.c.cc</groupId>
+	<groupId>org.gjs.c.common</groupId>
 	<artifactId>gjs-c-common-base</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>nar</packaging>
 
 	<name>GJS C Base</name>

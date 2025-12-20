@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
 
-import org.gjs.java.common.type.DocumentTemplate;
 import org.gjs.java.test.BaseClassTest;
 import org.junit.jupiter.api.Test;
 

@@ -27,8 +27,7 @@ import org.slf4j.LoggerFactory;
  *
  *
  *
- * Gj Software
- * 2025
+ * Gj Software 2025
  * 
  *
  * 
@@ -176,6 +175,13 @@ public abstract class FilePlain {
 	protected abstract boolean saveContent(String path);
 
 	/**
+	 * Checks if is valid content.
+	 *
+	 * @return true, if is valid content
+	 */
+	protected abstract boolean isValidContent();
+
+	/**
 	 * Checks if is valid.
 	 *
 	 * @return true, if is valid
@@ -184,7 +190,7 @@ public abstract class FilePlain {
 		boolean res = false;
 		try {
 			Paths.get(filePath);
-			res = true;
+			res = isValidContent();
 		} catch (InvalidPathException | NullPointerException e) {
 			logger.warn(e.getMessage());
 		}

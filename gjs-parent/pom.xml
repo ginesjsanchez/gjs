@@ -27,6 +27,8 @@
 	Needs properties in settings.xml file: 
 		
 		* cygwinDir : Directory of Cygwin installation (indirectly, only for cygwin profile)
+
+		* cygwinUser : Username for Cygwin (indirectly, only for cygwin profile)
 					
 	</description>    
 

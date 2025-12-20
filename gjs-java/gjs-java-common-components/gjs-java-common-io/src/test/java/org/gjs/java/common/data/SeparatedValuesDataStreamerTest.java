@@ -14,9 +14,8 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.junit.jupiter.api.Test;
-import org.gjs.java.common.data.SeparatedValuesDataStreamer;
 import org.gjs.java.test.BaseUnitTest;
+import org.junit.jupiter.api.Test;
 
 public class SeparatedValuesDataStreamerTest extends BaseUnitTest<SeparatedValuesDataStreamer> {
 

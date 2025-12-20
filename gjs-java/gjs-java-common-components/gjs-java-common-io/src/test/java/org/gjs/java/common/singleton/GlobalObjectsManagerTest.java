@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.util.List;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.gjs.java.common.singleton.GlobalObjectsManager;
 import org.gjs.java.test.BaseUnitTest;
 import org.gjs.java.test.samples.dto.SampleEntityDto;
 import org.gjs.java.test.samples.dto.SampleWithFKEntityDto;

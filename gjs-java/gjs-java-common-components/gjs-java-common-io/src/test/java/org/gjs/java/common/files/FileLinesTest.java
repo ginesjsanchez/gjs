@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.gjs.java.common.files.FileLines;
 import org.gjs.java.test.BaseUnitTest;
 import org.junit.jupiter.api.Test;
 

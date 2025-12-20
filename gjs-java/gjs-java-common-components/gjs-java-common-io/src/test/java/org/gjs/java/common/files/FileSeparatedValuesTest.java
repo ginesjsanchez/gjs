@@ -11,7 +11,6 @@ import java.nio.file.Path;
 import java.util.List;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.gjs.java.common.files.FileSeparatedValues;
 import org.gjs.java.common.type.Matrix;
 import org.gjs.java.test.BaseUnitTest;
 import org.junit.jupiter.api.Test;

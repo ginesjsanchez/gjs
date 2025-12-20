@@ -24,7 +24,23 @@
 		<gjs.nar.linker>gcc</gjs.nar.linker>
 		
 		<gjs.nar.compiler.language>c</gjs.nar.compiler.language>
-		<gjs.nar.language.standard>c99</gjs.nar.language.standard>
+		<gjs.nar.cpp.version>23</gjs.nar.cpp.version>
+		<gjs.nar.language.standard>gnu${gjs.nar.cpp.version}</gjs.nar.language.standard>
+		
+		<!-- Dependency versions -->
+		<!-- Gjs versions -->
+		<gjs-c-common-base.version>1.0.0-SNAPSHOT</gjs-c-common-base.version>
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.gjs.c.common</groupId>
+				<artifactId>gjs-c-common-base</artifactId>
+				<version>${gjs-c-common-base.version}</version>
+				<type>nar</type>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	
 </project>

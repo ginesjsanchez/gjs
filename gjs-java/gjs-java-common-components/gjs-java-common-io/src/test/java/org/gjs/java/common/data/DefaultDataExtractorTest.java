@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.gjs.java.common.data.DefaultDataExtractor;
 import org.gjs.java.common.util.ConversionUtils;
 import org.gjs.java.test.BaseUnitTest;
 import org.gjs.java.test.samples.dto.SampleEntityDto;

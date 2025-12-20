@@ -106,7 +106,7 @@ string ToTimeString ( time_t t )
 }
 
 template <typename T>
-string ToString ( T t )
+string _ToString ( T t )
 {
 	try
 	{
@@ -121,22 +121,80 @@ string ToString ( T t )
 	}
 }
 
-template string ToString ( bool );
-template string ToString ( short );
-template string ToString ( int );
-template string ToString ( long );
-template string ToString ( long long );
-template string ToString ( unsigned short );
-template string ToString ( unsigned int );
-template string ToString ( unsigned long );
-template string ToString ( unsigned long long );
-template string ToString ( float );
-template string ToString ( double );
-template string ToString ( long double );
-template string ToString ( char );
-template string ToString ( unsigned char );
-template string ToString ( char * );
-template string ToString ( const char * );
+string ToString ( short t ) {
+    return _ToString<short>( t );
+}
+
+string ToString ( int t ) {
+    return _ToString<int>( t );
+}
+
+
+string ToString ( long t ) {
+    return _ToString<long>( t );
+}
+
+
+string ToString ( long long t ) {
+    return _ToString<long long>( t );
+}
+
+
+string ToString ( unsigned short t ) {
+    return _ToString<unsigned short>( t );
+}
+
+
+string ToString ( unsigned int t ) {
+    return _ToString<unsigned int>( t );
+}
+
+
+string ToString ( unsigned long t ) {
+    return _ToString<unsigned long>( t );
+}
+
+
+string ToString ( unsigned long long t ) {
+    return _ToString<unsigned long long>( t );
+}
+
+
+string ToString ( float t ) {
+    return _ToString<float>( t );
+}
+
+
+string ToString ( double t ) {
+    return _ToString<double>( t );
+}
+
+
+string ToString ( long double t ) {
+    return _ToString<long double>( t );
+}
+
+
+string ToString ( char t ) {
+    return _ToString<char>( t );
+}
+
+
+string ToString ( unsigned char t ) {
+    return _ToString<unsigned char>( t );
+}
+
+
+string ToString ( char * t ) {
+    return _ToString<char *>( t );
+}
+
+
+string ToString ( const char * t ) {
+    return _ToString<const char *>( t );
+}
+
+
 
 
 template <typename T>

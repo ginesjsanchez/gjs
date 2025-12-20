@@ -9,8 +9,6 @@ import java.util.ResourceBundle;
 
 import org.gjs.java.common.constant.CommonBaseConstants;
 import org.gjs.java.common.constant.CommonIoConstants;
-import org.gjs.java.common.util.BundleUtils;
-import org.gjs.java.common.util.MDCUtils;
 import org.gjs.java.test.BaseUnitTest;
 import org.junit.jupiter.api.Test;
 

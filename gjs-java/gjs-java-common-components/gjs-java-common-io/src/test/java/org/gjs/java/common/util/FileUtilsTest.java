@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.File;
 
 import org.apache.commons.lang3.SystemUtils;
-import org.gjs.java.common.util.FileUtils;
 import org.gjs.java.test.BaseUnitTest;
 import org.junit.jupiter.api.Test;
 

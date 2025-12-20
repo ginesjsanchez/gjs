@@ -37,14 +37,28 @@ namespace org
 
 			string ToTimeString ( time_t t );
 
-			template <typename T> string ToString ( T t );
-
 			template <typename T> string ToString ( list<T> & lista );
 			template <typename T> string ToString ( list<T> * lista );
 			template <typename T> string ToString ( vector<T> & vector );
 			template <typename T> string ToString ( vector<T> * vector );
 			template <typename T> string ToString ( map<string, T> & mapa );
 			template <typename T> string ToString ( map<string, T> * mapa );
+
+            string ToString ( short );
+            string ToString ( int );
+            string ToString ( long );
+            string ToString ( long long );
+            string ToString ( unsigned short );
+            string ToString ( unsigned int );
+            string ToString ( unsigned long );
+            string ToString ( unsigned long long );
+            string ToString ( float );
+            string ToString ( double );
+            string ToString ( long double );
+            string ToString ( char );
+            string ToString ( unsigned char );
+            string ToString ( char * );
+            string ToString ( const char * );
 
 			}
 		}

@@ -1,0 +1,26 @@
+#ifndef _ORG_GJS_C_CC_CPP_SECUENCIAS_H
+#define _ORG_GJS_C_CC_CPP_SECUENCIAS_H
+
+#include <string>
+#include <list>
+
+
+using namespace std;
+
+namespace org
+{
+	namespace gjs
+	{
+		namespace cpp
+		{
+            namespace common
+            {
+
+			template<typename T> bool SonIguales ( const T val1[], const T val2[] );
+
+ 			}
+		}
+	}
+}
+
+#endif

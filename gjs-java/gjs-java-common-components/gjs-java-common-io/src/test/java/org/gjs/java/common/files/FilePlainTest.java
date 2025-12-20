@@ -10,7 +10,6 @@ import java.io.File;
 import java.nio.file.Path;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.gjs.java.common.files.FilePlain;
 import org.gjs.java.test.BaseUnitTest;
 import org.junit.jupiter.api.Test;
 
@@ -48,6 +47,11 @@ public class FilePlainTest extends BaseUnitTest<FilePlain> {
 
 		@Override
 		protected boolean saveContent(String path) {
+			return true;
+		}
+
+		@Override
+		protected boolean isValidContent() {
 			return true;
 		}
 

@@ -6,11 +6,17 @@
 using namespace std;
 using namespace org::gjs::cpp::common;
 
+extern bool TestToInt ();
 extern bool TestToString ();
 extern bool TestConcatenar ();
 extern bool TestCadenas ();
 extern bool TestIToString ();
-
+extern bool TestObjeto ();
+extern bool TestExcepcion ();
+extern bool TestSistema ();
+extern bool TestIComparable ();
+extern bool TestColecciones ();
+extern bool TestFicheros ();
 
 
 int main( int argc, char * argv[] )
@@ -18,10 +24,17 @@ int main( int argc, char * argv[] )
 	int iRes = 0;
 
 	map<string, FUNCION_BOOL> mapTests;
+	mapTests[ "ToInt" ] = TestToString;
 	mapTests[ "ToString" ] = TestToString;
 	mapTests[ "Concatenar" ] = TestConcatenar;
 	mapTests[ "Cadenas" ] = TestCadenas;
 	mapTests[ "IToString" ] = TestIToString;
+	mapTests[ "Objeto" ] = TestObjeto;
+	mapTests[ "Excepcion" ] = TestExcepcion;
+	mapTests[ "Sistema" ] = TestSistema;
+	mapTests[ "IComparable" ] = TestIComparable;
+	mapTests[ "Colecciones" ] = TestColecciones;
+	mapTests[ "Ficheros" ] = TestFicheros;
 
 
 	string sTest( "null" );
@@ -47,10 +60,17 @@ int main( int argc, char * argv[] )
 		return( iRes );
 	}
 
-	if ( ! TestToString () ||
+	if ( ! TestToInt () ||
+		! TestToString () ||
 		! TestConcatenar () ||
 		! TestCadenas () ||
-		! TestIToString () )
+		! TestIToString () ||
+		! TestObjeto () ||
+		! TestExcepcion () ||
+		! TestSistema () ||
+        ! TestIComparable() ||
+        ! TestColecciones() ||
+        ! TestFicheros() )
 	{
 		iRes = -1;
 	}

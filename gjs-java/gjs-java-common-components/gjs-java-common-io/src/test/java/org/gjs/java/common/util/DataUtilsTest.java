@@ -12,8 +12,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.gjs.java.common.util.ConversionUtils;
-import org.gjs.java.common.util.DataUtils;
 import org.gjs.java.test.BaseUnitTest;
 import org.gjs.java.test.samples.dto.SampleEntityDto;
 import org.junit.jupiter.api.Test;

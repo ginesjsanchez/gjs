@@ -44,7 +44,9 @@
 		Needs profile cpp with special properties in settings.xml file: 
 		
 			* cygwinDir : Directory of Cygwin installation (from gjs-parent)
-			
+
+			* cygwinUser : Username for Cygwin (indirectly, only for cygwin profile)
+						
 			* oracleDir : Directory of Oracle installation
 	</description>
 
@@ -63,6 +65,12 @@
 		<!-- Binary prefixes -->
 		<exeFinalPrefix></exeFinalPrefix>
 		<libFinalPrefix>lib</libFinalPrefix>
+
+		<!-- User home -->
+		<homeDir>${cygwinDir}/home/${cygwinUser}</homeDir>		
+
+		<!-- External installed libs -->
+		<externalLibDir>${homeDir}/lib</externalLibDir>		
 		
 		<!-- System Libraries directories -->
 		<sysLibDir1>${cygwinDir}/lib</sysLibDir1>		
@@ -73,6 +81,11 @@
 		<!-- CppCheck Tool directory -->
 		<cppCheckDir>${cygwinDir}/bin</cppCheckDir>
 		
+		<!-- Apache Log4cxx directory -->
+		<log4cxxDir>${externalLibDir}/log4cxx</log4cxxDir>
+		<log4cxxDirInclude>${log4cxxDir}/include</log4cxxDirInclude>
+		<log4cxxDirLib>${log4cxxDir}/lib</log4cxxDirLib>
+	
 		<!-- GLib  directory -->
 		<glibDir>${cygwinDir}/lib/glib-2.0</glibDir>
 		<glibDirInclude>${glibDir}/include</glibDirInclude>

@@ -9,9 +9,8 @@ import java.io.FileReader;
 import java.nio.file.Path;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.junit.jupiter.api.Test;
-import org.gjs.java.common.data.ObjectsDataReader;
 import org.gjs.java.test.BaseUnitTest;
+import org.junit.jupiter.api.Test;
 
 public class ObjectsDataReaderTest extends BaseUnitTest<ObjectsDataReader> {
 

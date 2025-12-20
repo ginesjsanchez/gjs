@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.gjs.java.common.type.StringTemplate;
 import org.gjs.java.test.BaseClassTest;
 import org.junit.jupiter.api.Test;
 

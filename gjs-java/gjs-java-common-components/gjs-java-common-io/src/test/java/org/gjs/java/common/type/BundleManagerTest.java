@@ -12,7 +12,6 @@ import java.util.ResourceBundle;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.gjs.java.common.constant.CommonIoConstants;
-import org.gjs.java.common.type.BundleManager;
 import org.gjs.java.common.util.MDCUtils;
 import org.gjs.java.test.BaseClassTest;
 import org.junit.jupiter.api.Test;

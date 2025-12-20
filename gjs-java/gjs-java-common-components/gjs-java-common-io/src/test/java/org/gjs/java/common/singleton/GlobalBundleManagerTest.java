@@ -9,7 +9,6 @@ import java.util.Locale;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.gjs.java.common.constant.CommonBaseConstants;
-import org.gjs.java.common.singleton.GlobalBundleManager;
 import org.gjs.java.common.util.BundleUtils;
 import org.gjs.java.test.BaseUnitTest;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;

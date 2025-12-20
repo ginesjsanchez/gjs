@@ -12,7 +12,17 @@
 	</description>
 
 	<modules>
-		<module>gjs-c-common-base</module>
+		<!-- C++ components -->
 		<module>gjs-cpp-common-base</module>
+		<module>gjs-cpp-common-log</module>
+		<module>gjs-cpp-common-support</module>
+		<module>gjs-cpp-common-io</module>
+		<module>gjs-cpp-common-database</module>
+		<module>gjs-cpp-common</module>
+		<module>gjs-cpp-common-test</module>
+		<module>gjs-cpp-common-test-mocks</module>
+	
+		<!-- C components -->
+		<module>gjs-c-common-base</module>
 	</modules>
 </project>

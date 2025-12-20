@@ -18,6 +18,9 @@
 		<!-- NAR -->
 		<nar-maven-plugin.version>3.10.1-GJS</nar-maven-plugin.version>
 		
+		<!-- C/C++ Language version -->
+		<gjs.nar.cpp.language.option>--std=${gjs.nar.language.standard}</gjs.nar.cpp.language.option>
+
 		<!-- Generic compilation options-->
 		<gjs.nar.architecture.bits>64</gjs.nar.architecture.bits>
 		<gjs.nar.optimization.level>2</gjs.nar.optimization.level>
@@ -117,7 +120,6 @@
 								<option>-Wno-switch</option> 
 								<option>-Wno-sign-compare</option> 
 								<option>-Wno-pointer-arith</option>
-								<option>-Wno-conversion-null</option>
 								<option>-Wno-write-strings</option>
 								<option>-Wunused-result</option>
 								<option>${gjs.nar.locale.option}</option>
@@ -271,6 +273,7 @@
 											<arg value="-I${sslDirInclude}"/>
 											<arg value="-I${oraDirInclude}"/>
 											<arg value="-I${xmlDirInclude}"/>
+											<arg value="-I${log4cxxDirInclude}"/>											
 											<arg value="-I${sysIncDir}"/>
 											<arg value="-I${sysIncDir2}"/>	
 											<arg value="--suppress=virtualCallInConstructor"/>
