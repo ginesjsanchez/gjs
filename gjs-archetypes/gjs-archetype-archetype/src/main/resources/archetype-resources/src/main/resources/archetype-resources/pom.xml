@@ -25,9 +25,12 @@
 		<!-- Language features -->
 		<gjs.source.language>${lan}</gjs.source.language>
 		<gjs.source.extension>${ext}</gjs.source.extension>
-		
+	
+#if( $lan.equals( "c" ) || $lan.equals( "c++" )	)
 		<!-- Compiler options -->
-				
+		<gjs.compiler.additionalOptions></gjs.compiler.additionalOptions>
+#end
+		
 		<!-- Dependency versions -->
 		
     </properties>

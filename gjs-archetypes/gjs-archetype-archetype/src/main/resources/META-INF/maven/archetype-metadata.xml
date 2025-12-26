@@ -80,7 +80,7 @@
 			  </includes>
 		</fileSet>
 		<fileSet filtered="true" packaged="false" encoding="UTF-8">
-		  <directory>src/main/resources/archetype-resources/src/main/_lan_</directory>
+		  <directory>src/main/resources/archetype-resources/src/main/__lan__</directory>
 			  <includes>
 				<include>**</include>
 			  </includes>
@@ -92,7 +92,7 @@
 			  </includes>
 		</fileSet>
 		<fileSet filtered="true" packaged="false" encoding="UTF-8">
-		  <directory>src/main/resources/archetype-resources/src/test/_lan_</directory>
+		  <directory>src/main/resources/archetype-resources/src/test/__lan__</directory>
 			  <includes>
 				<include>**</include>
 			  </includes>
