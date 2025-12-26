@@ -14,7 +14,7 @@
 	<name>Maven C NAR Parent Pom</name>
 	<description>Parent pom for C projects using the nar-maven-plugin.</description>
 
-	<properties>
+	<properties>	
 		<!-- Language features -->
 		<gjs.source.language>c</gjs.source.language>
 		<gjs.source.extension>c</gjs.source.extension>
@@ -24,8 +24,9 @@
 		<gjs.nar.linker>gcc</gjs.nar.linker>
 		
 		<gjs.nar.compiler.language>c</gjs.nar.compiler.language>
-		<gjs.nar.cpp.version>23</gjs.nar.cpp.version>
-		<gjs.nar.language.standard>gnu${gjs.nar.cpp.version}</gjs.nar.language.standard>
+		<gjs.nar.language.version>23</gjs.nar.language.version>
+		<gjs.nar.language.standard>c${gjs.nar.language.version}</gjs.nar.language.standard>
+		<gjs.nar.language.aol>gcc</gjs.nar.language.aol>
 		
 		<!-- Dependency versions -->
 		<!-- Gjs versions -->
@@ -42,5 +43,77 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+	<profiles>
+		<profile>
+			<id>source</id>
+			<build>
+				<plugins>
+						<!--
+					<plugin>
+						<groupId>org.gjs.java.maven.plugins</groupId>
+						<groupId>com.github.maven-nar</groupId>
+						<artifactId>nar-maven-plugin</artifactId>
+						<configuration>
+							<linker>
+								<testOptions combine.children="append">
+									<option>${additionalObjects}</option> 
+								</testOptions>
+							</linker>
+						</configuration>
+					</plugin>
+						-->
+					<!--
+					<plugin>
+						<groupId>org.codehaus.gmaven</groupId>
+						<artifactId>groovy-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>add-object-files-bin-for-test</id>
+								<phase>generate-test-resources</phase>
+								<goals>
+									<goal>execute</goal>
+								</goals>
+								<configuration>
+									<source>
+										if ( ! "true".equals( project.properties.get("gjs.nar.skip") ) ) { 
+										if ( "c".equals( project.properties.get("gjs.source.language") ) ) { 
+										try 
+										{
+											log.info ( "\n* R E C O P I L A N D O  F I C H E R O S  O B J E T O *\n" )
+											def objDir = $/${dirBinObj}/$
+											def additonalObjects = ""		
+											def objects = new File( objDir );
+											objects.eachFileRecurse ( groovy.io.FileType.FILES )
+											{
+												if ( ! it.path.endsWith( ".o" ) )
+												{
+													additonalObjects = additonalObjects + " " + it.path.getName() 
+												}
+											}
+											log.info ( "Additional objects: ${additonalObjects}\n" )
+											project.properties.setProperty('additonalObjects', additonalObjects)
+											log.info ( "\n" )
+										}
+										catch ( Exception ex )
+										{
+											log.error ( ex.getMessage() )
+										}
+										} else {
+											log.info ( "Skipping the execution.\n" )
+										}
+										} else {
+											log.info ( "Skipping the execution.\n" )
+										}
+									</source>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>	
+		-->			
+				</plugins>
+			</build>	
+		</profile>
+	</profiles>	
 	
 </project>

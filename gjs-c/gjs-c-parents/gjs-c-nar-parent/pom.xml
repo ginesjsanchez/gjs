@@ -3,9 +3,9 @@
 
 	<parent>
 		<groupId>org.gjs.c</groupId>
-		<artifactId>gjs-c-common-parent</artifactId>
+		<artifactId>gjs-c-nar-extension-parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
-		<relativePath>../gjs-c-common-parent</relativePath>
+		<relativePath>../gjs-c-nar-extension-parent</relativePath>
 	</parent>
 
     <artifactId>gjs-c-nar-parent</artifactId>
@@ -15,11 +15,8 @@
 	<description>Parent pom for compiling and linking C/C++ projects using the nar-maven-plugin.</description>
 	
 	<properties>
-		<!-- NAR -->
-		<nar-maven-plugin.version>3.10.1-GJS</nar-maven-plugin.version>
-		
 		<!-- C/C++ Language version -->
-		<gjs.nar.cpp.language.option>--std=${gjs.nar.language.standard}</gjs.nar.cpp.language.option>
+		<gjs.nar.language.option>--std=${gjs.nar.language.standard}</gjs.nar.language.option>
 
 		<!-- Generic compilation options-->
 		<gjs.nar.architecture.bits>64</gjs.nar.architecture.bits>
@@ -33,10 +30,16 @@
 		<gjs.nar.platform.options></gjs.nar.platform.options>
 		<gjs.nar.platform.link.options></gjs.nar.platform.link.options>
 
-		<!-- Linker options -->	
+		<!-- Platform options -->	
 		<gjs.nar.architecture>x86_64-pc-cygwin</gjs.nar.architecture>
 		<gjs.nar.emulation>i386pep</gjs.nar.emulation>
 		<gjs.nar.architecture.option>-A ${gjs.nar.architecture}</gjs.nar.architecture.option> 
+		<gjs.nar.aol>${gjs.nar.architecture}-${osName}-${gjs.nar.language.aol}</gjs.nar.aol>
+		
+		<!-- Threads -->
+		<gjs.nar.threads.option>-mthreads</gjs.nar.threads.option>
+
+		<!-- Linker options -->	
 		<gjs.nar.emulation.option>-Wl,-m,${gjs.nar.emulation}</gjs.nar.emulation.option> 
 		
 		<!-- Naming -->
@@ -55,14 +58,15 @@
 		
 		<!-- Binary directories -->
 		<!-- TODO: Pendiente de customizar para todos los tipos de binario -->
-		<subdirBinExe>nar/${project.artifactId}-${project.version}-${nar.aol}-executable/bin/${nar.aol}</subdirBinExe>
-		<subdirBinLib>nar/${project.artifactId}-${project.version}-${nar.aol}-shared/lib/${nar.aol}/shared</subdirBinLib>
-		<subdirBinStLib>nar/${project.artifactId}-${project.version}-${nar.aol}-shared/lib/${nar.aol}/static</subdirBinStLib>
-		<subdirObj>nar/obj/${nar.aol}</subdirObj>
+		<subdirBinExe>nar/${project.artifactId}-${project.version}-${gjs.nar.aol}-executable/bin/${gjs.nar.aol}</subdirBinExe>
+		<subdirBinLib>nar/${project.artifactId}-${project.version}-${gjs.nar.aol}-shared/lib/${gjs.nar.aol}/shared</subdirBinLib>
+		<subdirBinStLib>nar/${project.artifactId}-${project.version}-${gjs.nar.aol}-shared/lib/${gjs.nar.aol}/static</subdirBinStLib>
+		<subdirBinObj>nar/obj/${gjs.nar.aol}</subdirBinObj>
 		<subdirTest>test-nar/test-reports</subdirTest>
 		<dirBinLib>${project.basedir}/target/${subdirBinLib}</dirBinLib>
 		<dirBinStLib>${project.basedir}/target/${subdirBinStLib}</dirBinStLib>
 		<dirBinExe>${project.basedir}/target/${subdirBinExe}</dirBinExe>
+		<dirBinObj>${project.basedir}/target/${subdirBinObj}</dirBinObj>
 		<dirTest>${project.basedir}/target/${subdirTest}</dirTest>
 		<dirStLib>${project.basedir}/target/lib</dirStLib>
 		
@@ -82,8 +86,6 @@
 					-->
 					<groupId>com.github.maven-nar</groupId>
 					<artifactId>nar-maven-plugin</artifactId>
-					<version>${nar-maven-plugin.version}</version>
-					<extensions>true</extensions>
 					<configuration>
 						<os>${osName}</os>
 						<architecture>${gjs.nar.architecture}</architecture>
@@ -92,17 +94,18 @@
 						<gnuUseOnWindows>true</gnuUseOnWindows>
 						<gnuMakeSkip>true</gnuMakeSkip>
 						<!--output>${finalName}</output-->
-						<cpp>
+						<c>
 							<name>${gjs.nar.compiler}</name>							
 							<debug>false</debug>
 							<sourceDirectory>${project.basedir}/src/main/${gjs.nar.compiler.language}</sourceDirectory>
 							<includes>
 								<include>**/*.c</include>
-								<include>**/*.cxx</include>
-								<include>**/*.cc</include>
-								<include>**/*.cpp</include>
 							</includes>
 							<excludes>
+								<exclude>**/*.cxx</exclude>
+								<exclude>**/*.cc</exclude>
+								<exclude>**/*.cpp</exclude>
+								<exclude>**/*.hpp</exclude>
 								<exclude>**/*.txt</exclude>
 								<exclude>**/*.md</exclude>
 								<exclude>**/*.sql</exclude>
@@ -124,6 +127,50 @@
 								<option>-Wunused-result</option>
 								<option>${gjs.nar.locale.option}</option>
 								<option>${gjs.nar.platform.options}</option>
+								<option>${gjs.nar.threads.option}</option>
+							</options>
+
+							<includePaths>
+								<includePath>
+									<path>${project.basedir}/src/main/include</path>
+								</includePath>
+							</includePaths>						
+						</c>
+						<cpp>
+							<name>${gjs.nar.compiler}</name>							
+							<debug>false</debug>
+							<sourceDirectory>${project.basedir}/src/main/${gjs.nar.compiler.language}</sourceDirectory>
+							<includes>
+								<include>**/*.cxx</include>
+								<include>**/*.cc</include>
+								<include>**/*.cpp</include>
+								<include>**/*.hpp</include>
+							</includes>
+							<excludes>
+								<exclude>**/*.c</exclude>
+								<exclude>**/*.txt</exclude>
+								<exclude>**/*.md</exclude>
+								<exclude>**/*.sql</exclude>
+								<exclude>**/resources/**</exclude>
+							</excludes>						
+							<multiThreaded>true</multiThreaded>
+							<ccache>false</ccache>
+						
+							<options>
+								<option>${gjs.nar.language.option}</option>
+								<option>-m${gjs.nar.architecture.bits}</option> 
+								<option>-fPIC</option> 
+								<option>-fabi-version=0</option>
+								<option>-O${gjs.nar.optimization.level}</option> 
+								<option>-Wall</option> 
+								<option>-Wno-switch</option> 
+								<option>-Wno-sign-compare</option> 
+								<option>-Wno-pointer-arith</option>
+								<option>-Wno-write-strings</option>
+								<option>-Wunused-result</option>
+								<option>${gjs.nar.locale.option}</option>
+								<option>${gjs.nar.platform.options}</option>
+								<option>${gjs.nar.threads.option}</option>
 							</options>
 
 							<includePaths>
@@ -141,11 +188,13 @@
 								<option>-v</option> 
 								<option>${gjs.nar.emulation.option}</option> 
 								<option>${gjs.nar.platform.link.options}</option>
+								<option>${gjs.nar.threads.option}</option>
 							</options>
 							<testOptions>
 								<option>-v</option> 
 								<option>${gjs.nar.emulation.option}</option> 
 								<option>${gjs.nar.platform.link.options}</option>
+								<option>${gjs.nar.threads.option}</option>
 							</testOptions>
 						</linker>
 						
@@ -157,29 +206,62 @@
 									<arg>${modulo}</arg>
 								</args>
 							</test>
-						</tests>
-						
+						</tests>						
 					</configuration>
+					<executions>
+						<execution >
+							<id>default-nar-vcproj</id>
+							<configuration combine.self="override">
+								<skip>true</skip>
+							</configuration>
+						</execution>					
+						<execution>
+							<id>default-nar-javah</id>
+							<configuration combine.self="override">
+								<skip>true</skip>
+							</configuration>
+						</execution>					
+					</executions>					
 				</plugin>
 			</plugins>
-		</pluginManagement>
-		<!-- Para que Maven gestione nar como extensión lo hemos de sacar del perfil cpp -->
-		<plugins>
-			<plugin>
-				<!--
-				<groupId>org.gjs.java.maven.plugins</groupId>
-				-->
-				<groupId>com.github.maven-nar</groupId>
-				<artifactId>nar-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
+		</pluginManagement>				
 	</build>
-	
+
 	<profiles>
 		<profile>
-			<id>cpp</id>
-			<build>					
+			<id>source</id>
+			<build>
 				<plugins>
+					<!--
+					<plugin>
+						<groupId>org.codehaus.gmaven</groupId>
+						<artifactId>groovy-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>validate-kind-project</id>
+								<phase>validate</phase>
+								<goals>
+									<goal>execute</goal>
+								</goals>
+								<configuration>
+									<source>
+										def srcDir =  $/${projectDir}/$ + "/src"
+										def dirSrc = new File( srcDir )
+										def narSkip = String.valueOf (! dirSrc.exists() )
+										log.info("* ${dirSrc}" )
+										log.info("* ${narSkip}" )
+										if ( "true".equals( narSkip ) ) {
+											log.info ( "Not source project detected." )
+										} else {
+											log.info ( "Source project detected." )
+										} 
+										project.properties.setProperty( "gjs.nar.skip", narSkip ) 
+									</source>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>					
+					-->
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-resources-plugin</artifactId>
@@ -187,7 +269,7 @@
 							<includeEmptyDirs>true</includeEmptyDirs>
 						</configuration>
 						<executions>
-						   <execution>
+							<execution>
 								<id>copy-resources</id>
 								<phase>generate-resources</phase>
 								<goals>
@@ -307,7 +389,11 @@
 				<os>
 					<family>Windows</family>
 				</os>
-			</activation>
+				<property>
+					<name>packaging</name>
+					<value>nar</value>
+				</property>
+			</activation>		
 			<build>	
 				<plugins>
 					<plugin>
@@ -371,49 +457,6 @@
 						<groupId>org.codehaus.gmaven</groupId>
 						<artifactId>groovy-maven-plugin</artifactId>
 						<executions>
-							<!-- TODO esto no sirve porque al copilar NAR borra el contenido de /obj -->
-							<!--execution>
-								<id>copy-static-dependencies-for-link</id>
-								<phase>process-sources</phase>
-								<goals>
-									<goal>execute</goal>
-								</goals>
-								<configuration>
-									<source>
-										try 
-										{
-											println "\n* R E C O P I L A N D O  O B J E T O S *\n"
-											def baseDir = $/${projectDir}/$
-											def dirTo = $/${projectDir}/$ + "/target/lib"
-											println "Destino = " + dirTo + "\n"
-											def fileTo = new File( dirTo )
-											fileTo.mkdirs()
-											project.dependencies.each() 
-											{
-												def dirFrom = baseDir + "/target/nar/${it.artifactId}-${it.version}-${nar.aol}-static/lib/${nar.aol}/static"
-												println "${it.groupId}:${it.artifactId}:${it.version} =>" + dirFrom 
-												def dir = new File( dirFrom )
-												if ( dir.exists() )
-												{
-													def file = dirFrom + "/*.a"
-													ant.copy(todir: dirTo ) 
-													{
-														fileset(dir: dirFrom )
-														{
-															include(name:"**/*.a")
-														}
-													}																				
-												}
-											}
-											println "\n"
-										}
-										catch ( Exception ex )
-										{
-											println ex.getMessage();
-										}
-									</source>
-								</configuration>
-							</execution-->
 							<execution>
 								<id>copy-dependencies-bin-for-test</id>
 								<phase>process-test-classes</phase>
@@ -422,22 +465,23 @@
 								</goals>
 								<configuration>
 									<source>
+										if ( ! "true".equals( project.properties.get("gjs.nar.skip") ) ) { 
 										try 
 										{
 											if ( project.dependencies.size() > 0 )
 											{
 												<!-- Para recuperar las dependencias de las dependencias es mejor ir por directorios -->
-												println "\n* R E C O P I L A N D O    B I N A R I O S *\n"
+												log.info ( "\n* R E C O P I L A N D O    B I N A R I O S *\n" )
 												def baseDir = $/${projectDir}/$
 												def dirTo = $/${projectDir}/$ + "/target/${subdirTest}"
 												def dirDeps = baseDir + "/target/test-nar"
-												println "Origen  = " + dirDeps
-												println "Destino = " + dirTo + "\n"
+												log.info ( "Origen  = " + dirDeps )
+												log.info ( "Destino = " + dirTo + "\n" )
 												
 												def dependencias = new File( dirDeps );
 												def separator = System.getProperty( "file.separator" ) 
-												def finLib = "-shared" + separator + "lib" + separator + "${nar.aol}" + separator + "shared"
-												def finExe = "-executable" + separator + "bin" + separator + "${nar.aol}"
+												def finLib = "-shared" + separator + "lib" + separator + "${gjs.nar.aol}" + separator + "shared"
+												def finExe = "-executable" + separator + "bin" + separator + "${gjs.nar.aol}"
 												def subdirRep = separator + "test-reports" + separator 
 												dependencias.eachFileRecurse ( groovy.io.FileType.DIRECTORIES )
 												{
@@ -447,12 +491,12 @@
 														def dirFrom = it.path
 														if ( dirFrom.endsWith( finLib ) )
 														{
-															println "LIB: " + dirFrom
+															log.info ( "LIB: " + dirFrom )
 															filename = "**/*.dll"
 														}
 														else if ( dirFrom.endsWith( finExe ) )
 														{
-															println "EXE: " + dirFrom
+															log.info ( "EXE: " + dirFrom )
 															filename = "**/*.exe"
 														}
 														if ( filename.size() > 0 )
@@ -467,12 +511,15 @@
 														}
 													}
 												}
-												println "\n"
+												log.info ( "\n" )
 											}
 										}
 										catch ( Exception ex )
 										{
-											println ex.getMessage();
+											log.error ( ex.getMessage() )
+										}
+										} else {
+											log.info ( "Skipping the execution.\n" )
 										}
 									</source>
 								</configuration>

@@ -32,18 +32,5 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
-	<build>
-		<pluginManagement>
-			<plugins>
-			</plugins>
-		</pluginManagement>		
-
-		<extensions>
-		</extensions>
-
-		<plugins>
-		</plugins>
-	</build>
 		
 </project>

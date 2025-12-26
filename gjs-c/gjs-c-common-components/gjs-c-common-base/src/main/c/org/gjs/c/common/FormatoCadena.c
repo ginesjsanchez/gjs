@@ -57,7 +57,7 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 	int			iPosTmp;
 	int			iPosCod;
 	void *		p_vArg;
-	char *	p_cArg;
+	char *	    p_cArg;
 	//void *	p_vCod;
 	int			iPosBuf;
 	int			iArg;
@@ -65,7 +65,7 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 	long		lArg;
 	//float		fArg;
 	int			iIndLargo;
-	char *	p_cTmp;
+	char *	    p_cTmp;
 	char	*	p_cFrmProc;
 	char	*	p_cCod;
 	char	*	p_cBuffer;
@@ -86,9 +86,11 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 			iPosFrm = 0;
 			iPosCad = 0;
 			iMaxAncho = -1;
-			while ( ( iPosFrm < CadLongitud ( p_cFormato ) ) && 
+			while ( ( iPosFrm < CadLongitud ( p_cFormato ) ) &&
 					( iPosCad < iMaxTam ) && ( iRes == 1 ) )
 			{
+			    iAnchura = 0;
+			    iPrecision = 0;
 				cCarFrm = p_cFormato [ iPosFrm ];
 				switch ( iEstado )
 				{
@@ -121,8 +123,8 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 							p_cFrmProc [ iPosFrmP ] = cCarFrm;
 							iPosFrmP = iPosFrmP + 1;
 							iEstado = 2;
-						} 
-						else if ( cCarFrm == 'l' ) 
+						}
+						else if ( cCarFrm == 'l' )
 						{
 							if ( iIndLargo == 1 )
 							{
@@ -136,7 +138,7 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 								iEstado = 1;
 							}
 						}
-						else if ( strchr ( _FRM_CODIGOS, cCarFrm ) != NULL ) 
+						else if ( strchr ( _FRM_CODIGOS, cCarFrm ) != NULL )
 						{
 							if ( iIndLargo == 1 )
 							{
@@ -148,12 +150,12 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 							iPosFrm = iPosFrm - 1;
 							iEstado = 8;
 						}
-						else if ( cCarFrm == '*' ) 
+						else if ( cCarFrm == '*' )
 						{
 							iAnchura  = va_arg ( valArgumentos, int );
 							CadInicializar ( p_cTmp, iPosTmp );
 							sprintf ( p_cTmp,"%d", iAnchura );
-							for ( iPosTmp = 0; iPosTmp < CadLongitud ( p_cTmp ); iPosTmp = iPosTmp + 1 ) 
+							for ( iPosTmp = 0; iPosTmp < CadLongitud ( p_cTmp ); iPosTmp = iPosTmp + 1 )
 							{
 								p_cFrmProc [ iPosFrmP ] = p_cTmp [ iPosTmp ];
 								iPosFrmP = iPosFrmP + 1;
@@ -161,20 +163,20 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 							CadInicializar ( p_cTmp, iPosTmp );
 							iPosTmp = 0;
 							iEstado = 3;
-						} 
-						else if ( cCarFrm == '%' ) 
+						}
+						else if ( cCarFrm == '%' )
 						{
 							p_cCadena [ iPosCad ] = cCarFrm;
 							iPosCad = iPosCad + 1;
 							iEstado = 0;
 						}
-						else if ( cCarFrm == '(' ) 
+						else if ( cCarFrm == '(' )
 						{
 							CadInicializar ( p_cCod, 127 );
 							iPosCod = 0;
 							iEstado = 7;
-						} 
-						else 
+						}
+						else
 						{
 							p_cFrmProc [ iPosFrmP ] = cCarFrm;
 							iPosFrmP = iPosFrmP + 1;
@@ -190,7 +192,7 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 							p_cFrmProc [ iPosFrmP ] = cCarFrm;
 							iPosFrmP = iPosFrmP + 1;
 						}
-						else if ( strchr ( _FRM_CODIGOS, cCarFrm ) != NULL ) 
+						else if ( strchr ( _FRM_CODIGOS, cCarFrm ) != NULL )
 						{
 							iAnchura = atoi ( p_cTmp );
 							CadInicializar ( p_cTmp, iPosTmp );
@@ -198,7 +200,7 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 							iPosFrm = iPosFrm - 1;
 							iEstado = 8;
 						}
-						else if ( cCarFrm == '.' ) 
+						else if ( cCarFrm == '.' )
 						{
 							iAnchura = atoi ( p_cTmp );
 							CadInicializar ( p_cTmp, iPosTmp );
@@ -207,7 +209,7 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 							iPosFrmP = iPosFrmP + 1;
 							iEstado = 4;
 						}
-						else 
+						else
 						{
 							/* Posible error: */
 							iAnchura = atoi ( p_cTmp );
@@ -219,18 +221,18 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 					}
 					case 3: // Casos después de flag *:
 					{
-						if ( cCarFrm == '.' ) 
+						if ( cCarFrm == '.' )
 						{
 							p_cFrmProc [ iPosFrmP ] = cCarFrm;
 							iPosFrmP = iPosFrmP + 1;
 							iEstado = 4;
-						} 
-						else if ( strchr ( _FRM_CODIGOS, cCarFrm ) != NULL ) 
+						}
+						else if ( strchr ( _FRM_CODIGOS, cCarFrm ) != NULL )
 						{
 							iPosFrm = iPosFrm - 1;
 							iEstado = 8;
-						} 
-						else 
+						}
+						else
 						{
 							iEstado = 6;
       					}
@@ -246,12 +248,12 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 							iPosFrmP = iPosFrmP + 1;
 							iEstado = 5;
 						}
-						else if ( cCarFrm == '*' ) 
+						else if ( cCarFrm == '*' )
 						{
 							iPrecision  = va_arg ( valArgumentos, int );
 							CadInicializar ( p_cTmp, iPosTmp );
 							sprintf ( p_cTmp,"%d", iPrecision );
-							for ( iPosTmp = 0; iPosTmp < CadLongitud ( p_cTmp ); iPosTmp = iPosTmp + 1 ) 
+							for ( iPosTmp = 0; iPosTmp < CadLongitud ( p_cTmp ); iPosTmp = iPosTmp + 1 )
 							{
 								p_cFrmProc [ iPosFrmP ] = p_cTmp [ iPosTmp ];
 								iPosFrmP = iPosFrmP + 1;
@@ -259,13 +261,13 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 							CadInicializar ( p_cTmp, iPosTmp );
 							iPosTmp = 0;
 							iEstado = 6;
-						} 
-						else if ( strchr ( _FRM_CODIGOS, cCarFrm ) != NULL ) 
+						}
+						else if ( strchr ( _FRM_CODIGOS, cCarFrm ) != NULL )
 						{
 							iPosFrm = iPosFrm - 1;
 							iEstado = 8;
 						}
-						else 
+						else
 						{
 							p_cFrmProc [ iPosFrmP ] = cCarFrm;
 							iPosFrmP = iPosFrmP + 1;
@@ -283,7 +285,7 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 							iPosFrmP = iPosFrmP + 1;
 							iEstado = 41;
 						}
-						else if ( strchr ( _FRM_CODIGOS, cCarFrm ) != NULL ) 
+						else if ( strchr ( _FRM_CODIGOS, cCarFrm ) != NULL )
 						{
 							iPrecision = atoi ( p_cTmp );
 							CadInicializar ( p_cTmp, iPosTmp );
@@ -291,7 +293,7 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 							iPosFrm = iPosFrm - 1;
 							iEstado = 8;
 						}
-						else 
+						else
 						{
 							iPrecision = atoi ( p_cTmp );
 							CadInicializar ( p_cTmp, iPosTmp );
@@ -304,12 +306,12 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 					}
 					case 6: // Procesando Fin de precision ():
 					{
-						if ( strchr ( _FRM_CODIGOS, cCarFrm ) != NULL ) 
+						if ( strchr ( _FRM_CODIGOS, cCarFrm ) != NULL )
 						{
 							iPosFrm = iPosFrm - 1;
 							iEstado = 8;
 						}
-						else 
+						else
 						{
 							p_cFrmProc [ iPosFrmP ] = cCarFrm;
 							iPosFrmP = iPosFrmP + 1;
@@ -332,7 +334,7 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 					}
 					case 8: // Procsesando el tipo:
 					{
-						if ( iAnchura < iPrecision ) 
+						if ( iAnchura < iPrecision )
 						{
 							iMaxAncho = iPrecision;
 						}
@@ -341,7 +343,7 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 							iMaxAncho = iAnchura;
 						}
 						CadInicializar ( p_cBuffer, CAD_BASE_MAX_TAM );
-						if ( ( cCarFrm == 's' ) || ( cCarFrm == 'S' ) ) 
+						if ( ( cCarFrm == 's' ) || ( cCarFrm == 'S' ) )
 						{
 							//p_vArg = va_arg (valArgumentos, void * );
 							p_cArg = va_arg ( valArgumentos, char * );
@@ -349,16 +351,16 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 							if ( _EsCadenaValida ( p_cArg ) == 1 )
 							{
 								/*
-								if ( CadLongitud ( p_cArg, 127 ) > 0 ) 
+								if ( CadLongitud ( p_cArg, 127 ) > 0 )
 								{
-									// FALTA: 
+									// FALTA:
 									//p_vCod = Codificar ( p_cCod, p_vArg );
 									//iMaxAncho = iMaxAncho + CadLongitud ( p_cFrmProc, CAD_BASE_MAX_TAM ) + Len ( p_vCod );
 									//p_vCod = NULL;
 
 								iMaxAncho = iMaxAncho + CadLongitud ( p_cFrmProc, CAD_BASE_MAX_TAM ) + CadLongitud ( p_cArg, 255 );
-								} 
-								else 
+								}
+								else
 								{
 									//p_vCod = NULL;
 									iMaxAncho = iMaxAncho + CadLongitud ( p_cFrmProc, CAD_BASE_MAX_TAM ) + CadLongitud ( p_cArg, );
@@ -367,22 +369,22 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 								p_cFrmProc [ iPosFrmP ] = 's';
 								iPosFrmP = iPosFrmP + 1;
 								p_cFrmProc [ iPosFrmP ] = (char) 0;
-								if ( iMaxAncho < CAD_BASE_MAX_TAM ) 
+								if ( iMaxAncho < CAD_BASE_MAX_TAM )
 								{
 									/*
-									if ( ES_VALIDO ( p_vCod ) ) 
+									if ( ES_VALIDO ( p_vCod ) )
 									{
 										sprintf ( p_cBuffer, p_cFrmProc, p_vCod );
 										??MemLiberar ( &p_vCod );
-									} 
-									else 
+									}
+									else
 									{
 									*/
 									sprintf ( p_cBuffer, p_cFrmProc, p_cArg );
 									CadInicializar ( p_cFrmProc, iPosFrmP );
 									//}
-								} 
-								else 
+								}
+								else
 								{
 									sprintf ( p_cBuffer, "%s", CAD_BASE_TXT_DEMASIADO_LARGO );
 									CadInicializar ( p_cFrmProc, iPosFrmP );
@@ -393,9 +395,9 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 								sprintf ( p_cBuffer, "%s", CAD_BASE_TXT_VALOR_NULO );
 								CadInicializar ( p_cFrmProc, iPosFrmP );
 							}
-							iPosBuf = 0; 
-							while ( ( iPosBuf < CadLongitud ( p_cBuffer ) ) && 
-									( iPosCad < iMaxTam ) )  
+							iPosBuf = 0;
+							while ( ( iPosBuf < CadLongitud ( p_cBuffer ) ) &&
+									( iPosCad < iMaxTam ) )
 							{
 								p_cCadena [ iPosCad ] = p_cBuffer [ iPosBuf ];
 								iPosCad = iPosCad + 1;
@@ -408,9 +410,9 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 							p_cFrmProc [ iPosFrmP ] = cCarFrm;
 							iPosFrmP = iPosFrmP + 1;
 							iMaxAncho = iMaxAncho + CadLongitud ( p_cFrmProc ) + 64;
-							if ( iMaxAncho < CAD_BASE_MAX_TAM ) 
+							if ( iMaxAncho < CAD_BASE_MAX_TAM )
 							{
-								switch( cCarFrm ) 
+								switch( cCarFrm )
 								{
 									case 'd':
 									case 'i':
@@ -482,7 +484,7 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 										{
 											if ( iPosPun + iPrecision <= iLongBuf )
 											{
-												iAnchura = iPosPun + iPrecision; 
+												iAnchura = iPosPun + iPrecision;
 											}
 											else
 											{
@@ -498,7 +500,7 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 											if ( iPrecision > 0 )
 											{
 												if ( iAnchura + iPrecision <= iLongBuf )
-												{	
+												{
 													iAnchura = iAnchura + iPrecision;
 												}
 												else
@@ -525,8 +527,8 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 									}
 								}
 								iPosBuf = 0;
-								while ( ( iPosBuf < iAnchura ) && 
-										( iPosCad < iMaxTam ) )  
+								while ( ( iPosBuf < iAnchura ) &&
+										( iPosCad < iMaxTam ) )
 								{
 									p_cCadena [ iPosCad ] = p_cBuffer [ iPosBuf ];
 									iPosCad = iPosCad + 1;
@@ -594,7 +596,7 @@ static int _EsCadenaValida ( char * p_cCad )
 			}
 			iPos = iPos + 1;
 		}
-		if ( iPos >= CAD_BASE_MAX_TAM ) 
+		if ( iPos >= CAD_BASE_MAX_TAM )
 		{
 			iRes = 0;
 		}

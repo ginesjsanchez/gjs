@@ -42,11 +42,6 @@
 						</includePaths>						
 					</cpp>
 					<linker>
-						<!--
-						<options combine.children="append">
-							<option>-L${log4cxxDirLib}</option>
-						</options>
-						-->	
 						<libs combine.children="append">
 							<lib>
 								<name>log4cxx</name>

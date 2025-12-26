@@ -291,11 +291,6 @@
 	</dependencies>
 
 	<build>
-		<pluginManagement>
-			<plugins>
-			</plugins>
-		</pluginManagement>		
-
 		<extensions>
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
@@ -303,8 +298,6 @@
 				<version>${wagon-webdav-jackrabbit.version}</version>
 			</extension>
 		</extensions>
-
-		<plugins>
-		</plugins>
-	</build>		
+	</build>
+	
 </project>

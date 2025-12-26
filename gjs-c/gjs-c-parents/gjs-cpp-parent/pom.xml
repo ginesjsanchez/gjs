@@ -23,8 +23,9 @@
 		<gjs.nar.compiler>g++</gjs.nar.compiler>
 		<gjs.nar.linker>g++</gjs.nar.linker>		
 		<gjs.nar.compiler.language>c++</gjs.nar.compiler.language>
-		<gjs.nar.cpp.version>20</gjs.nar.cpp.version>
-		<gjs.nar.language.standard>c++${gjs.nar.cpp.version}</gjs.nar.language.standard>
+		<gjs.nar.language.version>20</gjs.nar.language.version>
+		<gjs.nar.language.standard>c++${gjs.nar.language.version}</gjs.nar.language.standard>
+		<gjs.nar.language.aol>gpp</gjs.nar.language.aol>
 		
 		<!-- Dependency versions -->
 		<!-- Gjs versions -->
@@ -95,38 +96,41 @@
 		</dependencies>
 	</dependencyManagement>
 	
-	<build>
-		<plugins>
-			<plugin>
-				<!--
-				<groupId>org.gjs.java.maven.plugins</groupId>
-				-->
-				<groupId>com.github.maven-nar</groupId>
-				<artifactId>nar-maven-plugin</artifactId>
-				<configuration>
-					<cpp>
-						<options combine.children="append">
-							<option>${gjs.nar.cpp.language.option}</option>
-							<option>-Wno-conversion-null</option>
-							<option>-fpermissive</option>
-						</options>
+	<profiles>
+		<profile>
+			<id>source</id>
+			<build>
+				<plugins>
+					<plugin>
+						<!--
+						<groupId>org.gjs.java.maven.plugins</groupId>
+						-->
+						<groupId>com.github.maven-nar</groupId>
+						<artifactId>nar-maven-plugin</artifactId>
+						<configuration>
+							<cpp>
+								<options combine.children="append">
+									<option>-Wno-conversion-null</option>
+									<option>-fpermissive</option>
+								</options>
 
-						<includePaths combine.children="append">
-							<includePath>
-								<path>${glibDirInclude}</path>
-							</includePath>
-						</includePaths>						
-					</cpp>
-					
-					<linker>
-						<testOptions combine.children="append">
-							<!--option> -Wl,++wrap=exit</option--> 
-							<!--option> -Wl,++wrap=getenv</option--> 
-						</testOptions>
-					</linker>
-					
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>	
+								<includePaths combine.children="append">
+									<includePath>
+										<path>${glibDirInclude}</path>
+									</includePath>
+								</includePaths>						
+							</cpp>
+							
+							<linker>
+								<testOptions combine.children="append">
+									<!--option> -Wl,++wrap=exit</option--> 
+									<!--option> -Wl,++wrap=getenv</option--> 
+								</testOptions>
+							</linker>				
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>	
+		</profile>
+	</profiles>	
 </project>

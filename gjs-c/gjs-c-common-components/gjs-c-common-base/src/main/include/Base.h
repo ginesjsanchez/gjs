@@ -21,6 +21,7 @@
 
 
 #include <Punteros.h>
+#include <TerminalANSI.h>
 #include <Bits.h>
 #include <Nibble.h>
 #include <Byte.h>

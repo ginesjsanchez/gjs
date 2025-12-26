@@ -23,23 +23,25 @@
 		.		|
 		.		|--/gjs-c-common-parent
 		.		        |
-		.		        |--/gjs-c-nar-parent
-		.	  	 				|
-		.						|--/gjs-c-parent
-		.								|
-		.								|--/gjs-c-lib-parent
-		.								|
-		.								|--/gjs-c-stlib-parent
-		.								|
-		.								|--/gjs-c-exe-parent
-		.						|
-		.						|--/gjs-cpp-parent
-		.								|
-		.								|--/gjs-cpp-lib-parent
-		.								|
-		.								|--/gjs-cpp-stlib-parent
-		.								|
-		.								|--/gjs-cpp-exe-parent
+		.		        |--/gjs-c-nar-extension-parent
+		.		                |
+		.		                |--/gjs-c-nar-parent
+		.	  	 			        	|
+		.					        	|--/gjs-c-parent
+		.					        	|   	|
+		.							    |   	|--/gjs-c-lib-parent
+		.						        |   	|
+		.						        |   	|--/gjs-c-stlib-parent
+		.						        |   	|
+		.						        |   	|--/gjs-c-exe-parent
+		.					        	|
+		.					        	|--/gjs-cpp-parent
+		.					        			|
+		.					        			|--/gjs-cpp-lib-parent
+		.					                		|
+		.						        		|--/gjs-cpp-stlib-parent
+		.						        		|
+		.							        	|--/gjs-cpp-exe-parent
 		.
 		Needs profile cpp with special properties in settings.xml file: 
 		
@@ -51,9 +53,6 @@
 	</description>
 
 	<properties>
-		<!-- NAR -->
-		<nar-maven-plugin.version>4.0.0-SNAPSHOT280</nar-maven-plugin.version>
-
 		<!-- Default programming language features -->
 		<gjs.source.language>c</gjs.source.language>
 		<gjs.source.extension>c</gjs.source.extension>
@@ -142,6 +141,7 @@
 		</extensions>
 
 		<plugins>
+			<!-- TODO: Provisional hasta ver el efecto del despliegue de ficheros NAR -->
 			<plugin>
 			   <groupId>org.apache.maven.plugins</groupId>
 			   <artifactId>maven-deploy-plugin</artifactId>

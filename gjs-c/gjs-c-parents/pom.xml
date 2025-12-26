@@ -12,6 +12,7 @@
      
     <modules>
         <module>gjs-c-common-parent</module>
+        <module>gjs-c-nar-extension-parent</module>
         <module>gjs-c-nar-parent</module>
         <module>gjs-c-makefile-parent</module>
         <module>gjs-c-parent</module>

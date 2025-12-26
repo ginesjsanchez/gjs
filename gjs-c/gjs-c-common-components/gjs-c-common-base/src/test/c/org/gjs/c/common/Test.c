@@ -1,6 +1,8 @@
 #include "Base.h"
 
 
+extern int TestPunteros ();
+extern int TestSConversor ();
 
 
 
@@ -32,12 +34,10 @@ int main( int argc, char * argv[] )
 //		return( iRes );
 //	}
 //
-//	if ( ! TestToString () ||
-//		! TestConcatenar () ||
-//		! TestCadenas () ||
-//		! TestIToString () )
-//	{
-//		iRes = -1;
-//	}
+	if ( BOOL_ES_FALSO ( TestPunteros () ||
+                        TestSConversor () ) )
+	{
+		iRes = -1;
+	}
 	return ( iRes );
 }

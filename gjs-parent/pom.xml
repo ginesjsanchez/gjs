@@ -11,11 +11,15 @@
 	Common parent pom for all kind of projects and archetypes.
 	
 	Profiles:
-		* win | linux : It is automatically selected based on the operating system
+		* win | linux           : It is automatically selected based on the operating system
 		
-		* cygwin      : It is activated if the operating system is Windows and the CYGWIN environment variable has been defined.
+		* cygwin                : It is activated if the operating system is Windows and the CYGWIN environment variable has been defined.
 	
-		* debug		  : It is activated if the DEBUG porperty has been defined
+		* debug		            : It is activated if the DEBUG porperty has been defined
+
+		* pom | source | plugin : It is automatically selected when the project has packaging pom, maven-plugin or not 
+
+		* eclipse               : It is automatically selected when Maven is executed from Eclipse IDE
 	
 	Environtment propeties:
 	
@@ -355,6 +359,26 @@
 		</pluginManagement>		
 		
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>enforce-maven-version</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireMavenVersion>
+									<version>3.9</version>
+								</requireMavenVersion>
+							</rules>
+							<fail>true</fail>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>  
 		    <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-help-plugin</artifactId>
@@ -431,6 +455,33 @@
 				<exeFinalExtension>.exe</exeFinalExtension>
 				<rootDir>${cygwinDir}</rootDir>
             </properties>
+		</profile>
+		<profile>
+			<id>pom</id>
+			<activation>
+				<property>
+					<name>packaging</name>
+					<value>pom</value>
+				</property>
+			</activation>
+		</profile>
+		<profile>
+			<id>plugin</id>
+			<activation>
+				<property>
+					<name>packaging</name>
+					<value>maven-plugin</value>
+				</property>
+			</activation>
+		</profile>
+		<profile>
+			<id>source</id>
+			<activation>
+				<property>
+					<name>packaging</name>
+					<value>!pom</value>
+				</property>
+			</activation>
 		</profile>
 		<profile>
 			<id>debug</id>

@@ -1,5 +1,5 @@
-#ifndef _ORG_GJS_C_CC_CPP__LOG_CONFIG_H
-#define _ORG_GJS_C_CC_CPP__LOG_CONFIG_H
+#ifndef _ORG_GJS_C_CC_CPP_LOG_CONFIG_H
+#define _ORG_GJS_C_CC_CPP_LOG_CONFIG_H
 
 //#ifdef LOG4CXX
 #include <log4cxx/log4cxx.h>

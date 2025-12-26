@@ -53,7 +53,7 @@
 	
 	<profiles>
 		<profile>
-			<id>cpp</id>
+			<id>source</id>
 			<build>	
 				<!-- TODO -->
 				<plugins>

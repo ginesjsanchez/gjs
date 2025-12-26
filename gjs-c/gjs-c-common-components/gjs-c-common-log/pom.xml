@@ -1,0 +1,58 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.gjs.c</groupId>
+		<artifactId>gjs-c-lib-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../../gjs-c-parents/gjs-c-lib-parent</relativePath>
+	</parent>	
+
+	<groupId>org.gjs.c.common</groupId>
+	<artifactId>gjs-c-common-log</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>nar</packaging>
+
+	<name>GJS C Common Log Support</name>
+	<description>Base logging components for C project archetypes</description>
+
+	<properties>
+		<checkSeverity>style</checkSeverity>	
+	</properties>
+
+    <dependencies>
+		<dependency>
+			<groupId>org.gjs.c.common</groupId>
+			<artifactId>gjs-c-common-base</artifactId>
+			<type>nar</type>
+		</dependency>
+    </dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.github.maven-nar</groupId>
+				<artifactId>nar-maven-plugin</artifactId>
+				<configuration>
+					<cpp>
+						<includePaths combine.children="append">
+							<includePath>
+								<path>${log4cxxDirInclude}</path>
+							</includePath>
+						</includePaths>						
+					</cpp>
+					<linker>
+						<libs combine.children="append">
+							<lib>
+								<name>log4cxx</name>
+								<type>shared</type>
+								<directory>${log4cxxDirLib}</directory>
+							</lib>
+						</libs>					
+					</linker>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	
+</project>

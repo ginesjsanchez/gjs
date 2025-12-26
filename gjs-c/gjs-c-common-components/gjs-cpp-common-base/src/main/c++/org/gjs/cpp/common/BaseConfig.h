@@ -19,7 +19,7 @@
 #include <limits>
 #include <cstdio>
 #include <algorithm>
-
+#include <cstring>
 
 
 #define REGEX_URL 			"([a-z0-9-]+://)?(localhost|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+|[-a-z0-9]+(\\.[-a-z0-9]+)+)(:[0-9]+)?/?"

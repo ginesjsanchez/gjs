@@ -13,10 +13,13 @@
 #ifndef _ORG_GJS_C_CC_PUNTEROS_H
 #define _ORG_GJS_C_CC_PUNTEROS_H
 
+#if  ( !defined (VC) )
+#   include <stdlib.h>
+#endif
 
 // PENDIENTE: Determinar la dirección mínima de memoria:
 #if  ( !defined (VC) )
-#	define PTR_LIBERAR( p_Obj )		if ( p_Obj != NULL ) { if ( (unsigned long) p_Obj > 1000 ) delete ( p_Obj ); else printf ( "DIR BAJA %lx\n", (long) p_Obj ); p_Obj = NULL; }
+#	define PTR_LIBERAR( p_Obj )		if ( p_Obj != NULL ) { if ( (unsigned long) p_Obj > 1000 ) free ( p_Obj ); else printf ( "DIR BAJA %lx\n", (long) p_Obj ); p_Obj = NULL; }
 #else
 #	define PTR_LIBERAR( p_Obj )		if ( p_Obj != NULL ) { if ( (unsigned long) p_Obj > 1000 ) delete ( (void *) p_Obj ); else printf ( "DIR BAJA %lx\n", (long) p_Obj ); p_Obj = NULL; }
 #endif
@@ -40,7 +43,11 @@
 
 
 // NOTA: Utilizo new char para olvidarme de momento de compatibilidades:
-#define PTR_RESERVAR_MEMORIA( p_Mem, iTam )			p_Mem = new char [ iTam ]
+#if  ( !defined (VC) )
+#   define PTR_RESERVAR_MEMORIA( p_Mem, iTam )			p_Mem = malloc ( iTam )
+#else
+#   define PTR_RESERVAR_MEMORIA( p_Mem, iTam )			p_Mem = new char [ iTam ]
+#endif
 #define PTR_LIBERAR_MEMORIA( p_Obj )				PTR_LIBERAR ( p_Obj );
 #define PTR_RELLENAR_MEMORIA( p_Mem, iTam, cVal )	if ( ( p_Mem != NULL ) && ( iTam > 0 ) ) { for ( int iPos = 0; iPos < iTam; iPos = iPos + 1 ) {	*(p_Mem + iPos) = (char) cVal; } }
 #define PTR_INICIALIZAR_MEMORIA( p_Mem, iTam )		if ( ( p_Mem != NULL ) && ( iTam > 0 ) ) { for ( int iPos = 0; iPos < iTam; iPos = iPos + 1 ) {	*(p_Mem + iPos) = (char) 0; } }

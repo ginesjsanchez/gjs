@@ -21,17 +21,4 @@
 	<properties>
 	</properties>
 
-	<build>
-		<pluginManagement>
-			<plugins>
-			</plugins>
-		</pluginManagement>		
-
-		<extensions>
-		</extensions>
-
-		<plugins>
-		</plugins>
-	</build>
-		
 </project>

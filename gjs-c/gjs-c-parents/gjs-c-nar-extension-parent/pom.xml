@@ -1,0 +1,49 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.gjs.c</groupId>
+		<artifactId>gjs-c-common-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../gjs-c-common-parent</relativePath>
+	</parent>
+
+    <artifactId>gjs-c-nar-extension-parent</artifactId>
+	<packaging>pom</packaging>
+
+	<name>Maven C/C++ NAR Exrension Parent Pom</name>
+	<description>Parent pom for define nar packaging extension in Maven.</description>
+	
+	<properties>
+		<!-- NAR -->
+		<nar-maven-plugin.version>3.10.1-GJS</nar-maven-plugin.version>
+	</properties>
+
+	<!-- Para que reconozca el packaging nar debe estar fuera de los perfiles --> 
+	<build>	
+		<pluginManagement>				
+			<plugins>
+				<plugin>
+					<!--
+					<groupId>org.gjs.java.maven.plugins</groupId>
+					-->
+					<groupId>com.github.maven-nar</groupId>
+					<artifactId>nar-maven-plugin</artifactId>
+					<version>${nar-maven-plugin.version}</version>
+					<extensions>true</extensions>
+					<configuration />
+				</plugin>
+			</plugins>
+		</pluginManagement>				
+		<plugins>
+			<plugin>
+				<!--
+				<groupId>org.gjs.java.maven.plugins</groupId>
+				-->
+				<groupId>com.github.maven-nar</groupId>
+				<artifactId>nar-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>	
+
+</project>
