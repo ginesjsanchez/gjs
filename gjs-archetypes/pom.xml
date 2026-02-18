@@ -13,8 +13,11 @@
     <modules>
         <module>gjs-archetype-parent</module>
         <module>gjs-archetype-archetype</module>
-        <module>gjs-java-module-archetype</module>
+        <module>gjs-java-artifact-archetype</module>
         <module>gjs-plugin-archetype</module>
-    </modules>
+        <module>gjs-cpp-lib-archetype</module>
+        <module>gjs-cpp-stlib-archetype</module>
+        <module>gjs-cpp-exe-archetype</module>
+  </modules>
     
  </project>

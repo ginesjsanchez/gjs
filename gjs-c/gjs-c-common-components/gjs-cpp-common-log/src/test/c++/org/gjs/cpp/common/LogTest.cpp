@@ -48,8 +48,8 @@ void LogCompletoParaTest ()
 	LogFatal ( "Mensaje de error fatal 1" );
 	runtime_error ex1 ( "Excepcion error 2" );
 	runtime_error ex2 ( "Excepcion error fatal 2" );
-	LogError ( "Mensaje de error 2", ex1 );
-	LogFatal ( "Mensaje de error fatal 2", ex2 );
+	LogErrorEx ( "Mensaje de error 2", ex1 );
+	LogFatalEx ( "Mensaje de error fatal 2", ex2 );
 	runtime_error ex3 ( "Excepcion error 3" );
 	runtime_error ex4 ( "Excepcion error fatal 3" );
 	LogError ( ex3 );

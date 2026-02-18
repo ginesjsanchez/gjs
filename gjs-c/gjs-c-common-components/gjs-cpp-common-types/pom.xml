@@ -1,0 +1,36 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.gjs.c</groupId>
+		<artifactId>gjs-cpp-lib-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../../gjs-c-parents/gjs-cpp-lib-parent</relativePath>
+	</parent>	
+
+	<groupId>org.gjs.c.common</groupId>
+	<artifactId>gjs-cpp-common-types</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>nar</packaging>
+
+	<name>GJS C++ Common Types</name>
+	<description>Base components for C++ project archetypes</description>
+	
+	<properties>
+		<checkSeverity>style</checkSeverity>	
+	</properties>
+
+    <dependencies>
+		<dependency>
+			<groupId>org.gjs.c.common</groupId>
+			<artifactId>gjs-cpp-common-base</artifactId>
+			<type>nar</type>
+		</dependency>
+		<dependency>
+			<groupId>org.gjs.c.common</groupId>
+			<artifactId>gjs-cpp-common-system</artifactId>
+			<type>nar</type>
+		</dependency>
+    </dependencies>
+
+</project>

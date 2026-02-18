@@ -24,11 +24,13 @@ public:
 
 private:
 	string tipo;
+	size_t tam;
 
 public:
 	string getTipo () const;
 	virtual int hash() const;
 	virtual bool esValido () const ;
+	size_t getTam() const;
 
 	Objeto * clonar();
 

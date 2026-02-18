@@ -18,7 +18,7 @@
 #define _ORG_GJS_C_CC_BASE_H
 
 
-
+#include <BaseConfig.h>
 
 #include <Punteros.h>
 #include <TerminalANSI.h>
@@ -32,6 +32,7 @@
 #include <OrdenBytes.h>
 #include <InfoMemoria.h>
 #include <Memoria.h>
+#include <ASCIICodigos.h>
 #include <ASCIIEstandar.h>
 #include <CadenasBase.h>
 #include <FormatoCadena.h>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<archetype-descriptor xsi:schemaLocation="https://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0 http://maven.apache.org/xsd/archetype-descriptor-1.1.0.xsd" name="semilla-sb-back-archetype"
+<archetype-descriptor xsi:schemaLocation="https://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0 http://maven.apache.org/xsd/archetype-descriptor-1.1.0.xsd"
     xmlns="https://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" nane="gjs-archetype-archetype">
 
     <requiredProperties>
 		<!-- These properties function as constants -->
@@ -64,43 +64,48 @@
 	
 	<fileSets>
 		<fileSet filtered="true" packaged="false" encoding="UTF-8">
-		  <directory></directory>
-			  <includes>
+			<directory></directory>
+			<includes>
+				<include>README.md</include>
+				<include>changelog.md</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="true" packaged="false" encoding="UTF-8">
+			<directory>src/main/resources/archetype-resources</directory>
+			<includes>
 				<include>pom.xml</include>
 				<include>README.md</include>
 				<include>changelog.md</include>
-			  </includes>
+			</includes>
 		</fileSet>
 		<fileSet filtered="true" packaged="false" encoding="UTF-8">
-		  <directory>src/main/resources/archetype-resources</directory>
-			  <includes>
-				<include>pom.xml</include>
-				<include>README.md</include>
-				<include>changelog.md</include>
-			  </includes>
-		</fileSet>
-		<fileSet filtered="true" packaged="false" encoding="UTF-8">
-		  <directory>src/main/resources/archetype-resources/src/main/__lan__</directory>
-			  <includes>
+			<directory>src/main/resources/archetype-resources/src/main/__lan__</directory>
+			<includes>
 				<include>**</include>
-			  </includes>
+			</includes>
 		</fileSet>
 		<fileSet filtered="true" packaged="false" encoding="UTF-8">
-		  <directory>src/main/resources/archetype-resources/src/main/resources</directory>
-			  <includes>
+			<directory>src/main/resources/archetype-resources/src/main/resources</directory>
+			<includes>
 				<include>**</include>
-			  </includes>
+			</includes>
 		</fileSet>
 		<fileSet filtered="true" packaged="false" encoding="UTF-8">
-		  <directory>src/main/resources/archetype-resources/src/test/__lan__</directory>
-			  <includes>
+			<directory>src/main/resources/archetype-resources/src/test/__lan__</directory>
+			<includes>
 				<include>**</include>
-			  </includes>
+			</includes>
 		</fileSet>
 		<fileSet filtered="true" packaged="false" encoding="UTF-8">
 			<directory>src/main/resources/archetype-resources/src/test/resources</directory>
 			<includes>
 				<include>**</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="true" packaged="false" encoding="UTF-8">
+			<directory>src/main/resources</directory>
+			<includes>
+				<include>*.properties</include>
 			</includes>
 		</fileSet>
 		<fileSet filtered="true" packaged="false" encoding="UTF-8">
@@ -113,6 +118,12 @@
 			<directory>src/main/resources/META-INF/maven</directory>
 			<includes>
 				<include>archetype-metadata.xml</include>
+			</includes>
+		</fileSet>
+		<fileSet filtered="true" packaged="false" encoding="UTF-8">
+			<directory>src/test</directory>
+			<includes>
+				<include>**</include>
 			</includes>
 		</fileSet>
 	</fileSets>

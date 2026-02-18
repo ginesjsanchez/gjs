@@ -101,8 +101,12 @@
 #		include <limits.h>
 #		include <time.h>
 #		include <fcntl.h>
+#	if ( ! defined ( CYGWIN ) )
 #		include <sys/io.h>
 #		include <mcheck.h>
+#   else
+#		include <io.h>
+#	endif
 #		include <math.h>
 #		include <float.h>
 

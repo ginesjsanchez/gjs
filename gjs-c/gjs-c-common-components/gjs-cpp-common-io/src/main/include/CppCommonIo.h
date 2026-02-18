@@ -4,6 +4,8 @@
 
 #include <CppCommonSupport.h>
 
+#include <ExtensionesFicheros.h>
+#include <SistemaFicheros.h>
 
 #include <SocketExcepcion.h>
 #include <Socket.h>

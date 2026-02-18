@@ -31,6 +31,7 @@ namespace org
             {
                 namespace log
                 {
+					
             enum Nivel
             {
                 TODOS = 0,
@@ -53,7 +54,17 @@ namespace org
             bool LogIni ( map<string, string> & mapPropiedades );
             bool LogIni ( const string & sRutaFicheroCfg, map<string, string> & mapPropiedades );
 
+			bool LogActivado ();
+			void LogActivar ();
+            void LogDesactivar ();
+
+
             bool LogIniConsola ( bool bSoloMensaje = false );
+			bool LogHaySalidaPorConsola ();
+			bool LogSalidaPorConsolaActivada ();
+			void LogActivarConsola ();
+            void LogDesactivarConsola ();
+			
             bool LogIniFichero ( const string & sFicLog, bool consola = false );
 
             void LogFin ();
@@ -64,30 +75,30 @@ namespace org
             void LogAviso ( const string & sMensaje );
             void LogError ( const string & sMensaje );
             void LogFatal ( const string & sMensaje );
-            void LogError ( const string & sMensaje, const exception & exInfo );
-            void LogFatal ( const string & sMensaje, const exception & exInfo );
+            void LogErrorEx ( const string & sMensaje, const exception & exInfo );
+            void LogFatalEx ( const string & sMensaje, const exception & exInfo );
             void LogError ( const exception & exInfo );
             void LogFatal ( const exception & exInfo );
 
+            template<typename... Args> void LogInfo ( const string & sFormato, Args&&... argumentos );
+            template<typename... Args> void LogDepuracion ( const string & sFormato, Args&&... argumentos );
+            template<typename... Args> void LogTraza ( const string & sFormato, Args&&... argumentos );
+            template<typename... Args> void LogAviso ( const string & sFormato, Args&&... argumentos );
+            template<typename... Args> void LogError ( const string & sFormato, Args&&... argumentos );
+            template<typename... Args> void LogFatal ( const string & sFormato, Args&&... argumentos );
+
             Nivel LogGetNivel ();
             void LogSetNivel ( Nivel nivel );
+            void LogSetNivel ( int iNivel );
 
-
+			Nivel ToNivel ( int iNivel );
+			int ToInt ( Nivel nivel );
             /*
                 TODO:
                     Colores en caso consola
                     Reconfiguracion forzada
                     Test reconfiguración periodica y forzada
-                    Caso formateo de cadenas + multiple argumentos
-            */
-            /*
-            template<typename... Types> void LogInfo ( Types... args );
-            template<typename... Types> void LogDepuracion ( Types... args );
-            template<typename... Types> void LogTraza ( Types... args );
-            template<typename... Types> void LogAviso ( Types... args );
-            template<typename... Types> void LogError ( Types... args );
-            template<typename... Types> void LogFatal ( Types... args );
-            */
+             */
                 }
             }
         }

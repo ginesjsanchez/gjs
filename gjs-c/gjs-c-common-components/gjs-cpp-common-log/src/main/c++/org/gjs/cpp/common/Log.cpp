@@ -19,19 +19,25 @@ namespace org
 
 static bool _bLogInicializado = false;
 
+static log4cxx::ConsoleAppenderPtr _p_consoleAppender = nullptr;
+static log4cxx::LevelPtr _p_levelConsole = nullptr;
+static log4cxx::LevelPtr _p_level = nullptr;
 
 
 static void _LogIniConsola ( bool bSoloMensaje )
 {
-	log4cxx::ConsoleAppenderPtr appender( new log4cxx::ConsoleAppender() );
-	log4cxx::PatternLayout * layout = new log4cxx::PatternLayout ();
-	log4cxx::LogString conversionPattern = log4cxx::LogString ( ( bSoloMensaje ? LOG_PATRON_CONSOLA_MIN : LOG_PATRON_DEF ) );
-	layout-> setConversionPattern( conversionPattern );
-	appender->setLayout( log4cxx::LayoutPtr( layout ) );
-	log4cxx::helpers::Pool pool;
-	appender->activateOptions( pool );
-	log4cxx::Logger::getRootLogger()->addAppender( appender );
-	log4cxx::Logger::getRootLogger()->setLevel( log4cxx::Level::getAll() );
+	if ( _p_consoleAppender == nullptr ) 
+	{
+		log4cxx::ConsoleAppenderPtr _p_consoleAppender( new log4cxx::ConsoleAppender() );
+		log4cxx::PatternLayout * layout = new log4cxx::PatternLayout ();
+		log4cxx::LogString conversionPattern = log4cxx::LogString ( ( bSoloMensaje ? LOG_PATRON_CONSOLA_MIN : LOG_PATRON_DEF ) );
+		layout-> setConversionPattern( conversionPattern );
+		_p_consoleAppender->setLayout( log4cxx::LayoutPtr( layout ) );
+		log4cxx::helpers::Pool pool;
+		_p_consoleAppender->activateOptions( pool );
+		log4cxx::Logger::getRootLogger()->addAppender( _p_consoleAppender );
+		log4cxx::Logger::getRootLogger()->setLevel( log4cxx::Level::getAll() );
+	}
 }
 
 static void _LogIniFichero ( string sFicLog )
@@ -47,6 +53,22 @@ static void _LogIniFichero ( string sFicLog )
 	appender->activateOptions( pool );
 	log4cxx::Logger::getRootLogger()->addAppender( appender );
 	log4cxx::Logger::getRootLogger()->setLevel( log4cxx::Level::getAll() );
+}
+
+static void _LogBuscarConsola ()
+{
+	log4cxx::AppenderList appenders = log4cxx::Logger::getRootLogger()->getAllAppenders();
+    for ( auto it = appenders.begin(); it != appenders.end(); ++it ) 
+	{
+        // Hacer cast dinámico a ConsoleAppenderPtr
+        _p_consoleAppender = std::dynamic_pointer_cast<log4cxx::ConsoleAppender>(*it);
+        if ( _p_consoleAppender != nullptr ) {
+            break;
+        }
+    }
+    if ( _p_consoleAppender != nullptr ) {
+		_p_levelConsole = _p_consoleAppender->getThreshold ();
+    }
 }
 
 
@@ -144,6 +166,11 @@ static log4cxx::LevelPtr _ToLevel ( Nivel nivel )
 	return log4cxx::Level::toLevel ( _ToLog4cxx ( nivel ) );
 }
 
+static log4cxx::LevelPtr _ToLevel ( int iNivel )
+{
+	return log4cxx::Level::toLevel ( _ToLog4cxx ( static_cast<Nivel>( iNivel ) ) );
+}
+
 static Nivel _ToNivel ( log4cxx::LevelPtr p_level )
 {
 	return ( _FromLog4cxx ( p_level->toInt() ) );
@@ -194,6 +221,7 @@ bool LogIni ( const string & sRutaFicheroCfg )
 		{
 			log4cxx::xml::DOMConfigurator::configureAndWatch( sRutaFicheroCfg, LOG_TMP_RECONFIGURACION );
 			_bLogInicializado = true;
+			_LogBuscarConsola ();
 		}
 		catch ( const exception & ex )
 		{
@@ -219,6 +247,30 @@ bool LogIni ( const string & sRutaFicheroCfg, map<string, string> & mapPropiedad
 	return ( LogIni ( sRutaFicheroCfg ) );
 }
 
+bool LogActivado ()
+{
+	return ( log4cxx::Logger::getRootLogger()->getLevel () != log4cxx::Level::getOff() );
+}
+
+void LogActivar ()
+{
+	if ( _p_level != nullptr ) 
+	{
+		log4cxx::Logger::getRootLogger()->setLevel ( _p_level );
+		_p_level = nullptr;
+	}
+}
+	
+void LogDesactivar ()
+{
+	if ( _p_level == nullptr ) 
+	{
+		_p_level = log4cxx::Logger::getRootLogger()->getLevel ();
+		log4cxx::Logger::getRootLogger()->setLevel ( log4cxx::Level::getOff() );
+	}
+}
+
+
 bool LogIniConsola ( bool bSoloMensaje )
 {
 	bool bRes = true;
@@ -238,6 +290,38 @@ bool LogIniConsola ( bool bSoloMensaje )
 		}
 	}
 	return( bRes );
+}
+
+bool LogHaySalidaPorConsola ()
+{
+	return ( _p_consoleAppender != nullptr );
+}
+
+bool LogSalidaPorConsolaActivada ()
+{
+	bool bRes = false;
+	if ( _p_consoleAppender != nullptr ) 
+	{
+		bRes = ( _p_consoleAppender->getThreshold () != log4cxx::Level::getOff() );
+	}
+	return ( bRes );
+}
+
+void LogActivarConsola ()
+{
+	if ( _p_consoleAppender != nullptr ) 
+	{
+		_p_consoleAppender->setThreshold ( _p_levelConsole );
+	}
+}
+	
+void LogDesactivarConsola ()
+{
+	if ( _p_consoleAppender != nullptr ) 
+	{
+		_p_levelConsole = _p_consoleAppender->getThreshold ();
+		_p_consoleAppender->setThreshold ( log4cxx::Level::getOff() );
+	}
 }
 
 bool LogIniFichero ( const string & sFicLog, bool consola )
@@ -369,7 +453,7 @@ void LogFatal ( const string & sMensaje )
 	}
 }
 
-void LogError ( const string & sMensaje, const exception & exInfo )
+void LogErrorEx ( const string & sMensaje, const exception & exInfo )
 {
 	if ( _bLogInicializado )
 	{
@@ -385,7 +469,7 @@ void LogError ( const string & sMensaje, const exception & exInfo )
 	}
 }
 
-void LogFatal ( const string & sMensaje, const exception & exInfo )
+void LogFatalEx ( const string & sMensaje, const exception & exInfo )
 {
 	if ( _bLogInicializado )
 	{
@@ -459,88 +543,63 @@ void LogSetNivel ( Nivel nivel )
 	}
 }
 
-
-/*
-template<typename... Types> void LogInfo ( Types... args )
+void LogSetNivel ( int iNivel )
 {
-	LogInfo( Concatenar( args... ) );
-}
-
-template<typename... Types> void LogDepuracion ( Types... args )
-{
-	LogDepuracion( Concatenar( args... ) );
-}
-
-template<typename... Types> void LogTraza ( Types... args )
-{
-	LogTraza( Concatenar( args... ) );
-}
-
-template<typename... Types> void LogAviso ( Types... args )
-{
-	LogAviso( Concatenar( args... ) );
-}
-
-template<typename... Types> void LogError ( Types... args )
-{
-	LogError( Concatenar( args... ) );
-}
-
-template<typename... Types> void LogFatal ( Types... args )
-{
-	LogFatal( Concatenar( args... ) );
+	try
+	{
+		log4cxx::Logger::getRootLogger()->setLevel( _ToLevel ( iNivel ) );
+	}
+	catch ( const exception & ex )
+	{
+		cout << ex.what() << endl;
+	}
 }
 
 
-template void LogInfo ( string );
-template void LogInfo ( string, string );
-template void LogInfo ( string, string, string );
-template void LogInfo ( string, string, string, string );
-template void LogInfo ( string, string, string, string, string );
-template void LogInfo ( string, string, string, string, string, string );
-template void LogInfo ( string, string, string, string, string, string, string );
-template void LogInfo ( string, string, string, string, string, string, string, string );
-template void LogInfo ( const char * );
-template void LogInfo ( const char *, const char * );
-template void LogInfo ( const char *, const char *, const char * );
-template void LogInfo ( const char *, const char *, const char *, const char * );
-template void LogInfo ( const char *, const char *, const char *, const char *, const char * );
-template void LogInfo ( const char *, const char *, const char *, const char *, const char *, const char * );
-template void LogInfo ( const char *, const char *, const char *, const char *, const char *, const char *, const char * );
-template void LogInfo ( const char *, const char *, const char *, const char *, const char *, const char *, const char *, const char * );
-template void LogInfo ( const char *, string );
-template void LogInfo ( string, const char * );
-template void LogInfo ( const char *, string, string );
-template void LogInfo ( const char *, string, const char * );
-template void LogInfo ( string, const char *, string );
-template void LogInfo ( string, const char *, const char * );
-template void LogInfo ( const char *, string, string, string );
-template void LogInfo ( const char *, string, string, const char * );
-template void LogInfo ( const char *, string, const char *, string );
-template void LogInfo ( const char *, string, const char *, const char * );
-template void LogInfo ( string, const char *, string, string );
-template void LogInfo ( string, const char *, string, const char * );
-template void LogInfo ( string, const char *, const char *, string );
-template void LogInfo ( string, const char *, const char *, const char * );
+template<typename... Args> void LogInfo ( const string & sFormato, Args&&... argumentos )
+{
+	LogInfo( ToString ( sFormato, forward<Args>( argumentos )... ) );
+}
 
-template void LogInfo ( const char *, string, string, string, string );
-template void LogInfo ( const char *, string, string, string, const char * );
-template void LogInfo ( const char *, string, string, const char *, string );
-template void LogInfo ( const char *, string, string, const char *, const char * );
-template void LogInfo ( const char *, string, const char *, string, string );
-template void LogInfo ( const char *, string, const char *, string, const char * );
-template void LogInfo ( const char *, string, const char *, const char *, string );
-template void LogInfo ( const char *, string, const char *, const char *, const char * );
-template void LogInfo ( string, const char *, string, string, string );
-template void LogInfo ( string, const char *, string, string, const char * );
-template void LogInfo ( string, const char *, string, const char *, string );
-template void LogInfo ( string, const char *, string, const char *, const char * );
-template void LogInfo ( string, const char *, const char *, string, string );
-template void LogInfo ( string, const char *, const char *, string, const char * );
-template void LogInfo ( string, const char *, const char *, const char *, string );
-template void LogInfo ( string, const char *, const char *, const char *, const char * );
+template<typename... Args> void LogDepuracion ( const string & sFormato, Args&&... argumentos )
+{
+	LogDepuracion( ToString ( sFormato, forward<Args>( argumentos )... ) );
+}
 
-*/
+template<typename... Args> void LogTraza ( const string & sFormato, Args&&... argumentos )
+{
+	LogTraza( ToString ( sFormato, forward<Args>( argumentos )... ) );
+}
+
+template<typename... Args> void LogAviso ( const string & sFormato, Args&&... argumentos )
+{
+	LogAviso( ToString ( sFormato, forward<Args>( argumentos )... ) );
+}
+
+template<typename... Args> auto LogError ( const string & sFormato, Args&&... argumentos )
+ -> std::enable_if_t<!(... || std::is_base_of_v<std::exception, std::decay_t<Args>>)>
+{
+	LogError( ToString ( sFormato, forward<Args>( argumentos )... ) );
+}
+
+template<typename... Args> auto LogFatal ( const string & sFormato, Args&&... argumentos )
+ -> std::enable_if_t<!(... || std::is_base_of_v<std::exception, std::decay_t<Args>>)>
+{
+	LogFatal( ToString ( sFormato, forward<Args>( argumentos )... ) );
+}
+
+
+Nivel ToNivel ( int iNivel ) 
+{
+	return ( static_cast<Nivel> ( iNivel ) );
+}
+
+int ToInt ( Nivel nivel )
+{
+	return  ( static_cast<int> ( nivel ) );
+}
+
+
 
                 }
             }

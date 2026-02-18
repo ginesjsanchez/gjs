@@ -1,3 +1,9 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+${symbol_pound}set( ${symbol_dollar}symbol_pound = '${symbol_pound}' )
+${symbol_pound}set( ${symbol_dollar}symbol_dollar = '${symbol_dollar}' )
+${symbol_pound}set( ${symbol_dollar}symbol_escape = '${symbol_escape}' )
 ${symbol_pound}set( ${symbol_dollar}capitalizedName = ${symbol_dollar}shortName.substring(0,1).toUpperCase() + ${symbol_dollar}shortName.substring(1))
 ${symbol_dollar}{symbol_pound}${symbol_dollar}{symbol_pound} ${symbol_dollar}{capitalizedName} project
 

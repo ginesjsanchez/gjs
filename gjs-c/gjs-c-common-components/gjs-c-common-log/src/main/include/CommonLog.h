@@ -2,8 +2,13 @@
 #define _ORG_GJS_C_CC_C_COMMON_LOG_H
 
 
-#include <MDC.h>
-#include <Log.h>
+#include <NivelesLog.h>
+
+#include <SLog.h>
+
+// PENDIENTE
+//#include <Log.h>
+//#include <MDC.h>
 
 
 #endif

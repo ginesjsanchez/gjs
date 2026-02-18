@@ -29,9 +29,13 @@
 		
 		<!-- Dependency versions -->
 		<!-- Gjs versions -->
+		<gjs-c-common-base.version>1.0.0-SNAPSHOT</gjs-c-common-base.version>
 		<gjs-cpp-common-base.version>1.0.0-SNAPSHOT</gjs-cpp-common-base.version>
+		<gjs-cpp-common-types.version>1.0.0-SNAPSHOT</gjs-cpp-common-types.version>
+		<gjs-cpp-common-time.version>1.0.0-SNAPSHOT</gjs-cpp-common-time.version>
 		<gjs-cpp-common-support.version>1.0.0-SNAPSHOT</gjs-cpp-common-support.version>
 		<gjs-cpp-common-io.version>1.0.0-SNAPSHOT</gjs-cpp-common-io.version>
+		<gjs-cpp-common-system.version>1.0.0-SNAPSHOT</gjs-cpp-common-system.version>
 		<gjs-cpp-common-log.version>1.0.0-SNAPSHOT</gjs-cpp-common-log.version>
 		<gjs-cpp-common-database.version>1.0.0-SNAPSHOT</gjs-cpp-common-database.version>
 		<gjs-cpp-common-test-mocks.version>1.0.0-SNAPSHOT</gjs-cpp-common-test-mocks.version>
@@ -49,14 +53,32 @@
 			</dependency>
 			<dependency>
 				<groupId>org.gjs.c.common</groupId>
-				<artifactId>gjs-cpp-common-support</artifactId>
-				<version>${gjs-cpp-common-support.version}</version>
+				<artifactId>gjs-cpp-common-time</artifactId>
+				<version>${gjs-cpp-common-time.version}</version>
+				<type>nar</type>
+			</dependency>
+			<dependency>
+				<groupId>org.gjs.c.common</groupId>
+				<artifactId>gjs-cpp-common-types</artifactId>
+				<version>${gjs-cpp-common-types.version}</version>
 				<type>nar</type>
 			</dependency>
 			<dependency>
 				<groupId>org.gjs.c.common</groupId>
 				<artifactId>gjs-cpp-common-io</artifactId>
 				<version>${gjs-cpp-common-io.version}</version>
+				<type>nar</type>
+			</dependency>
+			<dependency>
+				<groupId>org.gjs.c.common</groupId>
+				<artifactId>gjs-cpp-common-system</artifactId>
+				<version>${gjs-cpp-common-system.version}</version>
+				<type>nar</type>
+			</dependency>
+			<dependency>
+				<groupId>org.gjs.c.common</groupId>
+				<artifactId>gjs-cpp-common-support</artifactId>
+				<version>${gjs-cpp-common-support.version}</version>
 				<type>nar</type>
 			</dependency>
 			<dependency>

@@ -2,9 +2,9 @@
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
 <?xml version="1.0" encoding="UTF-8"?>
-<archetype-descriptor xsi:schemaLocation="https://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0 http://maven.apache.org/xsd/archetype-descriptor-1.1.0.xsd" name="semilla-sb-back-archetype"
+<archetype-descriptor xsi:schemaLocation="https://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0 http://maven.apache.org/xsd/archetype-descriptor-1.1.0.xsd" 
     xmlns="https://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="${artifactId}">
 
     <requiredProperties>
 		<!-- These properties function as constants -->
@@ -36,45 +36,39 @@
 			<defaultValue>${symbol_dollar}{defaultVersion}</defaultValue>
 			<validationRegex>^[1-9][0-9]*${symbol_escape}.[0-9]+${symbol_escape}.[0-9]+(-SNAPSHOT|-RC${symbol_escape}.[0-9]+)?</validationRegex>
 		</requiredProperty>
- </requiredProperties>
+	</requiredProperties>
 	
 	<fileSets>
         <fileSet filtered="true" encoding="UTF-8">
- 		  <directory>/</directory>
-		  <includes>
-			<include>pom.xml</include>
-		  </includes>
-		</fileSet>
-        <fileSet filtered="true" encoding="UTF-8">
- 		  <directory>/</directory>
-		  <includes>
-			<include>README.md</include>
-			<include>changelog.md</include>
+			<directory></directory>
+			<includes>
+				<include>README.md</include>
+				<include>changelog.md</include>
 		  </includes>
 		</fileSet>
 		<fileSet filtered="true" packaged="true" encoding="UTF-8">
-		  <directory>src/main/${lan}</directory>
-			  <includes>
+			<directory>src/main/${lan}</directory>
+			<includes>
 				<include>**/*.${ext}</include>
-			  </includes>
+			</includes>
 		</fileSet>
 		<fileSet filtered="true" encoding="UTF-8">
-		  <directory>src/main/resources</directory>
-			  <includes>
+			<directory>src/main/resources</directory>
+			<includes>
 				<include>**</include>
-			  </includes>
+			</includes>
 		</fileSet>
 		<fileSet filtered="true" packaged="true" encoding="UTF-8">
-		  <directory>src/test/${lan}</directory>
-			  <includes>
+			<directory>src/test/${lan}</directory>
+			<includes>
 				<include>**/*.${ext}</include>
-			  </includes>
+			</includes>
 		</fileSet>
 		<fileSet filtered="true" encoding="UTF-8">
-		  <directory>src/test/resources</directory>
-			  <includes>
+			<directory>src/test/resources</directory>
+			<includes>
 				<include>**</include>
-			  </includes>
+			</includes>
 		</fileSet>
 	</fileSets>	
 </archetype-descriptor>

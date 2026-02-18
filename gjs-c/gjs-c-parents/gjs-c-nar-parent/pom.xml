@@ -12,8 +12,10 @@
 	<packaging>pom</packaging>
 
 	<name>Maven C/C++ NAR Parent Pom</name>
-	<description>Parent pom for compiling and linking C/C++ projects using the nar-maven-plugin.</description>
+	<description>
+	Parent pom for compiling and linking C/C++ projects using the nar-maven-plugin.
 	To compile C files with the C++ compiler, you can use the .cc extension.
+	</description>
 	<properties>
 		<!-- C/C++ Language version -->
 		<gjs.nar.language.option>--std=${gjs.nar.language.standard}</gjs.nar.language.option>
@@ -29,6 +31,14 @@
 		<!-- Aggregational platform specific compilation options -->
 		<gjs.nar.platform.options></gjs.nar.platform.options>
 		<gjs.nar.platform.link.options></gjs.nar.platform.link.options>
+
+		<!-- Default Compiler options (must be defined in the pom.xml son) -->
+		<gjs.nar.compiler/>
+		<gjs.nar.linker/>
+		<gjs.nar.compiler.language/>
+		<gjs.nar.language.version/>
+		<gjs.nar.language.standard/>
+		<gjs.nar.language.aol/>
 
 		<!-- Platform options -->	
 		<gjs.nar.architecture>x86_64-pc-cygwin</gjs.nar.architecture>

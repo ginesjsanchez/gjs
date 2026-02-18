@@ -1,5 +1,5 @@
-#ifndef _ES_INTERIOR_BASE_CONCATENAR_H
-#define _ES_INTERIOR_BASE_CONCATENAR_H
+#ifndef _ORG_GJS_C_CC_CPP_CONCATENAR_H
+#define _ORG_GJS_C_CC_CPP_CONCATENAR_H
 
 #include <string>
 #include <list>

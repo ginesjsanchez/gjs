@@ -18,6 +18,16 @@ namespace org
             namespace common
             {
 
+long ToInt ( double t )
+{
+	return ( round ( t ) );
+}
+
+long ToInt ( float t )
+{
+	return ( round ( t ) );
+}
+
 long ToInt ( char * t )
 {
 	return ( ToInt( (const char *)t ) );
@@ -47,10 +57,7 @@ long ToInt ( const string & t )
 	long lRes = 0;
 	try
 	{
-		if ( t.size() > 0 )
-		{
-			lRes = atol( t.c_str() );
-		}
+        lRes = stol( t );
 	}
 	catch (...)
 	{
@@ -88,6 +95,75 @@ long ToInt ( const wchar_t * t )
 {
 	return ( ToInt ( wstring( t ) ) );
 }
+
+long long ToLLong ( char * t )
+{
+	return ( ToLLong( (const char *)t ) );
+}
+
+long long ToLLong ( const char * t )
+{
+	long long lRes = 0;
+	if ( t != NULL )
+	{
+		try
+		{
+			if ( strlen( t ) > 0 )
+			{
+				lRes = atoll( t );
+			}
+		}
+		catch (...)
+		{
+		}
+	}
+	return ( lRes );
+}
+
+long long ToLLong ( const string & t )
+{
+	long long lRes = 0;
+	try
+	{
+        lRes = stoll( t );
+	}
+	catch (...)
+	{
+	}
+	return ( lRes );
+}
+
+
+long long ToLLong ( IToString & t )
+{
+	return ( ToLLong ( t.toString() ) );
+}
+
+long long ToLLong ( IToString * t )
+{
+	long long lRes = 0;
+	if ( t != NULL )
+	{
+		lRes = ToLLong ( *t );
+	}
+	return ( lRes );
+}
+
+long long ToLLong ( const wstring & t )
+{
+	return ( ToLLong( string( t.begin(), t.end() ) ) );
+}
+
+long long ToLLong ( wchar_t * t )
+{
+	return ( ToLLong ( wstring( t ) ) );
+}
+
+long long ToLLong ( const wchar_t * t )
+{
+	return ( ToLLong ( wstring( t ) ) );
+}
+
 
 			}
 		}

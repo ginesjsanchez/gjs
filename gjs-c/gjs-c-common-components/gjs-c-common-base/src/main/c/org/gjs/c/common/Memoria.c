@@ -518,7 +518,7 @@ static void	MemInicializar ()
 {
 #  if ( defined ( WIN ) )
 	SYSTEM_INFO		sysinfDatos;
-#  elif ( defined ( UNIX ) || defined ( LINUX ) )
+#  elif ( ( defined ( UNIX ) || defined ( LINUX ) ) && !defined ( CYGWIN ) )
 	struct rlimit	rlimDatos;
 #  endif
 
@@ -530,7 +530,7 @@ static void	MemInicializar ()
 		p_vBasMemMinDireccionEspProc = (void *) sysinfDatos.lpMinimumApplicationAddress;
 		p_vBasMemMaxDireccionEspProc = (void *) sysinfDatos.lpMaximumApplicationAddress;
 
-#	  elif ( defined ( UNIX ) || defined ( LINUX ) )
+#	  elif (  ( defined ( UNIX ) || defined ( LINUX ) ) && !defined ( CYGWIN ) )
 
 		if ( getrlimit ( RLIMIT_DATA, &rlimDatos ) == 0 )
 		{

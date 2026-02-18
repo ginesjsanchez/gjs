@@ -1,3 +1,6 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
 #set( $capitalizedPrefix = $prefix.substring(0,1).toUpperCase() + $prefix.substring(1))
 #set( $capitalizedName = $shortName.substring(0,1).toUpperCase() + $shortName.substring(1))
 ${symbol_pound} ${capitalizedPrefix} ${capitalizedName} Archetype
@@ -28,19 +31,19 @@ ${symbol_pound}${symbol_pound} Generating a project from the archetype
 		-DarchetypeArtifactId=${artifactId} \
 		-DarchetypeVersion=${version} \
 		-DshortName=test-project \ 
-		-DgroupId=org.gjs.test 
+		-DprojectGroupId=org.gjs.test 
     
 	Archetype Parameters:
 
 	* shortName: Name of the project. Always lowercase. Allows two words separated by a hyphen.
 
-	* groupId: The group of the project artifact. 
+	* projectGroupId: The group of the project artifact. 
 
-	* artifactId: The name of the project artifact. Default is ${shortName}. Not required.
+	* projectArtifactId: The name of the project artifact. Default is ${shortName}. Not required.
 
-	* package: The project packaging of the sourc code. Default is ${groupId}. Not required.
+	* package: The project packaging of the sourc code. Default is ${projectGroupId}. Not required.
 
-	* version: The project version. Default is 1.0.0-SNAPSHOT. Not required.
+	* projectVersion: The project version. Default is 1.0.0-SNAPSHOT. Not required.
 	
 	
     

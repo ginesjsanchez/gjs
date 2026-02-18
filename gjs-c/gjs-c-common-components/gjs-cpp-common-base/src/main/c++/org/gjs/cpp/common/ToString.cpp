@@ -4,6 +4,8 @@
 //#include <locale>
 //#include <codecvt>
 
+
+
 using namespace std;
 using namespace org::gjs::cpp::common;
 
@@ -293,6 +295,10 @@ string ToString ( map<string, T> * mapa )
 	}
 }
 
+template<typename... Args> string ToString ( const string & sFormato, Args&&... argumentos )
+{
+    return format( sFormato, forward<Args>( argumentos )... );
+}
 
 
 template string ToString ( list<string> & );

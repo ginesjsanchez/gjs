@@ -7,7 +7,49 @@ using namespace std;
 using namespace org::gjs::cpp::common;
 
 
+static bool TestToLowerCase01 ()
+{
+	cout << "Test ToLowerCase 01:" << endl;
+	bool bRes = true;
+	string sCadena = string( "" );
+	string sRes = ToLowerCase( sCadena );
+	if ( sRes.size() != 0 )
+	{
+		cout << "Error caso 1: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "12 AbC-DEFgH" );
+	string sExpected = string( "12 abc-defgh" );
+	sRes = ToLowerCase( sCadena );
+	if ( sRes != sExpected )
+	{
+		cout << "Error caso 2: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	return( bRes );
+}
 
+static bool TestToUpperCase01 ()
+{
+	cout << "Test ToUpperCase 01:" << endl;
+	bool bRes = true;
+	string sCadena = string( "" );
+	string sRes = ToUpperCase( sCadena );
+	if ( sRes.size() != 0 )
+	{
+		cout << "Error caso 1: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "12 AbC-DEFgH" );
+	string sExpected = string( "12 ABC-DEFGH" );
+	sRes = ToUpperCase( sCadena );
+	if ( sRes != sExpected )
+	{
+		cout << "Error caso 2: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	return( bRes );
+}
 
 static bool TestReemplazarTodos01 ()
 {
@@ -185,7 +227,699 @@ static bool TestLimpiar01 ()
 	sRes = Limpiar( sCadena );
 	if ( sRes != "123456789abc" )
 	{
+		cout << "Error caso 3: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	return( bRes );
+}
+
+static bool TestFormatearBlancos01 ()
+{
+	cout << "Test FormatearBlancos01:" << endl;
+	bool bRes = true;
+	string sCadena = string( "" );
+	string sRes = FormatearBlancos( sCadena );
+	if ( sRes != sCadena )
+	{
+		cout << "Error caso 1: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "123456789" );
+	sRes = FormatearBlancos( sCadena );
+	if ( sRes != sCadena )
+	{
 		cout << "Error caso 2: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "  123  456  789 abc  " );
+	sRes = FormatearBlancos( sCadena );
+	if ( sRes != "123 456 789 abc" )
+	{
+		cout << "Error caso 3: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	return( bRes );
+}
+
+static bool TestContieneBlancos01 ()
+{
+	cout << "Test ContieneBlancos01:" << endl;
+	bool bRes = true;
+	string sCadena = string( "" );
+	bRes = ContieneBlancos( sCadena );
+	if ( bRes )
+	{
+		cout << "Error caso 1: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "123456789" );
+	bRes = ContieneBlancos( sCadena );
+	if ( bRes )
+	{
+		cout << "Error caso 2: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "  123  456  789 abc  " );
+	bRes = ContieneBlancos( sCadena );
+	if ( !bRes )
+	{
+		cout << "Error caso 3: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	return( bRes );
+}
+
+static bool TestContieneTabuladores01 ()
+{
+	cout << "Test ContieneTabuladores01:" << endl;
+	bool bRes = true;
+	string sCadena = string( "" );
+	bRes = ContieneTabuladores( sCadena );
+	if ( bRes )
+	{
+		cout << "Error caso 1: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "123456789" );
+	bRes = ContieneTabuladores( sCadena );
+	if ( bRes )
+	{
+		cout << "Error caso 2: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "  123\t456  789 abc  " );
+	bRes = ContieneTabuladores( sCadena );
+	if ( !bRes )
+	{
+		cout << "Error caso 3: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	return( bRes );
+}
+
+static bool TestContieneCaracteresNoImprimibles01 ()
+{
+	cout << "Test ContieneCaracteresNoImprimibles01:" << endl;
+	bool bRes = true;
+	string sCadena = string( "" );
+	bRes = ContieneCaracteresNoImprimibles( sCadena );
+	if ( bRes )
+	{
+		cout << "Error caso 1: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "123456789" );
+	bRes = ContieneCaracteresNoImprimibles( sCadena );
+	if ( bRes )
+	{
+		cout << "Error caso 2: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "  123\u0001456  789 abc  " );
+	bRes = ContieneCaracteresNoImprimibles( sCadena );
+	if ( !bRes )
+	{
+		cout << "Error caso 3: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	return( bRes );
+}
+
+static bool TestContieneCaracteresNoAlfanumericos01 ()
+{
+	cout << "Test ContieneCaracteresNoAlfanumericos01:" << endl;
+	bool bRes = true;
+	string sCadena = string( "" );
+	bRes = ContieneCaracteresNoAlfanumericos( sCadena );
+	if ( bRes )
+	{
+		cout << "Error caso 1: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "123456789" );
+	bRes = ContieneCaracteresNoAlfanumericos( sCadena );
+	if ( bRes )
+	{
+		cout << "Error caso 2: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "  123.456  789 abc : " );
+	bRes = ContieneCaracteresNoAlfanumericos( sCadena );
+	if ( !bRes )
+	{
+		cout << "Error caso 3: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	return( bRes );
+}
+
+static bool TestContieneCaracteresNoEstandar01 ()
+{
+	cout << "Test ContieneCaracteresNoEstandar01:" << endl;
+	bool bRes = true;
+	string sCadena = string( "" );
+	bRes = ContieneCaracteresNoEstandar( sCadena );
+	if ( bRes )
+	{
+		cout << "Error caso 1: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "123456789" );
+	bRes = ContieneCaracteresNoEstandar( sCadena );
+	if ( bRes )
+	{
+		cout << "Error caso 2: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "  123ñ456  789 abc  " );
+	bRes = ContieneCaracteresNoEstandar( sCadena );
+	if ( !bRes )
+	{
+		cout << "Error caso 3: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	return( bRes );
+}
+
+static bool TestCoherenciaParentesis01 ()
+{
+	cout << "Test CoherenciaParentesis01:" << endl;
+	bool bRes = true;
+	string sCadena = string( "" );
+	bRes = CoherenciaParentesis( sCadena );
+	if ( bRes )
+	{
+		cout << "Error caso 1: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "123456789" );
+	bRes = CoherenciaParentesis( sCadena );
+	if ( bRes )
+	{
+		cout << "Error caso 2: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "  (123 (456()789) abc)" );
+	bRes = CoherenciaParentesis( sCadena );
+	if ( !bRes )
+	{
+		cout << "Error caso 3: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "  (123 (456()789 abc)" );
+	bRes = CoherenciaParentesis( sCadena );
+	if ( bRes )
+	{
+		cout << "Error caso 4: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	return( bRes );
+}
+
+static bool TestCoherenciaLlaves01 ()
+{
+	cout << "Test CoherenciaLlaves01:" << endl;
+	bool bRes = true;
+	string sCadena = string( "" );
+	bRes = CoherenciaLlaves( sCadena );
+	if ( bRes )
+	{
+		cout << "Error caso 1: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "123456789" );
+	bRes = CoherenciaLlaves( sCadena );
+	if ( bRes )
+	{
+		cout << "Error caso 2: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "  {123 {456{}789} abc}" );
+	bRes = CoherenciaLlaves( sCadena );
+	if ( !bRes )
+	{
+		cout << "Error caso 3: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "  {123 {456{}789 abc}" );
+	bRes = CoherenciaLlaves( sCadena );
+	if ( bRes )
+	{
+		cout << "Error caso 4: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	return( bRes );
+}
+
+static bool TestCoherenciaCorchetes01 ()
+{
+	cout << "Test CoherenciaCorchetes01:" << endl;
+	bool bRes = true;
+	string sCadena = string( "" );
+	bRes = CoherenciaCorchetes( sCadena );
+	if ( bRes )
+	{
+		cout << "Error caso 1: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "123456789" );
+	bRes = CoherenciaCorchetes( sCadena );
+	if ( bRes )
+	{
+		cout << "Error caso 2: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "  [123 [456[]789] abc]" );
+	bRes = CoherenciaCorchetes( sCadena );
+	if ( !bRes )
+	{
+		cout << "Error caso 3: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "  [123 [456[]789 abc]" );
+	bRes = CoherenciaCorchetes( sCadena );
+	if ( bRes )
+	{
+		cout << "Error caso 4: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	return( bRes );
+}
+
+static bool TestCoherenciaParejaSignos01 ()
+{
+	cout << "Test CoherenciaParejaSignos01:" << endl;
+	bool bRes = true;
+	string sCadena = string( "" );
+	bRes = CoherenciaParejaSignos( sCadena, '@', '$' );
+	if ( bRes )
+	{
+		cout << "Error caso 1: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "123456789" );
+	bRes = CoherenciaParejaSignos( sCadena, '@', '$' );
+	if ( bRes )
+	{
+		cout << "Error caso 2: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "  @123 @456@$789$ abc$" );
+	bRes = CoherenciaParejaSignos( sCadena, '@', '$' );
+	if ( !bRes )
+	{
+		cout << "Error caso 3: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "  @123 @456@$789 abc$" );
+	bRes = CoherenciaParejaSignos( sCadena, '@', '$' );
+	if ( bRes )
+	{
+		cout << "Error caso 4: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "  $123 @456@$789$ abc$" );
+	bRes = CoherenciaParejaSignos( sCadena, '@', '$' );
+	if ( !bRes )
+	{
+		cout << "Error caso 5: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "  $123 @456@$789@ abc$" );
+	bRes = CoherenciaParejaSignos( sCadena, '@', '$' );
+	if ( bRes )
+	{
+		cout << "Error caso 6: [" << bRes << "]" << endl;
+		bRes = false;
+	}
+	return( bRes );
+}
+
+static bool TestEliminarCaracter01 ()
+{
+	cout << "Test EliminarCaracter01:" << endl;
+	bool bRes = true;
+	string sCadena = string( "" );
+	string sRes = EliminarCaracter( sCadena, 0 );
+	if ( sRes != sCadena )
+	{
+		cout << "Error caso 1: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "123456789" );
+	sRes = EliminarCaracter( sCadena, -1 );
+	if ( sRes != sCadena )
+	{
+		cout << "Error caso 2: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sRes = EliminarCaracter( sCadena, 20 );
+	if ( sRes != sCadena )
+	{
+		cout << "Error caso 3: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sRes = EliminarCaracter( sCadena, 0 );
+	if ( sRes != "23456789" )
+	{
+		cout << "Error caso 4: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sRes = EliminarCaracter( sCadena, sCadena.size() - 1 );
+	if ( sRes != "12345678" )
+	{
+		cout << "Error caso 5: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sRes = EliminarCaracter( sCadena, 3 );
+	if ( sRes != "1235678" )
+	{
+		cout << "Error caso 6: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	return( bRes );
+}
+
+static bool TestEliminarCaracteres01 ()
+{
+	cout << "Test EliminarCaracteres01:" << endl;
+	bool bRes = true;
+	string sCadena = string( "" );
+	string sRes = EliminarCaracteres( sCadena, 0, 1 );
+	if ( sRes != sCadena )
+	{
+		cout << "Error caso 1: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "123456789" );
+	sRes = EliminarCaracteres( sCadena, -1, 1 );
+	if ( sRes != sCadena )
+	{
+		cout << "Error caso 2: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sRes = EliminarCaracteres( sCadena, 0, 0 );
+	if ( sRes != sCadena )
+	{
+		cout << "Error caso 3: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sRes = EliminarCaracteres( sCadena, 20, 1 );
+	if ( sRes != sCadena )
+	{
+		cout << "Error caso 4: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sRes = EliminarCaracteres( sCadena, 0, 1 );
+	if ( sRes != "23456789" )
+	{
+		cout << "Error caso 4: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sRes = EliminarCaracteres( sCadena, sCadena.size() - 1, 2 );
+	if ( sRes != "12345678" )
+	{
+		cout << "Error caso 5: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sRes = EliminarCaracteres( sCadena, 3, 4 );
+	if ( sRes != "1238" )
+	{
+		cout << "Error caso 6: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	return( bRes );
+}
+
+static bool TestEliminarPrimerosCaracteres01 ()
+{
+	cout << "Test EliminarPrimerosCaracteres01:" << endl;
+	bool bRes = true;
+	string sCadena = string( "" );
+	string sRes = EliminarPrimerosCaracteres( sCadena, 1 );
+	if ( sRes != sCadena )
+	{
+		cout << "Error caso 1: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "123456789" );
+	sRes = EliminarPrimerosCaracteres( sCadena, -1 );
+	if ( sRes != sCadena )
+	{
+		cout << "Error caso 2: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sRes = EliminarPrimerosCaracteres( sCadena, 0 );
+	if ( sRes != sCadena )
+	{
+		cout << "Error caso 3: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sRes = EliminarPrimerosCaracteres( sCadena, 1 );
+	if ( sRes != "23456789" )
+	{
+		cout << "Error caso 4: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sRes = EliminarPrimerosCaracteres( sCadena, sCadena.size() + 1 );
+	if ( sRes != "" )
+	{
+		cout << "Error caso 5: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sRes = EliminarPrimerosCaracteres( sCadena, 3 );
+	if ( sRes != "456789" )
+	{
+		cout << "Error caso 6: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	return( bRes );
+}
+
+static bool TestEliminarUltimosCaracteres01 ()
+{
+	cout << "Test EliminarUltimosCaracteres01:" << endl;
+	bool bRes = true;
+	string sCadena = string( "" );
+	string sRes = EliminarUltimosCaracteres( sCadena, 1 );
+	if ( sRes != sCadena )
+	{
+		cout << "Error caso 1: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "123456789" );
+	sRes = EliminarUltimosCaracteres( sCadena, -1 );
+	if ( sRes != sCadena )
+	{
+		cout << "Error caso 2: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sRes = EliminarUltimosCaracteres( sCadena, 0 );
+	if ( sRes != sCadena )
+	{
+		cout << "Error caso 3: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sRes = EliminarUltimosCaracteres( sCadena, 1 );
+	if ( sRes != "12345678" )
+	{
+		cout << "Error caso 4: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sRes = EliminarUltimosCaracteres( sCadena, 20 );
+	if ( sRes != "" )
+	{
+		cout << "Error caso 5: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sRes = EliminarUltimosCaracteres( sCadena, 3 );
+	if ( sRes != "123456" )
+	{
+		cout << "Error caso 6: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	return( bRes );
+}
+
+static bool TestEliminarApariciones01 ()
+{
+	cout << "Test EliminarApariciones01:" << endl;
+	bool bRes = true;
+	string sCadena = string( "" );
+	string sSubcadena = string( "" );
+	string sRes = EliminarApariciones( sCadena, sSubcadena );
+	if ( sRes != sCadena )
+	{
+		cout << "Error caso 1: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "123456789" );
+	sRes = EliminarApariciones( sCadena, sSubcadena );
+	if ( sRes != sCadena )
+	{
+		cout << "Error caso 2: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sSubcadena = string( "abc" );
+	sRes = EliminarApariciones( sCadena, sSubcadena );
+	if ( sRes != sCadena )
+	{
+		cout << "Error caso 3: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sSubcadena = string( "345" );
+	sRes = EliminarApariciones( sCadena, sSubcadena );
+	if ( sRes != "12678" )
+	{
+		cout << "Error caso 4: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "abc fgh 123 abc456" );
+	sSubcadena = string( "abc" );
+	sRes = EliminarApariciones( sCadena, sSubcadena );
+	if ( sRes != " fgh 123 456" )
+	{
+		cout << "Error caso 5: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	return( bRes );
+}
+
+static bool TestEliminarBlancos01 ()
+{
+	cout << "Test EliminarBlancos01:" << endl;
+	bool bRes = true;
+	string sCadena = string( "" );
+	string sRes = EliminarBlancos( sCadena );
+	if ( sRes != sCadena )
+	{
+		cout << "Error caso 1: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "123456789" );
+	sRes = EliminarBlancos( sCadena );
+	if ( sRes != sCadena )
+	{
+		cout << "Error caso 2: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "abc fgh" );
+	sRes = EliminarBlancos( sCadena );
+	if ( sRes != "abcfgh" )
+	{
+		cout << "Error caso 3: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( " a b c f g h" );
+	sRes = EliminarBlancos( sCadena );
+	if ( sRes != "abcfgh" )
+	{
+		cout << "Error caso 4: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	return( bRes );
+}
+
+static bool TestEliminarTabuladores01 ()
+{
+	cout << "Test EliminarTabuladores01:" << endl;
+	bool bRes = true;
+	string sCadena = string( "" );
+	string sRes = EliminarTabuladores( sCadena );
+	if ( sRes != sCadena )
+	{
+		cout << "Error caso 1: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "123456789" );
+	sRes = EliminarTabuladores( sCadena );
+	if ( sRes != sCadena )
+	{
+		cout << "Error caso 2: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "abc\tfgh" );
+	sRes = EliminarTabuladores( sCadena );
+	if ( sRes != "abcfgh" )
+	{
+		cout << "Error caso 3: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( " a\tb\tc\tf\tg\th" );
+	sRes = EliminarTabuladores( sCadena );
+	if ( sRes != " abcfgh" )
+	{
+		cout << "Error caso 4: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	return( bRes );
+}
+
+static bool TestEliminarCaracteresNoAlfanumericos01 ()
+{
+	cout << "Test EliminarCaracteresNoAlfanumericos01:" << endl;
+	bool bRes = true;
+	string sCadena = string( "" );
+	string sRes = EliminarCaracteresNoAlfanumericos( sCadena );
+	if ( sRes != sCadena )
+	{
+		cout << "Error caso 1: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "123456789" );
+	sRes = EliminarCaracteresNoAlfanumericos( sCadena );
+	if ( sRes != sCadena )
+	{
+		cout << "Error caso 2: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "abc:fgh" );
+	sRes = EliminarCaracteresNoAlfanumericos( sCadena );
+	if ( sRes != "abcfgh" )
+	{
+		cout << "Error caso 3: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( " a.b,c-f\tg(h1" );
+	sRes = EliminarCaracteresNoAlfanumericos( sCadena );
+	if ( sRes != "abcfgh1" )
+	{
+		cout << "Error caso 4: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	return( bRes );
+}
+
+static bool TestEliminarCaracteresNoEstandar01 ()
+{
+	cout << "Test EliminarCaracteresNoEstandar01:" << endl;
+	bool bRes = true;
+	string sCadena = string( "" );
+	string sRes = EliminarCaracteresNoEstandar( sCadena );
+	if ( sRes != sCadena )
+	{
+		cout << "Error caso 1: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "123456789" );
+	sRes = EliminarCaracteresNoEstandar( sCadena );
+	if ( sRes != sCadena )
+	{
+		cout << "Error caso 2: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( "abcñfgh" );
+	sRes = EliminarCaracteresNoEstandar( sCadena );
+	if ( sRes != "abcfgh" )
+	{
+		cout << "Error caso 3: [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sCadena = string( " añbçcf\tg\u0200h1" );
+	sRes = EliminarCaracteresNoEstandar( sCadena );
+	if ( sRes != " abcf\tgh1" )
+	{
+		cout << "Error caso 4: [" << sRes << "]" << endl;
 		bRes = false;
 	}
 	return( bRes );
@@ -1500,6 +2234,24 @@ bool TestCadenas ()
 {
 	bool bRes = true;
 	cout << endl << ANSI::AMARILLO << "[Test Cadenas]" << ANSI::RESETEAR << endl;
+	if ( TestToLowerCase01() )
+	{
+		cout << ANSI::VERDE << "Resultado: OK" << ANSI::RESETEAR << endl;
+	}
+	else
+	{
+		cout  << ANSI::ROJO << "Resultado: KO" << ANSI::RESETEAR << endl;
+		bRes = false;
+	}
+	if ( TestToUpperCase01() )
+	{
+		cout << ANSI::VERDE << "Resultado: OK" << ANSI::RESETEAR << endl;
+	}
+	else
+	{
+		cout  << ANSI::ROJO << "Resultado: KO" << ANSI::RESETEAR << endl;
+		bRes = false;
+	}
 	if ( TestReemplazarTodos01() )
 	{
 		cout << ANSI::VERDE << "Resultado: OK" << ANSI::RESETEAR << endl;
@@ -1545,6 +2297,178 @@ bool TestCadenas ()
 		cout  << ANSI::ROJO << "Resultado: KO" << ANSI::RESETEAR << endl;
 		bRes = false;
 	}
+    if ( TestFormatearBlancos01() )
+	{
+		cout << ANSI::VERDE << "Resultado: OK" << ANSI::RESETEAR << endl;
+	}
+	else
+	{
+		cout  << ANSI::ROJO << "Resultado: KO" << ANSI::RESETEAR << endl;
+		bRes = false;
+	}
+    if ( TestContieneBlancos01() )
+	{
+		cout << ANSI::VERDE << "Resultado: OK" << ANSI::RESETEAR << endl;
+	}
+	else
+	{
+		cout  << ANSI::ROJO << "Resultado: KO" << ANSI::RESETEAR << endl;
+		bRes = false;
+	}
+    if ( TestContieneTabuladores01() )
+	{
+		cout << ANSI::VERDE << "Resultado: OK" << ANSI::RESETEAR << endl;
+	}
+	else
+	{
+		cout  << ANSI::ROJO << "Resultado: KO" << ANSI::RESETEAR << endl;
+		bRes = false;
+	}
+    if ( TestContieneCaracteresNoImprimibles01() )
+	{
+		cout << ANSI::VERDE << "Resultado: OK" << ANSI::RESETEAR << endl;
+	}
+	else
+	{
+		cout  << ANSI::ROJO << "Resultado: KO" << ANSI::RESETEAR << endl;
+		bRes = false;
+	}
+    if ( TestContieneCaracteresNoAlfanumericos01() )
+	{
+		cout << ANSI::VERDE << "Resultado: OK" << ANSI::RESETEAR << endl;
+	}
+	else
+	{
+		cout  << ANSI::ROJO << "Resultado: KO" << ANSI::RESETEAR << endl;
+		bRes = false;
+	}
+    if ( TestContieneCaracteresNoEstandar01() )
+	{
+		cout << ANSI::VERDE << "Resultado: OK" << ANSI::RESETEAR << endl;
+	}
+	else
+	{
+		cout  << ANSI::ROJO << "Resultado: KO" << ANSI::RESETEAR << endl;
+		bRes = false;
+	}
+	if ( TestCoherenciaParentesis01() )
+	{
+		cout << ANSI::VERDE << "Resultado: OK" << ANSI::RESETEAR << endl;
+	}
+	else
+	{
+		cout  << ANSI::ROJO << "Resultado: KO" << ANSI::RESETEAR << endl;
+		bRes = false;
+	}
+	if ( TestCoherenciaLlaves01() )
+	{
+		cout << ANSI::VERDE << "Resultado: OK" << ANSI::RESETEAR << endl;
+	}
+	else
+	{
+		cout  << ANSI::ROJO << "Resultado: KO" << ANSI::RESETEAR << endl;
+		bRes = false;
+	}
+	if ( TestCoherenciaCorchetes01() )
+	{
+		cout << ANSI::VERDE << "Resultado: OK" << ANSI::RESETEAR << endl;
+	}
+	else
+	{
+		cout  << ANSI::ROJO << "Resultado: KO" << ANSI::RESETEAR << endl;
+		bRes = false;
+	}
+	if ( TestCoherenciaParejaSignos01() )
+	{
+		cout << ANSI::VERDE << "Resultado: OK" << ANSI::RESETEAR << endl;
+	}
+	else
+	{
+		cout  << ANSI::ROJO << "Resultado: KO" << ANSI::RESETEAR << endl;
+		bRes = false;
+	}
+	if ( TestEliminarCaracter01() )
+	{
+		cout << ANSI::VERDE << "Resultado: OK" << ANSI::RESETEAR << endl;
+	}
+	else
+	{
+		cout  << ANSI::ROJO << "Resultado: KO" << ANSI::RESETEAR << endl;
+		bRes = false;
+	}
+	if ( TestEliminarCaracteres01() )
+	{
+		cout << ANSI::VERDE << "Resultado: OK" << ANSI::RESETEAR << endl;
+	}
+	else
+	{
+		cout  << ANSI::ROJO << "Resultado: KO" << ANSI::RESETEAR << endl;
+		bRes = false;
+	}
+	if ( TestEliminarPrimerosCaracteres01() )
+	{
+		cout << ANSI::VERDE << "Resultado: OK" << ANSI::RESETEAR << endl;
+	}
+	else
+	{
+		cout  << ANSI::ROJO << "Resultado: KO" << ANSI::RESETEAR << endl;
+		bRes = false;
+	}
+	if ( TestEliminarUltimosCaracteres01() )
+	{
+		cout << ANSI::VERDE << "Resultado: OK" << ANSI::RESETEAR << endl;
+	}
+	else
+	{
+		cout  << ANSI::ROJO << "Resultado: KO" << ANSI::RESETEAR << endl;
+		bRes = false;
+	}
+	if ( TestEliminarApariciones01() )
+	{
+		cout << ANSI::VERDE << "Resultado: OK" << ANSI::RESETEAR << endl;
+	}
+	else
+	{
+		cout  << ANSI::ROJO << "Resultado: KO" << ANSI::RESETEAR << endl;
+		bRes = false;
+	}
+	if ( TestEliminarBlancos01() )
+	{
+		cout << ANSI::VERDE << "Resultado: OK" << ANSI::RESETEAR << endl;
+	}
+	else
+	{
+		cout  << ANSI::ROJO << "Resultado: KO" << ANSI::RESETEAR << endl;
+		bRes = false;
+	}
+	if ( TestEliminarTabuladores01() )
+	{
+		cout << ANSI::VERDE << "Resultado: OK" << ANSI::RESETEAR << endl;
+	}
+	else
+	{
+		cout  << ANSI::ROJO << "Resultado: KO" << ANSI::RESETEAR << endl;
+		bRes = false;
+	}
+	if ( TestEliminarCaracteresNoAlfanumericos01() )
+	{
+		cout << ANSI::VERDE << "Resultado: OK" << ANSI::RESETEAR << endl;
+	}
+	else
+	{
+		cout  << ANSI::ROJO << "Resultado: KO" << ANSI::RESETEAR << endl;
+		bRes = false;
+	}
+	if ( TestEliminarCaracteresNoEstandar01() )
+	{
+		cout << ANSI::VERDE << "Resultado: OK" << ANSI::RESETEAR << endl;
+	}
+	else
+	{
+		cout  << ANSI::ROJO << "Resultado: KO" << ANSI::RESETEAR << endl;
+		bRes = false;
+	}
+
 	if ( TestSubcadenas01() )
 	{
 		cout << ANSI::VERDE << "Resultado: OK" << ANSI::RESETEAR << endl;

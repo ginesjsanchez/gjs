@@ -24,6 +24,7 @@ Objeto::Objeto ()
 {
     const type_info &typeinfo( typeid(*this) );
     tipo = string ( typeinfo.name() );
+	tam = sizeof(*this);
 }
 
 Objeto::~Objeto ()
@@ -38,6 +39,11 @@ int Objeto::hash () const
 string Objeto::getTipo () const
 {
 	return( tipo );
+}
+
+size_t Objeto::getTam () const
+{
+	return( tam );
 }
 
 bool Objeto::esValido () const

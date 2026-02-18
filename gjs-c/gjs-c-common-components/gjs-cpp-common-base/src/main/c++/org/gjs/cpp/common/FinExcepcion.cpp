@@ -17,7 +17,7 @@ namespace org
             {
 
 
-FinExcepcion::FinExcepcion( const char * p_cModulo, const char * p_cRutina, int iCodigo ) : Excepcion( p_cModulo, p_cRutina, Concatenar( MENSAJE_EXCEPCION, ToString( iCodigo ) ) )
+FinExcepcion::FinExcepcion( const string & sModulo, const string & sRutina, int iCodigo ) : Excepcion( sModulo,sRutina, Concatenar( MENSAJE_EXCEPCION, ToString( iCodigo ) ) )
 {
 }
 

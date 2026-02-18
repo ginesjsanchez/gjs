@@ -24,11 +24,11 @@
 
 
 
-const char * VersCadena ( int iVersion, int iSubversion, int iRevision, int iCorreccion )
+char * VersCadena ( int iVersion, int iSubversion, int iRevision, int iCorreccion )
 {
 	const char *	p_cPatron;
-	char *		p_cAux;
-	char *		p_cRes;
+	char *			p_cAux;
+	char *			p_cRes;
 	int				iTam;
 
 	if ( iVersion >= 0 )

@@ -23,7 +23,12 @@
     <dependencies>
 		<dependency>
 			<groupId>org.gjs.c.common</groupId>
-			<artifactId>gjs-cpp-common-base</artifactId>
+			<artifactId>gjs-cpp-common-time</artifactId>
+			<type>nar</type>
+		</dependency>
+		<dependency>
+			<groupId>org.gjs.c.common</groupId>
+			<artifactId>gjs-cpp-common-system</artifactId>
 			<type>nar</type>
 		</dependency>
     </dependencies>

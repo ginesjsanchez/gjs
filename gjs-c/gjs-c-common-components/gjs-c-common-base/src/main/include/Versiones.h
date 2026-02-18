@@ -31,7 +31,7 @@
 
 
 
-const char * VersCadena ( int iVersion, int iSubversion, int iRevision, int iCorreccion );
+char * VersCadena ( int iVersion, int iSubversion, int iRevision, int iCorreccion );
 int VersProcesar ( const char * p_cCadena, int * p_iVersion, int * p_iSubversion, int * p_iRevision, int * p_iCorreccion );
 
 

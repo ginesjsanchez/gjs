@@ -360,7 +360,7 @@ void SConvEstablecerValorEnteroSinSigno ( SConversor * p_convObj, unsigned int u
 	{
 		p_convObj->iConvValida = 1;
 		p_convObj->uiValor = uiValor;
-		p_convObj->ulValor = (long) p_convObj->uiValor;
+		p_convObj->ulValor = (unsigned long) p_convObj->uiValor;
 	#  if ( defined ( LLONG ) )
 		p_convObj->llValor = (llong) p_convObj->uiValor;
 	#  endif

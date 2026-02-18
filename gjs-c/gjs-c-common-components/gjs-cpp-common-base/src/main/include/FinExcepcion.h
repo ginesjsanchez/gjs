@@ -18,7 +18,7 @@ namespace org
 			class FinExcepcion : public Excepcion
 			{
 			public:
-				FinExcepcion( const char * p_cModulo, const char * p_cRutina, int iCodigo );
+				FinExcepcion( const string & sModulo, const string & sRutina, int iCodigo );
 			};
 
             }

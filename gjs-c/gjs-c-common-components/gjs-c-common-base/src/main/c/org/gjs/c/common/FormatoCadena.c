@@ -85,6 +85,7 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 			iPosTmp = 0;
 			iPosFrm = 0;
 			iPosCad = 0;
+			iPosFrmP = 0;
 			iMaxAncho = -1;
 			while ( ( iPosFrm < CadLongitud ( p_cFormato ) ) &&
 					( iPosCad < iMaxTam ) && ( iRes == 1 ) )

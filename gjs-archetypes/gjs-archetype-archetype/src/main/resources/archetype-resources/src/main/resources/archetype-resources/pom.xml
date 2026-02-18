@@ -19,7 +19,7 @@
     <packaging>${packaging}</packaging>
 	
     <name>${symbol_dollar}{capitalizedName}</name>
-    <description>Project ${symbol_dollar}{capitalizedName} in language ${symbol_dollar}{lan}</description>
+    <description>Project ${symbol_dollar}{capitalizedName} in language ${lan}</description>
 
     <properties>
 		<!-- Language features -->
@@ -40,10 +40,12 @@
         </dependencies>
     </dependencyManagement>
 
+	<dependencies>
+	</dependencies>
+
     <build>
     </build>
 
     <profiles>
     </profiles>
-
 </project>

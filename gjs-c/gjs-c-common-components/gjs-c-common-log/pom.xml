@@ -26,33 +26,31 @@
 			<artifactId>gjs-c-common-base</artifactId>
 			<type>nar</type>
 		</dependency>
+		<dependency>
+			<groupId>org.gjs.c.common</groupId>
+			<artifactId>gjs-c-common-text</artifactId>
+			<type>nar</type>
+		</dependency>
+		<dependency>
+			<groupId>org.gjs.c.common</groupId>
+			<artifactId>gjs-c-common-time</artifactId>
+			<type>nar</type>
+		</dependency>
+		<dependency>
+			<groupId>org.gjs.c.common</groupId>
+			<artifactId>gjs-c-common-io</artifactId>
+			<type>nar</type>
+		</dependency>
+		<dependency>
+			<groupId>org.gjs.c.common</groupId>
+			<artifactId>gjs-c-common-system</artifactId>
+			<type>nar</type>
+		</dependency>
+		<dependency>
+			<groupId>org.gjs.c.common</groupId>
+			<artifactId>gjs-c-common-support</artifactId>
+			<type>nar</type>
+		</dependency>
     </dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>com.github.maven-nar</groupId>
-				<artifactId>nar-maven-plugin</artifactId>
-				<configuration>
-					<cpp>
-						<includePaths combine.children="append">
-							<includePath>
-								<path>${log4cxxDirInclude}</path>
-							</includePath>
-						</includePaths>						
-					</cpp>
-					<linker>
-						<libs combine.children="append">
-							<lib>
-								<name>log4cxx</name>
-								<type>shared</type>
-								<directory>${log4cxxDirLib}</directory>
-							</lib>
-						</libs>					
-					</linker>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 	
 </project>

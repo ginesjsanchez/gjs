@@ -1,0 +1,251 @@
+#include "SMensajes.h"
+
+#include "CommonConfig.h"
+
+#include <SEntidadId.h>
+#include <SFicTexto.h>
+
+
+
+
+SMensajes * SMsjCrear ()
+{
+	SMensajes * p_msjObj;
+
+	p_msjObj = ( SMensajes * ) MemReservar ( sizeof ( SMensajes ) );
+	if ( ES_VALIDO ( p_msjObj ) )
+	{
+		p_msjObj->p_lisMensajes = SLispCrear ();
+		if ( ES_VALIDO ( p_msjObj->p_lisMensajes ) )
+		{
+			SLispActivarLiberacionMemoria ( p_msjObj->p_lisMensajes );
+		}
+		else
+		{
+			MemLiberar ( ( void ** ) &p_msjObj );
+		}
+	}
+	return ( p_msjObj );
+}
+
+void SMsjDestruir ( SMensajes ** p_p_msjObj )
+{
+	SMensajes * p_msjObj;
+
+	if ( ES_VALIDO ( p_p_msjObj ) )
+	{
+		p_msjObj = *p_p_msjObj;
+
+		if ( ES_VALIDO ( p_msjObj ) )
+		{
+			SLispVaciar ( p_msjObj->p_lisMensajes );
+			SLispDestruir ( &( p_msjObj->p_lisMensajes ) );
+			MemLiberar ( ( void ** ) p_p_msjObj );
+		}
+	}
+}
+
+int SMsjInsertar ( SMensajes * p_msjObj, unsigned long uiCodigo, SCadena * p_cadTexto )
+{
+	int				iRes;
+	SEntidadId *	p_entDatos;
+
+	if ( ES_VALIDO ( p_msjObj ) && (  uiCodigo > 0 ) && ( SCadLongitud ( p_cadTexto ) > 0 ) )
+	{
+		if ( SMsjExisteCodigo ( p_msjObj, uiCodigo ) == 0 )
+		{
+			p_entDatos = SEntIdEncapsular ( uiCodigo, p_cadTexto );
+			if ( ES_VALIDO ( p_entDatos ) )
+			{
+				iRes = SLispInsertarDetras ( p_msjObj->p_lisMensajes, ( void * ) p_entDatos );
+			}
+			else
+			{
+				iRes = 0;
+			}
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SMsjInsertarLit ( SMensajes * p_msjObj, unsigned long uiCodigo, const char * p_cTexto )
+{
+	return ( SMsjInsertar ( p_msjObj, uiCodigo, SCadGenerar ( p_cTexto ) ) );
+}
+
+int SMsjExisteCodigo ( SMensajes * p_msjObj, unsigned long uiCodigo )
+{
+	int				iRes;
+	int				iEnc;
+	SEntidadId *	p_entDatos;
+
+	if ( ES_VALIDO ( p_msjObj ) )
+	{
+		iEnc = 0;
+		SLispInicio ( p_msjObj->p_lisMensajes );
+		while ( ( iEnc == 0 ) && ( SLispEstaEnFinal ( p_msjObj->p_lisMensajes ) == 0 ) )
+		{
+			p_entDatos = ( SEntidadId * ) SLispActual ( p_msjObj->p_lisMensajes );
+			if ( SEntIdId ( p_entDatos ) == uiCodigo )
+			{
+				iEnc = 1;
+			}
+			else
+			{
+				SLispSiguiente ( p_msjObj->p_lisMensajes );
+			}
+		}
+		iRes = iEnc;
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SMsjNumMensajes ( SMensajes * p_msjObj )
+{
+	int	iRes;
+
+	if ( ES_VALIDO ( p_msjObj ) )
+	{
+		iRes = SLispNumElementos ( p_msjObj->p_lisMensajes );
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+
+SCadena * SMsjTexto ( SMensajes * p_msjObj, unsigned long uiCodigo )
+{
+	SEntidadId *	p_entDatos;
+	SCadena *		p_cadTexto;
+	int				iEnc;
+
+	if ( ES_VALIDO ( p_msjObj ) )
+	{
+		iEnc = 0;
+		p_cadTexto = NULL;
+		SLispInicio ( p_msjObj->p_lisMensajes );
+		while ( ( iEnc == 0 ) && ( SLispEstaEnFinal ( p_msjObj->p_lisMensajes ) == 0 ) )
+		{
+			p_entDatos = ( SEntidadId * ) SLispActual ( p_msjObj->p_lisMensajes );
+			if ( SEntIdId ( p_entDatos ) == uiCodigo )
+			{
+				iEnc = 1;
+				p_cadTexto = SEntIdNombre ( p_entDatos );
+			}
+			else
+			{
+				SLispSiguiente ( p_msjObj->p_lisMensajes );
+			}
+		}
+	}
+	else
+	{
+		p_cadTexto = NULL;
+	}
+	return ( p_cadTexto );
+}
+
+void SMsjLimpiar ( SMensajes * p_msjObj )
+{
+	if ( ES_VALIDO ( p_msjObj ) )
+	{
+		SLispVaciar ( p_msjObj->p_lisMensajes );
+	}
+}
+
+int SMsjCargar ( SMensajes * p_msjObj, const char * p_cFichero )
+{
+	int					iRes;
+	SFicTexto *			p_ficMsj;
+	const char *		p_cLinea;
+	SCadena *			p_cadLinea;
+	SCadena *			p_cadCodigoAux;
+	SCadenaConv *		p_cadCodigo;
+	SCadena *			p_cadTexto;
+	int					iSep;
+	int					uiCodigo;
+
+	p_ficMsj = SFicTxtCrear ( p_cFichero );
+	if ( ES_VALIDO ( p_ficMsj ) )
+	{
+		if ( SFicTxtAbrir ( p_ficMsj, MOD_APR_LECTURA ) == 1 )
+		{
+			iRes = 1;
+			while ( ( SFicTxtEstaEnFinal ( p_ficMsj ) == 0 ) && ( iRes == 1 ) )
+			{
+				p_cLinea = SFicTxtLeerLinea ( p_ficMsj );
+				//if ( ES_NULO ( p_cLinea ) )
+				//{
+					//printf ( "Linea Nula \n" );
+					//iRes = 0;
+				//}
+				//else
+				if ( ES_VALIDO ( p_cLinea ) )
+				{
+					p_cadLinea = SCadGenerar ( p_cLinea );
+					if ( ES_VALIDO ( p_cadLinea ) )
+					{
+						SCadEliminarBlancos ( p_cadLinea );
+						if ( SCadLongitud ( p_cadLinea ) > 0 )
+						{
+							iSep = SCadBuscarCaracter ( p_cadLinea, ' ', 0 );
+							if ( iSep > 0 )
+							{
+								p_cadCodigoAux = SCadExtraerPrimeros ( p_cadLinea, iSep );
+								p_cadTexto = SCadExtraerUltimos ( p_cadLinea, SCadLongitud ( p_cadLinea ) - iSep - 1 );
+
+								SCadEliminarBlancos ( p_cadCodigoAux );
+								SCadEliminarBlancos ( p_cadTexto );
+
+								p_cadCodigo = SCadcCrearCad ( p_cadCodigoAux );
+								if ( SCadcEsNumerica ( p_cadCodigo ) == 1 )
+								{
+									uiCodigo = SCadcValorEntero ( p_cadCodigo );
+									SMsjInsertar ( p_msjObj, uiCodigo, p_cadTexto );
+								}
+
+								SCadcDestruir ( & p_cadCodigo );
+								SCadDestruir ( &p_cadCodigoAux );
+								SCadDestruir ( &p_cadTexto );
+							}
+						}
+						
+						MemLiberar ( (void **) &p_cLinea );
+						SCadDestruir ( &p_cadLinea );
+					}
+					else
+					{
+						iRes = 0;
+					}
+				}
+			}
+			SFicTxtCerrar ( p_ficMsj );
+		}
+		else
+		{
+			iRes = 0;
+		}
+		SFicTxtDestruir ( &p_ficMsj );
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+

@@ -7,6 +7,7 @@
 #include <vector>
 #include <map>
 #include <ctime>
+#include <format>
 
 #include <IToString.h>
 
@@ -59,6 +60,9 @@ namespace org
             string ToString ( unsigned char );
             string ToString ( char * );
             string ToString ( const char * );
+	
+			// Pendiente de test
+			template<typename... Args> string ToString ( const string & sFormato, Args&&... argumentos );
 
 			}
 		}

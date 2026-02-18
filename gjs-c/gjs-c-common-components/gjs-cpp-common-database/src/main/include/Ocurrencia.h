@@ -18,16 +18,16 @@ namespace org
             {
 
 			class Ocurrencia : public ListaValores, public IComparable
-			{	
+			{
 			private:
 				Entidad * entidad;
-				
+
 			public:
 				explicit Ocurrencia ( Entidad * _entidad );
 				explicit Ocurrencia( Ocurrencia * obj );
 				Ocurrencia( Ocurrencia & obj );
 				virtual ~Ocurrencia ();
-				
+
 			protected:
 				virtual long getHash() const override;
 
@@ -47,15 +47,15 @@ namespace org
 				void Asignar ( Ocurrencia * obj );
 
 				Ocurrencia * Clonar();
-				
+
 				virtual string toString () override;
-				
+
 				Ocurrencia & operator=( Ocurrencia & obj );
 				bool operator== ( Ocurrencia & obj );
 				bool operator!= ( Ocurrencia & obj );
-		
+
 			};
-		
+
  			}
 		}
 	}

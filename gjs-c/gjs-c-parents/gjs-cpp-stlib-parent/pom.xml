@@ -35,6 +35,7 @@
 						</library>
 					</libraries>
 					<linker>
+						<!-- Para crear librerías estáticas se utiliza el ar -->
 						<options combine.self="override">
 						</options>
 					</linker>

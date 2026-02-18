@@ -19,6 +19,8 @@ namespace org
 		{
             namespace common
             {
+			long ToInt ( double t );
+			long ToInt ( float t );
 
 			long ToInt ( const string & t );
 			long ToInt ( char * t );
@@ -29,6 +31,16 @@ namespace org
 
 			long ToInt ( IToString & t );
 			long ToInt ( IToString * t );
+
+			long long ToLLong ( const string & t );
+			long long ToLLong ( char * t );
+			long long ToLLong ( const char * t );
+			long long ToLLong ( const wstring & t );
+			long long ToLLong ( wchar_t * t );
+			long long ToLLong ( const wchar_t * t );
+
+			long long ToLLong ( IToString & t );
+			long long ToLLong ( IToString * t );
 
  			}
 		}

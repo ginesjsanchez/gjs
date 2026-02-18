@@ -1,0 +1,48 @@
+#set( $capitalizedName = $shortName.substring(0,1).toUpperCase() + $shortName.substring(1))
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+		<groupId>org.gjs.c</groupId>
+		<artifactId>gjs-cpp-stlib-parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+        <relativePath />
+    </parent>
+
+    <groupId>${groupId}</groupId>
+    <artifactId>${artifactId}</artifactId>
+    <version>${version}</version>
+    <packaging>nar</packaging>
+	
+    <name>${capitalizedName}</name>
+    <description>Project ${capitalizedName} in language C++</description>
+
+    <properties>
+		<!-- Language features -->
+		<gjs.source.language>c++</gjs.source.language>
+		<gjs.source.extension>cpp</gjs.source.extension>
+	
+		<!-- Compiler options -->
+		<gjs.compiler.additionalOptions></gjs.compiler.additionalOptions>
+		
+		<!-- Dependency versions -->
+		
+    </properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.gjs.c.common</groupId>
+			<artifactId>gjs-cpp-common</artifactId>
+			<type>nar</type>
+		</dependency>
+		
+		<!-- Test -->
+		<dependency>
+			<groupId>org.gjs.c.common</groupId>
+			<artifactId>gjs-cpp-common-test</artifactId>
+			<type>nar</type>
+		</dependency>
+	</dependencies>
+	
+</project>

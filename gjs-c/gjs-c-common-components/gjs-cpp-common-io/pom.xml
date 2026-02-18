@@ -24,7 +24,7 @@
     <dependencies>
 		<dependency>
 			<groupId>org.gjs.c.common</groupId>
-			<artifactId>gjs-cpp-common-support</artifactId>
+			<artifactId>gjs-cpp-common-types</artifactId>
 			<type>nar</type>
 		</dependency>
     </dependencies>

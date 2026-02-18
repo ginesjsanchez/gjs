@@ -16,6 +16,31 @@ namespace org
             namespace common
             {
 
+string ToLowerCase ( const string & sCadena )
+{
+	string sRes = string ( sCadena );
+	transform ( sRes.begin(), sRes.end(), sRes.begin(),
+					   [](unsigned char c){ return tolower( c ); });
+	return ( sRes );
+}
+
+string ToUpperCase ( const string & sCadena )
+{
+	string sRes = string ( sCadena );
+	transform ( sRes.begin(), sRes.end(), sRes.begin(),
+					   [](unsigned char c){ return toupper( c ); });
+	return ( sRes );
+}
+
+bool SonIgualesSinDistinguirTipoLetra ( const string & sCadena1, const string & sCadena2 )
+{
+    return ( sCadena1.size() == sCadena2.size() ) &&
+           ranges::equal ( sCadena1, sCadena2, [](char x, char y) {
+               return  tolower( (unsigned char)x ) ==
+                       tolower( (unsigned char)y );
+           });
+}
+
 string ReemplazarTodos ( const string & sCadena, char cBuscar, char cReemplazo )
 {
 	string sRes = sCadena;
@@ -65,6 +90,152 @@ string Limpiar( const string & sCadena )
 	string sRes = sCadena;
 	sRes.erase( remove_if( sRes.begin(), sRes.end(), []( char c ) { return iscntrl( c ); } ), sRes.end() );
 	return ( sRes );
+}
+
+string FormatearBlancos ( const string & sCadena )
+{
+    regex patron ( "\\s+" );
+    return ( regex_replace( sCadena, patron, " " ) );
+}
+
+
+bool ContieneCaracter ( const string & sCadena, char c )
+{
+	return ( sCadena.find( c ) != string::npos );
+}
+
+bool ContieneBlancos ( const string & sCadena )
+{
+    regex patron ( "\\s" );
+    smatch comparador;
+    regex_match ( sCadena, comparador, patron );
+    return ( comparador.size() > 0 );
+}
+
+bool ContieneTabuladores ( const string & sCadena )
+{
+    regex patron ( "\\t" );
+    smatch comparador;
+    regex_match ( sCadena, comparador, patron );
+    return ( comparador.size() > 0 );
+}
+
+bool ContieneCaracteresNoImprimibles ( const string & sCadena )
+{
+    regex patron ( "(?![\\n\\t])[^[:print:]]" );
+    smatch comparador;
+    regex_match ( sCadena, comparador, patron );
+    return ( comparador.size() > 0 );
+}
+
+bool ContieneCaracteresNoAlfanumericos ( const string & sCadena )
+{
+    regex patron ( "[^\\w:]" );
+    smatch comparador;
+    regex_match ( sCadena, comparador, patron );
+    return ( comparador.size() > 0 );
+}
+
+bool ContieneCaracteresNoEstandar ( const string & sCadena )
+{
+    regex patron ( "[^\\u0020-\\u007F]" );
+    smatch comparador;
+    regex_match ( sCadena, comparador, patron );
+    return ( comparador.size() > 0 );
+}
+
+bool CoherenciaParentesis ( const string & sCadena )
+{
+	return ( CoherenciaParejaSignos ( sCadena, '(', ')' ) );
+}
+
+bool CoherenciaLlaves ( const string & sCadena  )
+{
+	return ( CoherenciaParejaSignos ( sCadena, '{', '}' ) );
+}
+
+bool CoherenciaCorchetes ( const string & sCadena  )
+{
+	return ( CoherenciaParejaSignos ( sCadena, '[', ']' ) );
+}
+
+bool CoherenciaParejaSignos ( const string & sCadena, char cSigAp, char cSigCl )
+{
+  	int iAbiertos = 0;
+    for ( size_t pos = 0; pos < sCadena.size(); pos = pos + 1 )
+    {
+        if ( sCadena.at( pos ) == cSigAp )
+        {
+            iAbiertos = iAbiertos + 1;
+        }
+        else if ( sCadena.at( pos ) == cSigCl )
+        {
+            iAbiertos = iAbiertos - 1;
+        }
+    }
+	return ( iAbiertos == 0 );
+}
+
+string EliminarCaracter ( const string & sCadena, int iCar )
+{
+    string sRes = sCadena;
+    if ( ( iCar >= 0 ) && ( iCar < sCadena.size() ) )
+    {
+        sRes.erase ( iCar, 1 );
+    }
+	return ( sRes );
+}
+
+string EliminarCaracteres ( const string & sCadena, int iPosIni, int iNumCars )
+{
+    string sRes = sCadena;
+    if ( ( iPosIni >= 0 ) && ( iPosIni < sCadena.size() ) && ( iNumCars > 0 ) )
+    {
+        if ( iPosIni + iNumCars > sCadena.size() )
+        {
+            iNumCars = iNumCars - iPosIni - iNumCars + sCadena.size();
+        }
+        sRes.erase ( iPosIni, iNumCars );
+    }
+	return ( sRes );
+}
+
+string EliminarPrimerosCaracteres ( const string & sCadena, int iNumCars )
+{
+	return ( EliminarCaracteres ( sCadena, 0, iNumCars ) );
+}
+
+string EliminarUltimosCaracteres ( const string & sCadena, int iNumCars )
+{
+	return ( EliminarCaracteres ( sCadena, sCadena.size() - iNumCars, iNumCars ) );
+}
+
+string EliminarApariciones ( const string & sCadena1, const string & sCadena2 )
+{
+    regex patron ( format ( "\\{}", sCadena2 ) );
+    return ( regex_replace( sCadena1, patron, "" ) );
+}
+
+string EliminarBlancos ( const string & sCadena )
+{
+	return ( EliminarTodos ( sCadena, ' ' ) );
+}
+
+string EliminarTabuladores ( const string & sCadena )
+{
+	return ( EliminarTodos ( sCadena, '\t' ) );
+}
+
+string EliminarCaracteresNoAlfanumericos ( const string & sCadena )
+{
+    regex patron ( "[^\\w:]" );
+    return ( regex_replace( sCadena, patron, "" ) );
+}
+
+string EliminarCaracteresNoEstandar ( const string & sCadena )
+{
+    regex patron ( "[^\\u0020-\\u007F]" );
+    return ( regex_replace( sCadena, patron, "" ) );
 }
 
 string SubcadenaHasta ( const string & sCadena, char cBuscar )
@@ -347,6 +518,15 @@ size_t BuscarPrimero( const string & sCadena, const list<string> & delimitadores
 	return( posRes );
 }
 
+size_t BuscarDesdeAtrasCaracter( const string& sCadena, char c, size_t desde ) 
+{
+	if (desde == string::npos) 
+	{
+		desde = sCadena.length() - 1;
+	}
+	return ( sCadena.rfind(c, desde) );
+}
+
 vector<string> Separar ( string sCadena, const initializer_list<string> & delimitadores )
 {
     size_t posIni = 0;
@@ -398,6 +578,49 @@ vector<string> Separar ( string sCadena, const list<string> & delimitadores )
 	}
     return( vecRes );
 }
+
+int NumPalabras( const string & sCadena, char cDelimitador ) 
+{
+	int iRes = 0;
+	if ( ! sCadena.empty() ) 
+	{
+		iRes = 1;
+		for ( char c : sCadena ) 
+		{
+			if ( c == cDelimitador ) 
+			{
+				iRes = iRes + 1;
+			}
+		}
+	}
+	return ( iRes );
+}
+
+string ExtraerPalabra ( const string & sCadena, int iPos, char cDelimitador ) 
+{
+	string  sRes = "";
+	int 	iInicio = 0;
+	int 	iActual = 0;
+	int 	iCar = 0; 
+	bool 	bEnc = false;
+	
+	while ( ( iCar <= sCadena.length() ) && !bEnc )
+	{
+		if ( ( iCar == sCadena.length() ) || ( sCadena[ iCar ] == cDelimitador ) ) 
+		{
+			if ( iActual == iPos ) 
+			{
+				bEnc= true;
+				sRes = sCadena.substr(iInicio, iCar - iInicio);
+			}
+			iActual = iActual + 1;
+			iInicio = iCar + 1;
+		}
+		iCar = iCar + 1;
+	}
+	return ( sRes );
+}
+
 
 			}
 		}

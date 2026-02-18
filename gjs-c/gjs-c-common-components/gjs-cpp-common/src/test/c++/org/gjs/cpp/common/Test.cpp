@@ -5,6 +5,7 @@ using namespace org::gjs::cpp::common;
 using namespace std;
 
 
+extern bool TestExcepcion ();
 
 
 int main( int argc, char * argv[] )
@@ -13,6 +14,7 @@ int main( int argc, char * argv[] )
 	InicializarBase();
 
 	map<string, FUNCION_BOOL> mapTests;
+	mapTests[ "Excepcion" ] = TestExcepcion;
 
 	string sTest( "null" );
 	if ( argc > 1 )
@@ -37,10 +39,9 @@ int main( int argc, char * argv[] )
 		return( iRes );
 	}
 
-	// if ( ! TestOcurrencia () ||
-	//	! TestTabla () )
-	//{
-	//	iRes = -1;
-	//}
+    if ( ! TestExcepcion () )
+    {
+		iRes = -1;
+	}
 	return ( iRes );
 }

@@ -50,6 +50,8 @@
 			* cygwinUser : Username for Cygwin (indirectly, only for cygwin profile)
 						
 			* oracleDir : Directory of Oracle installation
+			
+			* visualStudioVCDir : Directory of VC header and lib files (if is present)
 	</description>
 
 	<properties>
@@ -76,6 +78,12 @@
 		<sysLibDir2>${cygwinDir}/usr/local/lib</sysLibDir2>
 		<sysIncDir>${cygwinDir}/usr/include</sysIncDir>
 		<sysIncDir2>${cygwinDir}/usr/local/include</sysIncDir2>
+		
+		<!-- Visual Studio Libraries directories -->
+		<vcLibDir>${visualStudioVCDir}/lib</vcLibDir>		
+		<vcIncDir1>${visualStudioVCDir}/include/ucrt</vcIncDir1>
+		<vcIncDir2>${visualStudioVCDir}/include/shared</vcIncDir2>
+		<vcIncDir3>${visualStudioVCDir}/include/um</vcIncDir3>
 		
 		<!-- CppCheck Tool directory -->
 		<cppCheckDir>${cygwinDir}/bin</cppCheckDir>

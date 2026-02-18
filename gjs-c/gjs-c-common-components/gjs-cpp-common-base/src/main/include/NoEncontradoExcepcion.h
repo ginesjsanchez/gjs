@@ -20,7 +20,7 @@ namespace org
 			{
 
 			public:
-				NoEncontradoExcepcion ( const string & _sModulo, const string & _sRutina, const string & _sTipo, const string & _sObjeto );
+				NoEncontradoExcepcion ( const string & sModulo, const string & sRutina, const string & sTipo, const string & sObjeto );
 			};
 
             }

@@ -42,12 +42,12 @@
 	
     <licenses>    
 		<license>
-			<name>Apache License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<name>GNU General Public License (GPL) version 3.0</name>
+			<url>https://www.gnu.org/licenses/gpl-3.0.html</url>
 			<distribution>repo</distribution>
 		</license>
     </licenses>    
- 	<inceptionYear>2025</inceptionYear>
+ 	<inceptionYear>2026</inceptionYear>
 	<developers>
 		<developer>
 			<id>gjs</id>
@@ -70,6 +70,11 @@
 		<project.build.sourceEncoding>${source.encoding}</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>${resources.encoding}</project.reporting.outputEncoding>
 		<project.resources.sourceEncoding>${reporting.encoding}</project.resources.sourceEncoding>
+
+		<!-- Public Free License -->
+		<lincence.name>gpl_v3</lincence.name>
+		<lincence.organization>GJ Software</lincence.organization>
+		<lincence.year>2026</lincence.year>
 
 		<!-- Aggregational platform specific compilation options -->
 		<platformOptions></platformOptions>
@@ -98,7 +103,8 @@
 		<maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
 		<maven-invoker-plugin.version>3.9.1</maven-invoker-plugin.version>
         <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
- 
+		<properties-maven-plugin.version>1.2.1</properties-maven-plugin.version>
+		
 		<!-- Additional Maven plugins -->
         <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
 		<copy-rename-maven-plugin.version>1.0.1</copy-rename-maven-plugin.version>
@@ -324,24 +330,29 @@
 					<artifactId>license-maven-plugin</artifactId>
 					<version>${license-maven-plugin.version}</version>
 					<configuration>
-						<inceptionYear>2025</inceptionYear>
-						<organizationName>GJ Software</organizationName>
+						<inceptionYear>${license.year}</inceptionYear>
+						<organizationName>${lincence.organization}</organizationName>
 						<projectName>${project.name}</projectName>
-						<licenseName>gpl_v3</licenseName>
+						<licenseName>${lincence.name}</licenseName>
 
 						<roots>
 							<root>src/main/java</root>
 							<root>src/main/c</root>
 							<root>src/main/c++</root>
 							<root>src/main/include</root>
+							<root>src/main/jsp</root>
+							<root>src/main/js</root>
 						</roots>
 						<includes>
 							<include>*.java</include>
 							<include>*.c</include>
 							<include>*.cpp</include>
 							<include>*.h</include>
+							<include>*.hpp</include>
 							<include>*.js</include>
 							<include>*.css</include>
+							<include>*.xhtml</include>
+							<include>*.jsp</include>
 						</includes>
 					</configuration>
 				</plugin>
@@ -355,7 +366,17 @@
 					<artifactId>maven-gpg-plugin</artifactId>
 					<version>${maven-gpg-plugin.version}</version>
 				</plugin>
-			</plugins>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>properties-maven-plugin</artifactId>
+					<version>${properties-maven-plugin.version}</version>
+					<configuration>
+						<!-- Not in this version
+						<failOnMissingFile>false</failOnMissingFile>
+						-->
+					</configuration>
+				</plugin>
+		</plugins>
 		</pluginManagement>		
 		
 		<plugins>
@@ -391,6 +412,24 @@
                         <phase>validate</phase>
                     </execution>
                 </executions>
+            </plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>properties-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>initialize</phase>
+						<goals>
+							<goal>read-project-properties</goal>
+						</goals>
+						<configuration>
+							<files>
+								<file>src/main/resources/license.properties</file>
+							</files>
+							<quiet>true</quiet>
+						</configuration>
+					</execution>
+				</executions>
             </plugin>
 		</plugins>
 	</build>

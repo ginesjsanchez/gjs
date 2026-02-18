@@ -2,15 +2,26 @@
 #define _ORG_GJS_C_CC_CPP_BASE_H
 
 
+#include <Precompilacion.h>
+#include <BaseConfig.h>
+#include <Memoria.h>
 #include <Prototipos.h>
 #include <TerminalANSI.h>
+#include <Funciones.h>
+#include <ASCIICodigos.h>
+#include <ASCIIEstandar.h>
 
 #include <Cadenas.h>
 #include <IToString.h>
 #include <ToString.h>
 #include <ToInt.h>
+#include <ToReal.h>
 #include <Concatenar.h>
+#include <Codificacion.h>
+#include <InfoMemoria.h>
+#include <ExpresionesRegulares.h>
 
+#include <Depurador.h>
 #include <Objeto.h>
 #include <IComparable.h>
 
@@ -24,9 +35,7 @@
 #include <Sistema.h>
 #include <Ficheros.h>
 
-
-
-#define LIBERAR( ptr ) 				if( ptr != NULL ) { delete ptr; ptr = NULL; }
+#include <Conversor.h>
 
 
 #endif

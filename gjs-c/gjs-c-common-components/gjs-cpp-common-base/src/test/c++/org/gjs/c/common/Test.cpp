@@ -7,9 +7,11 @@ using namespace std;
 using namespace org::gjs::cpp::common;
 
 extern bool TestToInt ();
+extern bool TestToReal ();
 extern bool TestToString ();
 extern bool TestConcatenar ();
 extern bool TestCadenas ();
+extern bool TestCodificacion ();
 extern bool TestIToString ();
 extern bool TestObjeto ();
 extern bool TestExcepcion ();
@@ -17,17 +19,19 @@ extern bool TestSistema ();
 extern bool TestIComparable ();
 extern bool TestColecciones ();
 extern bool TestFicheros ();
-
+extern bool TestConversor ();
 
 int main( int argc, char * argv[] )
 {
 	int iRes = 0;
 
 	map<string, FUNCION_BOOL> mapTests;
-	mapTests[ "ToInt" ] = TestToString;
+	mapTests[ "ToInt" ] = TestToInt;
+	mapTests[ "ToReal" ] = TestToReal;
 	mapTests[ "ToString" ] = TestToString;
 	mapTests[ "Concatenar" ] = TestConcatenar;
 	mapTests[ "Cadenas" ] = TestCadenas;
+	mapTests[ "Codificacion" ] = TestCodificacion;
 	mapTests[ "IToString" ] = TestIToString;
 	mapTests[ "Objeto" ] = TestObjeto;
 	mapTests[ "Excepcion" ] = TestExcepcion;
@@ -35,6 +39,7 @@ int main( int argc, char * argv[] )
 	mapTests[ "IComparable" ] = TestIComparable;
 	mapTests[ "Colecciones" ] = TestColecciones;
 	mapTests[ "Ficheros" ] = TestFicheros;
+	mapTests[ "Conversor" ] = TestConversor;
 
 
 	string sTest( "null" );
@@ -61,16 +66,19 @@ int main( int argc, char * argv[] )
 	}
 
 	if ( ! TestToInt () ||
+		! TestToReal () ||
 		! TestToString () ||
 		! TestConcatenar () ||
 		! TestCadenas () ||
+		! TestCodificacion () ||
 		! TestIToString () ||
 		! TestObjeto () ||
 		! TestExcepcion () ||
 		! TestSistema () ||
         ! TestIComparable() ||
         ! TestColecciones() ||
-        ! TestFicheros() )
+        ! TestFicheros() ||
+        ! TestConversor() )
 	{
 		iRes = -1;
 	}

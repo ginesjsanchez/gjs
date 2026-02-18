@@ -1,43 +1,86 @@
 #include "Base.h"
 
+#define NUM_TESTS        2
 
 extern int TestPunteros ();
 extern int TestSConversor ();
 
+char ** testArrayInit()
+{
+    char ** p_p_cTests = (char **) MemReservar ( NUM_TESTS * sizeof( char *));
+    p_p_cTests[ 0 ] = CadDuplicar ( "Punteros" );
+    p_p_cTests[ 1 ] = CadDuplicar ( "SConversor" );
+    return p_p_cTests;
+}
 
+PFUNINTV * functionArrayInit()
+{
+    PFUNINTV* p_fTests = (PFUNINTV *) MemReservar ( NUM_TESTS * sizeof( PFUNINTV ));
+    p_fTests[ 0 ] = TestPunteros;
+    p_fTests[ 1 ] = TestSConversor;
+    return p_fTests;
+}
+
+void freeArrays( char ** p_p_cTests, PFUNINTV* p_fTests )
+{
+    for ( int i = 0; i < NUM_TESTS; i = i + 1 ) {
+        MemLiberar( (void **) p_p_cTests[ i ]);
+    }
+    MemLiberar( (void **) p_p_cTests );
+    MemLiberar( (void **) p_fTests );
+}
+
+int findTest( char ** p_p_cTests, char * p_cTest )
+{
+    int iIndex = -1;
+    int i = 0;
+    while ( ( i < NUM_TESTS) && ( iIndex < 0 ) )
+    {
+        if ( strcmp ( p_p_cTests[ i ], p_cTest ) == 0 )
+        {
+            iIndex = i;
+        }
+        i = i + 1;
+    }
+    return ( iIndex );
+}
 
 int main( int argc, char * argv[] )
 {
 	int iRes = 0;
-	//InicializarBase();
+
+	char ** p_p_cTests = testArrayInit();
+    PFUNINTV * p_fTests = functionArrayInit();
 
 	char * p_cTest = 0x0;
 	if ( argc > 1 )
 	{
 		p_cTest = argv[1];
 	}
-//	if ( ( sTest.size() > 0 ) && ( sTest.compare( "null" ) != 0 ) )
-//	{
-//		if ( mapTests.find( sTest ) != mapTests.end() )
-//		{
-//			FUNCION_BOOL fTest = mapTests[ sTest ];
-//			if( !fTest() )
-//			{
-//				iRes = -1;
-//			}
-//		}
-//		else
-//		{
-//			cerr << "Test [" << sTest << "] no encontrado." << endl;
-//			iRes = -1;
-//		}
-//		return( iRes );
-//	}
-//
+	if ( CadLongitud ( p_cTest ) > 0 )
+	{
+	    int iTest = findTest( p_p_cTests, p_cTest );
+		if ( iTest >= 0 )
+		{
+			PFUNINTV fTest = p_fTests[ iTest ];
+			if( fTest() != 1 )
+			{
+				iRes = -1;
+			}
+		}
+		else
+		{
+			printf( "Test [%s] no encontrado.", p_cTest );
+			iRes = -1;
+		}
+		return( iRes );
+	}
+
 	if ( BOOL_ES_FALSO ( TestPunteros () ||
                         TestSConversor () ) )
 	{
 		iRes = -1;
 	}
+	freeArrays( p_p_cTests, p_fTests );
 	return ( iRes );
 }
