@@ -26,8 +26,13 @@ Archetype to generate the basic structure of a project in c++ language.
 		-DarchetypeArtifactId=gjs-cpp-lib-archetype \
 		-DarchetypeVersion=1.0.0-SNAPSHOT \
 		-DshortName=test-project \ 
-		-DgroupId=org.gjs.test 
-    
+		-DgroupId=org.gjs.test  \
+ 		-DartifactId=test-project  \
+		-Dpackage=org.gjs.test \
+		-Dversion=1.0.0-SNAPSHOT \
+		-Dlog=y \
+		-Dparameters=1
+   
 	Archetype Parameters:
 
 	* shortName: Name of the project. Always lowercase. Allows two words separated by a hyphen.
@@ -38,8 +43,12 @@ Archetype to generate the basic structure of a project in c++ language.
 
 	* package: The project packaging of the sourc code. Default is org.gjs.maven.archetypes. Not required.
 
-	* version: The project version. Default is 1.0.0-SNAPSHOT. Not required.
+	* version: The project version. Default is 1.0.0-SNAPSHOT. Not required.	
 	
+	* log: Activates log4cxx. Values y/n. Default is y. Not required.
+
+	* parameters: Number of parameters of the program. Default is 0. Not required. 
+ 
 	
     
 ## References

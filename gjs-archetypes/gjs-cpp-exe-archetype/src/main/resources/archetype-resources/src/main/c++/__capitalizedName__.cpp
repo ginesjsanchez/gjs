@@ -3,67 +3,116 @@
 #set( $symbol_escape = '\' )
 #set( $capitalizedName = $shortName.substring(0,1).toUpperCase() + $shortName.substring(1))
 #set( $includeConfig = "${capitalizedName}Config.h")
+#set($cleanVersion = $version.split("-")[0])
+#set($parts = $cleanVersion.split("."))
+#if($parts.size() > 0)
+  #set($major = $parts[0])
+#else
+  #set($major = "1" )
+#end
+#if($parts.size() > 1)
+  #set($minor = $parts[1])
+#else
+  #set($minor = "0" )
+#end
+#if($parts.size() > 2)
+  #set($patch = $parts[2])
+#else
+  #set($patch = "0" )
+#end
 
 ${symbol_pound}include "${includeConfig}"
 
 
 
-
 using namespace std;
 using namespace org::gjs::cpp::common;
+using namespace org::gjs::cpp::common::log;
 
 
+#if( $parameters > 0 )
+static bool validateArgument ( int iArg, string sArg );
+#end
+
+#if( $parameters > 0 )
 int main ( int iNumArgs, char * p_p_cArgs [] )
+#else
+int main ()
+#end
 {
 	int					iRes;
-	CArgumentos	*		p_argParametros;
-    string				sDirectorio;
+#if( $parameters > 0 )
+	Argumentos	*		p_argParametros;
+#end
 
-	EntInicializar ();
+	EntInicializar ( true, "${shortName}", ${major}, ${minor}, ${patch} );
+#if( $log.equals( "y" )	)
+	LogIni( "/log4cxx.xml" );
+#end
 
-	p_argParametros = new CArgumentos ( iNumArgs, p_p_cArgs );
+#if( $parameters > 0 )
+	p_argParametros = new Argumentos ( iNumArgs, p_p_cArgs );
 	if ( ES_VALIDO ( p_argParametros ) )
 	{
-		if ( p_argParametros->NumArgumentos () == 1 )
+		if ( p_argParametros->NumArgumentos () == ${parameters} )
 		{
-			sDirectorio = string ( p_argParametros->DuplicarArgumento ( 0 ) );
-			if ( !sDirectorio.empty() )
+			for ( int iArg = 0; iArg < p_argParametros->NumArgumentos (); iArg = iArg + 1 )
 			{
-				iRes = 1;
-				if ( SisExisteDirectorio ( sDirectorio ) == 0 )
+				if ( !validateArgument ( iArg, p_argParametros->Argumento ( iArg ) ) )
 				{
-					cout << format( "No existe el directorio pasado como argumento ({})." << sDirectorio << endl; 
+					cout << format( "Invalid argument {} (Value={}).", iArg,  
+							p_argParametros->Argumento ( iArg ) ) << endl; 
 					iRes = 0;
 				}
-			}
-			else
-			{
-				cout << "Error de memoria al procesar los argumentos del programa." << endl;
-				iRes = 0;
 			}
 		}
 		else
 		{
-			cout << "Numero de argumentos erroneo." << endl;
-			cout << "Uso: AcumuladorSignos <Dirtectorio> << endl;
+			cout << "Invalid number of arguments." << endl;
+			//TODO
+			cout << "Use: ${shortName} <Param1> ..." << endl;
 			iRes = 0;
 		}
 
-		DESTRUIR ( CArgumentos, p_argParametros );
+		delete p_argParametros;
 	}
 	else
 	{
 		cout << "Se han producido un error al procesar los parametros." << endl;
 		iRes = 0;
 	}
+#end
 
 	if ( iRes == 1 )
 	{
-		iRes = ProcesarDirectorio ( p_cDirectorio );
+		// TODO: Add source main code
 	}
+	
+#if( $log.equals( "y" )	)
+	LogFin();
+#end
+	EntFinalizar ();
 	return ( iRes );
 }
 
-static int ProcesarDirectorio ( const string & sDirectorio )
+#if( $parameters > 0 )
+static bool validateArgument ( int iArg, string sArg )
+{
+	bool bRes = false;
+	switch ( iArg ) 
+	{
+#foreach($i in [0..$parameters])
+			case $i:
+				// TODO
+				bRes = !sArg.empty();
+				break;
+#end				
+	}
+	return ( bRes );
+}
+#end		 
+	
+
+
 
 
