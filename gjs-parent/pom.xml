@@ -104,16 +104,19 @@
 		<maven-invoker-plugin.version>3.9.1</maven-invoker-plugin.version>
         <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
 		<properties-maven-plugin.version>1.2.1</properties-maven-plugin.version>
-		
+
 		<!-- Additional Maven plugins -->
         <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
 		<copy-rename-maven-plugin.version>1.0.1</copy-rename-maven-plugin.version>
         <exec-maven-plugin.version>3.5.1</exec-maven-plugin.version>
-        <groovy-maven-plugin-version>2.1.1</groovy-maven-plugin-version>
+        <gmavenplus-plugin.version>4.2.1</gmavenplus-plugin.version>
         <build-helper-maven-plugin.version>3.6.1</build-helper-maven-plugin.version>
         <maven-replacer-plugin.version>1.4.1</maven-replacer-plugin.version>
 		<maven-buildnumber-plugin.version>3.2.1</maven-buildnumber-plugin.version>
 		<license-maven-plugin.version>2.7.0</license-maven-plugin.version>
+		
+		<!-- Groovy -->
+		<groovy.version>4.0.29</groovy.version>
 	</properties>
 
 	<build>
@@ -275,9 +278,31 @@
 				</plugin> 
 				<!-- Aditional Maven plugins -->
                 <plugin>
-                    <groupId>org.codehaus.gmaven</groupId>
-                    <artifactId>groovy-maven-plugin</artifactId>
-                    <version>${groovy-maven-plugin-version}</version>
+                    <groupId>org.codehaus.gmavenplus</groupId>
+                    <artifactId>gmavenplus-plugin</artifactId>
+                    <version>${gmavenplus-plugin.version}</version>
+					 <dependencies>
+						<dependency>
+							<groupId>org.apache.groovy</groupId>
+							<artifactId>groovy</artifactId>
+							<version>${groovy.version}</version>
+						</dependency>
+					    <dependency>
+							<groupId>org.apache.groovy</groupId>
+							<artifactId>groovy-json</artifactId>
+							<version>${groovy.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.apache.groovy</groupId>
+							<artifactId>groovy-xml</artifactId>
+							<version>${groovy.version}</version>
+						</dependency>
+						<dependency>
+							<groupId>org.apache.groovy</groupId>
+							<artifactId>groovy-ant</artifactId>
+							<version>${groovy.version}</version>
+						</dependency>
+					</dependencies>
                 </plugin>
 				<plugin>
 					<groupId>org.jacoco</groupId>
@@ -454,6 +479,8 @@
 				<platformLinkOption>-Wl,-mwindows</platformLinkOption>
 				<exeFinalExtension>.exe</exeFinalExtension>
 				<rootDir></rootDir>
+				<cygwin>false</cygwin>
+				<noLdLibraryPath>true</noLdLibraryPath>
             </properties>
 		</profile>
 		<profile>
@@ -470,8 +497,12 @@
                 <consoleArgs></consoleArgs>
 				<exeFinalExtension></exeFinalExtension>
 				<rootDir></rootDir>
+				<cygwin>false</cygwin>
 				<!-- Esta propiedad se genera para windows -->
+				<!--
 				<projectDir>${project.basedir}</projectDir>
+				-->
+				<noLdLibraryPath>false</noLdLibraryPath>
             </properties>
 		</profile>
 		<profile>
@@ -493,7 +524,9 @@
 				<platformLinkOption>-Wl,-mcygwin</platformLinkOption>
 				<exeFinalExtension>.exe</exeFinalExtension>
 				<rootDir>${cygwinDir}</rootDir>
-            </properties>
+ 				<cygwin>true</cygwin>
+				<noLdLibraryPath>false</noLdLibraryPath>
+           </properties>
 		</profile>
 		<profile>
 			<id>pom</id>
@@ -578,8 +611,8 @@
 									</pluginExecution>
 									<pluginExecution>
 										<pluginExecutionFilter>
-											<groupId>org.apache.maven.plugins</groupId>
-											<artifactId>maven-dependency-plugin</artifactId>
+											<groupId>org.codehaus.gmavenplus</groupId>
+											<artifactId>gmavenplus-plugin</artifactId>
 											<versionRange>[1.0.0,)</versionRange>
 											<goals>
 												<goal>unpack-dependencies</goal>

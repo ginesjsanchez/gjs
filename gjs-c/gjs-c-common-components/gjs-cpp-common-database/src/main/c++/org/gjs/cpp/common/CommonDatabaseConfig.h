@@ -2,6 +2,8 @@
 #define _ORG_GJS_C_CC_CPP_COMMON_DATABASE_CONFIG
 
 
+#include <CppBase.h>
+#include <CppCommonTypes.h>
 #include <CppCommonSupport.h>
 
 #include <string>

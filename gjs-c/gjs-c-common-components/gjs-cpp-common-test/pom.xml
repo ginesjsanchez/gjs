@@ -32,5 +32,10 @@
 			<artifactId>gjs-cpp-common-io</artifactId>
 			<type>nar</type>
 		</dependency>
+		<dependency>
+			<groupId>org.gjs.c.common</groupId>
+			<artifactId>gjs-cpp-common-support</artifactId>
+			<type>nar</type>
+		</dependency>
     </dependencies>
 </project>

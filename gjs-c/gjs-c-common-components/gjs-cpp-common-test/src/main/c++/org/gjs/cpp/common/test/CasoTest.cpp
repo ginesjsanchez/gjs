@@ -57,7 +57,7 @@ ResultadoCasoTest CasoTest::Ejecutar ()
 	{
 		if ( ! bEsperaExcepcion ) 
 		{
-			LogFatal ( "Error inesperado", ex );
+			LogFatalEx ( "Error inesperado", ex );
 			rctRes = ResultadoCasoTest::FAIL;
 		}
 		else

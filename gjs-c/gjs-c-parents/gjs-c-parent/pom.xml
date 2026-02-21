@@ -138,24 +138,10 @@
 			<id>source</id>
 			<build>
 				<plugins>
-						<!--
-					<plugin>
-						<groupId>org.gjs.java.maven.plugins</groupId>
-						<groupId>com.github.maven-nar</groupId>
-						<artifactId>nar-maven-plugin</artifactId>
-						<configuration>
-							<linker>
-								<testOptions combine.children="append">
-									<option>${additionalObjects}</option> 
-								</testOptions>
-							</linker>
-						</configuration>
-					</plugin>
-						-->
 					<!--
 					<plugin>
-						<groupId>org.codehaus.gmaven</groupId>
-						<artifactId>groovy-maven-plugin</artifactId>
+						<groupId>org.codehaus.gmavenplus</groupId>
+						<artifactId>gmavenplus-plugin</artifactId>
 						<executions>
 							<execution>
 								<id>add-object-files-bin-for-test</id>
@@ -164,7 +150,8 @@
 									<goal>execute</goal>
 								</goals>
 								<configuration>
-									<source>
+									<scripts>
+										<script><![CDATA[
 										if ( ! "true".equals( project.properties.get("gjs.nar.skip") ) ) { 
 										if ( "c".equals( project.properties.get("gjs.source.language") ) ) { 
 										try 
@@ -194,12 +181,13 @@
 										} else {
 											log.info ( "Skipping the execution.\n" )
 										}
-									</source>
+										]]></script>
+									</scripts>
 								</configuration>
 							</execution>
 						</executions>
 					</plugin>	
-		-->			
+					-->			
 				</plugins>
 			</build>	
 		</profile>

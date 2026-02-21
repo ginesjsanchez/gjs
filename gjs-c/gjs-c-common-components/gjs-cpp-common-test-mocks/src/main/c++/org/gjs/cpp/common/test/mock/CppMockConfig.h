@@ -5,6 +5,7 @@
 
 #include <CppBase.h>
 #include <CppLog.h>
+#include <CppCommonTypes.h>
 #include <CppCommonIo.h>
 #include <CppTest.h>
 

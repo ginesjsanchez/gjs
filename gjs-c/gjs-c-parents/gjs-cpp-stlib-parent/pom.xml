@@ -19,6 +19,11 @@
 	<name>Maven C++ Static Library Parent Pom</name>
 	<description>Parent pom for generate a C++ static library using the nar-maven-plugin.</description>
 	
+	<!--
+	<profiles>
+		<profile>
+			<id>source</id>
+			-->
 	<build>
 		<plugins>
 			<plugin>
@@ -38,9 +43,74 @@
 						<!-- Para crear librerías estáticas se utiliza el ar -->
 						<options combine.self="override">
 						</options>
+						<!--
+						<testOptions combine.children="append">
+							<option>${dirBinObjTest}/${finalPrefix}${finalName}.a</option>
+						</testOptions>
+						-->
 					</linker>
 				</configuration>
 			</plugin>
+			<!--
+			<plugin>
+				<groupId>org.codehaus.gmavenplus</groupId>
+				<artifactId>gmavenplus-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-static-bin-for-test</id>
+						<phase>process-test-resources</phase>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+						<configuration>
+							<scripts>
+								<script><![CDATA[
+								try 
+								{
+									log.info ( "Copying library binary file..." )
+									def baseDir = $/${project.basedir}/$
+									def dirTo = $/${project.basedir}/$ + "/target/${subdirBinObjTest}"
+									def dirBin =  new File( $/${dirBinStLib}/$ )
+									log.info ( "Origen  = " + dirBin )
+									log.info ( "Destino = " + dirTo  )
+									
+									if ( dirBin.exists() && dirBin.isDirectory() ) 
+									{
+										dirBin.eachFileRecurse ( groovy.io.FileType.FILES )
+										{
+											file ->
+												if (file.path.endsWith(".a")) 
+												{
+													def dirFrom = file.parent  
+													def filename = file.name   
+
+													ant.copy(todir: dirTo)
+													{
+														fileset(dir: dirFrom) 
+														{
+															include(name: filename)
+														}
+													}
+												}
+										}
+										log.info ( "Copied." )
+									}
+								}
+								catch ( Exception ex )
+								{
+									log.error ( ex )
+								}
+								]]></script>
+							</scripts>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+-->			
 		</plugins>
 	</build>
+	<!--
+		</profile>
+	</profiles>	
+-->
 </project>

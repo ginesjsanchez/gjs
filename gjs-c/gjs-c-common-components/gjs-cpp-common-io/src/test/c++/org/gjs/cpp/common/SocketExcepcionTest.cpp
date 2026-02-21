@@ -1,6 +1,6 @@
 #include "CppCommonIo.h"
+#include <CppBase.h>
 
-#include <iostream>
 
 using namespace std;
 using namespace org::gjs::cpp::common;

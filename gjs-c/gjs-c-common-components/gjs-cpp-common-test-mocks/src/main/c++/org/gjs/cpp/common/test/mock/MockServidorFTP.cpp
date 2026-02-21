@@ -56,13 +56,13 @@ void MockServidorFTP::SesionFinalizada( const string & sUsuario )
 
 bool MockServidorFTP::ExcepcionProducida( exception & ex )
 {
-	LogError( "{SERVIDORFTP} Excepcion recibida", ex );
+	LogErrorEx ( "{SERVIDORFTP} Excepcion recibida", ex );
 	return( true );
 }
 
 void MockServidorFTP::ExcepcionProducidaEnPeticion( exception & ex )
 {
-	LogError( "{SERVIDORFTP} Excepcion recibida", ex );
+	LogErrorEx ( "{SERVIDORFTP} Excepcion recibida", ex );
 }
 
                     }

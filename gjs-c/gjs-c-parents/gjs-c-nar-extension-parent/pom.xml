@@ -16,7 +16,7 @@
 	
 	<properties>
 		<!-- NAR -->
-		<nar-maven-plugin.version>3.10.1-GJS</nar-maven-plugin.version>
+		<nar-maven-plugin.version>3.11.1-GJS</nar-maven-plugin.version>
 	</properties>
 
 	<!-- Para que reconozca el packaging nar debe estar fuera de los perfiles --> 

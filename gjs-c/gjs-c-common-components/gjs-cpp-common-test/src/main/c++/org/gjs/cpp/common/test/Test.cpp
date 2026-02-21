@@ -155,16 +155,16 @@ bool Test::Ejecutar()
 				bRes = false;
 			}
 		}
-		Finalizar();
+		Finalizar ();
 	}
 	catch ( const exception& ex )
 	{
-		LogFatal( "Error inesperado", ex );
+		LogFatalEx ( "Error inesperado", ex );
 		bRes = false;
 	}
 	catch ( ... )
 	{
-		LogFatal( "Lanzado objeto inesperado" );
+		LogFatal ( "Lanzado objeto inesperado" );
 		bRes = false;
 	}	
 	LogInfo ( "" );

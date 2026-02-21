@@ -60,8 +60,7 @@ int AplicConAbrir ()
   
 		//tcsetattr ( iFilDesc, TCSANOW, &console ); 
 #	   else // GNU:
-		// PENDIENTE: Verificar que esobra de todo esto:
-		std::fstream tty ( "/dev/tty", std::ios::in | std::ios::out );
+		// PENDIENTE: Verificar que sobra de todo esto:
 		iFilDesc = open ( "/dev/tty", O_RDWR );
 		tcgetattr ( iFilDesc, &trmioConsola ); 
 

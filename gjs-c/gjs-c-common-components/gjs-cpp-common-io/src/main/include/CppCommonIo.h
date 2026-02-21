@@ -2,8 +2,6 @@
 #define _ORG_GJS_C_CC_CPP_COMMON_IO_H
 
 
-#include <CppCommonSupport.h>
-
 #include <ExtensionesFicheros.h>
 #include <SistemaFicheros.h>
 

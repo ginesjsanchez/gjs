@@ -13,8 +13,8 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>nar</packaging>
 
-	<name>GJS C++ Common Support</name>
-	<description>Base components and tools for C++ project archetypes</description>
+	<name>GJS C++ Common System</name>
+	<description>Base OS components and tools for C++ project archetypes</description>
 	
 	<properties>
 		<checkSeverity>style</checkSeverity>	

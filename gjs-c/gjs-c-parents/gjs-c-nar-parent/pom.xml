@@ -56,7 +56,7 @@
 		<finalName.prefix.lib>lib</finalName.prefix.lib>
 		<finalName.prefix.exe></finalName.prefix.exe>
 		<finalName.prefix></finalName.prefix>
-		<finalName>${finalName.prefix}${project.artifactId}-${osName}-${project.version}</finalName>
+		<finalName>${finalName.prefix}${project.artifactId}-${project.version}</finalName>
 			
 		<!-- Opciones cppcheck -->
 		<check.execute>true</check.execute>
@@ -70,13 +70,15 @@
 		<!-- TODO: Pendiente de customizar para todos los tipos de binario -->
 		<subdirBinExe>nar/${project.artifactId}-${project.version}-${gjs.nar.aol}-executable/bin/${gjs.nar.aol}</subdirBinExe>
 		<subdirBinLib>nar/${project.artifactId}-${project.version}-${gjs.nar.aol}-shared/lib/${gjs.nar.aol}/shared</subdirBinLib>
-		<subdirBinStLib>nar/${project.artifactId}-${project.version}-${gjs.nar.aol}-shared/lib/${gjs.nar.aol}/static</subdirBinStLib>
+		<subdirBinStLib>nar/${project.artifactId}-${project.version}-${gjs.nar.aol}-static/lib/${gjs.nar.aol}/static</subdirBinStLib>
 		<subdirBinObj>nar/obj/${gjs.nar.aol}</subdirBinObj>
+		<subdirBinObjTest>test-nar/obj/${gjs.nar.aol}</subdirBinObjTest>
 		<subdirTest>test-nar/test-reports</subdirTest>
 		<dirBinLib>${project.basedir}/target/${subdirBinLib}</dirBinLib>
 		<dirBinStLib>${project.basedir}/target/${subdirBinStLib}</dirBinStLib>
 		<dirBinExe>${project.basedir}/target/${subdirBinExe}</dirBinExe>
 		<dirBinObj>${project.basedir}/target/${subdirBinObj}</dirBinObj>
+		<dirBinObjTest>${project.basedir}/target/${subdirBinObjTest}</dirBinObjTest>
 		<dirTest>${project.basedir}/target/${subdirTest}</dirTest>
 		<dirStLib>${project.basedir}/target/lib</dirStLib>
 		
@@ -244,36 +246,6 @@
 			<id>source</id>
 			<build>
 				<plugins>
-					<!--
-					<plugin>
-						<groupId>org.codehaus.gmaven</groupId>
-						<artifactId>groovy-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>validate-kind-project</id>
-								<phase>validate</phase>
-								<goals>
-									<goal>execute</goal>
-								</goals>
-								<configuration>
-									<source>
-										def srcDir =  $/${projectDir}/$ + "/src"
-										def dirSrc = new File( srcDir )
-										def narSkip = String.valueOf (! dirSrc.exists() )
-										log.info("* ${dirSrc}" )
-										log.info("* ${narSkip}" )
-										if ( "true".equals( narSkip ) ) {
-											log.info ( "Not source project detected." )
-										} else {
-											log.info ( "Source project detected." )
-										} 
-										project.properties.setProperty( "gjs.nar.skip", narSkip ) 
-									</source>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>					
-					-->
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-resources-plugin</artifactId>
@@ -330,7 +302,7 @@
 						<artifactId>maven-antrun-plugin</artifactId>
 						<executions>
 							<execution>
-								<id>prepareTests</id>
+								<id>prepare-tests</id>
 								<phase>generate-test-sources</phase>
 								<configuration>
 									<target name="prepare-context-for-tests">
@@ -408,6 +380,7 @@
 			</activation>		
 			<build>	
 				<plugins>
+				<!--
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>build-helper-maven-plugin</artifactId>
@@ -424,10 +397,12 @@
 									<regex>(.*)\\([^\\]+)</regex>
 									<replacement>$1/$2</replacement>
 									<failIfNoMatch>true</failIfNoMatch>
+									<skip>!${noLdLibraryPath}</skip>
 								</configuration>
 							</execution>
 						</executions>
 					</plugin>
+					-->
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-resources-plugin</artifactId>
@@ -439,6 +414,7 @@
 									<goal>copy-resources</goal>
 								</goals>
 								<configuration>
+									<skip>!${noLdLibraryPath}</skip>
 									<outputDirectory>${dirTest}</outputDirectory>
 									<overwrite>true</overwrite>
 									<resources>
@@ -466,26 +442,27 @@
 						</executions>
 					</plugin>	
 					<plugin>
-						<groupId>org.codehaus.gmaven</groupId>
-						<artifactId>groovy-maven-plugin</artifactId>
+						<groupId>org.codehaus.gmavenplus</groupId>
+						<artifactId>gmavenplus-plugin</artifactId>
 						<executions>
 							<execution>
 								<id>copy-dependencies-bin-for-test</id>
-								<phase>process-test-classes</phase>
+								<phase>generate-test-resources</phase>
 								<goals>
 									<goal>execute</goal>
 								</goals>
 								<configuration>
-									<source>
-										if ( ! "true".equals( project.properties.get("gjs.nar.skip") ) ) { 
+									<scripts>
+										<script><![CDATA[
+										if ( "true".equals( project.properties.get("noLdLibraryPath") ) ) { 
 										try 
 										{
 											if ( project.dependencies.size() > 0 )
 											{
-												<!-- Para recuperar las dependencias de las dependencias es mejor ir por directorios -->
+												// Para recuperar las dependencias de las dependencias es mejor ir por directorios
 												log.info ( "\n* R E C O P I L A N D O    B I N A R I O S *\n" )
-												def baseDir = $/${projectDir}/$
-												def dirTo = $/${projectDir}/$ + "/target/${subdirTest}"
+												def baseDir = $/${project.basedir}/$
+												def dirTo = $/${project.basedir}/$ + "/target/${subdirTest}"
 												def dirDeps = baseDir + "/target/test-nar"
 												log.info ( "Origen  = " + dirDeps )
 												log.info ( "Destino = " + dirTo + "\n" )
@@ -533,7 +510,8 @@
 										} else {
 											log.info ( "Skipping the execution.\n" )
 										}
-									</source>
+										]]></script>
+									</scripts>
 								</configuration>
 							</execution>
 						</executions>

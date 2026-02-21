@@ -26,11 +26,6 @@
 			<artifactId>gjs-cpp-common-base</artifactId>
 			<type>nar</type>
 		</dependency>
-		<dependency>
-			<groupId>org.gjs.c.common</groupId>
-			<artifactId>gjs-cpp-common-system</artifactId>
-			<type>nar</type>
-		</dependency>
     </dependencies>
 
 </project>
