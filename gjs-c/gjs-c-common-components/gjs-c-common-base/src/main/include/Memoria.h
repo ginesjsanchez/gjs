@@ -96,7 +96,7 @@ int MemEsValida ( void * p_vDireccion );
 
 byte MemValorByte ( unsigned long ulDireccion );
 
-
+int MemEsIgual ( void * p_vBloque1, void * p_vBloque2, int iNumBytes );
 
 #endif
 

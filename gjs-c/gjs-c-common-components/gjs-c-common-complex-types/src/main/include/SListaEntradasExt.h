@@ -35,8 +35,7 @@ SEntradaExt * SLisEtxElemento ( SListaEntradasExt * p_lisObj, int iElem );
 const char * SLisEtxNombreElemento ( SListaEntradasExt * p_lisObj, int iElem );
 const char * SLisEtxDefinicionElemento ( SListaEntradasExt * p_lisObj, int iElem );
 
-int SLisEtxInsertar ( SListaEntradasExt * p_lisObj, SEntradaExt * p_etrDatos );
-int SLisEtxInsertarExt ( SListaEntradasExt * p_lisObj, const char * p_cNombre, const char * p_cDefinicion );
+int SLisEtxInsertar ( SListaEntradasExt * p_lisObj, SEntradaExt * p_etxDatos );
 
 int SLisEtxEliminar ( SListaEntradasExt * p_lisObj, const char * p_cNombre );
 int SLisEtxEliminarElem ( SListaEntradasExt * p_lisObj, int iElem );

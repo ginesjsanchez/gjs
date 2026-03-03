@@ -77,7 +77,7 @@ const char * SLczExtClave ( SLocalizadorExt * p_lczeObj )
 	}
 	else
 	{
-		p_cRes = 0;
+		p_cRes = NULL;
 	}
 	return ( p_cRes );
 }

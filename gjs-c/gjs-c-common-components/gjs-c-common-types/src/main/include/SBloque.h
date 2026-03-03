@@ -45,6 +45,9 @@ float SBlqReal ( SBloque * p_blqObj );
 double SBlqRealDoble ( SBloque * p_blqObj );
 char * SBlqCadena ( SBloque * p_blqObj );
 
+int SBlqEsIgual ( SBloque * p_blqObj1, SBloque * p_blqObj2 );
+int SBlqEsIgualExt ( SBloque * p_blqObj, byte * p_byDatos );
+
 int SBlqLiberacionMemoriaActivada ( SBloque * p_blqObj );
 
 int SBlqLimpiar ( SBloque * p_blqObj );

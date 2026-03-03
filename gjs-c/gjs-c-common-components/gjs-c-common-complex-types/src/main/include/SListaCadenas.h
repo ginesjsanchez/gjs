@@ -70,6 +70,8 @@ int SLisCadInsertarDupDetras ( SListaCadenas * p_lisObj, SCadena * p_cadDatos );
 int SLisCadEliminar ( SListaCadenas * p_lisObj );
 
 int SLisCadExiste ( SListaCadenas * p_lisObj, SCadena * p_cadDatos );
+int SLisCadBuscar ( SListaCadenas * p_lisObj, SCadena * p_cadDatos );
+int SLisCadBuscarExt ( SListaCadenas * p_lisObj, const char * p_cDatos );
 
 int	SLisCadLiberacionMemoriaActivada ( SListaCadenas * p_lisObj );
 void SLisCadActivarLiberacionMemoria ( SListaCadenas * p_lisObj );

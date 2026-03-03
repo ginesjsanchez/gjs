@@ -303,6 +303,36 @@ int SElpDesencadenar ( SElementoPtr * p_elpObj )
 	return ( iRes );
 }
 
+int SElpEsIgual ( SElementoPtr * p_elpObj1, SElementoPtr * p_elpObj2, int iNumBytes )
+{
+	int	iRes;
+
+	if ( ES_VALIDO ( p_elpObj1 ) && ES_VALIDO ( p_elpObj2 ) )
+	{
+		iRes = MemEsIgual ( (void *) SElpDatos ( p_elpObj1 ), (void *) SElpDatos ( p_elpObj2 ), iNumBytes );
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SElpEsIgualExt ( SElementoPtr * p_elpObj, byte * p_byObj, int iNumBytes )
+{
+	int	iRes;
+
+	if ( ES_VALIDO ( p_elpObj ) && ES_VALIDO ( p_byObj ) )
+	{
+		iRes = MemEsIgual ( (void *) SElpDatos ( p_elpObj ), (void *) p_byObj, iNumBytes );
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
 int	SElpLiberacionMemoriaActivada ( SElementoPtr * p_elpObj )
 {
 	int iRes;

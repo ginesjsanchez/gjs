@@ -91,7 +91,7 @@ const char * SEtrNombre ( SEntrada * p_etrObj )
 	}
 	else
 	{
-		p_cRes = 0;
+		p_cRes = NULL;
 	}
 	return ( p_cRes );
 }
@@ -199,7 +199,73 @@ SEntrada * SEtrDuplicar (  SEntrada * p_etrObj )
 	return ( p_etrRes );
 }
 
-int SEtrEsIgual ( SEntrada * p_etrObj, const char * p_cNombre )
+int SEtrEsIgual ( SEntrada * p_etrObj1, SEntrada * p_etrObj2 )
+{
+	int iRes;
+
+	if ( ( SEtrEsValido ( p_etrObj1 ) == 1 ) && ( SEtrEsValido ( p_etrObj2 ) == 1 ) )
+	{
+		if ( CadCompararSinDistinguirTipoLetra ( p_etrObj1->p_cNombre, p_etrObj2->p_cNombre ) == 1 )
+		{
+			iRes = 1;
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SEtrEsMenor ( SEntrada * p_etrObj1, SEntrada * p_etrObj2 )
+{
+	int iRes;
+
+	if ( ( SEtrEsValido ( p_etrObj1 ) == 1 ) && ( SEtrEsValido ( p_etrObj2 ) == 1 ) )
+	{
+		if ( CadCompararSinDistinguirTipoLetra ( p_etrObj1->p_cNombre, p_etrObj2->p_cNombre ) == 2 )
+		{
+			iRes = 1;
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SEtrEsMayor ( SEntrada * p_etrObj1, SEntrada * p_etrObj2 )
+{
+	int iRes;
+
+	if ( ( SEtrEsValido ( p_etrObj1 ) == 1 ) && ( SEtrEsValido ( p_etrObj2 ) == 1 ) )
+	{
+		if ( CadCompararSinDistinguirTipoLetra ( p_etrObj1->p_cNombre, p_etrObj2->p_cNombre ) == 3 )
+		{
+			iRes = 1;
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SEtrEsIgualLit ( SEntrada * p_etrObj, const char * p_cNombre )
 {
 	int iRes;
 
@@ -221,7 +287,7 @@ int SEtrEsIgual ( SEntrada * p_etrObj, const char * p_cNombre )
 	return ( iRes );
 }
 
-int SEtrEsMenor ( SEntrada * p_etrObj, const char * p_cNombre )
+int SEtrEsMenorLit ( SEntrada * p_etrObj, const char * p_cNombre )
 {
 	int iRes;
 
@@ -243,7 +309,7 @@ int SEtrEsMenor ( SEntrada * p_etrObj, const char * p_cNombre )
 	return ( iRes );
 }
 
-int SEtrEsMayor ( SEntrada * p_etrObj, const char * p_cNombre )
+int SEtrEsMayorLit ( SEntrada * p_etrObj, const char * p_cNombre )
 {
 	int iRes;
 

@@ -44,6 +44,7 @@
 		<gjs-c-common-support.version>1.0.0-SNAPSHOT</gjs-c-common-support.version>
 		<gjs-c-common-log.version>1.0.0-SNAPSHOT</gjs-c-common-log.version>
 		<gjs-c-common.version>1.0.0-SNAPSHOT</gjs-c-common.version>
+		<gjs-c-common-test.version>1.0.0-SNAPSHOT</gjs-c-common-test.version>
 	</properties>
 
 	<dependencyManagement>
@@ -118,6 +119,12 @@
 				<groupId>org.gjs.c.common</groupId>
 				<artifactId>gjs-c-common</artifactId>
 				<version>${gjs-c-common.version}</version>
+				<type>nar</type>
+			</dependency>
+			<dependency>
+				<groupId>org.gjs.c.common</groupId>
+				<artifactId>gjs-c-common-test</artifactId>
+				<version>${gjs-c-common-test.version}</version>
 				<type>nar</type>
 			</dependency>
 		</dependencies>

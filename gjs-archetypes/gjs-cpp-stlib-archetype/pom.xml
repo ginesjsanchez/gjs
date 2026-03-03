@@ -26,7 +26,7 @@
      
     mvn archetype:generate \
 		-DarchetypeGroupId=org.gjs.maven.archetypes \
-		-DarchetypeArtifactId=gjs-cpp-lib-archetype \
+		-DarchetypeArtifactId=gjs-cpp-stlib-archetype \
 		-DarchetypeVersion=1.0.0-SNAPSHOT \
 		-DshortName=test-project \
 		-DgroupId=org.gjs.test  \
@@ -43,7 +43,7 @@
 
 	* artifactId: The name of the project artifact. Default is cpp-lib. Not required.
 
-	* package: The project packaging of the sourc code. Default is org.gjs.maven.archetypes. Not required.
+	* package: The project packaging of the source code. Default is org.gjs.maven.archetypes. Not required.
 
 	* version: The project version. Default is 1.0.0-SNAPSHOT. Not required.
                  

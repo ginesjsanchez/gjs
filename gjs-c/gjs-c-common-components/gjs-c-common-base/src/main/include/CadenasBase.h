@@ -34,6 +34,14 @@ int CadUniLongitudSeg ( const unichar * p_ucValor, int iMax );
 void CadUniInicializar ( unichar * p_ucValor, int iMax );
 unichar * CadUniDuplicar ( const unichar * p_ucValor );
 
+
+int CadComparar ( const char * p_cAsciiz1, const char * p_cAsciiz2 );
+int CadCompararExt ( const char * p_cAsciiz1, const char * p_cAsciiz2, int iMax1, int iMax2 );
+
+int CadEsAlfanumericoValido ( const char * p_cAsciiz );
+int CadEsAlfanumericoValidoExt ( const char * p_cAsciiz, int iMax );
+
+
 void CadImprimir ( const char * p_cAsciiz );
 
 

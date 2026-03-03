@@ -79,7 +79,27 @@ int SValTieneValor ( SValor * p_valObj );
 
 SValor * SValDuplicar ( SValor * p_valObj );
 
+int SValEsByte ( SValor * p_valObj );
+int SValEsEntero ( SValor * p_valObj );
+int SValEsReal ( SValor * p_valObj );
+int SValEsBinario ( SValor * p_valObj );
+int SValEsCadena ( SValor * p_valObj );
+int SValEsNumerico ( SValor * p_valObj );
 
+int SValEsIgual ( SValor * p_valObj1, SValor * p_valObj2 );
+int SValEsIgualNoTipado ( SValor * p_valObj1, SValor * p_valObj2 );
+int SValEsIgualValorByte ( SValor * p_valObj, byte byValor );
+int SValEsIgualValorEntero ( SValor * p_valObj, int iValor );
+int SValEsIgualValorEnteroLargo ( SValor * p_valObj, long lValor );
+int SValEsIgualValorEnteroSinSigno ( SValor * p_valObj, unsigned int uiValor );
+int SValEsIgualValorEnteroLargoSinSigno ( SValor * p_valObj, unsigned long ulValor );
+int SValEsIgualValorReal ( SValor * p_valObj, float fValor );
+int SValEsIgualValorRealDoble ( SValor * p_valObj, double dValor );
+int SValEsIgualValorLiteral ( SValor * p_valObj, const char * p_cValor );
+int SValEsIgualValorBinario ( SValor * p_valObj, byte * p_byValor );
+int SValEsIgualValorCadena ( SValor * p_valObj, SCadena * p_cadValor );
+int SValEsIgualValor ( SValor * p_valObj, SCadenaConv * p_cadValor );
+int SValEsIgualValorNumerico ( SValor * p_valObj, SCadenaNumerica * p_cadValor );
 
 #endif
 

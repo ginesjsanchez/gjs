@@ -22,11 +22,13 @@
 #include <UniChar.h>
 #include <Funciones.h>
 
-
+#include <stdarg.h>
 
 
 
 char * CadCrearExt ( int iTam, char cCarRelleno );
+char * CadCrearConFormato ( const char * p_cFormato, ... );
+char * CadCrearConFormatoExt ( const char * p_cFormato, va_list valArgumentos );
 
 
 // PENDIENTE: Comparativas EsMayor, EsMenor... y EmpiezaPor (sin distincion tipo letre) y similares
@@ -56,8 +58,10 @@ int CadConcatenarExt ( char * p_cAsciiz1, const char * p_cAsciiz2, int iMax1, in
 int CadCopiarCaracterExt ( char * p_cAsciiz1, char cVal, int iMax1 ); 
 int CadConcatenarCaracterExt ( char * p_cAsciiz1, char cVal, int iMax1 ); 
 
-int CadCopiarConFormato ( char * p_cAsciiz1, const char * p_cFormato, ...);
-int CadConcatenarConFormato ( char * p_cAsciiz1, const char * p_cFormato, ...);
+int CadCopiarConFormato ( char * p_cAsciiz1, const char * p_cFormato, ... );
+int CadConcatenarConFormato ( char * p_cAsciiz1, const char * p_cFormato, ... );
+int CadCopiarConFormatoExt ( char * p_cAsciiz1, const char * p_cFormato, va_list valArgumentos );
+int CadConcatenarConFormatoExt ( char * p_cAsciiz1, const char * p_cFormato, va_list valArgumentos );
 
 int CadUniCopiar ( unichar * p_ucValor1, const unichar * p_ucValor2 ); 
 int CadUniConcatenar ( unichar * p_ucValor1, const unichar * p_ucValor2 ); 
@@ -144,16 +148,14 @@ char * CadExtraerHastaCaracterExt ( const char * p_cAsciiz, char cVal, int iIncl
 int CadEliminarDesdeCaracterExt ( char * p_cAsciiz, char cVal, int iIncluir, int iAparicion, int iMax );
 int CadEliminarHastaCaracterExt ( char * p_cAsciiz, char cVal, int iIncluir, int iAparicion , int iMax  );
 
-int CadComparar ( const char * p_cAsciiz1, const char * p_cAsciiz2 );
 int CadCompararSinDistinguirTipoLetra ( const char * p_cAsciiz1, const char * p_cAsciiz2 );
+int CadCompararSinDistinguirTipoLetraExt ( const char * p_cAsciiz1, const char * p_cAsciiz2, int iMax1, int iMax2 );
 int CadCompararParcial ( const char * p_cAsciiz1, const char * p_cAsciiz2, int iMinCars );
 int CadEsIgual ( const char * p_cAsciiz1, const char * p_cAsciiz2 );
 int CadEsMenor ( const char * p_cAsciiz1, const char * p_cAsciiz2 );
 int CadEsMayor ( const char * p_cAsciiz1, const char * p_cAsciiz2 );
 int CadEsMenorIg ( const char * p_cAsciiz1, const char * p_cAsciiz2 );
 int CadEsMayorIg ( const char * p_cAsciiz1, const char * p_cAsciiz2 );
-int CadCompararExt ( const char * p_cAsciiz1, const char * p_cAsciiz2, int iMax1, int iMax2 );
-int CadCompararSinDistinguirTipoLetraExt ( const char * p_cAsciiz1, const char * p_cAsciiz2, int iMax1, int iMax2 );
 int CadCompararParcialExt ( const char * p_cAsciiz1, const char * p_cAsciiz2, int iMinCars, int iDistinguir, int iMax1, int iMax2 );
 int CadEsIgualExt ( const char * p_cAsciiz1, const char * p_cAsciiz2, int iMax1, int iMax2 );
 int CadEsMenorExt ( const char * p_cAsciiz1, const char * p_cAsciiz2, int iMax1, int iMax2 );

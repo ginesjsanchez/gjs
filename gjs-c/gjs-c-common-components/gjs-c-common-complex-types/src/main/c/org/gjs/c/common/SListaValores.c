@@ -626,6 +626,53 @@ int SLisValEliminar ( SListaValores * p_lisObj )
 	return ( iRes );
 }
 
+int SLisValExiste ( SListaValores * p_lisObj, SValor * p_valDatos )
+{
+	int iRes;
+	int iElem;
+
+	if ( ES_VALIDO ( p_lisObj ) && ES_VALIDO ( p_valDatos ) )
+	{
+		iRes = 0;
+		iElem = 0;
+		while ( ( iElem < SLisValNumElementos ( p_lisObj ) ) && ( iRes == 0 ) )
+		{
+			iRes = SValEsIgualNoTipado ( SLisValElemento ( p_lisObj, iElem ), p_valDatos );
+			iElem = iElem + 1;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SLisValBuscar ( SListaValores * p_lisObj, SValor * p_valDatos )
+{
+	int iRes;
+	int iElem;
+
+	if ( ES_VALIDO ( p_lisObj ) && ES_VALIDO ( p_valDatos ) )
+	{
+		iRes = -1;
+		iElem = 0;
+		while ( ( iElem < SLisValNumElementos ( p_lisObj ) ) && ( iRes == -1 ) )
+		{
+			if ( SValEsIgualNoTipado ( SLisValElemento ( p_lisObj, iElem ), p_valDatos ) )
+			{
+				iRes = iElem;
+			}
+			iElem = iElem + 1;
+		}
+	}
+	else
+	{
+		iRes = -1;
+	}
+	return ( iRes );
+}
+
 int	SLisValLiberacionMemoriaActivada ( SListaValores * p_lisObj )
 {
 	int	iRes;

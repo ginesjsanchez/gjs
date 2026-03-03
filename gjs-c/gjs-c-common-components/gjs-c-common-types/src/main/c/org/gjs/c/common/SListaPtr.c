@@ -463,6 +463,36 @@ void SLispDeposicionar ( SListaPtr * p_lisObj )
 	}
 }
 
+int SLispBuscar ( SListaPtr * p_lisObj, byte * p_byDatos, int iNumBytes )
+{
+	int				iRes;
+	int				iEnc;
+	SElementoPtr *	p_elpObj;
+
+	if ( ( SLispEsValida ( p_lisObj ) == 1 ) && ES_VALIDO ( p_byDatos ) )
+	{
+		p_elpObj = p_lisObj->p_elpPrimero;
+		iRes = 0;
+		iEnc = 0;
+		while ( ( iRes < p_lisObj->iNumElementos ) && ( iEnc == 0 ) &&
+			ES_VALIDO ( p_elpObj ) )
+		{
+			iEnc = SElpEsIgualExt ( p_elpObj, p_byDatos, iNumBytes );
+			p_elpObj = SElpSucesor ( p_elpObj );
+			iRes = iRes + 1;
+		}
+		if ( iEnc == 0 )
+		{
+			iRes = -1;
+		}
+	}
+	else
+	{
+		iRes = -1;
+	}
+	return ( iRes );
+}
+
 int SLispEsNulo ( SListaPtr * p_lisObj )
 {
 	int iRes;

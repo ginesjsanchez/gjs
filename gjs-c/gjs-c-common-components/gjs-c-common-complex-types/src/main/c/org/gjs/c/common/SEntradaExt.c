@@ -92,7 +92,7 @@ const char * SEtxNombre ( SEntradaExt * p_etxObj )
 	}
 	else
 	{
-		p_cRes = 0;
+		p_cRes = NULL;
 	}
 	return ( p_cRes );
 }
@@ -252,7 +252,73 @@ SEntradaExt * SEtxDuplicar (  SEntradaExt * p_etxObj )
 	return ( p_etxRes );
 }
 
-int SEtxEsIgual ( SEntradaExt * p_etxObj, const char * p_cNombre )
+int SEtxEsIgual ( SEntradaExt * p_etxObj1, SEntradaExt * p_etxObj2 )
+{
+	int iRes;
+
+	if ( ( SEtxEsValido ( p_etxObj1 ) == 1 ) && ( SEtxEsValido ( p_etxObj2 ) == 1 ) )
+	{
+		if ( CadCompararSinDistinguirTipoLetra ( p_etxObj1->p_cNombre, p_etxObj2->p_cNombre ) == 1 )
+		{
+			iRes = 1;
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SEtxEsMenor ( SEntradaExt * p_etxObj1, SEntradaExt * p_etxObj2 )
+{
+	int iRes;
+
+	if ( ( SEtxEsValido ( p_etxObj1 ) == 1 ) && ( SEtxEsValido ( p_etxObj2 ) == 1 ) )
+	{
+		if ( CadCompararSinDistinguirTipoLetra ( p_etxObj1->p_cNombre, p_etxObj2->p_cNombre ) == 2 )
+		{
+			iRes = 1;
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SEtxEsMayor ( SEntradaExt * p_etxObj1, SEntradaExt * p_etxObj2 )
+{
+	int iRes;
+
+	if ( ( SEtxEsValido ( p_etxObj1 ) == 1 ) && ( SEtxEsValido ( p_etxObj2 ) == 1 ) )
+	{
+		if ( CadCompararSinDistinguirTipoLetra ( p_etxObj1->p_cNombre, p_etxObj2->p_cNombre ) == 3 )
+		{
+			iRes = 1;
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SEtxEsIgualLit ( SEntradaExt * p_etxObj, const char * p_cNombre )
 {
 	int iRes;
 
@@ -274,7 +340,7 @@ int SEtxEsIgual ( SEntradaExt * p_etxObj, const char * p_cNombre )
 	return ( iRes );
 }
 
-int SEtxEsMenor ( SEntradaExt * p_etxObj, const char * p_cNombre )
+int SEtxEsMenorLit ( SEntradaExt * p_etxObj, const char * p_cNombre )
 {
 	int iRes;
 
@@ -296,7 +362,7 @@ int SEtxEsMenor ( SEntradaExt * p_etxObj, const char * p_cNombre )
 	return ( iRes );
 }
 
-int SEtxEsMayor ( SEntradaExt * p_etxObj, const char * p_cNombre )
+int SEtxEsMayorLit ( SEntradaExt * p_etxObj, const char * p_cNombre )
 {
 	int iRes;
 

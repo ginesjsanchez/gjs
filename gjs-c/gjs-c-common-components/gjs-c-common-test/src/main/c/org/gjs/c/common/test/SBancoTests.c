@@ -1,0 +1,146 @@
+#include "SBancoTests.h"
+#include "CTestConfig.h"
+
+
+
+
+
+
+SBancoTests * SBanTstCrear ()
+{
+	SBancoTests * p_bantstObj;
+
+	p_bantstObj = ( SBancoTests * ) MemReservar ( sizeof ( SBancoTests ) );
+	if ( ES_VALIDO ( p_bantstObj ) )
+	{
+		p_bantstObj->p_lisTests = SLisRefCrear ();
+	}
+	return ( p_bantstObj );
+}
+
+
+void SBanTstDestruir ( SBancoTests ** p_p_bantstObj )
+{
+	SBancoTests * p_bantstObj;
+
+	if ( ES_VALIDO ( p_p_bantstObj ) )
+	{
+		p_bantstObj = *p_p_bantstObj;
+		if ( ES_VALIDO ( p_bantstObj ) )
+		{
+			SLisRefDestruir ( &( p_bantstObj->p_lisTests ) );
+		}
+		*p_p_bantstObj = NULL;
+	}
+}
+
+void SBanTstNuevoTest ( SBancoTests * p_bantstObj, const char * p_cNombre, PFUNINTV p_fTest )
+{
+	if ( ES_VALIDO ( p_bantstObj ) )
+	{
+		SLisRefInsertarExt ( p_bantstObj->p_lisTests, p_cNombre, (void *) p_fTest );
+	}
+}
+
+int SBanTstNumTests ( SBancoTests * p_bantstObj )
+{
+	int iRes;
+
+	if ( ES_VALIDO ( p_bantstObj ) )
+	{
+		iRes = SLisRefNumElementos ( p_bantstObj->p_lisTests );
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SBanTstEjecutar ( SBancoTests * p_bantstObj )
+{
+	int iRes;
+	int iTest;
+
+	if ( ES_VALIDO ( p_bantstObj ) )
+	{
+		iTest = 0;
+		while ( ( iRes == 0 ) && ( iTest < SLisRefNumElementos ( p_bantstObj->p_lisTests ) ) )
+		{
+			PFUNINTV fTest = (PFUNINTV) SLisRefDatoElemento ( p_bantstObj->p_lisTests, iTest );
+			if ( fTest () == 0 )
+			{
+				iRes = -1;
+			}
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return( iRes );
+}
+
+int SBanTstEjecutarTest ( SBancoTests * p_bantstObj, const char * p_cTest )
+{
+	int iRes;
+
+	if ( ES_VALIDO ( p_bantstObj ) )
+	{
+		if ( CadLongitud ( p_cTest ) > 0 )
+		{
+			SReferencia * p_refObj = SLisRefBuscar ( p_bantstObj->p_lisTests, p_cTest );
+			if ( ES_VALIDO ( p_refObj ) )
+			{
+				PFUNINTV fTest = ( PFUNINTV ) SRefObtenerDatos ( p_refObj );
+				if ( fTest () == 0 )
+				{
+					iRes = -1;
+				}
+				else
+				{
+					iRes = 0;
+				}
+			}
+			else
+			{
+				printf ( "Test [%s] no encontrado.\n", p_cTest );
+				iRes = -1;
+			}
+		}
+		else
+		{
+			iRes = SBanTstEjecutar ( p_bantstObj );
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return( iRes );
+}
+
+
+int SBanTstEjecutarTextExe ( SBancoTests * p_bantstObj, int argc, char * argv[] )
+{
+	int iRes;
+
+	if ( ES_VALIDO ( p_bantstObj ) )
+	{
+		if ( argc > 1 )
+		{
+			char * p_cTest = argv[1];
+			iRes = SBanTstEjecutarTest ( p_bantstObj, p_cTest );
+		} 
+		else
+		{
+			iRes = SBanTstEjecutar ( p_bantstObj );
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return( iRes );
+}
+

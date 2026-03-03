@@ -44,6 +44,9 @@ int SElpDesencadenarAntecesor ( SElementoPtr * p_elpObj );
 int SElpDesencadenarSucesor ( SElementoPtr * p_elpObj );
 int SElpDesencadenar ( SElementoPtr * p_elpObj );
 
+int SElpEsIgual ( SElementoPtr * p_elpObj1, SElementoPtr * p_elpObj2, int iNumBytes );
+int SElpEsIgualExt ( SElementoPtr * p_elpObj, byte * p_byObj, int iNumBytes );
+
 int	SElpLiberacionMemoriaActivada ( SElementoPtr * p_elpObj );
 //void SElpActivarLiberacionMemoria ( SElementoPtr * p_elpObj );
 //void SElpDesactivarLiberacionMemoria ( SElementoPtr * p_elpObj );

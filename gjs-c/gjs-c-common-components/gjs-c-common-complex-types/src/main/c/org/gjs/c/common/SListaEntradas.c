@@ -185,7 +185,20 @@ int SLisEtrInsertar ( SListaEntradas * p_lisObj, SEntrada * p_etrDatos )
 
 	if ( ES_VALIDO ( p_lisObj ) && ES_VALIDO ( p_etrDatos ) )
 	{
-		iRes = SLispInsertarDetras ( p_lisObj->p_lisDatos, (byte *) p_etrDatos );
+		SLispInicio ( p_lisObj->p_lisDatos );
+		while ( SEtrEsMenor ( ( SEntrada * ) SLispActual ( p_lisObj->p_lisDatos ), p_etrDatos ) &&
+			( SLispEstaEnFinal ( p_lisObj->p_lisDatos ) == 0 ) )
+		{
+			SLispSiguiente ( p_lisObj->p_lisDatos );
+		}
+		if ( SLispEstaEnFinal ( p_lisObj->p_lisDatos ) == 1 )
+		{
+			iRes = SLispInsertar ( p_lisObj->p_lisDatos, ( byte * ) p_etrDatos );
+		}
+		else
+		{
+			iRes = SLispInsertarDelante ( p_lisObj->p_lisDatos, ( byte * ) p_etrDatos );
+		}
 	}
 	else
 	{
@@ -257,7 +270,6 @@ int SLisEtrVaciar ( SListaEntradas * p_lisObj )
 	}
 	return ( iRes );
 }
-
 
 int	SLisEtrLiberacionMemoriaActivada ( SListaEntradas * p_lisObj )
 {

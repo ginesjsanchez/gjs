@@ -5,6 +5,7 @@
 
 
 #include <SElemento.h>
+#include <SBloque.h>
 
 
 
@@ -52,6 +53,9 @@ void SLisSiguiente ( SLista * p_lisObj );
 void SLisAnterior ( SLista * p_lisObj );
 void SLisMoverA ( SLista * p_lisObj, int iElem );
 void SLisDeposicionar ( SLista * p_lisObj );
+
+int SLisBuscar ( SLista * p_lisObj, SBloque * p_blqDatos );
+int SLisBuscarExt ( SLista * p_lisObj, byte * p_byDatos );
 
 int SLisEsNulo ( SLista * p_lisObj );
 int SLisEstaEnFinal ( SLista * p_lisObj );

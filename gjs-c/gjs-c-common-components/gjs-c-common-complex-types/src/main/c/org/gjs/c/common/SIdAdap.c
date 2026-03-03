@@ -102,7 +102,7 @@ const char * SIdAdpPatron ( SIdAdap * p_idObj )
 	}
 	else
 	{
-		p_cRes = 0;
+		p_cRes = NULL;
 	}
 	return ( p_cRes );
 }

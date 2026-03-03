@@ -101,6 +101,9 @@
 #		include <semaphore.h>
 #		include <pwd.h>
 #		include <grp.h>
+#		include <signal.h>
+#		include <setjmp.h>
+
 
 #	elif ( defined ( LINUX ) )
 
@@ -120,6 +123,8 @@
 #		include <semaphore.h>
 #		include <pwd.h>
 #		include <grp.h>
+#		include <signal.h>
+#		include <setjmp.h>
 
 #	elif ( defined ( WIN ) )
 

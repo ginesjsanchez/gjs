@@ -443,6 +443,66 @@ void SLisDeposicionar ( SLista * p_lisObj )
 	}
 }
 
+int SLisBuscar ( SLista * p_lisObj, SBloque * p_blqDatos )
+{
+	int			iRes;
+	int			iEnc;
+	SElemento * p_elmObj;
+
+	if ( ( SLisEsValida ( p_lisObj ) == 1 ) && ES_VALIDO ( p_blqDatos ) )
+	{
+		p_elmObj = p_lisObj->p_elmPrimero;
+		iRes = 0;
+		iEnc = 0;
+		while ( ( iRes < p_lisObj->iNumElementos ) && ( iEnc == 0 ) &&
+			ES_VALIDO ( p_elmObj ) )
+		{
+			iEnc = SElmEsIgualBlq ( p_elmObj, p_blqDatos );
+			p_elmObj = SElmSucesor ( p_elmObj );
+			iRes = iRes + 1;
+		}
+		if ( iEnc == 0 )
+		{
+			iRes = -1;
+		}
+	}
+	else
+	{
+		iRes = -1;
+	}
+	return ( iRes );
+}
+
+int SLisBuscarExt ( SLista * p_lisObj, byte * p_byDatos )
+{
+	int			iRes;
+	int			iEnc;
+	SElemento * p_elmObj;
+
+	if ( ( SLisEsValida ( p_lisObj ) == 1 ) && ES_VALIDO ( p_byDatos ) )
+	{
+		p_elmObj = p_lisObj->p_elmPrimero;
+		iRes = 0;
+		iEnc = 0;
+		while ( ( iRes < p_lisObj->iNumElementos ) && ( iEnc == 0 ) &&
+			ES_VALIDO ( p_elmObj ) )
+		{
+			iEnc = SElmEsIgualExt ( p_elmObj, p_byDatos );
+			p_elmObj = SElmSucesor ( p_elmObj );
+			iRes = iRes + 1;
+		}
+		if ( iEnc == 0 )
+		{
+			iRes = -1;
+		}
+	}
+	else
+	{
+		iRes = -1;
+	}
+	return ( iRes );
+}
+
 int SLisEsNulo ( SLista * p_lisObj )
 {
 	int iRes;

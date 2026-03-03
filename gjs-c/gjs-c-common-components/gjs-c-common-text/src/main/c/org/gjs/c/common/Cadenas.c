@@ -38,6 +38,41 @@ char * CadCrearExt ( int iTam, char cCarRelleno )
 	return ( p_cRes );
 }
 
+char * CadCrearConFormato ( const char * p_cFormato, ... )
+{
+	char *		p_cObj;
+	va_list		valArgumentos;
+
+	va_start ( valArgumentos,  p_cFormato );
+	p_cObj = CadCrearConFormatoExt ( p_cFormato, valArgumentos );
+	va_end ( valArgumentos );
+	return ( p_cObj );
+}
+
+char * CadCrearConFormatoExt ( const char * p_cFormato, va_list valArgumentos )
+{
+	char *	p_cObj;
+	int		iLong;
+
+	if ( ES_VALIDO ( p_cFormato ) )
+	{
+		iLong = CAD_MAX_TAM; 
+		p_cObj = CadCrear ( iLong );
+		if ( ES_VALIDO ( p_cObj ) )
+		{
+			if ( CadCopiarConFormato ( p_cObj, p_cFormato, valArgumentos ) == 0 )
+			{
+				MemLiberar ( (void **) &p_cObj );
+			}
+		}
+	}
+	else
+	{
+		p_cObj = NULL;
+	}
+	return ( p_cObj );
+}
+
 int CadLimpiar ( char * p_cAsciiz )
 {
 	return ( CadLimpiarExt ( p_cAsciiz, ' ', -1 ) );
@@ -343,15 +378,35 @@ int CadConcatenarCaracterExt ( char * p_cAsciiz1, char cVal, int iMax1 )
 	return ( iRes );
 }
 
-int CadCopiarConFormato ( char * p_cAsciiz1, const char * p_cFormato, ...)
+int CadCopiarConFormato ( char * p_cAsciiz1, const char * p_cFormato, ... )
 {
 	int			iRes;
 	va_list		valArgumentos;
+
+	va_start ( valArgumentos,  p_cFormato );
+	iRes = CadCopiarConFormatoExt ( p_cAsciiz1, p_cFormato, valArgumentos );
+	va_end ( valArgumentos );
+	return ( iRes );
+}
+
+int CadConcatenarConFormato ( char * p_cAsciiz1, const char * p_cFormato, ... )
+{
+	int			iRes;
+	va_list		valArgumentos;
+
+	va_start ( valArgumentos,  p_cFormato );
+	iRes = CadConcatenarConFormatoExt ( p_cAsciiz1, p_cFormato, valArgumentos );
+	va_end ( valArgumentos );
+	return ( iRes );
+}
+
+int CadCopiarConFormatoExt ( char * p_cAsciiz1, const char * p_cFormato, va_list valArgumentos )
+{
+	int			iRes;
 	char *		p_cCadena;
 
 	if ( ES_VALIDO ( p_cAsciiz1 ) && ES_VALIDO ( p_cFormato ) )
 	{
-		va_start ( valArgumentos,  p_cFormato );
 		p_cCadena = CadCrear ( CAD_TAM_DEFECTO );
 		if ( ES_VALIDO ( p_cCadena ) )
 		{
@@ -369,7 +424,6 @@ int CadCopiarConFormato ( char * p_cAsciiz1, const char * p_cFormato, ...)
 		{
 			iRes = 0;
 		}
-		va_end ( valArgumentos );
 	}
 	else
 	{
@@ -378,15 +432,13 @@ int CadCopiarConFormato ( char * p_cAsciiz1, const char * p_cFormato, ...)
 	return ( iRes );
 }
 
-int CadConcatenarConFormato ( char * p_cAsciiz1, const char * p_cFormato, ...)
+int CadConcatenarConFormatoExt ( char * p_cAsciiz1, const char * p_cFormato, va_list valArgumentos )
 {
 	int			iRes;
-	va_list		valArgumentos;
 	char *		p_cCadena;
 
 	if ( ES_VALIDO ( p_cAsciiz1 ) && ES_VALIDO ( p_cFormato ) )
 	{
-		va_start ( valArgumentos,  p_cFormato );
 		p_cCadena = CadCrear ( CAD_TAM_DEFECTO );
 		if ( ES_VALIDO ( p_cCadena ) )
 		{
@@ -404,7 +456,6 @@ int CadConcatenarConFormato ( char * p_cAsciiz1, const char * p_cFormato, ...)
 		{
 			iRes = 0;
 		}
-		va_end ( valArgumentos );
 	}
 	else
 	{
@@ -1685,84 +1736,9 @@ int CadEliminarHastaCaracterExt ( char * p_cAsciiz, char cVal, int iIncluir, int
 	return ( iRes );
 }
 
-int CadComparar ( const char * p_cAsciiz1, const char * p_cAsciiz2 )
-{
-	return ( CadCompararExt ( p_cAsciiz1, p_cAsciiz2, -1, -1 ) );
-}
-
 int CadCompararSinDistinguirTipoLetra ( const char * p_cAsciiz1, const char * p_cAsciiz2 )
 {
 	return ( CadCompararSinDistinguirTipoLetraExt ( p_cAsciiz1, p_cAsciiz2, -1, -1 ) );
-}
-
-int CadCompararParcial ( const char * p_cAsciiz1, const char * p_cAsciiz2, int iMinCars )
-{
-	return ( CadCompararParcialExt ( p_cAsciiz1, p_cAsciiz2, iMinCars, 0, -1, -1 ) );
-}
-
-int CadEsIgual ( const char * p_cAsciiz1, const char * p_cAsciiz2 )
-{
-	return ( CadEsIgualExt ( p_cAsciiz1, p_cAsciiz2, -1, -1 ) );
-}
-
-int CadEsMenor ( const char * p_cAsciiz1, const char * p_cAsciiz2 )
-{
-	return ( CadEsMenorExt ( p_cAsciiz1, p_cAsciiz2, -1, -1 ) );
-}
-
-int CadEsMayor ( const char * p_cAsciiz1, const char * p_cAsciiz2 )
-{
-	return ( CadEsMayorExt ( p_cAsciiz1, p_cAsciiz2, -1, -1 ) );
-}
-
-int CadEsMenorIg ( const char * p_cAsciiz1, const char * p_cAsciiz2 )
-{
-	return ( CadEsMenorIgExt ( p_cAsciiz1, p_cAsciiz2, -1, -1 ) );
-}
-
-int CadEsMayorIg ( const char * p_cAsciiz1, const char * p_cAsciiz2 )
-{
-	return ( CadEsMayorIgExt ( p_cAsciiz1, p_cAsciiz2, -1, -1 ) );
-}
-
-int CadCompararExt ( const char * p_cAsciiz1, const char * p_cAsciiz2, int iMax1, int iMax2 )
-{
-	int iRes;
-	int iCar;
-	int iLong1;
-	int iLong2;
-
-	iLong1 = CadLongitudSeg ( p_cAsciiz1, iMax1 ); 
-	iLong2 = CadLongitudSeg ( p_cAsciiz2, iMax2 ); 
-	if ( ( iLong1 > 0 ) && ( iLong2 > 0 ) )
-	{
-		if ( iLong1 == iLong2 )
-		{
-			iRes = 1;
-			iCar = 0; 
-			while ( ( iCar < iLong1 ) && ( iRes == 1 ) )  
-			{
-				if ( p_cAsciiz1 [ iCar ] < p_cAsciiz2 [ iCar ] )
-				{
-					iRes = 2;
-				}
-				else if ( p_cAsciiz1 [ iCar ] > p_cAsciiz2 [ iCar ] )
-				{
-					iRes = 3;
-				}
-				iCar = iCar + 1;
-			}
-		}
-		else
-		{
-			iRes = 0;
-		}
-	}
-	else
-	{
-		iRes = 0;
-	}
-	return ( iRes );
 }
 
 int CadCompararSinDistinguirTipoLetraExt ( const char * p_cAsciiz1, const char * p_cAsciiz2, int iMax1, int iMax2 )
@@ -1803,6 +1779,36 @@ int CadCompararSinDistinguirTipoLetraExt ( const char * p_cAsciiz1, const char *
 		iRes = 0;
 	}
 	return ( iRes );
+}
+
+int CadCompararParcial ( const char * p_cAsciiz1, const char * p_cAsciiz2, int iMinCars )
+{
+	return ( CadCompararParcialExt ( p_cAsciiz1, p_cAsciiz2, iMinCars, 0, -1, -1 ) );
+}
+
+int CadEsIgual ( const char * p_cAsciiz1, const char * p_cAsciiz2 )
+{
+	return ( CadEsIgualExt ( p_cAsciiz1, p_cAsciiz2, -1, -1 ) );
+}
+
+int CadEsMenor ( const char * p_cAsciiz1, const char * p_cAsciiz2 )
+{
+	return ( CadEsMenorExt ( p_cAsciiz1, p_cAsciiz2, -1, -1 ) );
+}
+
+int CadEsMayor ( const char * p_cAsciiz1, const char * p_cAsciiz2 )
+{
+	return ( CadEsMayorExt ( p_cAsciiz1, p_cAsciiz2, -1, -1 ) );
+}
+
+int CadEsMenorIg ( const char * p_cAsciiz1, const char * p_cAsciiz2 )
+{
+	return ( CadEsMenorIgExt ( p_cAsciiz1, p_cAsciiz2, -1, -1 ) );
+}
+
+int CadEsMayorIg ( const char * p_cAsciiz1, const char * p_cAsciiz2 )
+{
+	return ( CadEsMayorIgExt ( p_cAsciiz1, p_cAsciiz2, -1, -1 ) );
 }
 
 int CadCompararParcialExt ( const char * p_cAsciiz1, const char * p_cAsciiz2, int iMinCars, int iDistinguir, int iMax1, int iMax2 )
@@ -3414,7 +3420,7 @@ char * CadTransformarExt ( const char * p_cAsciiz, PFUNCHARC p_fTrans, int iMax 
 	}
 	else
 	{
-		p_cRes = 0;
+		p_cRes = NULL;
 	}
 	return ( p_cRes );
 }
@@ -3507,7 +3513,7 @@ int CadEsTokenValidoExt ( const char * p_cAsciiz, int iMax )
 			iRes = 1;
 			while ( ( iRes = 1 ) && ( iPos < iLong ) )
 			{
-				if ( ASCIIEsValidoToken ( p_cAsciiz [ 0 ] ) == 0  )
+				if ( ASCIIEsValidoToken ( p_cAsciiz [ iPos ] ) == 0  )
 				{
 					iRes = 0;
 				}
@@ -3539,7 +3545,7 @@ int CadEsIdentificadorValidoExt ( const char * p_cAsciiz, int iMax )
 		iRes = 1;
 		while ( ( iRes = 1 ) && ( iPos < iLong ) )
 		{
-			if ( ASCIIEsValidoIdentificador ( p_cAsciiz [ 0 ] ) == 0  )
+			if ( ASCIIEsValidoIdentificador ( p_cAsciiz [ iPos ] ) == 0  )
 			{
 				iRes = 0;
 			}

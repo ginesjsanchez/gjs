@@ -35,22 +35,6 @@
 #include <SEntidadCod.h>
 #include <SEntidadIdCod.h>
 
-#include <SListaLiterales.h>
-#include <SListaEnteros.h>
-#include <SListaEnterosLargos.h>
-#include <SListaRealesDobles.h>
-#include <SVectorLiterales.h>
-#include <SVectorEnteros.h>
-#include <SVectorRealesDobles.h>
-#include <SSecuenciaLiterales.h>
-#include <SSecuenciaEnteros.h>
-#include <SSecuenciaRealesDobles.h>
-#include <STablaLiterales.h>
-#include <STablaEnteros.h>
-#include <STablaRealesDobles.h>
-#include <SPilaLiterales.h>
-#include <SPilaEnteros.h>
-#include <SPilaRealesDobles.h>
 #include <SAccion.h>
 #include <SLocalizador.h>
 #include <SLocalizadorExt.h>
@@ -69,9 +53,6 @@
 #include <SSecuenciaGeneradoresId.h>
 
 #include <SDatosTexto.h>
-
-#include <SArbolEnteros.h>
-#include <SArbolBinEnteros.h>
 
 #include <SConector.h>
 #include <SNodoConector.h>

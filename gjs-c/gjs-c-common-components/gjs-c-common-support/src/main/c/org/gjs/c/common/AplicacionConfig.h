@@ -26,6 +26,8 @@
 #include <Texto.h>
 #include <Tiempo.h>
 #include <Sistema.h>
+#include <TiposDatos.h>
+#include <Ficheros.h>
 
 #if ( !defined ( WIN ) )
 #	include <termios.h>

@@ -103,6 +103,8 @@ int SisEsFicheroHTML ( const char * p_cRuta );
 int SisEsFicheroSHP ( const char * p_cRuta );
 int SisEsFicheroDBF ( const char * p_cRuta );
 
+char * SisResolverDirectorioRelativo ( const char * p_cRutaBase, const char * p_cRutaRelativa );
+
 
 #endif
 

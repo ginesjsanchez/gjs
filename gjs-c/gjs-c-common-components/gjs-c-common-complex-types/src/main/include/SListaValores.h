@@ -69,6 +69,9 @@ int SLisValInsertarDupDelante ( SListaValores * p_lisObj, SValor * p_valDatos );
 int SLisValInsertarDupDetras ( SListaValores * p_lisObj, SValor * p_valDatos );
 int SLisValEliminar ( SListaValores * p_lisObj );
 
+int SLisValExiste ( SListaValores * p_lisObj, SValor * p_valDatos );
+int SLisValBuscar ( SListaValores * p_lisObj, SValor * p_valDatos );
+
 int	SLisValLiberacionMemoriaActivada ( SListaValores * p_lisObj );
 void SLisValActivarLiberacionMemoria ( SListaValores * p_lisObj );
 void SLisValDesactivarLiberacionMemoria ( SListaValores * p_lisObj );

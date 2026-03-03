@@ -586,6 +586,51 @@ int SElmDesencadenar ( SElemento * p_elmObj )
 	return ( iRes );
 }
 
+int SElmEsIgual ( SElemento * p_elmObj1, SElemento * p_elmObj2 )
+{
+	int	iRes;
+
+	if ( ES_VALIDO ( p_elmObj1 ) && ES_VALIDO ( p_elmObj2 ) )
+	{
+		iRes = SBlqEsIgual ( SElmDatos ( p_elmObj1 ), SElmDatos ( p_elmObj2 ) );
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SElmEsIgualBlq ( SElemento * p_elmObj, SBloque * p_blqObj )
+{
+	int	iRes;
+
+	if ( ES_VALIDO ( p_elmObj ) && ES_VALIDO ( p_blqObj ) )
+	{
+		iRes = SBlqEsIgual ( SElmDatos ( p_elmObj ), p_blqObj );
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SElmEsIgualExt ( SElemento * p_elmObj, byte * p_byObj )
+{
+	int	iRes;
+
+	if ( ES_VALIDO ( p_elmObj ) && ES_VALIDO ( p_byObj ) )
+	{
+		iRes = SBlqEsIgualExt ( SElmDatos ( p_elmObj ), p_byObj );
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
 int	SElmLiberacionMemoriaActivada ( SElemento * p_elmObj )
 {
 	int iRes;

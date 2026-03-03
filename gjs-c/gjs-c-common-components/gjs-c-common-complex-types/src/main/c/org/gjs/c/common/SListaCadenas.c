@@ -652,6 +652,56 @@ int SLisCadExiste ( SListaCadenas * p_lisObj, SCadena * p_cadDatos )
 	return ( iRes );
 }
 
+int SLisCadBuscar ( SListaCadenas * p_lisObj, SCadena * p_cadDatos )
+{
+	int iRes;
+	int iElem;
+
+	if ( ES_VALIDO ( p_lisObj ) && ES_VALIDO ( p_cadDatos ) )
+	{
+		iRes = -1;
+		iElem = 0;
+		while ( ( iElem < SLisCadNumElementos ( p_lisObj ) ) && ( iRes == -1 ) )
+		{
+			if ( SCadEsIgual ( SLisCadElemento ( p_lisObj, iElem ), p_cadDatos ) == 1 )
+			{
+				iRes = iElem;
+			}
+			iElem = iElem + 1;
+		}
+	}
+	else
+	{
+		iRes = -1;
+	}
+	return ( iRes );
+}
+
+int SLisCadBuscarExt ( SListaCadenas * p_lisObj, const char * p_cDatos )
+{
+	int iRes;
+	int iElem;
+
+	if ( ES_VALIDO ( p_lisObj ) && ES_VALIDO ( p_cDatos ) )
+	{
+		iRes = -1;
+		iElem = 0;
+		while ( ( iElem < SLisCadNumElementos ( p_lisObj ) ) && ( iRes == -1 ) )
+		{
+			if ( SCadEsIgualLiteral ( SLisCadElemento ( p_lisObj, iElem ), p_cDatos ) == 1 )
+			{
+				iRes = iElem;
+			}
+			iElem = iElem + 1;
+		}
+	}
+	else
+	{
+		iRes = -1;
+	}
+	return ( iRes );
+}
+
 int	SLisCadLiberacionMemoriaActivada ( SListaCadenas * p_lisObj )
 {
 	int	iRes;

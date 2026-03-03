@@ -33,6 +33,8 @@
 
 #include <SElemento.h>
 #include <SElementoPtr.h>
+#include <SPareja.h>
+#include <SReferencia.h>
 
 #include <SContenido.h>
 #include <SLista.h>
@@ -72,6 +74,32 @@
 #include <SAristaGrafo.h>
 #include <SNodoGrafo.h>
 #include <SGrafo.h>
+
+#include <SListaLiterales.h>
+#include <SListaEnteros.h>
+#include <SListaEnterosLargos.h>
+#include <SListaRealesDobles.h>
+#include <SVectorLiterales.h>
+#include <SVectorEnteros.h>
+#include <SVectorRealesDobles.h>
+#include <SSecuenciaLiterales.h>
+#include <SSecuenciaEnteros.h>
+#include <SSecuenciaEnterosLargos.h>
+#include <SSecuenciaEnteroslargosSinSigno.h>
+#include <SSecuenciaRealesDobles.h>
+#include <STablaLiterales.h>
+#include <STablaEnteros.h>
+#include <STablaRealesDobles.h>
+#include <SPilaLiterales.h>
+#include <SPilaEnteros.h>
+#include <SPilaRealesDobles.h>
+#include <SArbolEnteros.h>
+#include <SArbolBinEnteros.h>
+
+
+
+#include <SListaReferencias.h>
+#include <SListaParejas.h>
 
 
 #endif

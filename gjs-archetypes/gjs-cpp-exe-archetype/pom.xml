@@ -14,7 +14,7 @@
     <version>1.0.0-SNAPSHOT</version>    
     <packaging>maven-archetype</packaging>    
     
-    <name>Cpp-lib Maven archetype</name>    
+    <name>Cpp-exe Maven archetype</name>    
     <description>    
       
   --------------------------------------------------------    
@@ -45,7 +45,7 @@
 
 	* artifactId: The name of the project artifact. Default is cpp-lib. Not required.
 
-	* package: The project packaging of the sourc code. Default is org.gjs.maven.archetypes. Not required.
+	* package: The project packaging of the source code. Default is org.gjs.maven.archetypes. Not required.
 
 	* version: The project version. Default is 1.0.0-SNAPSHOT. Not required.
 	

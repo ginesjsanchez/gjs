@@ -54,6 +54,8 @@ void SLispAnterior ( SListaPtr * p_lisObj );
 void SLispMoverA ( SListaPtr * p_lisObj, int iElem );
 void SLispDeposicionar ( SListaPtr * p_lisObj );
 
+int SLispBuscar ( SListaPtr * p_lisObj, byte * p_byDatos, int iNumBytes );
+
 int SLispEsNulo ( SListaPtr * p_lisObj );
 int SLispEstaEnFinal ( SListaPtr * p_lisObj );
 int SLispEstaEnIncio ( SListaPtr * p_lisObj );

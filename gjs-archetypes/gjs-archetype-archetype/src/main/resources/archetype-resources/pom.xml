@@ -47,7 +47,7 @@
 
 	* artifactId: The name of the project artifact. Default is ${shortName}. Not required.
 
-	* package: The project packaging of the sourc code. Default is ${groupId}. Not required.
+	* package: The project packaging of the source code. Default is ${groupId}. Not required.
 
 	* version: The project version. Default is 1.0.0-SNAPSHOT. Not required.
                  

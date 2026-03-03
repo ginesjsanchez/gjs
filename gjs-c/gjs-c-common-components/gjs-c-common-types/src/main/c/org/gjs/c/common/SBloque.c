@@ -316,9 +316,53 @@ char * SBlqCadena ( SBloque * p_blqObj )
 	}
 	else
 	{
-		p_cRes = 0;
+		p_cRes = NULL;
 	}
 	return ( p_cRes );
+}
+
+int SBlqEsIgual ( SBloque * p_blqObj1, SBloque * p_blqObj2 )
+{
+	int	iRes;
+
+	if ( ES_VALIDO ( p_blqObj1 ) && ES_VALIDO ( p_blqObj2 ) )
+	{
+		if ( SBlqTam ( p_blqObj1 ) == SBlqTam ( p_blqObj2 ) )
+		{
+			iRes = MemEsIgual ( ( void * ) SBlqDatos ( p_blqObj1 ), ( void * ) SBlqDatos ( p_blqObj2 ), SBlqTam ( p_blqObj1 ) );
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SBlqEsIgualExt ( SBloque * p_blqObj, byte * p_byDatos )
+{
+	int	iRes;
+
+	if ( ES_VALIDO ( p_blqObj ) && ES_VALIDO ( p_byDatos ) )
+	{
+		if ( SBlqTam ( p_blqObj ) >= 0 )
+		{
+			iRes = MemEsIgual ( ( void * ) SBlqDatos ( p_blqObj ), ( void * ) p_byDatos, SBlqTam ( p_blqObj ) );
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
 int SBlqLiberacionMemoriaActivada ( SBloque * p_blqObj )

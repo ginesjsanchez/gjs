@@ -2132,5 +2132,71 @@ int SisEsFicheroDBF ( const char * p_cRuta )
 	return ( iRes );
 }
 
+#define MAX_PARTS 256
+
+char * SisResolverDirectorioRelativo ( const char * p_cRutaBase, const char * p_cRutaRelativa )
+{
+	char *	p_cResultado;
+	char **	p_p_cPartes;
+	char *	p_cToken;
+	int		iCount;
+	int		iCountRel;
+	int		iPartes;
+	int		iPartesRel;
+
+	if ( ES_VALIDO ( p_cRutaBase ) && ES_VALIDO ( p_cRutaRelativa ) )
+	{
+		p_cResultado = CadCrear ( MAXPATHLEN - 1 );
+		if ( CadEmpiezaPorCaracter ( p_cRutaRelativa, '.' ) == 1 )
+		{
+			p_p_cPartes = (char **) MemReservar ( MAX_PARTS * sizeof ( char * ) );
+			iPartes = CadNumPalabrasSep ( p_cRutaBase, '/' );
+			for ( iCount = 0; iCount < iPartes; iCount = iCount + 1 )
+			{
+				p_p_cPartes [iCount] = CadPalabraSep ( p_cRutaBase, iCount, '/' );
+			}
+			
+			iPartesRel = CadNumPalabrasSep ( p_cRutaRelativa, '/' );
+			for ( iCountRel = 0; iCountRel < iPartesRel; iCountRel = iCountRel + 1 )
+			{
+				p_cToken = CadPalabraSep ( p_cRutaRelativa, iCountRel, '/' );
+				if ( CadEsIgual ( p_cToken, ".." ) == 1 )
+				{
+					if ( iCount > 0 )
+					{
+						iCount = iCount - 1;
+					}
+					MemLiberar ( ( void ** ) &p_cToken );
+				}
+				else if ( CadEsIgual ( p_cToken, "." ) == 1 )
+				{
+					p_p_cPartes [iCount] = p_cToken;
+					iCount = iCount + 1;
+				}
+			}
+
+			for ( int i = 0; i < iCount; i = i + 1 )
+			{
+				CadConcatenarCaracter ( p_cResultado, '/' );
+				CadConcatenar ( p_cResultado, p_p_cPartes [i] );
+				MemLiberar ( ( void ** ) &(p_p_cPartes [i]) );
+			}
+			MemLiberar ( ( void ** ) &p_p_cPartes );
+			if ( CadLongitud ( p_cResultado ) == 0 )
+			{
+				CadConcatenarCaracter ( p_cResultado, '/' );
+			}
+		}
+		else
+		{
+			CadCopiar ( p_cResultado, p_cRutaBase );
+		}
+	}
+	else
+	{
+		p_cResultado = NULL;
+	}
+	return ( p_cResultado );
+}
 
 

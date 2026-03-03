@@ -20,11 +20,13 @@
 
 
 #include <SVersion.h>
+#include <SPropiedades.h>
 
 #include <AplicacionValidaciones.h>
 #include <AplicacionInformacion.h>
 #include <AplicacionConsola.h>
 #include <AplicacionPortapapeles.h>
+
 
 #include <CajaMensajes.h>
 

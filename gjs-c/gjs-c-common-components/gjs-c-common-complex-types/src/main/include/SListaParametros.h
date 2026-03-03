@@ -70,6 +70,7 @@ int SLisParInsertarDupDetras ( SListaParametros * p_lisObj, SParametro * p_parDa
 int SLisParEliminar ( SListaParametros * p_lisObj );
 
 int SLisParExiste ( SListaParametros * p_lisObj, SParametro * p_parDatos );
+int SLisParBuscar ( SListaParametros * p_lisObj, SParametro * p_parDatos );
 
 int	SLisParLiberacionMemoriaActivada ( SListaParametros * p_lisObj );
 void SLisParActivarLiberacionMemoria ( SListaParametros * p_lisObj );

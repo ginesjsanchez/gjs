@@ -63,6 +63,10 @@ int SElmDesencadenarAntecesor ( SElemento * p_elmObj );
 int SElmDesencadenarSucesor ( SElemento * p_elmObj );
 int SElmDesencadenar ( SElemento * p_elmObj );
 
+int SElmEsIgual ( SElemento * p_elmObj1, SElemento * p_elmObj2 );
+int SElmEsIgualBlq ( SElemento * p_elmObj, SBloque * p_blqObj );
+int SElmEsIgualExt ( SElemento * p_elmObj, byte * p_byObj );
+
 int	SElmLiberacionMemoriaActivada ( SElemento * p_elmObj );
 //void SElmActivarLiberacionMemoria ( SElemento * p_elmObj );
 //void SElmDesactivarLiberacionMemoria ( SElemento * p_elmObj );

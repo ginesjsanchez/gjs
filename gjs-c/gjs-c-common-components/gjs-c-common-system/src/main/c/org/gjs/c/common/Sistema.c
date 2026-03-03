@@ -54,5 +54,51 @@ void SisFinalizar ()
 }
 
 
+void SignalHandlerPorDefecto ( int signal )
+{
+	printf ( "INTERRUPCION RECIBIDA=%d\n", signal );
+	//if ( signal == SIGABRT )
+	//{
+	//	RetornarAPrograma ();
+	//}
+}
+
+//void GrabarRetornoAPrograma()
+//{
+//	_bRetornar = true;
+//	setjmp( _entornoRetorno );
+//}
+
+//void RetornarAPrograma ()
+//{
+//	if ( _bRetornar )
+//	{
+//		_bRetornar = false;
+//		cout << "retornando" << endl;
+//		longjmp( _entornoRetorno, 1 );
+//	}
+//}
+
+void SisEstablecerManejadorInterrupciones ( SIGNAL_HANDLER fManejador )
+{
+	signal( SIGTERM, fManejador );
+	signal( SIGSEGV, fManejador );
+	signal( SIGINT, fManejador );
+	signal( SIGILL, fManejador );
+	signal( SIGABRT, fManejador );
+	signal( SIGFPE, fManejador );
+}
+
+void SisEstablecerManejadorInterrupcionesDefecto ()
+{
+	SisEstablecerManejadorInterrupciones( SignalHandlerPorDefecto );
+}
+
+void SisLimpiarManejadorInterrupciones ()
+{
+	SisEstablecerManejadorInterrupciones( NULL );
+}
+
+
 
 

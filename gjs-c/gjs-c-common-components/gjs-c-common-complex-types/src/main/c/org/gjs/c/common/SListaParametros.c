@@ -654,6 +654,33 @@ int SLisParExiste ( SListaParametros * p_lisObj, SParametro * p_parDatos )
 	return ( iRes );
 }
 
+int SLisParBuscar ( SListaParametros * p_lisObj, SParametro * p_parDatos )
+{
+	int iRes;
+	int iElem;
+	SParametro * p_parElem;
+
+	if ( ES_VALIDO ( p_lisObj ) && ES_VALIDO ( p_parDatos ) )
+	{
+		iRes = -1;
+		iElem = 0;
+		while ( ( iElem < SLisParNumElementos ( p_lisObj ) ) && ( iRes == 0 ) )
+		{
+			p_parElem = SLisParElemento ( p_lisObj, iElem );
+			if ( SCadEsIgual ( SParNombre ( p_parElem ), SParNombre ( p_parDatos ) ) == 1 )
+			{
+				iRes = iElem;
+			}
+			iElem = iElem + 1;
+		}
+	}
+	else
+	{
+		iRes = -1;
+	}
+	return ( iRes );
+}
+
 int	SLisParLiberacionMemoriaActivada ( SListaParametros * p_lisObj )
 {
 	int	iRes;

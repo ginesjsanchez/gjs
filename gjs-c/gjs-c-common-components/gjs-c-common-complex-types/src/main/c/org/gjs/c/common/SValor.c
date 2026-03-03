@@ -879,5 +879,360 @@ SValor * SValDuplicar ( SValor * p_valObj )
 	return ( p_valRes );
 }
 
+int SValEsByte ( SValor * p_valObj )
+{
+	int iRes;
+
+	if ( ES_VALIDO ( p_valObj ) )
+	{
+		iRes = TipEsByte ( p_valObj->iTipo );
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SValEsEntero ( SValor * p_valObj )
+{
+	int iRes;
+
+	if ( ES_VALIDO ( p_valObj ) )
+	{
+		iRes = TipEsEntero ( p_valObj->iTipo );
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SValEsReal ( SValor * p_valObj )
+{
+	int iRes;
+
+	if ( ES_VALIDO ( p_valObj ) )
+	{
+		iRes = TipEsReal ( p_valObj->iTipo );
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SValEsBinario ( SValor * p_valObj )
+{
+	int iRes;
+
+	if ( ES_VALIDO ( p_valObj ) )
+	{
+		iRes = TipEsBinario ( p_valObj->iTipo );
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SValEsCadena ( SValor * p_valObj )
+{
+	int iRes;
+
+	if ( ES_VALIDO ( p_valObj ) )
+	{
+		iRes = TipEsCadena ( p_valObj->iTipo );
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SValEsNumerico ( SValor * p_valObj )
+{
+	int iRes;
+
+	if ( ES_VALIDO ( p_valObj ) )
+	{
+		iRes = TipEsNumero ( p_valObj->iTipo );
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SValEsIgual ( SValor * p_valObj1, SValor * p_valObj2 )
+{
+	int iRes;
+
+	if ( ES_VALIDO ( p_valObj1 ) && ES_VALIDO ( p_valObj2 ) )
+	{
+		if ( SValTipo ( p_valObj1 ) == SValTipo ( p_valObj2 ) )
+		{
+			iRes = SCadcEsIgual ( SValValor ( p_valObj1 ), SValValor ( p_valObj2 ) );
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SValEsIgualNoTipado ( SValor * p_valObj1, SValor * p_valObj2 )
+{
+	int iRes;
+
+	if ( ES_VALIDO ( p_valObj1 ) && ES_VALIDO ( p_valObj2 ) )
+	{
+		iRes = SCadcEsIgual ( SValValor ( p_valObj1 ), SValValor ( p_valObj2 ) );
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SValEsIgualValorByte ( SValor * p_valObj, byte byValor )
+{
+	int iRes;
+
+	if ( ES_VALIDO ( p_valObj ) )
+	{
+		if ( SValValorByte ( p_valObj ) == byValor )
+		{
+			iRes = 1;
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SValEsIgualValorEntero ( SValor * p_valObj, int iValor )
+{
+	int iRes;
+
+	if ( ES_VALIDO ( p_valObj ) )
+	{
+		if ( SValValorEntero ( p_valObj ) == iValor )
+		{
+			iRes = 1;
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SValEsIgualValorEnteroLargo ( SValor * p_valObj, long lValor )
+{
+	int iRes;
+
+	if ( ES_VALIDO ( p_valObj ) )
+	{
+		if ( SValValorEntero ( p_valObj ) == lValor )
+		{
+			iRes = 1;
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SValEsIgualValorEnteroSinSigno ( SValor * p_valObj, unsigned int uiValor )
+{
+	int iRes;
+
+	if ( ES_VALIDO ( p_valObj ) )
+	{
+		if ( SValValorNatural ( p_valObj ) == uiValor )
+		{
+			iRes = 1;
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SValEsIgualValorEnteroLargoSinSigno ( SValor * p_valObj, unsigned long ulValor )
+{
+	int iRes;
+
+	if ( ES_VALIDO ( p_valObj ) )
+	{
+		if ( SValValorNatural ( p_valObj ) == ulValor )
+		{
+			iRes = 1;
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SValEsIgualValorReal ( SValor * p_valObj, float fValor )
+{
+	int iRes;
+
+	if ( ES_VALIDO ( p_valObj ) )
+	{
+		if ( SValValorReal ( p_valObj ) == fValor )
+		{
+			iRes = 1;
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SValEsIgualValorRealDoble ( SValor * p_valObj, double dValor )
+{
+	int iRes;
+
+	if ( ES_VALIDO ( p_valObj ) )
+	{
+		if ( SValValorReal ( p_valObj ) == dValor )
+		{
+			iRes = 1;
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SValEsIgualValorLiteral ( SValor * p_valObj, const char * p_cValor )
+{
+	int iRes;
+
+	if ( ES_VALIDO ( p_valObj ) && ES_VALIDO ( p_cValor ) )
+	{
+		iRes = CadEsIgual ( SValValorCadena ( p_valObj ), p_cValor );
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SValEsIgualValorBinario ( SValor * p_valObj, byte * p_byValor )
+{
+	int iRes;
+
+	if ( ES_VALIDO ( p_valObj ) && ES_VALIDO ( p_byValor ) )
+	{
+		iRes = MemEsIgual ( SValValorBinario ( p_valObj ), p_byValor, SValMaxTam ( p_valObj ) );
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SValEsIgualValorCadena ( SValor * p_valObj, SCadena * p_cadValor )
+{
+	int iRes;
+
+	if ( ES_VALIDO ( p_valObj ) && ES_VALIDO ( p_cadValor ) )
+	{
+		iRes = CadEsIgual ( SValValorCadena ( p_valObj ), SCadValorConstante ( p_cadValor ) );
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SValEsIgualValor ( SValor * p_valObj, SCadenaConv * p_cadValor )
+{
+	int iRes;
+
+	if ( ES_VALIDO ( p_valObj ) && ES_VALIDO ( p_cadValor ) )
+	{
+		iRes = SCadcEsIgual ( SValValor ( p_valObj ), p_cadValor );
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SValEsIgualValorNumerico ( SValor * p_valObj, SCadenaNumerica * p_cadValor )
+{
+	int iRes;
+
+	if ( ES_VALIDO ( p_valObj ) && ES_VALIDO ( p_cadValor ) )
+	{
+		iRes = SCadcEsIgual ( SValValor ( p_valObj ), SCadnCadenaConv ( p_cadValor ) );
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
 
 

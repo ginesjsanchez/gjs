@@ -25,6 +25,7 @@
 		<module>gjs-c-common-support</module>
 		<module>gjs-c-common-log</module>
 		<module>gjs-c-common</module>
+		<module>gjs-c-common-test</module>
 		
 		<!-- C++ components -->
 		<module>gjs-cpp-common-base</module>

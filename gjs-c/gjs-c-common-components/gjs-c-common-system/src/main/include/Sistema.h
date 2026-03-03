@@ -70,10 +70,16 @@ PENDIENTES
 #include <SistemaImpresoras.h>
 
 
+typedef void (*SIGNAL_HANDLER)(int);
+
 
 void SisInicializar ();
 void SisInicializarExt ( const char * p_cNomProceso, const char * p_cDirTemporal );
 void SisFinalizar ();
+
+void SisEstablecerManejadorInterrupciones ( SIGNAL_HANDLER fManejador );
+void SisEstablecerManejadorInterrupcionesDefecto ();
+void SisLimpiarManejadorInterrupciones ();
 
 
 #endif

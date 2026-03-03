@@ -34,9 +34,12 @@ int SEtrEstablecerDefinicion ( SEntrada * p_etrObj, const char * p_cDefinicion )
 
 SEntrada * SEtrDuplicar (  SEntrada * p_etrObj );
 
-int SEtrEsIgual ( SEntrada * p_etrObj, const char * p_cNombre );
-int SEtrEsMenor ( SEntrada * p_etrObj, const char * p_cNombre );
-int SEtrEsMayor ( SEntrada * p_etrObj, const char * p_cNombre );
+int SEtrEsIgual ( SEntrada * p_etrObj1, SEntrada * p_etrObj2 );
+int SEtrEsMenor ( SEntrada * p_etrObj1, SEntrada * p_etrObj2 );
+int SEtrEsMayor ( SEntrada * p_etrObj1, SEntrada * p_etrObj2 );
+int SEtrEsIgualLit ( SEntrada * p_etrObj, const char * p_cNombre );
+int SEtrEsMenorLit ( SEntrada * p_etrObj, const char * p_cNombre );
+int SEtrEsMayorLit ( SEntrada * p_etrObj, const char * p_cNombre );
 
 
 

@@ -495,6 +495,36 @@ int MemEsValida ( void * p_vDireccion )
 }
 
 
+int MemEsIgual ( void * p_vBloque1, void * p_vBloque2, int iNumBytes )
+{
+	int		iRes;
+	int 	iByte;
+	byte * 	p_byBloque1;
+	byte * 	p_byBloque2;
+
+	if ( ES_VALIDO ( p_vBloque1 ) && ES_VALIDO ( p_vBloque2 ) && ( iNumBytes >= 0 ) )
+	{
+		iRes = 1;
+		iByte = 0;
+		p_byBloque1 = (byte *) p_vBloque1;
+		p_byBloque2 = (byte *) p_vBloque2;
+		while ( ( iByte < iNumBytes ) && ( iRes == 1 ) )
+		{
+			if ( p_byBloque1 [ iByte ] !=  p_byBloque2 [ iByte ] )
+			{
+				iRes = 0;
+			}
+			iByte = iByte + 1;
+		}	
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+
 /*
 byte MemValorByte ( unsigned long ulDireccion )
 {

@@ -13,7 +13,7 @@
 
 typedef struct
 {
-	char *			p_cNombre;
+	char *				p_cNombre;
 	SListaLiterales *	p_lisDefiniciones;
 
 } SEntradaExt;
@@ -41,9 +41,12 @@ int SEtxInsertarDefinicion ( SEntradaExt * p_extObj, const char * p_cDefinicion 
 
 SEntradaExt * SEtxDuplicar (  SEntradaExt * p_extObj );
 
-int SEtxEsIgual ( SEntradaExt * p_extObj, const char * p_cNombre );
-int SEtxEsMenor ( SEntradaExt * p_extObj, const char * p_cNombre );
-int SEtxEsMayor ( SEntradaExt * p_extObj, const char * p_cNombre );
+int SEtxEsIgual ( SEntradaExt * p_extObj1, SEntradaExt * p_extObj2 );
+int SEtxEsMenor ( SEntradaExt * p_extObj1, SEntradaExt * p_extObj2 );
+int SEtxEsMayor ( SEntradaExt * p_extObj1, SEntradaExt * p_extObj2 );
+int SEtxEsIgualLit ( SEntradaExt * p_extObj, const char * p_cNombre );
+int SEtxEsMenorLit ( SEntradaExt * p_extObj, const char * p_cNombre );
+int SEtxEsMayorLit ( SEntradaExt * p_extObj, const char * p_cNombre );
 
 
 

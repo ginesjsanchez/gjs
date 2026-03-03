@@ -22,6 +22,12 @@
 #include "Errores.h"
 
 
+#define ASCII_MIN_LETRA_MIN 		ASCII_A_MIN
+#define ASCII_MAX_LETRA_MIN 		ASCII_Z_MIN
+#define ASCII_MIN_LETRA_MAY			ASCII_A_MAY
+#define ASCII_MAX_LETRA_MAY 		ASCII_Z_MAY
+#define ASCII_MIN_NUMERO			ASCII_0
+#define ASCII_MAX_NUMERO 			ASCII_9
 
 
 
@@ -393,6 +399,86 @@ unichar * CadUniDuplicar ( const unichar * p_ucValor )
 		p_cCopia = NULL;
 	}
 	return ( p_cCopia );
+}
+
+int CadComparar ( const char * p_cAsciiz1, const char * p_cAsciiz2 )
+{
+	return ( CadCompararExt ( p_cAsciiz1, p_cAsciiz2, -1, -1 ) );
+}
+
+int CadCompararExt ( const char * p_cAsciiz1, const char * p_cAsciiz2, int iMax1, int iMax2 )
+{
+	int iRes;
+	int iCar;
+	int iLong1;
+	int iLong2;
+
+	iLong1 = CadLongitudSeg ( p_cAsciiz1, iMax1 ); 
+	iLong2 = CadLongitudSeg ( p_cAsciiz2, iMax2 ); 
+	if ( ( iLong1 > 0 ) && ( iLong2 > 0 ) )
+	{
+		if ( iLong1 == iLong2 )
+		{
+			iRes = 1;
+			iCar = 0; 
+			while ( ( iCar < iLong1 ) && ( iRes == 1 ) )  
+			{
+				if ( p_cAsciiz1 [ iCar ] < p_cAsciiz2 [ iCar ] )
+				{
+					iRes = 2;
+				}
+				else if ( p_cAsciiz1 [ iCar ] > p_cAsciiz2 [ iCar ] )
+				{
+					iRes = 3;
+				}
+				iCar = iCar + 1;
+			}
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int CadEsAlfanumericoValido ( const char * p_cAsciiz )
+{
+	return ( CadEsAlfanumericoValidoExt ( p_cAsciiz, -1 ) );
+}
+
+int CadEsAlfanumericoValidoExt ( const char * p_cAsciiz, int iMax )
+{
+	int		iPos;
+	int		iRes;
+	int		iLong;
+
+	iLong = CadLongitudSeg ( p_cAsciiz, iMax );
+	if ( iLong > 0 )
+	{
+		iPos = 1;
+		iRes = 1;
+		while ( ( iRes = 1 ) && ( iPos < iLong ) )
+		{
+			if ( ( ( p_cAsciiz [ iPos ] >= ASCII_MIN_LETRA_MAY ) && ( p_cAsciiz [ iPos ] <= ASCII_MAX_LETRA_MAY ) ) 
+					|| ( ( p_cAsciiz [ iPos ] >= ASCII_MIN_LETRA_MIN ) && ( p_cAsciiz [ iPos ] <= ASCII_MAX_LETRA_MIN ) ) 
+					|| ( ( p_cAsciiz [ iPos ] >= ASCII_MIN_NUMERO ) && ( p_cAsciiz [ iPos ] <= ASCII_MAX_NUMERO ) ) 
+				)
+			{
+				iRes = 0;
+			}
+			iPos = iPos + 1;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
 void CadImprimir ( const char * p_cAsciiz )

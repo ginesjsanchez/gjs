@@ -93,33 +93,26 @@ SEntradaExt * SLisEtxElemento ( SListaEntradasExt * p_lisObj, int iElem )
 	return ( p_etxRes );
 }
 
-int SLisEtxInsertarElem ( SListaEntradasExt * p_lisObj, int iPosAnt, SEntradaExt * p_etxDatos )
+int SLisEtxInsertar ( SListaEntradasExt * p_lisObj, SEntradaExt * p_etxDatos )
 {
 	int iRes;
 
-	if ( ES_VALIDO ( p_lisObj ) )
+	if ( ES_VALIDO ( p_lisObj ) && ES_VALIDO ( p_etxDatos ) )
 	{
-		iRes = SLispInsertarElem ( p_lisObj->p_lisDatos, iPosAnt, (byte *) p_etxDatos );
-	}
-	else
-	{
-		iRes = -1;
-	}
-	return ( iRes );
-}
-
-int SLisEtxInsertarAlInicio ( SListaEntradasExt * p_lisObj, SEntradaExt * p_etxDatos )
-{
-	return ( SLisEtxInsertarElem ( p_lisObj, -1, p_etxDatos ) );
-}
-
-int SLisEtxInsertarAlFinal ( SListaEntradasExt * p_lisObj, SEntradaExt * p_etxDatos )
-{
-	int iRes;
-
-	if ( ES_VALIDO ( p_lisObj ) )
-	{
-		iRes = SLisEtxInsertarElem ( p_lisObj, SLisEtxNumElementos ( p_lisObj ), p_etxDatos );
+		SLispInicio ( p_lisObj->p_lisDatos );
+		while ( SEtxEsMenor ( ( SEntradaExt * ) SLispActual ( p_lisObj->p_lisDatos ), p_etxDatos ) &&
+			( SLispEstaEnFinal ( p_lisObj->p_lisDatos ) == 0 ) )
+		{
+			SLispSiguiente ( p_lisObj->p_lisDatos );
+		}
+		if ( SLispEstaEnFinal ( p_lisObj->p_lisDatos ) == 1 )
+		{
+			iRes = SLispInsertar ( p_lisObj->p_lisDatos, ( byte * ) p_etxDatos );
+		}
+		else
+		{
+			iRes = SLispInsertarDelante ( p_lisObj->p_lisDatos, ( byte * ) p_etxDatos );
+		}
 	}
 	else
 	{
@@ -139,164 +132,6 @@ int SLisEtxVaciar ( SListaEntradasExt * p_lisObj )
 	else
 	{
 		iRes = -1;
-	}
-	return ( iRes );
-}
-
-int SLisEtxPosicion ( SListaEntradasExt * p_lisObj )
-{
-	int	iRes;
-
-	if ( ES_VALIDO ( p_lisObj ) )
-	{
-		iRes = SLispPosicion ( p_lisObj->p_lisDatos );
-	}
-	else
-	{
-		iRes = -1;
-	}
-	return ( iRes );
-}
-
-SEntradaExt * SLisEtxActual ( SListaEntradasExt * p_lisObj )
-{
-	SEntradaExt *	p_etxRes;
-
-	if ( ES_VALIDO ( p_lisObj ) )
-	{
-		p_etxRes = (SEntradaExt *) SLispActual ( p_lisObj->p_lisDatos );
-	}
-	else
-	{
-		p_etxRes = NULL;
-	}
-	return ( p_etxRes );
-}
-
-void SLisEtxInicio ( SListaEntradasExt * p_lisObj )
-{
-	if ( ES_VALIDO ( p_lisObj ) ) 
-	{
-		SLispInicio ( p_lisObj->p_lisDatos );
-	}
-}
-
-void SLisEtxFinal ( SListaEntradasExt * p_lisObj )
-{
-	if ( ES_VALIDO ( p_lisObj ) ) 
-	{
-		SLispFinal ( p_lisObj->p_lisDatos );
-	}
-}
-
-void SLisEtxSiguiente ( SListaEntradasExt * p_lisObj )
-{
-	if ( ES_VALIDO ( p_lisObj ) ) 
-	{
-		SLispSiguiente ( p_lisObj->p_lisDatos );
-	}
-}
-
-void SLisEtxAnterior ( SListaEntradasExt * p_lisObj )
-{
-	if ( ES_VALIDO ( p_lisObj ) ) 
-	{
-		SLispAnterior ( p_lisObj->p_lisDatos );
-	}
-}
-
-void SLisEtxMoverA ( SListaEntradasExt * p_lisObj, int iElem )
-{
-	if ( ES_VALIDO ( p_lisObj ) ) 
-	{
-		SLispMoverA ( p_lisObj->p_lisDatos, iElem );
-	}
-}
-
-void SLisEtxDeposicionar ( SListaEntradasExt * p_lisObj )
-{
-	if ( ES_VALIDO ( p_lisObj ) ) 
-	{
-		SLispDeposicionar ( p_lisObj->p_lisDatos );
-	}
-}
-
-int SLisEtxEsNulo ( SListaEntradasExt * p_lisObj )
-{
-	int iRes;
-
-	if ( ES_VALIDO ( p_lisObj ) ) 
-	{
-		iRes = SLispEsNulo ( p_lisObj->p_lisDatos );
-	}
-	else
-	{
-		iRes = 0;
-	}
-	return ( iRes );
-}
-
-int SLisEtxEstaEnFinal ( SListaEntradasExt * p_lisObj )
-{
-	int iRes;
-
-	if ( ES_VALIDO ( p_lisObj ) ) 
-	{
-		iRes = SLispEstaEnFinal ( p_lisObj->p_lisDatos );
-	}
-	else
-	{
-		iRes = 0;
-	}
-	return ( iRes );
-}
-
-int SLisEtxEstaEnIncio ( SListaEntradasExt * p_lisObj )
-{
-	int iRes;
-
-	if ( ES_VALIDO ( p_lisObj ) ) 
-	{
-		iRes = SLispEstaEnIncio ( p_lisObj->p_lisDatos );
-	}
-	else
-	{
-		iRes = 0;
-	}
-	return ( iRes );
-}
-
-int SLisEtxInsertar ( SListaEntradasExt * p_lisObj, SEntradaExt * p_etxDatos )
-{
-	return ( SLispInsertarDetras ( p_lisObj->p_lisDatos, (byte *) p_etxDatos ) );
-}
-
-int SLisEtxInsertarDelante ( SListaEntradasExt * p_lisObj, SEntradaExt * p_etxDatos )
-{
-	int iRes;
-
-	if ( ES_VALIDO ( p_lisObj ) ) 
-	{
-		iRes = SLispInsertarDelante ( p_lisObj->p_lisDatos, (byte *) p_etxDatos );
-	}
-	else
-	{
-		iRes = 0;
-	}
-	return ( iRes );
-}
-
-int SLisEtxInsertarDetras ( SListaEntradasExt * p_lisObj, SEntradaExt * p_etxDatos )
-{
-	int iRes;
-
-	if ( ES_VALIDO ( p_lisObj ) ) 
-	{
-		iRes = SLispInsertarDetras ( p_lisObj->p_lisDatos, (byte *) p_etxDatos );
-	}
-	else
-	{
-		iRes = 0;
 	}
 	return ( iRes );
 }
