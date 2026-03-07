@@ -1,0 +1,28 @@
+{
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.configuration.maven.userSettings": "C:\\Desarrollo\\apache-maven-3.9.11\\conf\\settings.xml",
+    "gjsMaven.cygwinPath": "C:\\Desarrollo\\Cygwin64",
+    "gjsMaven.defaultGoals": [
+        "clean",
+        "compile",
+        "test",
+        "package",
+        "install",
+        "deploy"
+    ],
+    "editor.defaultFormatter": "gjs-maven-vscode-extension.gjs-maven-vscode-extension",
+    "editor.fontSize": 10,
+    "terminal.integrated.profiles.windows": {
+        "Cygwin": {
+            "path": "C:\\\\Desarrollo\\\\Cygwin64\\\\bin\\\\bash.exe",
+            "args": [
+                "--login",
+                "-i"
+            ],
+            "env": {
+                "CHERE_INVOKING": "1"
+            }
+        }
+    },
+    "gjsMaven.terminalProfile": "Cygwin"
+}

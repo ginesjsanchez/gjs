@@ -133,6 +133,21 @@
 	<build>
 		<plugins>
 			<plugin>
+				<!--
+				<groupId>org.gjs.java.maven.plugins</groupId>
+				-->
+				<groupId>com.github.maven-nar</groupId>
+				<artifactId>nar-maven-plugin</artifactId>
+				<configuration>
+					<libraries>
+						<library>
+							<type>shared</type>
+							<narSystemPackage>${project.groupId}</narSystemPackage>
+						</library>
+					</libraries>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>properties-maven-plugin</artifactId>
 				<inherited>false</inherited>

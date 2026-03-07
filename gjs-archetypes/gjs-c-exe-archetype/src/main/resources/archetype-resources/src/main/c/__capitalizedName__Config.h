@@ -6,7 +6,7 @@ ${symbol_pound}ifndef ${tagLib}
 ${symbol_pound}define ${tagLib}
 
 // Dependencias comunes
-${symbol_pound}include <Entorno.h>
+${symbol_pound}include <CEntorno.h>
 
 
 

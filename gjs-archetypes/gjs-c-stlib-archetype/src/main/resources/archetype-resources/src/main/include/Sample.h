@@ -14,7 +14,7 @@ ${symbol_pound}include <${capitalizedName}Includes.h>
 
 
 // Library methods an functions
-bool SmpDoSomething ();
+int SmpDoSomething ();
 
 
 

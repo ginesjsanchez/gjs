@@ -12,8 +12,8 @@ ${symbol_pound}include "Sample.h"
 
 
 // Methods and functions implementation here
-bool SmpDoSomething () {
-    return true;
+int SmpDoSomething () {
+    return 1;
 }
 
 

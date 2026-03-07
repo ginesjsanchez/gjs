@@ -18,13 +18,15 @@ ${symbol_pound}include <${capitalizedName}Includes.h>
 // Data type structure
 typedef struct
 {
+	int iValue;
+	
 }  SampleType;
 
  
 SampleType * SmpCrear ();
 void SmpDestruir ( SampleType ** p_p_smpObj );
 
-int SmpIsValid ( SampleType * p_smpObj );
+int SmpEsValido ( SampleType * p_smpObj );
 
 
 

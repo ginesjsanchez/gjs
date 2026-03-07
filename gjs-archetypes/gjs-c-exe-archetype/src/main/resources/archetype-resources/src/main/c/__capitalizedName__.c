@@ -41,10 +41,10 @@ int main ()
 	SArgumentos	*		p_argParametros;
 #end
 
-	EntInicializar ( true, "${shortName}", ${major}, ${minor}, ${patch} );
+	EntInicializar ( 1, "${shortName}", ${major}, ${minor} );
 #if( $log.equals( "y" )	)
-	LogIni( "/log4cxx.xml" );
-#end
+	AplicLogInicializar ( EntDirectorioLog (), "${capitalizedName}.log" );
+#end                                               
 
 #if( $parameters > 0 )
 	p_argParametros = SArgCrear ( iNumArgs, p_p_cArgs );
@@ -85,7 +85,7 @@ int main ()
 	}
 	
 #if( $log.equals( "y" )	)
-	LogFin();
+	AplicLogFinalizar( NULL );
 #end
 	EntFinalizar ();
 	return ( iRes );
@@ -94,7 +94,7 @@ int main ()
 #if( $parameters > 0 )
 static int validateArgument ( int iArg, const char * p_cArg )
 {
-	int bRes = 1;
+	int iRes = 1;
 	switch ( iArg ) 
 	{
 #foreach($i in [0..$parameters])

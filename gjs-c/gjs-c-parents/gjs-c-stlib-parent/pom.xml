@@ -31,7 +31,8 @@
 					<libraries>
 						<library>
 							<type>static</type>
-							<narSystemPackage>${project.grouupId}</narSystemPackage>
+							<narSystemName>${finalPrefix}${finalName}</narSystemName>
+							<narSystemPackage>${project.groupId}</narSystemPackage>
 						</library>
 					</libraries>
 					<linker>

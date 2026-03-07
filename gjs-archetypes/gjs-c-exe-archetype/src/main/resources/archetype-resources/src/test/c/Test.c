@@ -3,21 +3,22 @@
 #set( $symbol_escape = '\' )
 #set( $capitalizedName = $shortName.substring(0,1).toUpperCase() + $shortName.substring(1))
 
-${symbol_pound}include <CppTest.h>
-
-${symbol_pound}include <map>
+${symbol_pound}include <CTest.h>
 
 
-using namespace org::gjs::cpp::common;
-using namespace std;
+
+${symbol_pound}include <CEntorno.h>
+
+
 
 
 
 
 int main( int argc, char * argv[] )
 {
-	int iRes = 1;
-	InicializarBase();
+	int iRes = 0;
+	EntInicializar ( 1, "Test${capitalizedName}", 1, 0 );
 	// TODO
+	EntFinalizar ();
 	return ( iRes );
 }

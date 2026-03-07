@@ -14,19 +14,20 @@ ${symbol_pound}include "SampleType.h"
 
 SampleType * SmpCrear ()
 {
-	SSampleType * p_smpObj;
+	SampleType * p_smpObj;
 	
-	p_smpObj = (SSampleType *) MemReservar ( sizeof ( SSampleType ) );
+	p_smpObj = (SampleType *) MemReservar ( sizeof ( SampleType ) );
 	if ( ES_VALIDO ( p_smpObj ) )
 	{
 		// Inicializar atributos
+		p_smpObj->iValue = 0;
 	}
 	return ( p_smpObj );
 }
 
-void SSmpDestruir ( SSampleType ** p_p_smpObj )
+void SmpDestruir ( SampleType ** p_p_smpObj )
 {
-	SSampleType * p_smpObj;
+	SampleType * p_smpObj;
 	
 	if ( ES_VALIDO ( p_p_smpObj ) )
 	{
@@ -39,14 +40,14 @@ void SSmpDestruir ( SSampleType ** p_p_smpObj )
 	}
 }
 
-int SSmpEsValido ( SSampleType * p_smpObj )
+int SmpEsValido ( SampleType * p_smpObj )
 {
 	int iRes;
 
 	if ( ES_VALIDO ( p_smpObj ) )
 	{
 		// Condiciones de validez de los atributos
-		if ( 1 = 1  )
+		if ( p_smpObj->iValue >= 0  )
 		{
 			iRes = 1;
 		}
