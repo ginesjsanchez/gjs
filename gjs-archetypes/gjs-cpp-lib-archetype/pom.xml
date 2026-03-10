@@ -5,13 +5,13 @@
 	<parent>
 		<groupId>org.gjs.maven.archetypes</groupId>    
 		<artifactId>gjs-archetype-parent</artifactId>    
-		<version>1.0.0-SNAPSHOT</version>    
-		<relativePath/>
+		<version>1.0.0-RC.1</version>    
+		<relativePath>../gjs-archetype-parent</relativePath>
 	</parent>	
 
     <groupId>org.gjs.maven.archetypes</groupId>    
     <artifactId>gjs-cpp-lib-archetype</artifactId>    
-    <version>1.0.0-SNAPSHOT</version>    
+    <version>1.0.0-RC.1</version>    
     <packaging>maven-archetype</packaging>    
     
     <name>Cpp-lib Maven archetype</name>    

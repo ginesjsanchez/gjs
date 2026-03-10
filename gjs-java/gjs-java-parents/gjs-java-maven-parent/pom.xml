@@ -5,13 +5,13 @@
 	<parent>
 		<groupId>org.gjs.java.maven</groupId>
 		<artifactId>gjs-java-maven-base-parent</artifactId>
-		<version>1.0.0-SNAPSHOT</version>    
+		<version>1.0.0-RC.1</version>    
 		<relativePath>../../gjs-java-base-parents/gjs-java-maven-base-parent</relativePath>
 	</parent>	
 
     <groupId>org.gjs.java.maven</groupId>
     <artifactId>gjs-java-maven-parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-RC.1</version>
 	<packaging>pom</packaging>
 
 	<name>GJS Java maven plugins parent</name>
@@ -20,7 +20,7 @@
 	</description>
 
 	<properties>
-		<gjs-maven-base.version>1.0.0-SNAPSHOT</gjs-maven-base.version>
+		<gjs-maven-base.version>1.0.0-RC.1</gjs-maven-base.version>
 		
 		<!-- Apache libraries -->
 		<maven-common-artifact-filters.version>3.4.0</maven-common-artifact-filters.version>
