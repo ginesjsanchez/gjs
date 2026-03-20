@@ -1,0 +1,13 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+#set( $capitalizedName = $shortName.substring(0,1).toUpperCase() + $shortName.substring(1))
+${symbol_pound} Test suite
+${symbol_pound}
+${symbol_pound} Library ${capitalizedName} 
+${symbol_pound}
+
+__version__ = "${version}"
+
+
+

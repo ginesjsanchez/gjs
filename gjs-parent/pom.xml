@@ -21,6 +21,10 @@
 
 		* eclipse               : It is automatically selected when Maven is executed from Eclipse IDE
 	
+	Special properties;
+	
+		* skip.if.not.source    :  true if packaging is pom, false otherwise
+	
 	Environtment propeties:
 	
 		* CYGWIN: To activate cygwin profile instead the windows profile 
@@ -71,6 +75,9 @@
 		<project.reporting.outputEncoding>${resources.encoding}</project.reporting.outputEncoding>
 		<project.resources.sourceEncoding>${reporting.encoding}</project.resources.sourceEncoding>
 
+		<!-- Plugins execution control -->
+		<skip.if.not.source>true</skip.if.not.source>
+	
 		<!-- Public Free License -->
 		<lincence.name>gpl_v3</lincence.name>
 		<lincence.organization>GJ Software</lincence.organization>
@@ -108,7 +115,7 @@
 		<!-- Additional Maven plugins -->
         <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
 		<copy-rename-maven-plugin.version>1.0.1</copy-rename-maven-plugin.version>
-        <exec-maven-plugin.version>3.5.1</exec-maven-plugin.version>
+        <exec-maven-plugin.version>3.6.3</exec-maven-plugin.version>
         <gmavenplus-plugin.version>4.2.1</gmavenplus-plugin.version>
         <build-helper-maven-plugin.version>3.6.1</build-helper-maven-plugin.version>
         <maven-replacer-plugin.version>1.4.1</maven-replacer-plugin.version>
@@ -367,6 +374,7 @@
 							<root>src/main/include</root>
 							<root>src/main/jsp</root>
 							<root>src/main/js</root>
+							<root>src/main/pyhton</root>
 						</roots>
 						<includes>
 							<include>*.java</include>
@@ -378,6 +386,8 @@
 							<include>*.css</include>
 							<include>*.xhtml</include>
 							<include>*.jsp</include>
+							<include>*.py</include>
+							<include>*.ts</include>
 						</includes>
 					</configuration>
 				</plugin>
@@ -536,6 +546,9 @@
 					<value>pom</value>
 				</property>
 			</activation>
+			<properties>
+				<skip.if.not.source>true</skip.if.not.source>
+			</properties>
 		</profile>
 		<profile>
 			<id>plugin</id>
@@ -545,6 +558,9 @@
 					<value>maven-plugin</value>
 				</property>
 			</activation>
+			<properties>
+				<skip.if.not.source>false</skip.if.not.source>
+			</properties>
 		</profile>
 		<profile>
 			<id>source</id>
@@ -554,6 +570,9 @@
 					<value>!pom</value>
 				</property>
 			</activation>
+			<properties>
+				<skip.if.not.source>false</skip.if.not.source>
+			</properties>
 		</profile>
 		<profile>
 			<id>debug</id>

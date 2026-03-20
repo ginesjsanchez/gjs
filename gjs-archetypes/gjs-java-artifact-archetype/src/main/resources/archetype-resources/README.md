@@ -1,61 +1,65 @@
-## ${artifactId} 
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+#set( $capitalizedName = $shortName.substring(0,1).toUpperCase() + $shortName.substring(1))
+${symbol_pound}${symbol_pound} ${artifactId} 
 
-Project ${name}
+Project ${capitalizedName}
 
-## Description
+${symbol_pound}${symbol_pound} Description
 
-Project java-module in java language.
+Project java-artifact in java language.
 
 
-## Requirements
+${symbol_pound}${symbol_pound} Requirements
 
 * Maven 3.9.x
 
 
-## Configuration
+${symbol_pound}${symbol_pound} Configuration
 
 
       
-## Installation
+${symbol_pound}${symbol_pound} Installation
     
     mvn clean install
 
 
-## Unit testing
+${symbol_pound}${symbol_pound} Unit testing
 
     mvn clean test
     
 
-## Documentation
+${symbol_pound}${symbol_pound} Documentation
 
     mvn site
     
 
-## Deploy 
+${symbol_pound}${symbol_pound} Deploy 
 
     mvn deploy
 
         
-## Execution
+${symbol_pound}${symbol_pound} Execution
 
     
-## Security
+${symbol_pound}${symbol_pound} Security
     
     
-## Audit
+${symbol_pound}${symbol_pound} Audit
 
     
-## To start
+${symbol_pound}${symbol_pound} To start
 
     
 
-## Avalaible users
+${symbol_pound}${symbol_pound} Avalaible users
 
 
-## Common mistakes
+${symbol_pound}${symbol_pound} Common mistakes
 
 
     
-## References
+${symbol_pound}${symbol_pound} References
 
 * [Maven Build Lifecycle](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html)

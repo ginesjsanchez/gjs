@@ -21,7 +21,7 @@
   Project gjs-java-artifact-archetype    
   --------------------------------------------------------    
     
-    Archetype to generate the basic structure of a simple project in language ${lan}.
+    Archetype to generate the basic structure of a simple artifact project in language java.
   Example of use: This command generates the test-project project:    
      
     mvn -B archetype:generate \

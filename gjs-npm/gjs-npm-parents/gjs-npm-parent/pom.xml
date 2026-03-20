@@ -1,0 +1,177 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.gjs</groupId>
+		<artifactId>gjs-parent</artifactId>
+		<version>1.0.0-RC.1</version>
+		<relativePath>../../../gjs-parent</relativePath>
+	</parent>	
+
+    <groupId>org.gjs.npm</groupId>
+    <artifactId>gjs-npm-parent</artifactId>
+    <version>1.0.0-RC.1</version>
+	<packaging>pom</packaging>
+
+	<name>GJS Npm</name>
+	<description>
+		GJS Npm integration with Maven.
+		
+		Fase Maven			Comando npm equivalente
+		validate			npm run lint (opcional)
+		initialize			npm install
+		generate-resources	npm run build
+		test				npm test
+		package				npm run package (opcional)
+		
+	</description>
+
+	<properties>
+		<!-- Default programming language features -->
+		<gjs.source.language>typescript</gjs.source.language>
+		<gjs.source.extension>ts</gjs.source.extension>
+
+		<!-- Npm configuration
+		<!-- Selector de gestor: npm | pnpm -->
+        <package.manager>npm</package.manager>
+        <node.env></node.env>
+        <install.command></install.command>
+        <build.script>build</build.script>
+        <test.script>test</test.script>
+        <working.dir>${project.basedir}</working.dir>
+		<install.args.extra></install.args.extra>
+	</properties>
+	
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<executions>
+						<!-- Install -->
+						<execution>
+							<id>pm-install</id>
+							<phase>initialize</phase>
+							<goals><goal>exec</goal></goals>
+							<configuration>
+								<workingDirectory>${working.dir}</workingDirectory>
+								<executable>${package.manager}</executable>
+								<environmentVariables>
+									<NODE_ENV>${node.env}</NODE_ENV>
+								</environmentVariables>
+								<arguments>
+									<argument>${install.command}</argument>
+									<argument>${install.args.extra}</argument>
+								</arguments>
+							</configuration>
+						</execution>
+
+						<!-- Build -->
+						<execution>
+							<id>pm-build</id>
+							<phase>generate-resources</phase>
+							<goals><goal>exec</goal></goals>
+							<configuration>
+								<workingDirectory>${working.dir}</workingDirectory>
+								<executable>${package.manager}</executable>
+								<arguments>
+									<argument>run</argument>
+									<argument>${build.script}</argument>
+								</arguments>
+							</configuration>
+						</execution>
+
+						<!-- Test -->
+						<execution>
+							<id>pm-test</id>
+							<phase>test</phase>
+							<goals><goal>exec</goal></goals>
+							<configuration>
+								<workingDirectory>${working.dir}</workingDirectory>
+								<executable>${package.manager}</executable>
+								<arguments>
+									<argument>run</argument>
+									<argument>${test.script}</argument>
+								</arguments>
+							</configuration>
+						</execution>
+
+					</executions>
+				</plugin>
+
+				<!-- Limpieza adicional -->
+				<plugin>
+					<artifactId>maven-clean-plugin</artifactId>
+					<configuration>
+						<filesets>
+							<fileset>
+								<directory>${working.dir}/dist</directory>
+							</fileset>
+						</fileset>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>		
+
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<configuration>
+					<skip>${skip.if.not.source}</skip>
+				</configuration>
+            </plugin>
+		</plugins>
+	</build>
+
+    <profiles>
+
+        <!-- Desarrollo -->
+        <profile>
+            <id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+            <properties>
+                <node.env>development</node.env>
+                <install.command>install</install.command>
+            </properties>
+        </profile>
+
+        <!-- Produccion -->
+        <profile>
+            <id>pro</id>
+            <properties>
+				<node.env>production</node.env>
+				<install.command>ci</install.command>
+            </properties>
+        </profile>
+
+        <!-- CI -->
+        <profile>
+            <id>ci</id>
+            <properties>
+                <install.command>ci</install.command>
+            </properties>
+        </profile>
+
+        <!-- Usar pnpm -->
+        <profile>
+            <id>pnpm</id>
+            <properties>
+                <package.manager>pnpm</package.manager>
+            </properties>
+        </profile>
+
+		<profile>
+			<id>pnpm-ci</id>
+			<properties>
+				<package.manager>pnpm</package.manager>
+				<install.command>install</install.command>
+				<install.args.extra>--frozen-lockfile</install.args.extra>
+			</properties>
+		</profile>
+    </profiles>
+
+</project>

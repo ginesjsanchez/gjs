@@ -118,41 +118,38 @@
 		</dependencies>
 	</dependencyManagement>
 	
-	<profiles>
-		<profile>
-			<id>source</id>
-			<build>
-				<plugins>
-					<plugin>
-						<!--
-						<groupId>org.gjs.java.maven.plugins</groupId>
-						-->
-						<groupId>com.github.maven-nar</groupId>
-						<artifactId>nar-maven-plugin</artifactId>
-						<configuration>
-							<cpp>
-								<options combine.children="append">
-									<option>-Wno-conversion-null</option>
-									<option>-fpermissive</option>
-								</options>
+	<build>
+		<plugins>
+			<plugin>
+				<!--
+				<groupId>org.gjs.java.maven.plugins</groupId>
+				-->
+				<groupId>com.github.maven-nar</groupId>
+				<artifactId>nar-maven-plugin</artifactId>
+				<configuration>
+					<skip>${skip.if.not.source}</skip>
+					<cpp>
+						<options combine.children="append">
+							<option>-Wno-conversion-null</option>
+							<option>-fpermissive</option>
+						</options>
 
-								<includePaths combine.children="append">
-									<includePath>
-										<path>${glibDirInclude}</path>
-									</includePath>
-								</includePaths>						
-							</cpp>
-							
-							<linker>
-								<testOptions combine.children="append">
-									<!--option> -Wl,++wrap=exit</option--> 
-									<!--option> -Wl,++wrap=getenv</option--> 
-								</testOptions>
-							</linker>				
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>	
-		</profile>
-	</profiles>	
+						<includePaths combine.children="append">
+							<includePath>
+								<path>${glibDirInclude}</path>
+							</includePath>
+						</includePaths>						
+					</cpp>
+					
+					<linker>
+						<testOptions combine.children="append">
+							<!--option> -Wl,++wrap=exit</option--> 
+							<!--option> -Wl,++wrap=getenv</option--> 
+						</testOptions>
+					</linker>				
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>	
+
 </project>

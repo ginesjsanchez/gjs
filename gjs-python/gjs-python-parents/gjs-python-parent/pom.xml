@@ -1,0 +1,208 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.gjs</groupId>
+		<artifactId>gjs-parent</artifactId>
+		<version>1.0.0-RC.1</version>
+		<relativePath>../../../gjs-parent</relativePath>
+	</parent>	
+
+    <groupId>org.gjs.python</groupId>
+    <artifactId>gjs-python-parent</artifactId>
+    <version>1.0.0-RC.1</version>
+	<packaging>pom</packaging>
+
+	<name>GJS common Python base parent</name>
+	<description>
+		Maven Python general parent pom.
+	</description>
+
+	<properties>
+		<!-- Default programming language features -->
+		<gjs.source.language>python</gjs.source.language>
+		<gjs.source.extension>py</gjs.source.extension>
+		
+		<!-- Python/Pip configuration -->
+		<gjs.pyhton.dir.build>${project.build.directory}/python-build</gjs.pyhton.dir.build>
+		<gjs.pyhton.dir.eggs>${project.build.directory}/python-eggs</gjs.pyhton.dir.eggs>
+		<gjs.pyhton.dir.src>${project.build.directory}/python-src</gjs.pyhton.dir.src>
+
+	</properties>
+	
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>copy-python-sources</id>
+							<phase>generate-resources</phase>
+							<goals><goal>copy-resources</goal></goals>
+							<configuration>
+								<outputDirectory>${gjs.pyhton.dir.src}</outputDirectory>
+								<resources>
+									<resource>
+										<directory>${project.basedir}</directory>
+										<includes>
+											<include>src/**</include>
+											<include>pyproject.toml</include>
+											<include>setup.py</include>
+										</includes>
+									</resource>
+								</resources>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<executions>
+						<execution>
+							<phase>initialize</phase>
+							<goals>
+								<goal>run</goal>
+							</goals>
+							<configuration>
+								<target>
+									<mkdir dir="${gjs.pyhton.dir.build}"/>
+									<mkdir dir="${gjs.pyhton.dir.eggs}"/>
+									<mkdir dir="${gjs.pyhton.dir.src}"/>
+								</target>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>python-clean</id>
+							<phase>clean</phase>
+							<goals>
+								<goal>exec</goal>
+							</goals>
+							<configuration>
+								<executable>python</executable>
+								<arguments>
+									<argument>-c</argument>
+									<argument>import shutil, os; [shutil.rmtree(d) for d in ['dist', 'build', 'target'] if os.path.exists(d)]</argument>
+								</arguments>
+							</configuration>
+						</execution>
+						<execution>
+							<id>python-setup</id>
+							<phase>compile</phase>
+							<goals>
+								<goal>exec</goal>
+							</goals>
+							<configuration>
+								<executable>pip</executable>
+								<workingDirectory>${gjs.pyhton.dir.src}</workingDirectory>
+								<arguments>
+									<argument>install</argument>
+									<argument>.</argument>
+								</arguments>
+							</configuration>
+						</execution>
+						<execution>
+							<id>python-test</id>
+							<phase>test</phase>
+							<goals>
+								<goal>exec</goal>
+							</goals>
+							<configuration>
+								<executable>python</executable>
+								<workingDirectory>${gjs.pyhton.dir.src}</workingDirectory>
+								<arguments>
+									<argument>-m</argument>
+									<argument>pytest</argument>
+									<argument>--junitxml=target/surefire-reports/python-tests.xml</argument>
+								</arguments>
+							</configuration>
+						</execution>
+						<execution>
+							<id>python-package</id>
+							<phase>package</phase>
+							<goals>
+								<goal>exec</goal>
+							</goals>
+							<configuration>
+								<executable>python</executable>
+								<workingDirectory>${gjs.pyhton.dir.src}</workingDirectory>
+								<arguments>
+									<argument>-m</argument>
+									<argument>build</argument>
+									<argument>--outdir</argument>
+									<argument>${project.build.directory}</argument> 
+								</arguments>
+								<environmentVariables>
+									<DIST_EXTRA_CONFIG>--build-base=${gjs.pyhton.dir.build} --egg-base=${gjs.pyhton.dir.eggs}</DIST_EXTRA_CONFIG>
+								</environmentVariables>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>		
+
+		<plugins>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<configuration>
+					<skip>${skip.if.not.source}</skip>
+				</configuration>
+            </plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<configuration>
+					<skip>${skip.if.not.source}</skip>
+				</configuration>
+            </plugin>
+		</plugins>
+	</build>
+
+    <profiles>
+        <profile>
+            <id>upgrade</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+						<configuration>
+							<skip>${skip.if.not.source}</skip>
+						</configuration>
+                       <executions>
+                            <execution>
+                                <id>upgrade-pip</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>python</executable>
+                                    <arguments>
+										<argument>-m</argument> 
+										<argument>pip</argument>
+										<argument>install</argument>
+										<argument>--upgrade</argument>
+										<argument>pip</argument>
+										<argument>setuptools</argument>
+										<argument>wheel</argument>
+										<argument>build</argument>
+										<argument>pytest</argument>
+									</arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>       
+                </plugins>       
+            </build>
+        </profile>
+    </profiles>
+
+</project>

@@ -6,7 +6,7 @@
     <parent>
 		<groupId>org.gjs.c</groupId>
 		<artifactId>gjs-c-lib-parent</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>1.0.0-RC.1</version>
         <relativePath />
     </parent>
 

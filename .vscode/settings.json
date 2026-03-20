@@ -10,7 +10,7 @@
         "install",
         "deploy"
     ],
-    "editor.defaultFormatter": "gjs-maven-vscode-extension.gjs-maven-vscode-extension",
+    "editor.defaultFormatter": null,
     "editor.fontSize": 10,
     "terminal.integrated.profiles.windows": {
         "Cygwin": {
@@ -24,5 +24,6 @@
             }
         }
     },
-    "gjsMaven.terminalProfile": "Cygwin"
+    "gjsMaven.terminalProfile": "Cygwin",
+    "editor.detectIndentation": false
 }
