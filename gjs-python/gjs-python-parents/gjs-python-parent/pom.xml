@@ -119,7 +119,7 @@
 								<arguments>
 									<argument>-m</argument>
 									<argument>pytest</argument>
-									<argument>--junitxml=target/surefire-reports/python-tests.xml</argument>
+									<argument>--junitxml=../target/surefire-reports/python-tests.xml</argument>
 								</arguments>
 							</configuration>
 						</execution>

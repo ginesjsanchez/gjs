@@ -24,6 +24,12 @@
 		test				npm test
 		package				npm run package (opcional)
 		
+		Profiles:
+		* dev (default) | pro   
+		* ci
+		* pnpm
+		* pnpm-ci
+		* install	
 	</description>
 
 	<properties>
@@ -31,7 +37,7 @@
 		<gjs.source.language>typescript</gjs.source.language>
 		<gjs.source.extension>ts</gjs.source.extension>
 
-		<!-- Npm configuration
+		<!-- Npm configuration -->
 		<!-- Selector de gestor: npm | pnpm -->
         <package.manager>npm</package.manager>
         <node.env></node.env>
@@ -40,11 +46,33 @@
         <test.script>test</test.script>
         <working.dir>${project.basedir}</working.dir>
 		<install.args.extra></install.args.extra>
+		<!-- Global install -->
+		<global.install.skip>false</global.install.skip>  <!-- Automated variable: do not touch -->
+		<global.install.libs></global.install.libs>  <!-- Library names separated by a space -->
 	</properties>
 	
 	<build>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>initilize-properties</id>
+							<phase>initialize</phase>
+							<goals>
+								<goal>run</goal>
+							</goals>
+							<configuration>
+								<target>
+									<condition property="global.install.skip" value="false" else="true">
+										<isset property="global.install.libs"/>
+									</condition>
+								</target>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>exec-maven-plugin</artifactId>
@@ -108,13 +136,37 @@
 							<fileset>
 								<directory>${working.dir}/dist</directory>
 							</fileset>
-						</fileset>
+						</filesets>
 					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>		
 
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>enforce-profiles-npm-ok</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireActiveProfile>
+									<profiles>dev,pro</profiles>
+									<all>false</all>
+								</requireActiveProfile>
+							</rules>
+							<fail>true</fail>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>  
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+            </plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
@@ -126,7 +178,6 @@
 	</build>
 
     <profiles>
-
         <!-- Desarrollo -->
         <profile>
             <id>dev</id>
@@ -138,7 +189,6 @@
                 <install.command>install</install.command>
             </properties>
         </profile>
-
         <!-- Produccion -->
         <profile>
             <id>pro</id>
@@ -147,7 +197,6 @@
 				<install.command>ci</install.command>
             </properties>
         </profile>
-
         <!-- CI -->
         <profile>
             <id>ci</id>
@@ -155,7 +204,6 @@
                 <install.command>ci</install.command>
             </properties>
         </profile>
-
         <!-- Usar pnpm -->
         <profile>
             <id>pnpm</id>
@@ -163,7 +211,6 @@
                 <package.manager>pnpm</package.manager>
             </properties>
         </profile>
-
 		<profile>
 			<id>pnpm-ci</id>
 			<properties>
@@ -172,6 +219,41 @@
 				<install.args.extra>--frozen-lockfile</install.args.extra>
 			</properties>
 		</profile>
+		<profile>
+			<id>install</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<executions>
+							<!-- Install -->
+							<execution>
+								<id>pm-global-install</id>
+								<phase>initialize</phase>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+								<configuration>
+									<skip>${global.install.skip}</skip>
+									<workingDirectory>${working.dir}</workingDirectory>
+									<executable>${package.manager}</executable>
+									<environmentVariables>
+										<NODE_ENV>${node.env}</NODE_ENV>
+									</environmentVariables>
+									<arguments>
+										<argument>${install.command}</argument>
+										<argument>-g</argument>
+										<argument>${global.install.libs}</argument>
+									</arguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
     </profiles>
+
 
 </project>

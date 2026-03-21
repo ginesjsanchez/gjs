@@ -411,7 +411,7 @@
 						-->
 					</configuration>
 				</plugin>
-		</plugins>
+			</plugins>
 		</pluginManagement>		
 		
 		<plugins>

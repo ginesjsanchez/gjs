@@ -21,7 +21,7 @@
   Project gjs-python-lib-archetype    
   --------------------------------------------------------    
     
-    Archetype to generate the basic structure of a simple project in language python.
+    Archetype to generate the basic structure of a simple project in language pyhton.
   Example of use: This command generates the test-project project:    
      
     mvn -B archetype:generate \

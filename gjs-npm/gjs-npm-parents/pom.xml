@@ -13,6 +13,7 @@
     <modules>
         <module>gjs-npm-parent</module>
         <module>gjs-npm-front-parent</module>
+        <module>gjs-npm-typescript-parent</module>
     </modules>
     
  </project>

@@ -1,11 +1,11 @@
-# GJS Python library Archetype
+# GJS Java artifact Archetype
 
 Project Archetype in python language.
 
 
 ## Description
 
-Archetype to generate the basic structure of a basic project in python language.
+Archetype to generate the basic structure of a basic project in java language.
 
 
 ## Requirements
@@ -28,7 +28,7 @@ Archetype to generate the basic structure of a basic project in python language.
 							-Dname=test \ 
 							-DgroupId=org.gjs.test \
   							-Dauthor="GJ Software" \
-							-DauthorMail=gjsoft@gmx.es 
+							-SauthorMail=gjsoft@gmx.es 
   
 	Archetype Parameters:
 

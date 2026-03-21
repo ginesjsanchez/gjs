@@ -16,10 +16,12 @@
 	<name>GJS Npm</name>
 	<description>
 		GJS Npm front integration with Maven.
+		Profiles:
+		* angular (default) | react | vue   
 	</description>
 
 	<properties>
-		<!-- Npm configuration
+		<!-- Npm configuration -->
         <!-- Carpeta de salida (Angular/React/Vue suelen usar dist o build) -->
         <frontend.output.dir>${working.dir}/dist</frontend.output.dir>
         <!-- Puedes cambiar a build si usas React clásico -->
@@ -56,6 +58,27 @@
 
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>enforce-profiles-npm-ok</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireActiveProfile>
+									<profiles>angular,react,vue</profiles>
+									<all>false</all>
+								</requireActiveProfile>
+							</rules>
+							<fail>true</fail>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>  
+			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 				<configuration>
 					<skip>${skip.if.not.source}</skip>
@@ -70,16 +93,29 @@
             <id>react</id>
             <properties>
                 <frontend.output.dir>${working.dir}/build</frontend.output.dir>
+				<!-- Global install -->
+				<global.install.libs>@angular/cli vite@latest</global.install.libs>
             </properties>
         </profile>
 
         <!-- Angular/Vue (por defecto dist) -->
         <profile>
             <id>angular</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<!-- Global install -->
+				<global.install.libs>@angular/cli</global.install.libs>
+			</properties>
         </profile>
 
         <profile>
             <id>vue</id>
+			<properties>
+				<!-- Global install -->
+				<global.install.libs>vue@latest</global.install.libs>
+			</properties>
         </profile>
     </profiles>
 
