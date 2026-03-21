@@ -25,11 +25,11 @@ Archetype to generate the basic structure of a maven plugin.
 							-DarchetypeGroupId=org.gjs.maven.archetypes \
 							-DarchetypeArtifactId=gjs-plugin-archetype \
 							-DarchetypeVersion=1.0.0-SNAPSHOT \
-							-Dname=test -Drule=test 
+							-DshortName=test -Drule=test 
     
 	Archetype Parameters:
 
-	* name: Name of the project. Always lowercase. Allows two words separated by a hyphen.
+	* shortName: Name of the project. Always lowercase. Allows two words separated by a hyphen.
 
 	* rule: Name of the sample rule. Always lowercase. Allows two words separated by a hyphen.
 

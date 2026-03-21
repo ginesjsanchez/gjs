@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<archetype-descriptor xsi:schemaLocation="https://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0 http://maven.apache.org/xsd/archetype-descriptor-1.1.0.xsd" name="semilla-sb-back-archetype"
+<archetype-descriptor xsi:schemaLocation="https://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0 http://maven.apache.org/xsd/archetype-descriptor-1.1.0.xsd" name="gjs-typescript-lib-archetype"
     xmlns="https://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
@@ -16,14 +16,14 @@
 		</requiredProperty>
 		
 		<!-- Propiedades reales -->
-		<requiredProperty key="name">
+		<requiredProperty key="shortName">
 			<validationRegex>[a-z]+</validationRegex>
 		</requiredProperty>
 		<requiredProperty key="groupId">
 			<validationRegex>[a-z]{2,}(.[a-z]{2,}){2,}</validationRegex>
 		</requiredProperty>
 		<requiredProperty key="artifactId">
-			<defaultValue>${name}</defaultValue>
+			<defaultValue>${shortName}</defaultValue>
 		</requiredProperty>
 		<requiredProperty key="package">
 			<defaultValue>${groupId}</defaultValue>
@@ -33,13 +33,6 @@
 			<defaultValue>${defaultVersion}</defaultValue>
 			<validationRegex>^[1-9][0-9]*\.[0-9]+\.[0-9]+(-SNAPSHOT|-RC\.[0-9]+)?</validationRegex>
 		</requiredProperty>
- 		<requiredProperty key="author">
-			<defaultValue>GJ Software</defaultValue>
-		</requiredProperty>
- 		<requiredProperty key="authorMail">
-			<defaultValue>gjsoft@gmx.es</defaultValue>
-			<validationRegex>^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$</validationRegex>
-		</requiredProperty>
 </requiredProperties>
 	
 	<fileSets>
@@ -48,15 +41,15 @@
 		  <includes>
 			<include>README.md</include>
 			<include>changelog.md</include>
-			<include>setup.py</include>
-			<include>pyproject.toml</include>	
-			<include>requirements.txt</include>			
+			<include>package.json</include>
+			<include>tsconfig.json</include>	
+			<include>jest.config.js</include>			
 		  </includes>
 		</fileSet>
 		<fileSet filtered="true" packaged="true" encoding="UTF-8">
-		  <directory>src/main/python</directory>
+		  <directory>src/main/typescript</directory>
 			  <includes>
-				<include>**/*.py</include>
+				<include>**/*.ts</include>
 			  </includes>
 		</fileSet>
 		<fileSet filtered="true" encoding="UTF-8">
@@ -66,9 +59,9 @@
 			  </includes>
 		</fileSet>
 		<fileSet filtered="true" packaged="true" encoding="UTF-8">
-		  <directory>src/test/python</directory>
+		  <directory>src/test/typescript</directory>
 			  <includes>
-				<include>**/*.py</include>
+				<include>**/*.ts</include>
 			  </includes>
 		</fileSet>
 		<fileSet filtered="true" encoding="UTF-8">

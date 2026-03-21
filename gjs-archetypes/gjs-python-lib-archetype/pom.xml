@@ -14,7 +14,7 @@
     <version>1.0.0-RC.1</version>    
     <packaging>maven-archetype</packaging>    
     
-    <name>gjs-py-lib-archetype</name>    
+    <name>GJS Python Library Archatype</name>    
     <description>    
       
   --------------------------------------------------------    
@@ -28,7 +28,7 @@
 							-DarchetypeGroupId=org.gjs.maven.archetypes \
 							-DarchetypeArtifactId=gjs-python-lib-archetype \
 							-DarchetypeVersion=1.0.0-SNAPSHOT \
-							-Dname=test-project \
+							-DshortName=test-project \
 							-DgroupId=org.gjs.test \
 							-Dauthor="GJ Software" \
 							-DauthorMail=gjsoft@gmx.es 
@@ -36,7 +36,7 @@
   ====================================================================================    
 	Archetype Parameters:
 
-	* name: Name of the project. Always lowercase. Allows two words separated by a hyphen.
+	* shortName: Name of the project. Always lowercase. Allows two words separated by a hyphen.
 
 	* groupId: The group of the project artifact. 
 

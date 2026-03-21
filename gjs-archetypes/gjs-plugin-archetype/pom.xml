@@ -28,13 +28,13 @@
 		-DarchetypeGroupId=org.gjs.maven.archetypes \
 		-DarchetypeArtifactId=gjs-plugin-archetype \
 		-DarchetypeVersion=1.0.0-SNAPSHOT \
-		-Dname=test -Drule=test \
+		-DshortName=test -Drule=test \
 		-Dversion=1.0.0-SNAPSHOT
     
   ====================================================================================    
 	Archetype Parameters:
 
-	* name: Name of the maven plugin. Always lowercase. Allows two words separated by a hyphen.
+	* shortName: Name of the maven plugin. Always lowercase. Allows two words separated by a hyphen.
 
 	* rule: Name of the sample rule. Always lowercase. Allows two words separated by a hyphen.
 

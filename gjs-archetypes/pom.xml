@@ -22,6 +22,7 @@
         <module>gjs-cpp-stlib-archetype</module>
         <module>gjs-cpp-exe-archetype</module>
         <module>gjs-python-lib-archetype</module>
+        <module>gjs-typescript-lib-archetype</module>
   </modules>
     
  </project>

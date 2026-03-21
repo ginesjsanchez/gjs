@@ -42,7 +42,7 @@
 								<goal>copy-resources</goal>
 							</goals>
 							<configuration>
-								<outputDirectory>${project.build.directory}/frontend</outputDirectory>
+								<outputDirectory>${project.build.directory}</outputDirectory>
 								<resources>
 									<resource>
 										<directory>${frontend.output.dir}</directory>

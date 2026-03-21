@@ -14,7 +14,7 @@
     <version>1.0.0-RC.1</version>    
     <packaging>maven-archetype</packaging>    
     
-    <name>gjs-java-artifact-archetype</name>    
+    <name>GJS Java Artifact Archatype</name>    
     <description>    
       
   --------------------------------------------------------    
@@ -28,13 +28,13 @@
 							-DarchetypeGroupId=org.gjs.maven.archetypes \
 							-DarchetypeArtifactId=gjs-java-artifact-archetype \
 							-DarchetypeVersion=1.0.0-SNAPSHOT \
-							-Dname=test-project \
+							-DshortName=test-project \
 							-DgroupId=org.gjs.test 
     
   ====================================================================================    
 	Archetype Parameters:
 
-	* name: Name of the project. Always lowercase. Allows two words separated by a hyphen.
+	* shortName: Name of the project. Always lowercase. Allows two words separated by a hyphen.
 
 	* groupId: The group of the project artifact. 
 

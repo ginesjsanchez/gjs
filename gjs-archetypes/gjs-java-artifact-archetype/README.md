@@ -25,12 +25,12 @@ Archetype to generate the basic structure of a basic project in java language.
 							-DarchetypeGroupId=org.gjs.maven.archetypes \
 							-DarchetypeArtifactId=gjs-java-artifact-archetype \
 							-DarchetypeVersion=1.0.0-SNAPSHOT \
-							-Dname=test \ 
+							-DshortName=test \ 
 							-DgroupId=org.gjs.test 
     
 	Archetype Parameters:
 
-	* name: Name of the project. Always lowercase. Allows two words separated by a hyphen.
+	* shortName: Name of the project. Always lowercase. Allows two words separated by a hyphen.
 
 	* groupId: The group of the project artifact. 
 

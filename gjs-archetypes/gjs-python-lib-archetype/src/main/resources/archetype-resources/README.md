@@ -8,7 +8,7 @@ Project ${capitalizedName}
 
 ${symbol_pound}${symbol_pound} Description
 
-Project py-lib in python language.
+Project ${capitalizedName} in python language.
 
 
 ${symbol_pound}${symbol_pound} Requirements

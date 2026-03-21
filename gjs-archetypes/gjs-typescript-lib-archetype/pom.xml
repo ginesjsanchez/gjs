@@ -10,33 +10,31 @@
 	</parent>	
 
     <groupId>org.gjs.maven.archetypes</groupId>    
-    <artifactId>gjs-python-lib-archetype</artifactId>    
+    <artifactId>gjs-typescript-lib-archetype</artifactId>    
     <version>1.0.0-RC.1</version>    
     <packaging>maven-archetype</packaging>    
     
-    <name>gjs-py-lib-archetype</name>    
+    <name>GJS Typescript Library Archatype</name>    
     <description>    
       
   --------------------------------------------------------    
-  Project gjs-python-lib-archetype    
+  Project gjs-typescript-lib-archetype    
   --------------------------------------------------------    
     
-    Archetype to generate the basic structure of a simple project in language pyhton.
+    Archetype to generate the basic structure of a simple project in language typescript.
   Example of use: This command generates the test-project project:    
      
     mvn -B archetype:generate \
 							-DarchetypeGroupId=org.gjs.maven.archetypes \
-							-DarchetypeArtifactId=gjs-python-lib-archetype \
+							-DarchetypeArtifactId=gjs-typescript-lib-archetype \
 							-DarchetypeVersion=1.0.0-SNAPSHOT \
-							-Dname=test-project \
-							-DgroupId=org.gjs.test \
-							-Dauthor="GJ Software" \
-							-DauthorMail=gjsoft@gmx.es 
+							-DshortName=test-project \
+							-DgroupId=org.gjs.test 
     
   ====================================================================================    
 	Archetype Parameters:
 
-	* name: Name of the project. Always lowercase. Allows two words separated by a hyphen.
+	* shortName: Name of the project. Always lowercase. Allows two words separated by a hyphen.
 
 	* groupId: The group of the project artifact. 
 
@@ -45,10 +43,6 @@
 	* package: The project packaging of the source code. Default is org.gjs.maven.archetypes. Not required.
 
 	* version: The project version. Default is 1.0.0-SNAPSHOT. Not required.
-                 
-	* author: The author of the project. Not required.
-	
-	* authorMail: The e-mail of the author of the project. Not required.
   ====================================================================================    
       
     </description>    

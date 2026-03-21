@@ -44,7 +44,8 @@
         <install.command></install.command>
         <build.script>build</build.script>
         <test.script>test</test.script>
-        <working.dir>${project.basedir}</working.dir>
+        <npm.build.dir>${project.build.directory}/npm</npm.build.dir>
+        <working.dir>${npm.build.dir}</working.dir>
 		<install.args.extra></install.args.extra>
 		<!-- Global install -->
 		<global.install.skip>false</global.install.skip>  <!-- Automated variable: do not touch -->
@@ -69,6 +70,27 @@
 										<isset property="global.install.libs"/>
 									</condition>
 								</target>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>copy-sources</id>
+							<phase>initialize</phase>
+							<goals>
+								<goal>copy-resources</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>${npm.build.dir}</outputDirectory>
+								<resources>
+									<resource>
+										<directory>${project.basedir}</directory>
+										<filtering>false</filtering>
+									</resource>
+								</resources>
 							</configuration>
 						</execution>
 					</executions>
@@ -135,6 +157,7 @@
 						<filesets>
 							<fileset>
 								<directory>${working.dir}/dist</directory>
+								<directory>${working.dir}/node-modules</directory>
 							</fileset>
 						</filesets>
 					</configuration>
@@ -166,6 +189,12 @@
 			</plugin>  
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
+            </plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<skip>${skip.if.not.source}</skip>
+				</configuration>
             </plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
