@@ -40,7 +40,7 @@
 			<defaultValue>gjsoft@gmx.es</defaultValue>
 			<validationRegex>^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$</validationRegex>
 		</requiredProperty>
-</requiredProperties>
+	</requiredProperties>
 	
 	<fileSets>
         <fileSet filtered="true" encoding="UTF-8">

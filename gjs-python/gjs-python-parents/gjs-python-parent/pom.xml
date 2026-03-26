@@ -16,6 +16,19 @@
 	<name>GJS common Python base parent</name>
 	<description>
 		Maven Python general parent pom.
+		
+		Fase Maven			Comando npm equivalente
+		initialize			
+		compile				pip install
+		test				python -m pytest
+		package				python -m build
+		install				pip install
+		
+		Profiles:
+		* upgrade	
+		
+		Install libraries:
+			mvn exec:exec@upgrade-tools -Pupgrade
 	</description>
 
 	<properties>
@@ -24,10 +37,10 @@
 		<gjs.source.extension>py</gjs.source.extension>
 		
 		<!-- Python/Pip configuration -->
-		<gjs.pyhton.dir.build>${project.build.directory}/python-build</gjs.pyhton.dir.build>
-		<gjs.pyhton.dir.eggs>${project.build.directory}/python-eggs</gjs.pyhton.dir.eggs>
-		<gjs.pyhton.dir.src>${project.build.directory}/python-src</gjs.pyhton.dir.src>
-
+		<gjs.python.dir.build>${project.build.directory}/python-build</gjs.python.dir.build>
+		<gjs.python.dir.eggs>${project.build.directory}/python-eggs</gjs.python.dir.eggs>
+		<gjs.python.dir.src>${project.build.directory}/python-src</gjs.python.dir.src>
+		<gjs.python.artifact.ext>tar.gz</gjs.python.artifact.ext>
 	</properties>
 	
 	<build>
@@ -41,7 +54,7 @@
 							<phase>generate-resources</phase>
 							<goals><goal>copy-resources</goal></goals>
 							<configuration>
-								<outputDirectory>${gjs.pyhton.dir.src}</outputDirectory>
+								<outputDirectory>${gjs.python.dir.src}</outputDirectory>
 								<resources>
 									<resource>
 										<directory>${project.basedir}</directory>
@@ -66,9 +79,7 @@
 							</goals>
 							<configuration>
 								<target>
-									<mkdir dir="${gjs.pyhton.dir.build}"/>
-									<mkdir dir="${gjs.pyhton.dir.eggs}"/>
-									<mkdir dir="${gjs.pyhton.dir.src}"/>
+									<mkdir dir="${gjs.python.dir.src}"/>
 								</target>
 							</configuration>
 						</execution>
@@ -100,7 +111,7 @@
 							</goals>
 							<configuration>
 								<executable>pip</executable>
-								<workingDirectory>${gjs.pyhton.dir.src}</workingDirectory>
+								<workingDirectory>${gjs.python.dir.src}</workingDirectory>
 								<arguments>
 									<argument>install</argument>
 									<argument>.</argument>
@@ -115,7 +126,7 @@
 							</goals>
 							<configuration>
 								<executable>python</executable>
-								<workingDirectory>${gjs.pyhton.dir.src}</workingDirectory>
+								<workingDirectory>${gjs.python.dir.src}</workingDirectory>
 								<arguments>
 									<argument>-m</argument>
 									<argument>pytest</argument>
@@ -125,26 +136,63 @@
 						</execution>
 						<execution>
 							<id>python-package</id>
-							<phase>package</phase>
+							<phase>prepare-package</phase>
 							<goals>
 								<goal>exec</goal>
 							</goals>
 							<configuration>
 								<executable>python</executable>
-								<workingDirectory>${gjs.pyhton.dir.src}</workingDirectory>
+								<workingDirectory>${gjs.python.dir.src}</workingDirectory>
 								<arguments>
 									<argument>-m</argument>
 									<argument>build</argument>
 									<argument>--outdir</argument>
 									<argument>${project.build.directory}</argument> 
 								</arguments>
-								<environmentVariables>
-									<DIST_EXTRA_CONFIG>--build-base=${gjs.pyhton.dir.build} --egg-base=${gjs.pyhton.dir.eggs}</DIST_EXTRA_CONFIG>
-								</environmentVariables>
+							</configuration>
+						</execution>
+						<execution>
+							<id>python-install</id>
+							<phase>install</phase>
+							<goals>
+								<goal>exec</goal>
+							</goals>
+							<configuration>
+								<executable>python</executable>
+								<workingDirectory>${project.build.directory}</workingDirectory>
+								<arguments>
+									<argument>-c</argument>
+									<argument>import os, subprocess, glob; file=glob.glob('*.whl')[0]; subprocess.run(['pip', 'install', file], check=True)</argument>
+								</arguments>
 							</configuration>
 						</execution>
 					</executions>
 				</plugin>
+				<!--
+				<plugin>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>python-rename-package</id>
+							<phase>package</phase>
+							<goals>
+								<goal>run</goal>
+							</goals>
+							<configuration>
+								<target>
+									<move todir="${project.build.directory}">
+										<fileset dir="${project.build.directory}">
+											<include name="*.${gjs.python.artifact.ext}" />
+										</fileset>
+										<mapper type="glob" from="*.${gjs.python.artifact.ext}" to="${project.build.finalName}.${gjs.python.artifact.ext}" />
+									</move>
+									<echo level="info" message="Package created: ${project.build.finalName}.${gjs.python.artifact.ext}" />
+								</target>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				-->
 			</plugins>
 		</pluginManagement>		
 
@@ -162,11 +210,20 @@
 					<skip>${skip.if.not.source}</skip>
 				</configuration>
             </plugin>
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>default-jar</id>
+						<phase>none</phase>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
     <profiles>
-        <profile>
+		<profile>
             <id>upgrade</id>
             <build>
                 <plugins>
@@ -178,7 +235,7 @@
 						</configuration>
                        <executions>
                             <execution>
-                                <id>upgrade-pip</id>
+                                <id>upgrade-tools</id>
                                 <phase>initialize</phase>
                                 <goals>
                                     <goal>exec</goal>

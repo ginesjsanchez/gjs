@@ -3,6 +3,9 @@
 #set( $symbol_escape = '\' )
 #set( $capitalizedPrefix = $prefix.substring(0,1).toUpperCase() + $prefix.substring(1))
 #set( $capitalizedName = $shortName.substring(0,1).toUpperCase() + $shortName.substring(1))
+#set( $infoGroup = $groupId)
+#set( $infoArtifact = $artifactId)
+#set( $infoVersion = $version)
 ${symbol_pound} ${capitalizedPrefix} ${capitalizedName} Archetype
 
 Project Archetype in ${lan} language.
@@ -22,14 +25,14 @@ ${symbol_pound}${symbol_pound} Requirements
 ${symbol_pound}${symbol_pound} Generating a project from the archetype
 
     mvn archetype:generate \
-		-DarchetypeGroupId=${groupId} \
-		-DarchetypeArtifactId=${artifactId} \
-		-DarchetypeVersion=${version} 
+		-DarchetypeGroupId=${infoGroupId} \
+		-DarchetypeArtifactId=${infoArtifactId} \
+		-DarchetypeVersion=${infoVersion} 
 
     mvn archetype:generate \
-		-DarchetypeGroupId=${groupId} \
-		-DarchetypeArtifactId=${artifactId} \
-		-DarchetypeVersion=${version} \
+		-DarchetypeGroupId=${infoGroupId} \
+		-DarchetypeArtifactId=${infoArtifactId} \
+		-DarchetypeVersion=${infoVersion} \
 		-DshortName=test-project \ 
 		-DprojectGroupId=org.gjs.test 
     

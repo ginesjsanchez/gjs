@@ -503,8 +503,11 @@
             <properties>
                 <osFamily>linux</osFamily>
                 <osName>Linux</osName>
+				<!--
                 <console>${env.BASH}</console>
-                <consoleArgs></consoleArgs>
+				-->
+				<console>bash</console>
+                <consoleArgs>-c</consoleArgs>
 				<exeFinalExtension></exeFinalExtension>
 				<rootDir></rootDir>
 				<cygwin>false</cygwin>
@@ -528,8 +531,11 @@
             <properties>
                 <osFamily>windows</osFamily>
                 <osName>Windows</osName>
+				<!--
                 <console>${env.SHELL}</console>
-                <consoleArgs></consoleArgs>
+				-->
+				<console>bash</console>
+                <consoleArgs>-c</consoleArgs>
 				<platformOptions>-DCYGWIN</platformOptions>
 				<platformLinkOption>-Wl,-mcygwin</platformLinkOption>
 				<exeFinalExtension>.exe</exeFinalExtension>

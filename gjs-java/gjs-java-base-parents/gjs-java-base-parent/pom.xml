@@ -49,6 +49,25 @@
 		.		     					|
 		.								|--/gjs-java-sb-test-parent
 		.
+		
+		Maven quality, format & documentation commads provided:
+			* mvn checkstyle:check 
+			* mvn javadoc:javadoc		Generar javadoc site
+			* mvn javadoc:fix   		Añade o corrige Javadoc en src/main/java
+			* mvn javadoc:test-fix 		Añade o corrige Javadoc en src/test/java
+			* mvn formatter:format	-Dformatter.file=file-eclipse-likely.xml
+			* mvn fmt:format -Dcode.line.max.length=100	
+			* mvn spotless:apply   		Aplica cambios (organiza imports)
+			* mvn spotless:check   		Solo verifica
+			* mvn pmd:check
+			* mvn spotbugs:spotbugs
+			* mvn spotbugs:check		
+			
+		Profiles:
+			* attach-sources			
+			* attach-javadoc
+
+		
 		Needs profile cpp with special properties in settings.xml file: 
 		
 			* jdk25Dir : Directory of Java Jdk-25 installation
@@ -76,6 +95,17 @@
         <gjs-java-common-test-base.version>1.0.0-RC.1</gjs-java-common-test-base.version>
         <gjs-java-common-base.version>1.0.0-RC.1</gjs-java-common-base.version>
 
+
+		<!-- Maven plugins -->
+		<maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
+		<maven-pmd-plugin.version>3.28.0</maven-pmd-plugin.version>
+		
+		<!-- Additional Maven plugins -->
+		<formatter-maven-plugin.version>2.29.0</formatter-maven-plugin.version>
+		<fmt-maven-plugin.version>2.29</fmt-maven-plugin.version>
+		<spotless-maven-plugin.version>2.43.0</spotless-maven-plugin.version>
+		<spotbugs-maven-plugin.version>4.9.8.2</spotbugs-maven-plugin.version>
+		
         <!-- Apache reporting plugins -->
         <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
         <maven-jxr-plugin.version>3.6.0</maven-jxr-plugin.version>
@@ -102,6 +132,9 @@
 
         <!-- Lombok -->
         <lombok.version>1.18.42</lombok.version>
+		
+		<!-- Fomatter -->
+		<code.line.max.length>120</code.line.max.length>
     </properties>
 
     <dependencyManagement>
@@ -334,7 +367,112 @@
     <build>
         <pluginManagement>
             <plugins>
-            </plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-checkstyle-plugin</artifactId>
+					<version>${maven-checkstyle-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>attach-javadocs</id>
+							<goals>
+								<goal>javadoc</goal>
+								<goal>fix</goal>         <!-- Añade/Arregla Javadoc en código -->
+								<goal>test-fix</goal>    <!-- Opcional para tests -->
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-pmd-plugin</artifactId>
+					<version>${maven-pmd-plugin.version}</version>
+					<configuration>
+					</configuration>
+					<executions>
+						<execution>
+							<goals>
+								<goal>check</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>net.revelc.code.formatter</groupId>
+					<artifactId>formatter-maven-plugin</artifactId>
+					<version>${formatter-maven-plugin.version}</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>format</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<configFile>${formatter.file}</configFile>
+						<includes>
+						   <include>**/*.java</include>
+						</includes>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>com.spotify.fmt</groupId>
+					<artifactId>fmt-maven-plugin</artifactId>
+					<version>${fmt-maven-plugin.version}</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>format</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<lineLength>${code.line.max.length}</lineLength>
+						<includes>
+							<include>**/*.java</include>
+						</includes>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>com.diffplug.spotless</groupId>
+					<artifactId>spotless-maven-plugin</artifactId>
+					<version>${spotless-maven-plugin.version}</version>
+					<configuration>
+						<java>
+							<removeUnusedImports />
+							<importOrder />
+						</java>
+					</configuration>
+					<executions>
+						<execution>
+							<goals>
+								<goal>apply</goal>
+								<goal>check</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>com.github.spotbugs</groupId>
+					<artifactId>spotbugs-maven-plugin</artifactId>
+					<version>${spotbugs-maven-plugin.version}</version>
+					<configuration>
+						<xmlOutput>true</xmlOutput>
+						<failOnError>false</failOnError>
+					</configuration>
+					<executions>
+						<execution>
+							<goals>
+								<goal>spotbugs</goal>
+								<goal>check</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+		    </plugins>
         </pluginManagement>
 
         <extensions>
@@ -347,11 +485,6 @@
 
     <reporting>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${maven-javadoc-plugin.version}</version>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
@@ -407,6 +540,46 @@
                 </plugins>
             </build>
         </profile>
+        <profile>
+            <id>attach-sources</id>
+            <build>
+                <plugins>
+                    <plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+								<phase>package</phase>
+							</execution>
+						</executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>		
+        <profile>
+            <id>attach-javadoc</id>
+            <build>
+                <plugins>
+                    <plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+								<phase>package</phase>
+							</execution>
+						</executions>
+					</plugin>
+                </plugins>
+            </build>
+        </profile>		
         <profile>
             <id>jdk-25</id>
             <properties>

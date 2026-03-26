@@ -6,9 +6,13 @@ import org.apache.commons.io.FileUtils
 
 println "Post generate tasks..."
 
-def projectArtifactId = request.properties.getProperty("artifactId")
-def projectGroupId = request.properties.getProperty("groupId")
-def projectVersion = request.properties.getProperty("version")
+def requestProperties = request.getProperties()
+
+def projectArtifactId = requestProperties.getProperty("artifactId")
+def projectGroupId = requestProperties.getProperty("groupId")
+def projectVersion = requestProperties.getProperty("version")
+
+
 
 println "1) Customizing pom.xml..."
 def pomFile = new File(request.getOutputDirectory(), projectArtifactId + "/pom.xml")

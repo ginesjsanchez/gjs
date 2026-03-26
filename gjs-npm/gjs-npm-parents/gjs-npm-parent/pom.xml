@@ -18,8 +18,8 @@
 		GJS Npm integration with Maven.
 		
 		Fase Maven			Comando npm equivalente
-		validate			npm run lint (opcional)
 		initialize			npm install
+		process-sources		npm run lint (opcional)
 		generate-resources	npm run build
 		test				npm test
 		package				npm run package (opcional)
@@ -30,6 +30,9 @@
 		* pnpm
 		* pnpm-ci
 		* install	
+		
+		Install libraries:
+			mvn exec:exec@pm-global-install -Pinstall
 	</description>
 
 	<properties>
@@ -49,7 +52,10 @@
 		<install.args.extra></install.args.extra>
 		<!-- Global install -->
 		<global.install.skip>false</global.install.skip>  <!-- Automated variable: do not touch -->
+		<global.install.minimal.libs>eslint</global.install.minimal.libs>  
 		<global.install.libs></global.install.libs>  <!-- Library names separated by a space -->
+		<local.install.minimal.libs>globals @eslint/js typescript-eslint</local.install.minimal.libs>  
+		<local.install.libs></local.install.libs>  <!-- Library names separated by a space -->
 	</properties>
 	
 	<build>
@@ -89,6 +95,9 @@
 									<resource>
 										<directory>${project.basedir}</directory>
 										<filtering>false</filtering>
+										<excludes>
+											<exclude>pom.xml</exclude>
+										</excludes>
 									</resource>
 								</resources>
 							</configuration>
@@ -113,6 +122,26 @@
 								<arguments>
 									<argument>${install.command}</argument>
 									<argument>${install.args.extra}</argument>
+								</arguments>
+							</configuration>
+						</execution>
+						<!-- Additional local installations -->
+						<execution>
+							<id>pm-local-install</id>
+							<phase>initialize</phase>
+							<goals>
+								<goal>exec</goal>
+							</goals>
+							<configuration>
+								<skip>${global.install.skip}</skip>
+								<workingDirectory>${working.dir}</workingDirectory>
+								<executable>${console}</executable>
+								<environmentVariables>
+									<NODE_ENV>${node.env}</NODE_ENV>
+								</environmentVariables>
+								<arguments>
+									<argument>${consoleArgs}</argument>
+									<argument>${package.manager} ${install.command} --save-dev ${local.install.minimal.libs} ${local.install.libs}</argument>
 								</arguments>
 							</configuration>
 						</execution>
@@ -147,8 +176,64 @@
 							</configuration>
 						</execution>
 
+						<!-- npm run lint (opcional) -->
+						<execution>
+							<id>npm-lint</id>
+							<phase>process-sources</phase>
+							<goals>
+								<goal>exec</goal>
+							</goals>
+							<configuration>
+								<workingDirectory>${working.dir}</workingDirectory>
+								<executable>npm</executable>
+								<arguments>
+									<argument>run</argument>
+									<argument>lint</argument>
+								</arguments>
+							</configuration>
+						</execution>
+
+						<!-- npm run package (opcional) -->
+						<execution>
+							<id>npm-package</id>
+							<phase>package</phase>
+							<goals>
+								<goal>exec</goal>
+							</goals>
+							<configuration>
+								<workingDirectory>${working.dir}</workingDirectory>
+								<executable>npm</executable>
+								<arguments>
+									<argument>run</argument>
+									<argument>package</argument>
+								</arguments>
+							</configuration>
+						</execution>
 					</executions>
 				</plugin>
+				<!--
+				<plugin>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>move-tgz</id>
+							<phase>package</phase>
+							<goals>
+								<goal>run</goal>
+							</goals>
+							<configuration>
+								<target>
+									<move todir="${project.build.directory}" flatten="true">
+										<fileset dir="${working.dir}">
+											<include name="*.tgz"/>
+										</fileset>
+									</move>
+								</target>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				-->
 
 				<!-- Limpieza adicional -->
 				<plugin>
@@ -178,7 +263,7 @@
 						<configuration>
 							<rules>
 								<requireActiveProfile>
-									<profiles>dev,pro</profiles>
+									<profiles>dev,pro,install</profiles>
 									<all>false</all>
 								</requireActiveProfile>
 							</rules>
@@ -203,6 +288,15 @@
 					<skip>${skip.if.not.source}</skip>
 				</configuration>
             </plugin>
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>default-jar</id>
+						<phase>none</phase>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -259,21 +353,20 @@
 							<!-- Install -->
 							<execution>
 								<id>pm-global-install</id>
-								<phase>initialize</phase>
+								<phase>validate</phase>
 								<goals>
 									<goal>exec</goal>
 								</goals>
 								<configuration>
 									<skip>${global.install.skip}</skip>
 									<workingDirectory>${working.dir}</workingDirectory>
-									<executable>${package.manager}</executable>
+									<executable>${console}</executable>
 									<environmentVariables>
 										<NODE_ENV>${node.env}</NODE_ENV>
 									</environmentVariables>
 									<arguments>
-										<argument>${install.command}</argument>
-										<argument>-g</argument>
-										<argument>${global.install.libs}</argument>
+										<argument>${consoleArgs}</argument>
+										<argument>${package.manager} ${install.command} -g ${global.install.minimal.libs} ${global.install.libs}</argument>
 									</arguments>
 								</configuration>
 							</execution>

@@ -2,14 +2,19 @@
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
 #set( $capitalizedName = $shortName.substring(0,1).toUpperCase() + $shortName.substring(1))
+#set( $infoGroup = $groupId)
+#set( $infoArtifact = $artifactId)
+#set( $infoVersion = $version)
 {
   "name": "${capitalizedName}",
-  "version": "${version}",
-  "main": "target/dist/index.js",
-  "types": "target/dist/index.d.ts",
+  "version": "${infoVersion}",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "jest",
     "build": "tsc",
+	"lint": "eslint . --ext .ts",
+	"package": "npm run build && npm pack --pack-destination ..",
     "prepublishOnly": "npm run test && npm run build"
   },
   "devDependencies": {

@@ -5,7 +5,7 @@
 
     <parent>
 		<groupId>org.gjs.python</groupId>
-		<artifactId>gjs-python-parent</artifactId>
+		<artifactId>gjs-python-lib-parent</artifactId>
 		<version>1.0.0-RC.1</version>
         <relativePath />
     </parent>
@@ -19,14 +19,19 @@
     <description>Project ${capitalizedName} in language python</description>
 
     <properties>
-		<!-- Language features -->
-		<gjs.source.language>python</gjs.source.language>
-		<gjs.source.extension>py</gjs.source.extension>
-				
-		<!-- Dependency versions -->
-		
     </properties>
-
-	<dependencies>
-	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-install-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>default-install</id>
+						<phase>none</phase>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>

@@ -5,15 +5,18 @@
 #set( $packagePath = ${package.replaceAll("\.","/")})
 {
   "compilerOptions": {
-    "target": "es2020",
+    "target": "ES2020",
     "module": "commonjs",
     "declaration": true,
-    "outDir": "./target/dist",
-    "rootDir": "./src/main/typescript/${packagePath}",
+    "outDir": "./dist",
+    "rootDir": "./src",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true
   },
-  "include": ["src/main/typescript/**/*"],
+  "include": [
+    "src/main/typescript/**/*.ts",
+    "src/test/typescript/**/*.ts"
+  ],
   "exclude": ["node_modules", "tests"]
 }

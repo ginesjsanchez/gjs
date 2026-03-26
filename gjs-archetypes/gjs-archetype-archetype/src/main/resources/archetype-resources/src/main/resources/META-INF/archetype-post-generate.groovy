@@ -9,9 +9,12 @@ import org.apache.commons.io.FileUtils
 
 println "Post generate tasks..."
 
-def projectArtifactId = request.properties.getProperty("artifactId")
-def projectGroupId = request.properties.getProperty("groupId")
-def projectVersion = request.properties.getProperty("version")
+
+def requestProperties = request.getProperties()
+
+def projectArtifactId = requestProperties.getProperty("artifactId")
+def projectGroupId = requestProperties.getProperty("groupId")
+def projectVersion = requestProperties.getProperty("version")
 
 println "1) Customizing pom.xml..."
 // This is due to a bug in the Maven plugin that, when there is a parent in the pom.xml template, it is lost 
@@ -39,6 +42,7 @@ if (pomFile.exists()) {
 else {
     println "Warn: pom.xml not found in " + request.getOutputDirectory() + "/" + projectArtifactId
 }
+
 
 println "The project ${symbol_dollar}{shortName} has been generated."
 println "Done."

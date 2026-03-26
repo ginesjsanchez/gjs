@@ -2,7 +2,11 @@
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
 #set( $capitalizedName = $shortName.substring(0,1).toUpperCase() + $shortName.substring(1))
-${symbol_pound}${symbol_pound} ${artifactId} 
+#set( $infoGroup = $groupId)
+#set( $infoArtifact = $artifactId)
+#set( $infoVersion = $version)
+${symbol_pound}${symbol_pound} ${capitalizedName} project
+
 
 Project ${capitalizedName}
 

@@ -1,23 +1,30 @@
-## GJS ${shortName} maven plugin 
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+#set( $capitalizedName = $shortName.substring(0,1).toUpperCase() + $shortName.substring(1))
+#set( $infoGroup = $groupId)
+#set( $infoArtifact = $artifactId)
+#set( $infoVersion = $version)
+${symbol_pound}${symbol_pound} ${capitalizedName} maven plugin 
 
- ${shortName}
+ Projes ${capitalizedName}
 
-## Description
+${symbol_pound}${symbol_pound} Description
 
 Project plugin in java language.
 
 
-## Requirements
+${symbol_pound}${symbol_pound} Requirements
 
 * Maven 3.9.x
 
 
-## Pom plugin definition:
+${symbol_pound}${symbol_pound} Pom plugin definition:
 
 	<plugin>
-		<groupId>${groupId}</groupId>
-		<artifactId>${artifactId}</artifactId>
-		<version>${version}</version>
+		<groupId>${infoGroupId}</groupId>
+		<artifactId>${infoArtifactId}</artifactId>
+		<version>${infoVersion}</version>
 		<configuration>
 			<skip>false</skip>
 			<fail>true</fail>
@@ -25,55 +32,55 @@ Project plugin in java language.
 	</plugin>
 
 
-## Use
+${symbol_pound}${symbol_pound} Use
 
 	mvn ${shortName}:${rule}
 	
 
-## Configuration
+${symbol_pound}${symbol_pound} Configuration
 
 
       
-## Installation
+${symbol_pound}${symbol_pound} Installation
     
     mvn clean install
 
 
-## Unit testing
+${symbol_pound}${symbol_pound} Unit testing
 
     mvn clean test
     
 
-## Documentation
+${symbol_pound}${symbol_pound} Documentation
 
     mvn site
     
 
-## Deploy 
+${symbol_pound}${symbol_pound} Deploy 
 
     mvn deploy
 
         
-## Execution
+${symbol_pound}${symbol_pound} Execution
 
     
-## Security
+${symbol_pound}${symbol_pound} Security
     
     
-## Audit
+${symbol_pound}${symbol_pound} Audit
 
     
-## To start
+${symbol_pound}${symbol_pound} To start
 
     
 
-## Avalaible users
+${symbol_pound}${symbol_pound} Avalaible users
 
 
-## Common mistakes
+${symbol_pound}${symbol_pound} Common mistakes
 
 
     
-## References
+${symbol_pound}${symbol_pound} References
 
 * [Maven Build Lifecycle](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html)

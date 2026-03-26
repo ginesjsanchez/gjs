@@ -44,6 +44,7 @@
 			<include>package.json</include>
 			<include>tsconfig.json</include>	
 			<include>jest.config.js</include>			
+			<include>eslint.config.js</include>			
 		  </includes>
 		</fileSet>
 		<fileSet filtered="true" packaged="true" encoding="UTF-8">

@@ -33,6 +33,11 @@ def copyDirectory(File dirIn, File dirOut) {
 }
 
 
+def requestProperties = request.getProperties()
+
+def projectArtifactId = requestProperties.getProperty("artifactId")
+def projectGroupId = requestProperties.getProperty("groupId")
+def projectVersion = requestProperties.getProperty("version")
 
 //println "1) Adapting the artifact to the ${lan} language..."
 
@@ -44,5 +49,5 @@ def copyDirectory(File dirIn, File dirOut) {
 //def dirTestLanOut = new File(request.getOutputDirectory(), "${artifactId}/src/main/resources/archetype-resources/src/test/${lan}")
 //dirTestLanIn.renameTo("${dirTestLanOut}")
 
-println "The archetype ${artifactId} has been generated."
+println "The archetype " + projectArtifactId + " has been generated."
 println "Done."

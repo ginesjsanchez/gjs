@@ -12,6 +12,8 @@
      
     <modules>
         <module>gjs-python-parent</module>
+        <module>gjs-python-lib-parent</module>
+        <module>gjs-python-exe-parent</module>
     </modules>
     
  </project>

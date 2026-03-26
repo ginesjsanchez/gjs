@@ -21,7 +21,7 @@
 	<properties>
 		<!-- Npm configuration -->
 		<!-- Global install -->
-		<global.install.libs>tsc ts-node tsun ts-jest @types/jest</global.install.libs>
+		<global.install.libs>tsc ts-node tsun ts-jest @types/jest @typescript-eslint/parser @typescript-eslint/eslint-plugin</global.install.libs>
 	</properties>
 	
 	<build>

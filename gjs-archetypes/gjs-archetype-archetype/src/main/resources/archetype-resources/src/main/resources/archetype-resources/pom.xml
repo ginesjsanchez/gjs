@@ -2,6 +2,10 @@
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
 #set( $capitalizedName = $shortName.substring(0,1).toUpperCase() + $shortName.substring(1))
+${symbol_pound}set( ${symbol_dollar}symbol_pound = '${symbol_pound}' )
+${symbol_pound}set( ${symbol_dollar}symbol_dollar = '${symbol_dollar}' )
+${symbol_pound}set( ${symbol_dollar}symbol_escape = '${symbol_escape}' )
+${symbol_pound}set( ${symbol_dollar}${symbol_dollar}capitalizedName = ${symbol_dollar}shortName.substring(0,1).toUpperCase() + ${symbol_dollar}shortName.substring(1))
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
