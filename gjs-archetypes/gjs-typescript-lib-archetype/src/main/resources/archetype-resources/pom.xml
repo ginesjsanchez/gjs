@@ -13,15 +13,12 @@
     <groupId>${groupId}</groupId>
     <artifactId>${artifactId}</artifactId>
     <version>${version}</version>
-    <packaging>jar</packaging>
+    <packaging>tgz</packaging>
 	
     <name>${capitalizedName}</name>
     <description>Project ${capitalizedName} in language typescript</description>
 
     <properties>
-		
     </properties>
 
-	<dependencies>
-	</dependencies>
 </project>

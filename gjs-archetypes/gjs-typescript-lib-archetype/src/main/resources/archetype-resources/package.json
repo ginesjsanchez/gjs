@@ -6,7 +6,7 @@
 #set( $infoArtifact = $artifactId)
 #set( $infoVersion = $version)
 {
-  "name": "${capitalizedName}",
+  "name": "${infoArtifact}",
   "version": "${infoVersion}",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

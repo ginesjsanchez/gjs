@@ -56,6 +56,9 @@
 		<global.install.libs></global.install.libs>  <!-- Library names separated by a space -->
 		<local.install.minimal.libs>globals @eslint/js typescript-eslint</local.install.minimal.libs>  
 		<local.install.libs></local.install.libs>  <!-- Library names separated by a space -->
+		
+		<!-- Extensions versions -->
+		<tgz-maven-extension.version>1.0.0-RC.1</tgz-maven-extension.version>
 	</properties>
 	
 	<build>
@@ -133,7 +136,6 @@
 								<goal>exec</goal>
 							</goals>
 							<configuration>
-								<skip>${global.install.skip}</skip>
 								<workingDirectory>${working.dir}</workingDirectory>
 								<executable>${console}</executable>
 								<environmentVariables>
@@ -211,29 +213,6 @@
 						</execution>
 					</executions>
 				</plugin>
-				<!--
-				<plugin>
-					<artifactId>maven-antrun-plugin</artifactId>
-					<executions>
-						<execution>
-							<id>move-tgz</id>
-							<phase>package</phase>
-							<goals>
-								<goal>run</goal>
-							</goals>
-							<configuration>
-								<target>
-									<move todir="${project.build.directory}" flatten="true">
-										<fileset dir="${working.dir}">
-											<include name="*.tgz"/>
-										</fileset>
-									</move>
-								</target>
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>
-				-->
 
 				<!-- Limpieza adicional -->
 				<plugin>
@@ -298,6 +277,14 @@
 				</executions>
 			</plugin>
 		</plugins>
+
+		<extensions>
+			<extension>
+				<groupId>org.gjs.maven.extensions</groupId>
+				<artifactId>tgz-maven-extension</artifactId>
+				<version>${tgz-maven-extension.version}</version>
+			</extension>
+		</extensions>
 	</build>
 
     <profiles>

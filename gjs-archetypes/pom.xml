@@ -15,6 +15,7 @@
         <module>gjs-archetype-archetype</module>
         <module>gjs-java-artifact-archetype</module>
         <module>gjs-plugin-archetype</module>
+        <module>gjs-exension-archetype</module>
         <module>gjs-c-lib-archetype</module>
         <module>gjs-c-stlib-archetype</module>
         <module>gjs-c-exe-archetype</module>

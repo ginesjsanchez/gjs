@@ -50,7 +50,7 @@
 		.								|--/gjs-java-sb-test-parent
 		.
 		
-		Maven quality, format & documentation commads provided:
+		Maven quality, format and documentation commads provided:
 			* mvn checkstyle:check 
 			* mvn javadoc:javadoc		Generar javadoc site
 			* mvn javadoc:fix   		Añade o corrige Javadoc en src/main/java

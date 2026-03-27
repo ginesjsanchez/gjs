@@ -6,6 +6,31 @@ import org.apache.commons.io.FileUtils
 
 println "Post generate tasks..."
 
+def replaceTags(String text) {
+	return text.replace( "__capitalizedName__", shortName.capitalize() )
+			.replace( "__capitalizedRule__", rule.capitalize() )
+			.replace( "__capitalizedPhase__", phase.capitalize() )
+}
+
+def processFile(File in) {
+	String outName = replaceTags( in.getName() )
+	if ( !outName.equals( in.getName() ) ) {
+		println "   Rename file " + in.getName() + " to ${outName}"
+		def out = new File( in.getParentFile().getPath(), outName )
+		out << in.text
+		in.delete()
+	}
+}
+
+def processDirectory(File dirIn) {
+	println "   Process directory ${dirIn}"
+	dirIn.eachFile(FileType.FILES) { file -> processFile( file ) }
+	dirIn.eachDir() { dir -> 	
+		processDirectory( dir ) 
+	}
+}
+
+
 
 def requestProperties = request.getProperties()
 
@@ -38,6 +63,11 @@ if (pomFile.exists()) {
 else {
     println "Warn: pom.xml not found in " + request.getOutputDirectory() + "/" + projectArtifactId
 }
+
+println "2) Adapting file names..."
+def srcDir = new File( request.getOutputDirectory() )
+processDirectory( srcDir )
+
 
 println "The project ${shortName} has been generated."
 println "Done."

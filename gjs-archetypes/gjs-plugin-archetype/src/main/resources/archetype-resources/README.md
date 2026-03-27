@@ -7,7 +7,7 @@
 #set( $infoVersion = $version)
 ${symbol_pound}${symbol_pound} ${capitalizedName} maven plugin 
 
- Projes ${capitalizedName}
+ Project ${capitalizedName}
 
 ${symbol_pound}${symbol_pound} Description
 
@@ -34,7 +34,9 @@ ${symbol_pound}${symbol_pound} Pom plugin definition:
 
 ${symbol_pound}${symbol_pound} Use
 
-	mvn ${shortName}:${rule}
+	Lyfecicle Phase: ${phase}
+	
+	Manual run: mvn ${shortName}:${rule}
 	
 
 ${symbol_pound}${symbol_pound} Configuration

@@ -25,13 +25,23 @@ Archetype to generate the basic structure of a maven plugin.
 							-DarchetypeGroupId=org.gjs.maven.archetypes \
 							-DarchetypeArtifactId=gjs-plugin-archetype \
 							-DarchetypeVersion=1.0.0-SNAPSHOT \
-							-DshortName=test -Drule=test 
+							-DshortName=test -Drule=test -Dphase=test
     
 	Archetype Parameters:
 
 	* shortName: Name of the project. Always lowercase. Allows two words separated by a hyphen.
 
 	* rule: Name of the sample rule. Always lowercase. Allows two words separated by a hyphen.
+
+	* phase: Phase of the Maven LifeCycle. Always lowercase. Allows two words separated by a hyphen. By default is none. Not required.
+			Posible values: 
+				validate|initialize|generate-sources|process-sources|
+				generate-resources|process-resources|compile|process-classes|
+				generate-test-sources|process-test-sources|generate-test-resources|
+				process-test-resources|test-compile|process-test-classes|test|
+				prepare-package|package|pre-integration-test|integration-test|
+				post-integration-test|verify|install|deploy|pre-clean|clean|
+				post-clean|pre-site|site|post-site|site-deploy|none
 
 	* groupId: The group of the project artifact. 
 

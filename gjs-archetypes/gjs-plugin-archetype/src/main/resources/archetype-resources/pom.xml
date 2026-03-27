@@ -21,7 +21,8 @@
   Maven plugin ${capitalizedName}
   --------------------------------------------------------    
     
-  Maven plugin to (TODO)    
+  Maven plugin ${shortName} to (TODO)
+  Lyfecicle Phase: ${phase}
 
   Pom plugin definition:
 
