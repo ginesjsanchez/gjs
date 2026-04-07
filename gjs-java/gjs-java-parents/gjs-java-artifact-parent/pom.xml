@@ -19,6 +19,35 @@
 	</description>
 
 	<properties>
+		<log.path>/log</log.path>
+		<log.archived.path>${log.path}/archived</log.archived.path>
 	</properties>
+	
+	<dependencies>
+		<!-- Gjs -->
+		<dependency>
+			<groupId>org.gjs.java.common</groupId>
+			<artifactId>gjs-java-common-support</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.gjs.java.common</groupId>
+			<artifactId>gjs-java-common-io</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.gjs.java.common</groupId>
+			<artifactId>gjs-java-common</artifactId>
+		</dependency>
 		
+	</dependencies>
+	
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
+	
+	
 </project>

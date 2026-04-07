@@ -1,0 +1,159 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.gjs.python</groupId>
+		<artifactId>gjs-python-exe-parent</artifactId>
+		<version>1.0.0-RC.1</version>
+		<relativePath>../gjs-python-exe-parent</relativePath>
+	</parent>	
+
+    <groupId>org.gjs.python</groupId>
+    <artifactId>gjs-python-rest-parent</artifactId>
+    <version>1.0.0-RC.1</version>
+	<packaging>pom</packaging>
+
+	<name>GJS common Python REST parent</name>
+	<description>
+		Maven Python general parent for server and client REST programs with Open API.
+
+		Profiles:
+		* upgrade	
+		* generate-sources
+		
+		Install libraries:
+			mvn exec:exec@upgrade-tools -Pupgrade
+			mvn exec:exec@openapi-codegen -Pgenerate-sources
+	</description>
+
+	<properties>
+		<gjs.python.artifact.src.models.path>${gjs.python.artifact.src.path}/${gjs.python.artifact.src.package.path}/models</gjs.python.artifact.src.models.path>
+	</properties>
+	
+	<build>
+		<pluginManagement>
+			<plugins>
+			</plugins>
+		</pluginManagement>		
+
+	</build>
+
+    <profiles>
+		<profile>
+            <id>generate-sources</id>
+            <build>
+                <plugins>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<target>
+										<mkdir dir="${project.build.directory}/generated-sources/pyhton"/>
+										<mkdir dir="${project.build.directory}/resources"/>
+										<copy file="${project.basedir}/src/main/resources/open-api.json" 
+											tofile="${project.build.directory}/resources/open-api.json" 
+											overwrite="true"/>	
+										</target>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>openapi-codegen</id>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+								<phase>generate-sources</phase>
+								<configuration>
+									<executable>python</executable>
+									<workingDirectory>${project.build.directory}/resources</workingDirectory>
+									<arguments>
+										<argument>-m</argument>
+										<argument>datamodel_code_generator</argument>
+										<argument>--input</argument>
+										<argument>open-api.json</argument>
+										<argument>--input-file-type</argument>
+										<argument>openapi</argument>
+										<argument>--output</argument>
+										<argument>${project.build.directory}/generated-sources/pyhton/Models.py</argument>
+									</arguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-resources-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>copy-openapi-model</id>
+								<phase>process-sources</phase>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>${project.basedir}/${gjs.python.artifact.src.models.path}</outputDirectory>
+									<resources>
+										<resource>
+											<directory>${project.build.directory}/generated-sources/pyhton</directory>
+											<includes>
+												<include>Models.py</include>
+											</includes>
+											<filtering>false</filtering>
+										</resource>
+									</resources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+                </plugins>       
+            </build>
+        </profile>
+		<profile>
+            <id>upgrade</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+						<configuration>
+							<skip>${skip.if.not.source}</skip>
+						</configuration>
+                        <executions>
+                            <execution>
+                                <id>upgrade-tools</id>
+                                <phase>initialize-rest</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <configuration>
+                                    <executable>python</executable>
+                                    <arguments>
+										<argument>-m</argument> 
+										<argument>pip</argument>
+										<argument>install</argument>
+										<argument>--upgrade</argument>
+										<argument>pip</argument>
+										<argument>datamodel-code-generator</argument>
+										<argument>fastapi</argument>
+										<argument>uvicorn</argument>
+										<argument>httpx</argument>
+									</arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>       
+                </plugins>       
+            </build>
+        </profile>
+    </profiles>
+
+</project>

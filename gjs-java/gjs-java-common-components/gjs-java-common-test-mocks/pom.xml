@@ -4,9 +4,9 @@
 
 	<parent>
         <groupId>org.gjs.java</groupId>
-        <artifactId>gjs-java-sb-test-parent</artifactId>
+        <artifactId>gjs-java-test-parent</artifactId>
 		<version>1.0.0-RC.1</version>
-        <relativePath>../../gjs-java-parents/gjs-java-sb-test-parent</relativePath>
+        <relativePath>../../gjs-java-parents/gjs-java-test-parent</relativePath>
 	</parent>
 
     <groupId>org.gjs.java.common</groupId>
@@ -29,10 +29,6 @@
             <scope>compile</scope>
         </dependency>
         
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-api</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.gjs.tools</groupId>
             <artifactId>openpojo</artifactId>

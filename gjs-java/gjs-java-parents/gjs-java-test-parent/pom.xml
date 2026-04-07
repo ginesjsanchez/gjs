@@ -18,10 +18,41 @@
 	</description>
 
 	<properties>
+		<!-- Dependency versions -->
+		<!-- Gjs versions -->
+		<gjs-java-common-support.version>1.0.0-RC.1</gjs-java-common-support.version>
+		<gjs-java-common-test-support.version>1.0.0-RC.1</gjs-java-common-test-support.version>
+		<gjs-java-common-io.version>1.0.0-RC.1</gjs-java-common-io.version>
+		<gjs-java-common.version>1.0.0-RC.1</gjs-java-common.version>
 	</properties>
 	
 	<dependencyManagement>
 		<dependencies>
+ 			<!-- Gjs -->
+			<dependency>
+				<groupId>org.gjs.java.common</groupId>
+				<artifactId>gjs-java-common-support</artifactId>
+				<version>${gjs-java-common-support.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.gjs.java.common</groupId>
+				<artifactId>gjs-java-common-io</artifactId>
+				<version>${gjs-java-common-io.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.gjs.java.common</groupId>
+				<artifactId>gjs-java-common</artifactId>
+				<version>${gjs-java-common.version}</version>
+			</dependency>
+
+			<!-- Test -->
+ 			<!-- Gjs -->
+			<dependency>
+				<groupId>org.gjs.java.common</groupId>
+				<artifactId>gjs-java-common-test-support</artifactId>
+				<version>${gjs-java-common-test-support.version}</version>
+				<scope>compile</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 

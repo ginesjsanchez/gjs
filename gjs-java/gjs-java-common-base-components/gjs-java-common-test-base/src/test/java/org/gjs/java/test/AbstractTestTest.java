@@ -12,7 +12,7 @@ public class AbstractTestTest extends BaseClassTest<AbstractTest> {
 
 		public boolean executed = false;
 
-		public void test() {
+		public void test() throws Exception {
 			super.beforeAll();
 			logger.info("Executing test...");
 			executed = true;

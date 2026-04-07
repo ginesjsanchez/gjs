@@ -23,7 +23,7 @@ public class BaseUnitTestTest extends BaseUnitTest<BaseUnitTest> {
 			initialized = true;
 		}
 
-		public void test() {
+		public void test() throws Exception {
 			super.beforeAll();
 			logger.info("Executing test...");
 			executed = true;
@@ -46,7 +46,7 @@ public class BaseUnitTestTest extends BaseUnitTest<BaseUnitTest> {
 			initialized = true;
 		}
 
-		public void test() {
+		public void test() throws Exception {
 			super.beforeAll();
 			logger.info("Executing test...");
 			executed = true;

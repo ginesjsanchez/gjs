@@ -19,12 +19,7 @@
     <description>Project ${capitalizedName} in language java</description>
 
     <properties>
-		<!-- Language features -->
-		<gjs.source.language>java</gjs.source.language>
-		<gjs.source.extension>java</gjs.source.extension>
-				
-		<!-- Dependency versions -->
-		
+		<log.path>/log</log.path>
     </properties>
 
 	<dependencies>

@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 
 import ch.qos.logback.classic.Level;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class LogUtil.
  *

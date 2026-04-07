@@ -219,7 +219,7 @@ public abstract class FilePlain {
 	 * @return true, if successful
 	 */
 	public boolean load(String directory, String file) {
-		return load(directory + FileSystems.getDefault().getSeparator() + file);
+		return load(String.format("%s%s%s", directory, FileSystems.getDefault().getSeparator(), file));
 	}
 
 	/**

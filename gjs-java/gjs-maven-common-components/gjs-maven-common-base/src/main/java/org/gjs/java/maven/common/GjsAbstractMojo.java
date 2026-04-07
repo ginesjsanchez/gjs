@@ -47,8 +47,6 @@ public abstract class GjsAbstractMojo extends AbstractMojo {
 	 */
 	protected abstract boolean getFail();
 
-	// TODO: Insert custom parameters
-
 	/**
 	 * Gets the goal name.
 	 *
@@ -64,6 +62,9 @@ public abstract class GjsAbstractMojo extends AbstractMojo {
 	 * @param errorMessages the error messages
 	 */
 	protected abstract void goalExecution(Log log, List<String> errorMessages);
+
+	protected void additionalInitializations() {
+	}
 
 	/**
 	 * Execute.
@@ -83,8 +84,10 @@ public abstract class GjsAbstractMojo extends AbstractMojo {
 		// PluginParameterExpressionEvaluator evaluator = new
 		// PluginParameterExpressionEvaluator(session, mojoExecution);
 
+		additionalInitializations();
+
 		List<String> errorMessages = new ArrayList<>();
-		log.info(String.format("Executin %s.", getGoalName()));
+		log.info(String.format("Executing %s.", getGoalName()));
 		try {
 			goalExecution(log, errorMessages);
 		} catch (Throwable e) {

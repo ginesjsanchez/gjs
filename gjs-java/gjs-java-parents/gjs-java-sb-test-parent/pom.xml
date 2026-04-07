@@ -18,6 +18,14 @@
 	</description>
 
 	<properties>
+		<!-- Dependency versions -->
+		<!-- Gjs versions -->
+		<gjs-java-sb-common-test-support.version>1.0.0-RC.1</gjs-java-sb-common-test-support.version>
+		<gjs-java-sb-common-test-mocks.version>1.0.0-RC.1</gjs-java-sb-common-test-mocks.version>
+		<gjs-java-sb-common.version>1.0.0-RC.1</gjs-java-sb-common.version>
+		<gjs-java-sb-common-test.version>1.0.0-RC.1</gjs-java-sb-common-test.version>
+
+		<!-- Sprong boot -->
 		<springboot.version>3.5.7</springboot.version>
 	</properties>
 	
@@ -49,6 +57,34 @@
 						<artifactId>spring-boot-starter-logging</artifactId>
 					</exclusion>
 				</exclusions>
+			</dependency>
+		
+ 			<!-- Gjs -->
+			<dependency>
+				<groupId>org.gjs.java.common</groupId>
+				<artifactId>gjs-java-sb-common</artifactId>
+				<version>${gjs-java-sb-common.version}</version>
+			</dependency>
+			
+			<!-- Test -->
+ 			<!-- Gjs -->
+			<dependency>
+				<groupId>org.gjs.java.common</groupId>
+				<artifactId>gjs-java-sb-common-test-support</artifactId>
+				<version>${gjs-java-sb-common-test-support.version}</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.gjs.java.common</groupId>
+				<artifactId>gjs-java-sb-common-test-mocks</artifactId>
+				<version>${gjs-java-sb-common-test-mocks.version}</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.gjs.java.common</groupId>
+				<artifactId>gjs-java-sb-common-test</artifactId>
+				<version>${gjs-java-sb-common-test.version}</version>
+				<scope>compile</scope>
 			</dependency>
 		</dependencies>
     </dependencyManagement>

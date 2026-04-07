@@ -22,7 +22,7 @@
   --------------------------------------------------------    
     
   Maven plugin ${shortName} to (TODO)
-  Lyfecicle Phase: ${phase}
+  Lifecycle Phase: ${phase}
 
   Pom plugin definition:
 

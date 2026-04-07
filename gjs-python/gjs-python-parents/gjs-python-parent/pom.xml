@@ -41,6 +41,7 @@
 		<gjs.python.dir.eggs>${project.build.directory}/python-eggs</gjs.python.dir.eggs>
 		<gjs.python.dir.src>${project.build.directory}/python-src</gjs.python.dir.src>
 		<gjs.python.artifact.ext>tar.gz</gjs.python.artifact.ext>
+		<gjs.python.artifact.src.package.path>org/gjs/python</gjs.python.artifact.src.package.path>
 	</properties>
 	
 	<build>

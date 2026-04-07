@@ -21,4 +21,22 @@
 	<properties>
 	</properties>
 
+	
+	<dependencies>
+		<!-- Gjs -->
+		<dependency>
+			<groupId>org.gjs.java.common</groupId>
+			<artifactId>gjs-java-sb-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.gjs.java.common</groupId>
+			<artifactId>gjs-java-common-io</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.gjs.java.common</groupId>
+			<artifactId>gjs-java-common-support</artifactId>
+		</dependency>
+		
+	</dependencies>
+
 </project>

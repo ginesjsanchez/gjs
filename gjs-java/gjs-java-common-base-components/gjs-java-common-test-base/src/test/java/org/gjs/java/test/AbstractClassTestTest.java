@@ -20,7 +20,7 @@ public class AbstractClassTestTest extends BaseClassTest<AbstractClassTest> {
 			return SamplePojo.class;
 		}
 
-		public void test() {
+		public void test() throws Exception {
 			super.beforeAll();
 			logger.info("Executing test...");
 			executed = true;

@@ -42,7 +42,7 @@ public class AbstractTesterUnitTestTest extends BaseUnitTest<AbstractTesterUnitT
 			initialized = true;
 		}
 
-		public void test() {
+		public void test() throws Exception {
 			super.beforeAll();
 			logger.info("Executing test...");
 			super.testTester1();

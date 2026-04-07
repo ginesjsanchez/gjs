@@ -3,6 +3,7 @@ package org.gjs.java.common.dto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -172,7 +173,9 @@ public class BasicUserDto implements Comparable<BasicUserDto> {
 	public String toString() {
 		return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).append("alias", alias)
 				.append("name", personName).append("document", document).append("email", email)
-				.append("roles", org.springframework.util.StringUtils.collectionToCommaDelimitedString(roles))
+				.append("roles",
+						Objects.nonNull(roles) ? roles.stream().map(Object::toString).collect(Collectors.joining(","))
+								: "null")
 				.toString();
 	}
 

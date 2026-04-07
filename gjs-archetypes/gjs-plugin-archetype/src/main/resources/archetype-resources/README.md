@@ -34,7 +34,7 @@ ${symbol_pound}${symbol_pound} Pom plugin definition:
 
 ${symbol_pound}${symbol_pound} Use
 
-	Lyfecicle Phase: ${phase}
+	Lifecycle Phase: ${phase}
 	
 	Manual run: mvn ${shortName}:${rule}
 	

@@ -4,9 +4,9 @@
 
     <parent>
 		<groupId>org.gjs.java</groupId>
-        <artifactId>gjs-java-sb-artifact-parent</artifactId>
-		<version>1.0.0-RC.1</version>
-        <relativePath>../../gjs-java-parents/gjs-java-sb-artifact-parent</relativePath>
+        <artifactId>gjs-java-parent</artifactId>
+        <version>1.0.0-RC.1</version>
+        <relativePath>../../gjs-java-parents/gjs-java-parent</relativePath>
     </parent>
 
     <groupId>org.gjs.java.common</groupId>
@@ -27,10 +27,6 @@
             <artifactId>gjs-java-common-support</artifactId>
         </dependency>
         
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-        </dependency>
         <dependency>
             <groupId>tools.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>

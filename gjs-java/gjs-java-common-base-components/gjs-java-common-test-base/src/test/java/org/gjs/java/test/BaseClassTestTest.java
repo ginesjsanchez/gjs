@@ -16,7 +16,7 @@ public class BaseClassTestTest extends BaseClassTest<BaseClassTest> {
 
 		public boolean executed = false;
 
-		public void test() {
+		public void test() throws Exception {
 			super.beforeAll();
 			logger.info("Executing test...");
 			executed = true;
@@ -32,7 +32,7 @@ public class BaseClassTestTest extends BaseClassTest<BaseClassTest> {
 			super(SamplePojo.class);
 		}
 
-		public void test() {
+		public void test() throws Exception {
 			super.beforeAll();
 			logger.info("Executing test...");
 			executed = true;

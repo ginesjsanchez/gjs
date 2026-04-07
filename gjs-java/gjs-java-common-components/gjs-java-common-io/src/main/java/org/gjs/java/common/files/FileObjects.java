@@ -5,11 +5,11 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.gjs.java.common.type.DataObject;
 import org.gjs.java.common.util.ConditionUtils;
 import org.gjs.java.common.util.NormalizationUtils;
-import org.springframework.util.CollectionUtils;
 
 /**
  * The Class FileObjects.

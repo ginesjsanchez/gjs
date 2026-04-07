@@ -26,7 +26,9 @@ Archetype to generate the basic structure of a basic project in java language.
 							-DarchetypeArtifactId=gjs-java-artifact-archetype \
 							-DarchetypeVersion=1.0.0-SNAPSHOT \
 							-DshortName=test \ 
-							-DgroupId=org.gjs.test 
+							-DgroupId=org.gjs.test \
+							-DincludeMain=y
+							
     
 	Archetype Parameters:
 
@@ -39,6 +41,8 @@ Archetype to generate the basic structure of a basic project in java language.
 	* package: The project packaging of the sourc code. Default is org.gjs.maven.archetypes. Not required.
 
 	* version: The project version. Default is 1.0.0-SNAPSHOT. Not required.
+     
+	* includeMain: Include Main class. Values: "y" or "n". Default is "n". Not required.
 	
 	
     

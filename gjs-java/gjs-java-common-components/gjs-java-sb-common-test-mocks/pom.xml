@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+        <groupId>org.gjs.java</groupId>
+        <artifactId>gjs-java-sb-test-parent</artifactId>
+		<version>1.0.0-RC.1</version>
+        <relativePath>../../gjs-java-parents/gjs-java-sb-test-parent</relativePath>
+	</parent>
+
+    <groupId>org.gjs.java.common</groupId>
+    <artifactId>gjs-java-sb-common-test-mocks</artifactId>
+    <version>1.0.0-RC.1</version>
+    <packaging>jar</packaging>
+
+	<name>Gjs Java test mocks for Spring Boot</name>
+	<description>Auxiliar mocks classes for testing</description>
+
+    <dependencies>
+        <!-- Gjs -->
+        <dependency>
+            <groupId>org.gjs.java.common</groupId>
+            <artifactId>gjs-java-sb-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.gjs.java.common</groupId>
+            <artifactId>gjs-java-common-test-support</artifactId>
+            <scope>compile</scope>
+        </dependency>
+              
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.gjs.tools</groupId>
+            <artifactId>openpojo</artifactId>
+        </dependency>
+    </dependencies>
+</project>

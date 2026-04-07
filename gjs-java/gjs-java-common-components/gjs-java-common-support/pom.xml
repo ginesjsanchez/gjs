@@ -4,9 +4,9 @@
 
     <parent>
 		<groupId>org.gjs.java</groupId>
-        <artifactId>gjs-java-sb-artifact-parent</artifactId>
+        <artifactId>gjs-java-parent</artifactId>
 		<version>1.0.0-RC.1</version>
-        <relativePath>../../gjs-java-parents/gjs-java-sb-artifact-parent</relativePath>
+        <relativePath>../../gjs-java-parents/gjs-java-parent</relativePath>
     </parent>
 
     <groupId>org.gjs.java.common</groupId>
@@ -27,15 +27,6 @@
             <artifactId>gjs-java-common-base</artifactId>
         </dependency>
                 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>   
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-commons</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.checkerframework</groupId>
             <artifactId>checker-qual</artifactId>
