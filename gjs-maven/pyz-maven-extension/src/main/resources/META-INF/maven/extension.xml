@@ -1,0 +1,8 @@
+<extension>
+	<exportedPackages>
+		<exportedPackage>org.gjs.maven.extensions.pyz</exportedPackage>
+	</exportedPackages>
+	<exportedArtifacts>
+		<exportedArtifact>org.gjs.maven.extensions:pyz-maven-extension</exportedArtifact>
+	</exportedArtifacts>
+</extension>

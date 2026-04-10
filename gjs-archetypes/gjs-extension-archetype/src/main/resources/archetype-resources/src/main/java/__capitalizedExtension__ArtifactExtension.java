@@ -19,6 +19,7 @@ import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.MavenProjectHelper;
 import org.codehaus.plexus.logging.Logger;
 
+
 public class ${capitalizedExtension}ArtifactExtension extends AbstractMavenLifecycleParticipant {
 
 	@Inject

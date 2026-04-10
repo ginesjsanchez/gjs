@@ -12,6 +12,7 @@
      
     <modules>
 		<module>tgz-maven-extension</module>
+		<module>pyz-maven-extension</module>
     </modules>
     
  </project>

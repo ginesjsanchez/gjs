@@ -152,21 +152,6 @@
 								</arguments>
 							</configuration>
 						</execution>
-						<execution>
-							<id>python-install</id>
-							<phase>install</phase>
-							<goals>
-								<goal>exec</goal>
-							</goals>
-							<configuration>
-								<executable>python</executable>
-								<workingDirectory>${project.build.directory}</workingDirectory>
-								<arguments>
-									<argument>-c</argument>
-									<argument>import os, subprocess, glob; file=glob.glob('*.whl')[0]; subprocess.run(['pip', 'install', file], check=True)</argument>
-								</arguments>
-							</configuration>
-						</execution>
 					</executions>
 				</plugin>
 				<!--

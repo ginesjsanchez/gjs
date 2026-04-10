@@ -18,12 +18,12 @@ Archetype to generate the basic structure of a basic executable project in pytho
 
     mvn -B archetype:generate \
 							-DarchetypeGroupId=org.gjs.maven.archetypes \
-							-DarchetypeArtifactId=gjs-pyhton-lib-archetype \
+							-DarchetypeArtifactId=gjs-pyhton-exe-archetype \
 							-DarchetypeVersion=1.0.0-SNAPSHOT 
 
     mvn -B archetype:generate \
 							-DarchetypeGroupId=org.gjs.maven.archetypes \
-							-DarchetypeArtifactId=gjs-pyhton-lib-archetype \
+							-DarchetypeArtifactId=gjs-pyhton-exe-archetype \
 							-DarchetypeVersion=1.0.0-SNAPSHOT \
 							-DshortName=test \ 
 							-DgroupId=org.gjs.test \

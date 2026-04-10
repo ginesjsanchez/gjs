@@ -1,6 +1,17 @@
 <component-set>
   <components>
     <component>
+      <role>org.apache.maven.artifact.handler.ArtifactHandler</role>
+      <role-hint>tgz</role-hint>
+      <implementation>org.gjs.maven.extensions.tgz.TgzArtifactHandler</implementation>
+      <configuration>
+        <type>tgz</type>
+        <extension>tgz</extension>
+        <packaging>tgz</packaging>
+        <addedToClasspath>false</addedToClasspath>
+      </configuration>
+    </component>
+    <component>
       <role>org.apache.maven.AbstractMavenLifecycleParticipant</role>
       <implementation>org.gjs.maven.extensions.tgz.TgzArtifactExtension</implementation>
     </component>

@@ -1,0 +1,50 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Simple Status API",
+    "version": "1.0.0",
+    "description": "Una API básica para verificar el estado del servidor."
+  },
+  "paths": {
+    "/status": {
+      "get": {
+        "summary": "Obtiene el estado actual del servidor",
+        "operationId": "getStatus",
+        "responses": {
+          "200": {
+            "description": "Respuesta exitosa",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerStatus"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ServerStatus": {
+        "type": "object",
+        "required": [
+          "status",
+          "date-time"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "OK"
+          },
+          "date-time": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2026-03-22T09:50:00Z"
+          }
+        }
+      }
+    }
+  }
+}

@@ -30,14 +30,6 @@
 		<gjs.python.artifact.src.models.path>${gjs.python.artifact.src.path}/${gjs.python.artifact.src.package.path}/models</gjs.python.artifact.src.models.path>
 	</properties>
 	
-	<build>
-		<pluginManagement>
-			<plugins>
-			</plugins>
-		</pluginManagement>		
-
-	</build>
-
     <profiles>
 		<profile>
             <id>generate-sources</id>
@@ -130,7 +122,7 @@
                         <executions>
                             <execution>
                                 <id>upgrade-tools</id>
-                                <phase>initialize-rest</phase>
+                                <phase>initialize</phase>
                                 <goals>
                                     <goal>exec</goal>
                                 </goals>

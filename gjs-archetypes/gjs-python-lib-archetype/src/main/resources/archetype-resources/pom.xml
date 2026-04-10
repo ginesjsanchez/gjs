@@ -20,7 +20,7 @@
     <description>Project ${capitalizedName} in language python</description>
 
     <properties>
-		<gjs.python.artifact.src.package.path>${packagePath}<gjs.python.artifact.src.package.path>
+		<gjs.python.artifact.src.package.path>${packagePath}</gjs.python.artifact.src.package.path>
     </properties>
 	
 </project>

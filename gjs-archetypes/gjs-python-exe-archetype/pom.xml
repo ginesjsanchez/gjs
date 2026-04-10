@@ -14,7 +14,7 @@
     <version>1.0.0-RC.1</version>    
     <packaging>maven-archetype</packaging>    
     
-    <name>GJS Python Library Archatype</name>    
+    <name>GJS Python Executable Archatype</name>    
     <description>    
       
   --------------------------------------------------------    

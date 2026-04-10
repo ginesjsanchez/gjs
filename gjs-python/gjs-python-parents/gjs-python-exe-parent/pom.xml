@@ -22,6 +22,9 @@
 		<gjs.python.artifact.ext>pyz</gjs.python.artifact.ext>
 		<gjs.python.artifact.src.path>.</gjs.python.artifact.src.path>
 		<gjs.python.artifact.main>Main:main</gjs.python.artifact.main>
+		
+		<!-- Extensions versions -->
+		<pyz-maven-extension.version>1.0.0-RC.1</pyz-maven-extension.version>
 	</properties>
 	
 	<build>
@@ -56,6 +59,13 @@
 			</plugins>
 		</pluginManagement>		
 
+		<extensions>
+			<extension>
+				<groupId>org.gjs.maven.extensions</groupId>
+				<artifactId>pyz-maven-extension</artifactId>
+				<version>${pyz-maven-extension.version}</version>
+			</extension>
+		</extensions>
 	</build>
 
 </project>

@@ -9,6 +9,17 @@
 <component-set>
   <components>
     <component>
+      <role>org.apache.maven.artifact.handler.ArtifactHandler</role>
+      <role-hint>${extension}</role-hint>
+      <implementation>${package}.${capitalizedExtension}ArtifactHandler</implementation>
+      <configuration>
+        <type>${extension}</type>
+        <extension>${extension}</extension>
+        <packaging>${extension}</packaging>
+        <addedToClasspath>false</addedToClasspath>
+      </configuration>
+    </component>
+    <component>
       <role>org.apache.maven.AbstractMavenLifecycleParticipant</role>
       <implementation>${package}.${capitalizedExtension}ArtifactExtension</implementation>
     </component>

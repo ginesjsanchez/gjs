@@ -22,7 +22,7 @@
     <properties>		
 		<gjs.python.artifact.src.path>src/main/python</gjs.python.artifact.src.path>
 		<gjs.python.artifact.main>${package}.${mainFunction}</gjs.python.artifact.main>
-		<gjs.python.artifact.src.package.path>${packagePath}<gjs.python.artifact.src.package.path>
+		<gjs.python.artifact.src.package.path>${packagePath}</gjs.python.artifact.src.package.path>
     </properties>
 	
 </project>

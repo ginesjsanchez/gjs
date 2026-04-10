@@ -1,0 +1,20 @@
+<component-set>
+  <components>
+    <component>
+      <role>org.apache.maven.artifact.handler.ArtifactHandler</role>
+      <role-hint>pyz</role-hint>
+      <implementation>org.gjs.maven.extensions.pyz.PyzArtifactHandler</implementation>
+      <configuration>
+        <type>pyz</type>
+        <extension>pyz</extension>
+        <packaging>pyz</packaging>
+        <language>python</language>
+        <addedToClasspath>false</addedToClasspath>
+      </configuration>
+    </component>
+    <component>
+      <role>org.apache.maven.AbstractMavenLifecycleParticipant</role>
+      <implementation>org.gjs.maven.extensions.pyz.PyzArtifactExtension</implementation>
+    </component>
+  </components>
+</component-set>
