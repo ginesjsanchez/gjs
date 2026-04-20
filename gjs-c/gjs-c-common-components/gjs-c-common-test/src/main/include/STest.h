@@ -14,11 +14,11 @@
 // TODO: Añadir lista de parametros, y gestión automatizada de la llamada al procedimiento a testear
 typedef struct
 {
-	char *	p_cNombreTest;
-	PPRCV	procInicializarTest;
-	PPRCV	procFinalizarTest;
-	PPRCT	procInicializarCasoTest;
-	PPRCT	procFinalizarCasoTest;
+	char *		p_cNombreTest;
+	PPRCV		procInicializarTest;
+	PPRCV		procFinalizarTest;
+	PPRCT		procInicializarCasoTest;
+	PPRCT		procFinalizarCasoTest;
 
 	SListaPtr *	p_lisCasos;
 
@@ -32,7 +32,8 @@ typedef struct
 } STest;
 
 
-STest * STestCrear ( const char * p_cNombre, PPRCV procInicializar, PPRCV procFinalizar, PPRCT procInicializarCaso, PPRCT procFinalizarCaso  );
+STest * STestCrear ( const char * p_cNombre );
+STest * STestCrearExt ( const char * p_cNombre, PPRCV procInicializar, PPRCV procFinalizar, PPRCT procInicializarCaso, PPRCT procFinalizarCaso  );
 void STestDestruir ( STest ** p_p_testObj );
 
 void STestInicializar ( STest * p_testObj );

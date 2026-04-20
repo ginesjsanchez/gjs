@@ -24,10 +24,16 @@ static bool TestToString01 ()
 		cout << "Error caso -1: [" << sRes << "]" << endl;
 		bRes = false;
 	}
-	sRes = ToString( 0.1 );
+	sRes = ToString( (float) 0.1 );
 	if ( sRes != "0.1" )
 	{
-		cout << "Error caso 0.1: [" << sRes << "]" << endl;
+		cout << "Error caso 0.1 (float): [" << sRes << "]" << endl;
+		bRes = false;
+	}
+	sRes = ToString( (double) 0.1 );
+	if ( ! sRes.starts_with ( "0.1000000000000000" ) )
+	{
+		cout << "Error caso 0.1 (double): [" << sRes << "]" << endl;
 		bRes = false;
 	}
 	sRes = ToString( " aye" );
@@ -65,13 +71,13 @@ static bool TestToString02 ()
 	const unsigned char SECUENCIA_1[] = "1234567890";
 
 	string sRes = ToString( SECUENCIA_0 );
-	if ( sRes != "{}" )
+	if ( sRes != "" )
 	{
 		cout << "Error caso 1: [" << sRes << "]" << endl;
 		bRes = false;
 	}
 	sRes = ToString( SECUENCIA_1 );
-	if ( sRes != "{1, 2, 3, 4, 5, 6, 7, 8, 9, 0}" )
+	if ( sRes != "1234567890" )
 	{
 		cout << "Error caso 2: [" << sRes << "]" << endl;
 		bRes = false;

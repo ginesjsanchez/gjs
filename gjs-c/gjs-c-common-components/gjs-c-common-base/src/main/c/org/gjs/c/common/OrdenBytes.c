@@ -276,7 +276,7 @@ int BytesInvertir ( byte * p_byValor, int iTam, int iSoloSiOrdenInvertido )
 	else
 	{
 		iRes = 0;
-		ErrEstablecer ( ERR_PARAMETROS );
+		ERROR_ESTABLECER ( ERR_PARAMETROS );
 	}
 	return ( iRes );
 }
@@ -465,7 +465,7 @@ int BytesOrdenar ( byte * p_byValor, int iTam, int iOrden )
 	else
 	{
 		iRes = 0;
-		ErrEstablecer ( ERR_PARAMETROS );
+		ERROR_ESTABLECER ( ERR_PARAMETROS );
 	}
 	return ( iRes );
 }

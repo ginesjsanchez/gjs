@@ -355,7 +355,7 @@ time_t Ahora ()
 
 static void * _inicio_heap = NULL;
 
-void InicializarBase()
+void InicializarBase ()
 {
 	if ( _inicio_heap == NULL )
 	{
@@ -363,10 +363,38 @@ void InicializarBase()
 	}
 }
 
-bool PuedeLiberarse ( void * ptr )
+bool PuedeLiberarse ( const void * ptr )
 {
-	if ( _inicio_heap == NULL ) return ( true );
-    return ( _inicio_heap < ptr );
+    uintptr_t addr = reinterpret_cast<uintptr_t>(ptr);
+    std::ifstream maps( "/proc/self/maps" );
+    std::string line;
+
+	bool bRes = false;
+    while ( !bRes && std::getline ( maps, line ) ) 
+	{
+        uintptr_t start, end;
+        char perms[8] = {};
+        char offset[16] = {};
+        char dev[16] = {};
+        unsigned long inode = 0;
+        char pathname[256] = {};
+
+        int parsed = sscanf( line.c_str(), "%lx-%lx %7s %15s %15s %lu %255s",
+                            &start, &end, perms, offset, dev, &inode, pathname );
+
+        // Cubrir [heap] explícito
+        bool is_named_heap = ( parsed >= 7 && strcmp( pathname, "[heap]" ) == 0 );
+
+        // Cubrir mmap anónimo rw-p sin nombre (bloques grandes de malloc)
+        // inode == 0 descarta ficheros mapeados
+        // parsed < 7 significa que no hay pathname en absoluto
+        bool is_anon_rw = (strcmp(perms, "rw-p") == 0)
+                          && (inode == 0)
+                          && (parsed < 7 || pathname[0] == '\0');
+
+        bRes = ( is_named_heap || is_anon_rw ) && ( addr >= start ) && ( addr < end );
+	}
+    return ( bRes );
 }
 
 int ResolverIP( const string & sIP )

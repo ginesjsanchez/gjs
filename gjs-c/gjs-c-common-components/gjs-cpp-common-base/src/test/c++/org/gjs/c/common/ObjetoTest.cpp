@@ -13,7 +13,7 @@ private:
     int valor;
 
 public:
-	PruebaObjeto( int iValor) : Objeto()
+	PruebaObjeto( int iValor ) : Objeto()
 	{
 	    this->valor = iValor;
 	}
@@ -50,45 +50,45 @@ static bool TestObjeto01 ()
 	PruebaObjeto * obj1 = new PruebaObjeto( 1 );
 	if ( obj1->toString() != "[Objeto={Tipo=PruebaObjeto}]" )
 	{
-		cout << "Error caso 1" << endl;
+		cout << "Error caso 1: [" << obj1->toString() << "]" << endl;
 		bRes = false;
 	}
-	if ( obj1->hash() != 0 )
+	if ( obj1->hash() != 1 )
 	{
-		cout << "Error caso 2" << endl;
+		cout << "Error caso 2: [" << obj1->hash() << "]"<< endl;
 		bRes = false;
 	}
 	if ( obj1->getTipo().compare ( "PruebaObjeto" ) != 0 )
 	{
-		cout << "Error caso 3" << endl;
+		cout << "Error caso 3: [" << obj1->getTipo() << "]" << endl;
 		bRes = false;
 	}
 	PruebaObjeto * obj2 = obj1->clonar();
 	if ( ! obj1->equals( obj2 ) )
 	{
-		cout << "Error caso 4" << endl;
+		cout << "Error caso 4: [" << obj1->toString() << "/" << obj2->toString() << "]" << endl;
+		bRes = false;
+	}
+	if ( *obj1 != *obj2  )
+	{
+		cout << "Error caso 5" << endl;
 		bRes = false;
 	}
 	PruebaObjeto * obj3 = new PruebaObjeto( 2 );
 	if ( obj1->equals( obj3 ) )
 	{
-		cout << "Error caso 5" << endl;
+		cout << "Error caso 6" << endl;
 		bRes = false;
 	}
 	PruebaObjeto obj4 = *obj1;
 	if ( ! obj1->equals( obj4 ) )
 	{
-		cout << "Error caso 5" << endl;
-		bRes = false;
-	}
-	if ( obj1 != ( obj2 ) )
-	{
-		cout << "Error caso 6" << endl;
+		cout << "Error caso 7" << endl;
 		bRes = false;
 	}
 	if ( obj1 == obj3 )
 	{
-		cout << "Error caso 7" << endl;
+		cout << "Error caso 8" << endl;
 		bRes = false;
 	}
 	delete obj1;

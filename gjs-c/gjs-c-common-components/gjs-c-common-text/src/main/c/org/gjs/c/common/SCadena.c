@@ -59,7 +59,7 @@ SCadena * SCadCrear ( int iLong )
 	return ( p_cadObj );
 }
 
-SCadena * SCadCrearLLena ( int iLong, char cRelleno )
+SCadena * SCadCrearLlena ( int iLong, char cRelleno )
 {
 	SCadena * p_cadObj;
 
@@ -422,10 +422,12 @@ int SCadConcatenarLiteral ( SCadena * p_cadObj, const char * p_cValor )
 	{
 		if ( ES_NULO ( p_cadObj->p_cValor ) )
 		{
+			printf ( "CON CASO 1\n" );
 			iRes = SCadCopiarLiteral ( p_cadObj, p_cValor );
 		}
 		else
 		{
+			printf ( "CON CASO 2 %d\n", p_cadObj->iMaxTam );
 			iRes = CadConcatenarExt ( p_cadObj->p_cValor, p_cValor, p_cadObj->iMaxTam, -1 );
 		}
 	}
@@ -2593,5 +2595,53 @@ int SCadDistingueTipoLetra ( SCadena * p_cadObj )
 		iRes = 0;
 	}
 	return ( iRes );
+}
+
+void SCadImprimir ( SCadena * p_cadObj )
+{
+	if ( ES_VALIDO ( p_cadObj ) )
+	{
+		CadImprimir ( p_cadObj->p_cValor );
+	}
+	else
+	{
+		CadImprimir ( NULL );
+	}
+}
+
+void SCadImprimirExt ( SCadena * p_cadObj, const char * p_cEtiqueta, char cSep, int iEnvolver )
+{
+	if ( ES_VALIDO ( p_cadObj ) )
+	{
+		CadImprimirExt ( p_cadObj->p_cValor, p_cEtiqueta, cSep, iEnvolver );
+	}
+	else
+	{
+		CadImprimirExt ( NULL, p_cEtiqueta, cSep, iEnvolver );
+	}
+}
+
+void SCadImprimirXml ( SCadena * p_cadObj, const char * p_cEtiqueta )
+{
+	if ( ES_VALIDO ( p_cadObj ) )
+	{
+		CadImprimirXml ( p_cadObj->p_cValor, p_cEtiqueta );
+	}
+	else
+	{
+		CadImprimirXml ( NULL, p_cEtiqueta );
+	}
+}
+
+void SCadImprimirJson ( SCadena * p_cadObj, const char * p_cEtiqueta )
+{
+	if ( ES_VALIDO ( p_cadObj ) )
+	{
+		CadImprimirJson ( p_cadObj->p_cValor, p_cEtiqueta );
+	}
+	else
+	{
+		CadImprimirJson ( NULL, p_cEtiqueta );
+	}
 }
 

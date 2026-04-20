@@ -1,55 +1,75 @@
-/*
-#ifndef _ORG_GJS_C_CC_TEXTO_H
-#define _ORG_GJS_C_CC_TEXTO_H
+#ifndef _ORG_GJS_C_CC_STEXTO_H
+#define _ORG_GJS_C_CC_STEXTO_H
 
-#include "Linea.h"
+#include <SListaCadenas.h>
+
 
 
 typedef struct
-	  {
-		TLINEA	*psLineas;
-		long		lNumLineas;
-		long		lLineaAct;
-		long		lColumnaAct;
-	  } TTEXTO;
+{
+	SListaCadenas	* 	p_lisLineas;
+	int					iLineaAct;
+	int					iColumnaAct;
+		
+} STexto;
 
 
-void TxtVacio( TTEXTO *ptxtDatos );
-void TxtInsertarCaracter( TTEXTO *ptxtDatos, char c );
-void TxtInsertarCadena( TTEXTO *ptxtDatos, char *sCadena );
-void TxtInsertarLinea( TTEXTO *ptxtDatos, char *sCadena );
+STexto * STxtCrear ();
+STexto * STxtGenerar ( const char * p_cTexto );
 
-void TxtInicio( TTEXTO *pLinDatos );
-void TxtFinal( TTEXTO *pLinDatos );
-void TxtSig( TTEXTO *pLinDatos );
-void TxtAnt( TTEXTO *pLinDatos );
 
-void TxtPrimeraLinea( TTEXTO *pLinDatos );
-void TxtUltimaLinea( TTEXTO *pLinDatos );
-void TxtSigLinea( TTEXTO *pLinDatos );
-void TxtAntLinea( TTEXTO *pLinDatos );
+void STxtDestruir ( STexto ** p_p_txtObj );
 
-TLINEA TxtLinea( TTEXTO *plinDatos );
-char *TxtCadenaLinea( TTEXTO *plinDatos );
-char *TxtCadena( TTEXTO *plinDatos );
+int STxtEsValido ( STexto * p_txtObj );
+int STxtEstaPosicionado ( STexto * p_txtObj );
+int STxtCursorEsValido ( STexto * p_txtObj );
+int STxtPosEsValida ( STexto * p_txtObj, int iLinea, int iColumna );
 
-void TxtEliminarCaracter( TTEXTO *pLinDatos );
-void TxtEliminarLinea( TTEXTO *pLinDatos );
 
-long TxtNumLineas( TTEXTOO *ptxtDatos );
-long TxtLongitud( TTEXTOO *ptxtDatos );
-TBOOL TxtEsFinal( TTEXTO *pLinDatos );
-TBOOL TxtEsInicio( TTEXTO *pLinDatos );
-TBOOL TxtEsFinalLinea( TTEXTO *pLinDatos );
-TBOOL TxtEsInicioLinea( TTEXTO *pLinDatos );
-TBOOL TxtEsVacio( TTEXTO *pLinDatos );
-TBOOL TxtEsLineaVacia( TTEXTO *pLinDatos );
+int STxtInicializar ( STexto * p_txtObj, const char * p_cTexto ); 
+void STxtVaciar ( STexto * p_txtObj ); 
 
-void TxtImprimir( TTEXTO *ptxtDatos );
+int STxtNumLineas ( STexto * p_txtObj );
 
-void TxtCargarFichero( TTEXTO *ptxtDatos, char *sFichero, long lMode );
-void TxtSalvarFichero( TTEXTO *ptxtDatos, char *sFichero );
+int STxtCursorLinea ( STexto * p_txtObj );
+int STxtCursorColumna ( STexto * p_txtObj );
+void STxtIrInicio ( STexto * p_txtObj );
+void STxtIrFinal ( STexto * p_txtObj );
+int STxtSig ( STexto * p_txtObj );
+int STxtAnt ( STexto * p_txtObj );
+void STxtIrInicioLinea ( STexto * p_txtObj );
+void STxtIrFinalLinea ( STexto * p_txtObj );
+void STxtIrPrimeraLinea ( STexto * p_txtObj );
+void STxtIrUltimaLinea ( STexto * p_txtObj );
+int STxtSigLinea ( STexto * p_txtObj );
+int STxtAntLinea ( STexto * p_txtObj );
+void STxtIrA ( STexto * p_txtObj, int iLinea, int iColumna );
 
+SCadena * STxtLineaActual ( STexto * p_txtObj ); 
+SCadena * STxtLinea ( STexto * p_txtObj, int iLinea ); 
+
+char STxtCaracterActual ( STexto * p_txtObj );
+char STxtCaracterSig ( STexto * p_txtObj );
+
+SCadena * STxtExtraer ( STexto * p_txtObj, int iLinIni, int iColIni, int iLinFin, int iColFin ); 
+
+
+/*
+TODO:
+
+void TxtInsertarCaracter ( STexto *ptxtDatos, char c );
+void TxtInsertarCadena ( STexto *ptxtDatos, char *sCadena );
+void TxtInsertarLinea ( STexto *ptxtDatos, char *sCadena );
+
+
+void TxtEliminarCaracter ( STexto * p_txtObj );
+void TxtEliminarLinea ( STexto * p_txtObj );
+
+void TxtImprimir ( STexto *ptxtDatos );
+
+void TxtCargarFichero ( STexto *ptxtDatos, char *sFichero, long lMode );
+void TxtSalvarFichero ( STexto *ptxtDatos, char *sFichero );
+*/
 
 #endif
-*/
+

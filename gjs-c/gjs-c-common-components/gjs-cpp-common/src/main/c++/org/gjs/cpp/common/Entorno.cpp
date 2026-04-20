@@ -58,6 +58,7 @@ bool EntInicializar ( bool bConsola, const string & sNombre, int iVersion, int i
 {
 	if ( !g_bEntInicializado )
 	{
+		InicializarBase();
 		if ( ! sDirTemporal.empty() )
 		{
 			SisInicializarDirectorios ( sDirTemporal );

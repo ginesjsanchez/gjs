@@ -64,15 +64,24 @@ int SBanTstEjecutar ( SBancoTests * p_bantstObj )
 
 	if ( ES_VALIDO ( p_bantstObj ) )
 	{
+		printf ( "%s[Inicio de los test]%s\n", ANSI_AZUL, ANSI_RESETEAR );
+		iRes = 1;
 		iTest = 0;
-		while ( ( iRes == 0 ) && ( iTest < SLisRefNumElementos ( p_bantstObj->p_lisTests ) ) )
+		while ( iTest < SLisRefNumElementos ( p_bantstObj->p_lisTests ) )
 		{
-			PFUNINTV fTest = (PFUNINTV) SLisRefDatoElemento ( p_bantstObj->p_lisTests, iTest );
-			if ( fTest () == 0 )
+			PFUNINTV fTest = (PFUNINTV) SLisRefDatosElemento ( p_bantstObj->p_lisTests, iTest );
+			if ( fTest() == 1 )
 			{
-				iRes = -1;
+				printf ( "%sResultado: OK%s\n", ANSI_VERDE, ANSI_RESETEAR );
 			}
+			else
+			{
+				printf ( "%sResultado: KO%s\n", ANSI_ROJO, ANSI_RESETEAR );
+				iRes = 0;
+			}
+			iTest = iTest + 1;
 		}
+		printf ( "%s[Fin de los test]%s\n", ANSI_AZUL, ANSI_RESETEAR );
 	}
 	else
 	{
@@ -87,15 +96,15 @@ int SBanTstEjecutarTest ( SBancoTests * p_bantstObj, const char * p_cTest )
 
 	if ( ES_VALIDO ( p_bantstObj ) )
 	{
-		if ( CadLongitud ( p_cTest ) > 0 )
+		if ( ( CadLongitud ( p_cTest ) > 0 ) && ( CadComparar ( p_cTest, "null" ) != 0 ) )
 		{
 			SReferencia * p_refObj = SLisRefBuscar ( p_bantstObj->p_lisTests, p_cTest );
 			if ( ES_VALIDO ( p_refObj ) )
 			{
 				PFUNINTV fTest = ( PFUNINTV ) SRefObtenerDatos ( p_refObj );
-				if ( fTest () == 0 )
+				if ( fTest () == 1 )
 				{
-					iRes = -1;
+					iRes = 1;
 				}
 				else
 				{
@@ -104,8 +113,8 @@ int SBanTstEjecutarTest ( SBancoTests * p_bantstObj, const char * p_cTest )
 			}
 			else
 			{
-				printf ( "Test [%s] no encontrado.\n", p_cTest );
-				iRes = -1;
+				printf ( "%sTest [%s] no encontrado.%s\n", ANSI_ROJO, p_cTest, ANSI_RESETEAR );
+				iRes = 0;
 			}
 		}
 		else

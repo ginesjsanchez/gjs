@@ -73,7 +73,7 @@ char * VersCadena ( int iVersion, int iSubversion, int iRevision, int iCorreccio
 	else
 	{
 		p_cRes = NULL;
-		ErrEstablecer ( ERR_PARAMETROS );
+		ERROR_ESTABLECER ( ERR_PARAMETROS );
 	}
 	return ( p_cRes );
 }
@@ -113,13 +113,13 @@ int VersProcesar ( const char * p_cCadena, int * p_iVersion, int * p_iSubversion
 		else
 		{
 			iRes = 0;
-			ErrEstablecer ( ERR_PARAMETROS );
+			ERROR_ESTABLECER ( ERR_PARAMETROS );
 		}
 	}
 	else
 	{
 		iRes = 0;
-		ErrEstablecer ( ERR_PARAMETROS );
+		ERROR_ESTABLECER ( ERR_PARAMETROS );
 	}
 	return ( iRes );
 }

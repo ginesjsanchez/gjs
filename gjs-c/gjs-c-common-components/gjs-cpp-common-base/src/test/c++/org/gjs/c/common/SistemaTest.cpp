@@ -380,7 +380,7 @@ static bool TestEsperar01 ()
 
 		chrono::duration<double> intervalo = fin - ini;
 		cout << "Tiempo espera=1.237 Tiempo medido=" << intervalo.count () << endl;
- 		if ( ( intervalo.count () < 1.236 ) || ( intervalo.count () > 1.255 ) )
+ 		if ( ! real::equalsWithPrec ( intervalo.count (), 1.237, 2 ) )
 		{
 			cout << "Tiempo de espera incorrecto" << endl;
 			bRes = false;
@@ -460,7 +460,8 @@ static bool TestPuedeLiberarse01 ()
 {
 	cout << "Test PuedeLiberarse01:" << endl;
 	bool bRes = true;
-
+	InicializarBase();
+	
 	int  iTest1 = 0;
 	string sTest1( "noliberable" );
 	int * iTest2 = (int *) malloc( sizeof( int ) );

@@ -1,4 +1,5 @@
 #include "SListaReferencias.h"
+#include "SListaReferencias.h"
 
 #include "TiposBasicosConfig.h"
 
@@ -13,7 +14,7 @@ SListaReferencias * SLisRefCrear ()
 	if ( ES_VALIDO ( p_lisObj ) )
 	{
 		p_lisObj->p_lisDatos = SLispCrear ();
-		SLispActivarLiberacionMemoria ( p_lisObj->p_lisDatos );
+		SLispDesactivarLiberacionMemoria ( p_lisObj->p_lisDatos );
 	}
 	return ( p_lisObj );
 }
@@ -28,6 +29,7 @@ void SLisRefDestruir ( SListaReferencias ** p_p_lisObj )
 
 		if ( ES_VALIDO ( p_lisObj ) )
 		{
+			SLisRefVaciar ( p_lisObj );
 			SLispDestruir ( &(p_lisObj->p_lisDatos) );
 			MemLiberar ( (void **) p_p_lisObj );
 		}
@@ -94,6 +96,40 @@ SReferencia * SLisRefElemento ( SListaReferencias * p_lisObj, int iElem )
 	return ( p_refRes );
 }
 
+const char * SLisRefAliasElemento ( SListaReferencias * p_lisObj, int iElem )
+{
+	const char * 	p_cRes;
+	SReferencia *	p_refObj;
+	
+	p_refObj = SLisRefElemento ( p_lisObj, iElem );
+	if ( ES_VALIDO ( p_refObj ) )
+	{
+		p_cRes = SRefObtenerAlias ( p_refObj );
+	}
+	else
+	{
+		p_cRes = NULL;
+	}
+	return ( p_cRes );
+}
+
+void * SLisRefDatosElemento ( SListaReferencias * p_lisObj, int iElem )
+{
+	void * 			p_vRes;
+	SReferencia *	p_refObj;
+	
+	p_refObj = SLisRefElemento ( p_lisObj, iElem );
+	if ( ES_VALIDO ( p_refObj ) )
+	{
+		p_vRes = SRefObtenerDatos ( p_refObj );
+	}
+	else
+	{
+		p_vRes = NULL;
+	}
+	return ( p_vRes );
+}
+
 int SLisRefInsertar ( SListaReferencias * p_lisObj, SReferencia * p_refDatos )
 {
 	int iRes;
@@ -140,10 +176,16 @@ int SLisRefInsertarExt ( SListaReferencias * p_lisObj, const char * p_cAlias, vo
 
 int SLisRefVaciar ( SListaReferencias * p_lisObj )
 {
-	int iRes;
+	int 			iRes;
+	SReferencia * 	p_refObj;
 
 	if ( ES_VALIDO ( p_lisObj ) )
 	{
+		for ( int iElem = 0; iElem < SLisRefNumElementos ( p_lisObj ); iElem = iElem + 1 )
+		{
+			p_refObj = SLisRefElemento ( p_lisObj, iElem );
+			SRefDestruir ( &p_refObj );
+		}
 		iRes = SLispVaciar ( p_lisObj->p_lisDatos );
 	}
 	else
@@ -184,11 +226,12 @@ int SLisRefEliminar ( SListaReferencias * p_lisObj, const char * p_cAlias )
 
 int SLisRefEliminarElem ( SListaReferencias * p_lisObj, int iElem )
 {
-	int iRes;
+	int 			iRes;
+	SReferencia * 	p_refObj;
 
 	if ( ES_VALIDO ( p_lisObj ) )
 	{
-		SReferencia * p_refObj = SLisRefElemento ( p_lisObj, iElem );
+		p_refObj = SLisRefElemento ( p_lisObj, iElem );
 		SRefDestruir ( &p_refObj );
 		iRes = SLispEliminarElem ( p_lisObj->p_lisDatos, iElem );
 	}

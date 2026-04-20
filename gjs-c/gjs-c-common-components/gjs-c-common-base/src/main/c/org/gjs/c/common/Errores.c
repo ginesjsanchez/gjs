@@ -29,7 +29,7 @@
 #define ERR_TXT_MEMORIA_INVALIDA			"Direccion de memoria invalida."
 #define ERR_TXT_MEMORIA_INSUFICIENTE		"Memoria insuficiente para realizar la operacion."
 #define ERR_TXT_MEMORIA_PROCESO				"La memoria (heap) del proceso esta corrompida o es invalida."
-#define ERR_TXT_PARAMETROS					"Uno o más parametros son nulos, o no son validos."
+#define ERR_TXT_PARAMETROS					"Uno o mas parametros son nulos, o no son validos."
 
 
 
@@ -349,7 +349,7 @@ int InfErrEsGrave ( int iCod )
 }
 */
 
-void _ErrEstablecer ( int iCodigo, const char * p_cDescripcion )
+void _ErrEstablecer ( const char * p_cModulo, int iLinea, int iCodigo, const char * p_cDescripcion )
 {
 	//if ( g_iGInicializado == 0 )
 	//{
@@ -361,8 +361,8 @@ void _ErrEstablecer ( int iCodigo, const char * p_cDescripcion )
 		MemLiberar ( (void **) &g_p_cGErrDescripcion );
 		g_p_cGErrDescripcion = _ErrDescripcion ( iCodigo );
 		MemLiberar ( (void **) &g_p_cGErrModulo );
-		g_p_cGErrModulo = CadDuplicar ( __FILE__ );
-		g_uiGErrLinea = __LINE__;
+		g_p_cGErrModulo = CadDuplicar ( p_cModulo );
+		g_uiGErrLinea = iLinea;
 	}
 	else
 	{
@@ -370,17 +370,17 @@ void _ErrEstablecer ( int iCodigo, const char * p_cDescripcion )
 		MemLiberar ( (void **) &g_p_cGErrDescripcion );
 		g_p_cGErrDescripcion = CadDuplicar ( p_cDescripcion );
 		MemLiberar ( (void **) &g_p_cGErrModulo );
-		g_p_cGErrModulo = CadDuplicar ( __FILE__ );
-		g_uiGErrLinea = __LINE__;
+		g_p_cGErrModulo = CadDuplicar ( p_cModulo );
+		g_uiGErrLinea = iLinea;
 	}
 }
 
-void ErrEstablecer ( int iCodigo )
+void ErrEstablecer ( const char * p_cModulo, int iLinea,int iCodigo )
 {
-    _ErrEstablecer ( iCodigo, NULL );
+    _ErrEstablecer ( p_cModulo, iLinea, iCodigo, NULL );
 }
 
-void ErrEstablecerConFormato ( int iCodigo, const char * p_cDescripcion, ... )
+void ErrEstablecerConFormato ( const char * p_cModulo, int iLinea, int iCodigo, const char * p_cDescripcion, ... )
 {
 	char *		p_cValor;
 	va_list		valArgumentos;
@@ -393,7 +393,7 @@ void ErrEstablecerConFormato ( int iCodigo, const char * p_cDescripcion, ... )
             va_start ( valArgumentos, p_cDescripcion );
             if ( FrmCadena ( p_cValor, p_cDescripcion, valArgumentos, ERR_MAX_TAM_MSJ ) == 1 )
             {
-                _ErrEstablecer ( iCodigo, p_cValor );
+                _ErrEstablecer ( p_cModulo, iLinea, iCodigo, p_cValor );
             }
 
             MemLiberar ( (void **) &p_cValor );
@@ -401,7 +401,7 @@ void ErrEstablecerConFormato ( int iCodigo, const char * p_cDescripcion, ... )
         }
 	}
 	else {
-        _ErrEstablecer ( iCodigo, NULL );
+        _ErrEstablecer ( p_cModulo, iLinea, iCodigo, NULL );
 	}
 }
 
@@ -471,7 +471,7 @@ void ErrImprimir ()
 	const char * p_cMsj;
 
 	p_cMsj = ErrMensaje ();
-	CadImprimir ( p_cMsj );
+	printf ( "%s\n", p_cMsj );
 	MemLiberar ( (void **) &p_cMsj );
 }
 

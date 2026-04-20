@@ -105,8 +105,8 @@ int SLinEsValida ( SLinea * p_linObj )
 
 	if ( ES_VALIDO ( p_linObj ) )
 	{
-		if ( ( SCadEsValida ( p_linObj->p_cadTexto ) == 0 ) ||
-			 ( SIndEsValido ( p_linObj->p_indPosicion ) == 0 ) )
+		if ( ( SCadEsValida ( p_linObj->p_cadTexto ) == 1 ) &&
+			 ( SIndEsValido ( p_linObj->p_indPosicion ) == 1 ) )
 		{
 			iRes = 1;
 		}

@@ -35,6 +35,8 @@
 #include <SEntidadCod.h>
 #include <SEntidadIdCod.h>
 
+#include <SError.h>
+
 #include <SAccion.h>
 #include <SLocalizador.h>
 #include <SLocalizadorExt.h>
@@ -43,8 +45,8 @@
 #include <SHiloAriadna.h>
 #include <SListaParametros.h>
 #include <SListaValores.h>
+#include <SListaErrores.h>
 
-#include <SListaCadenas.h>
 #include <SVectorCadenas.h>
 #include <SSecuenciaCadenas.h>
 #include <STablaCadenas.h>

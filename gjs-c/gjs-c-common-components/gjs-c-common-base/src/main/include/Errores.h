@@ -21,6 +21,11 @@
 
 
 
+#define ERROR_ESTABLECER( iCodigo )		ErrEstablecer ( __FILE__, __LINE__, iCodigo )
+
+#define ERROR_ESTABLECER_FORM( iCodigo, p_cDescripcion, ... ) \
+										ErrEstablecerConFormato ( __FILE__, __LINE__, iCodigo, p_cDescripcion, ##__VA_ARGS_ )
+
 
 
 
@@ -35,9 +40,9 @@
 
 
 /* Rutinas de generación y consulta de errores producidos: */
-void ErrEstablecer ( int iCodigo );
+void ErrEstablecer ( const char * p_cModulo, int iLinea, int iCodigo );
 //void ErrEstablecer ( int iCodigo, const char * p_cDescripcion );
-void ErrEstablecerConFormato ( int iCodigo, const char * p_cDescripcion, ... );
+void ErrEstablecerConFormato ( const char * p_cModulo, int iLinea, int iCodigo, const char * p_cDescripcion, ... );
 
 int ErrHayError ();
 

@@ -108,7 +108,7 @@ static bool TestToInt03 ()
 	{
 		string sValor = string( "999999999999999999999999999999999999999999999999999999999999999" );
 		long lRes = ToInt( sValor );
-		if ( lRes != LONG_MAX )
+		if ( lRes != 0 )
 		{
 			cout << "Error caso 3: [" << lRes << "]" << endl;
 			bRes = false;

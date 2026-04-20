@@ -26,18 +26,9 @@ double ToDouble ( char * t )
 double ToDouble ( const char * t )
 {
 	double dRes = 0.0;
-	if ( t != NULL )
+	if ( t != NULL ) 
 	{
-		try
-		{
-			if ( strlen( t ) > 0 )
-			{
-				dRes = atof( t );
-			}
-		}
-		catch (...)
-		{
-		}
+		dRes = ToDouble ( string ( t ) );
 	}
 	return ( dRes );
 }
@@ -47,7 +38,12 @@ double ToDouble ( const string & t )
 	double dRes = 0.0;
 	try
 	{
-        dRes = stold( t );
+		from_chars_result result = std::from_chars ( t.data(), t.data() + t.size(), dRes );
+		if ( result.ec != std::errc{} ) 
+		{
+			throw std::runtime_error( "from_chars fallo" );
+		}
+		return dRes;
 	}
 	catch (...)
 	{

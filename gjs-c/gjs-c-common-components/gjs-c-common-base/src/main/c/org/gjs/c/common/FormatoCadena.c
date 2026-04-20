@@ -570,7 +570,7 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 	else
 	{
 		iRes = 0;
-		ErrEstablecer ( ERR_PARAMETROS );
+		ERROR_ESTABLECER ( ERR_PARAMETROS );
 	}
 	return ( iRes );
 }

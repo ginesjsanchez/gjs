@@ -58,13 +58,13 @@ static bool TestToReal02 ()
 		bRes = false;
 	}
 	dRes = ToDouble( ToString( DBL_MAX ) );
-	if ( dRes != DBL_MAX )
+	if ( ! real::equals ( dRes, DBL_MAX ) )
 	{
 		cout << "Error caso 3: [" << dRes << "]" << endl;
 		bRes = false;
 	}
 	dRes = ToDouble( ToString( DBL_MIN ) );
-	if ( dRes != DBL_MIN )
+	if (  ! real::equals ( dRes, DBL_MIN ) )
 	{
 		cout << "Error caso 4: [" << dRes << "]" << endl;
 		bRes = false;

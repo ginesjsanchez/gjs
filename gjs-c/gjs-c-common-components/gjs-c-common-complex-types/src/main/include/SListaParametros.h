@@ -35,10 +35,6 @@ int SLisParEstablecerElem ( SListaParametros * p_lisObj, int iElem, SParametro *
 int SLisParInsertarElem ( SListaParametros * p_lisObj, int iPosAnt, SParametro * p_parDatos );
 int SLisParInsertarAlInicio ( SListaParametros * p_lisObj, SParametro * p_parDatos );
 int SLisParInsertarAlFinal ( SListaParametros * p_lisObj, SParametro * p_parDatos );
-int SLisParEstablecerElemDup ( SListaParametros * p_lisObj, int iElem, SParametro * p_parDatos );
-int SLisParInsertarElemDup ( SListaParametros * p_lisObj, int iPosAnt, SParametro * p_parDatos );
-int SLisParInsertarDupAlInicio ( SListaParametros * p_lisObj, SParametro * p_parDatos );
-int SLisParInsertarDupAlFinal ( SListaParametros * p_lisObj, SParametro * p_parDatos );
 
 int SLisParEliminarElem ( SListaParametros * p_lisObj, int iElem );
 
@@ -63,18 +59,10 @@ int SLisParEstablecer ( SListaParametros * p_lisObj, SParametro * p_parDatos );
 int SLisParInsertar ( SListaParametros * p_lisObj, SParametro * p_parDatos );
 int SLisParInsertarDelante ( SListaParametros * p_lisObj, SParametro * p_parDatos );
 int SLisParInsertarDetras ( SListaParametros * p_lisObj, SParametro * p_parDatos );
-int SLisParEstablecerDup ( SListaParametros * p_lisObj, SParametro * p_parDatos );
-int SLisParInsertarDup ( SListaParametros * p_lisObj, SParametro * p_parDatos );
-int SLisParInsertarDupDelante ( SListaParametros * p_lisObj, SParametro * p_parDatos );
-int SLisParInsertarDupDetras ( SListaParametros * p_lisObj, SParametro * p_parDatos );
 int SLisParEliminar ( SListaParametros * p_lisObj );
 
 int SLisParExiste ( SListaParametros * p_lisObj, SParametro * p_parDatos );
 int SLisParBuscar ( SListaParametros * p_lisObj, SParametro * p_parDatos );
-
-int	SLisParLiberacionMemoriaActivada ( SListaParametros * p_lisObj );
-void SLisParActivarLiberacionMemoria ( SListaParametros * p_lisObj );
-void SLisParDesactivarLiberacionMemoria ( SListaParametros * p_lisObj );
 
 
 

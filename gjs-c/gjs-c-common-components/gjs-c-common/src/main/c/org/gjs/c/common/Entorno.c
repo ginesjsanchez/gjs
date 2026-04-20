@@ -30,6 +30,7 @@ static char *	g_p_cEntDirDatos = NULL;
 static char *	g_p_cEntDirSeguridad = NULL;
 static char *	g_p_cEntDirLog = NULL;
 
+static int		g_iEntModoTest = 0;
 
 
 
@@ -146,6 +147,21 @@ void EntFinalizar ()
 int EntEstaInicializado ()
 {
 	return ( g_iEntInicializado );
+}
+
+int EntEstaEnModoTest ()
+{
+	return ( g_iEntModoTest );
+}
+
+void EntActivarModoTest ()
+{
+	g_iEntModoTest = 1;
+}
+
+void EntDesactivarModoTest ()
+{
+	g_iEntModoTest = 0;
 }
 
 const char * EntDirectorioDatos ()

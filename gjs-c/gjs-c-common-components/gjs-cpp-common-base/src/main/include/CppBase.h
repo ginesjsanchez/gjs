@@ -12,6 +12,7 @@
 #include <ASCIIEstandar.h>
 
 #include <Cadenas.h>
+#include <Real.h>
 #include <IToString.h>
 #include <ToString.h>
 #include <ToInt.h>

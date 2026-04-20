@@ -13,7 +13,7 @@ SListaParejas * SLisPrjCrear ()
 	if ( ES_VALIDO ( p_lisObj ) )
 	{
 		p_lisObj->p_lisDatos = SLispCrear ();
-		SLispActivarLiberacionMemoria ( p_lisObj->p_lisDatos );
+		SLispDesactivarLiberacionMemoria ( p_lisObj->p_lisDatos );
 	}
 	return ( p_lisObj );
 }
@@ -28,6 +28,7 @@ void SLisPrjDestruir ( SListaParejas ** p_p_lisObj )
 
 		if ( ES_VALIDO ( p_lisObj ) )
 		{
+			SLisPrjVaciar ( p_lisObj );
 			SLispDestruir ( &(p_lisObj->p_lisDatos) );
 			MemLiberar ( (void **) p_p_lisObj );
 		}
@@ -116,10 +117,16 @@ int SLisPrjInsertarExt ( SListaParejas * p_lisObj, void * p_vPrimero, void * p_v
 
 int SLisPrjVaciar ( SListaParejas * p_lisObj )
 {
-	int iRes;
+	int 		iRes;
+	SPareja * 	p_prjObj;
 
 	if ( ES_VALIDO ( p_lisObj ) )
 	{
+		for ( int iElem = 0; iElem < SLisPrjNumElementos ( p_lisObj ); iElem = iElem + 1 )
+		{
+			p_prjObj = SLisPrjElemento ( p_lisObj, iElem );
+			SPrjDestruir ( &p_prjObj );
+		}
 		iRes = SLispVaciar ( p_lisObj->p_lisDatos );
 	}
 	else
@@ -131,11 +138,12 @@ int SLisPrjVaciar ( SListaParejas * p_lisObj )
 
 int SLisPrjEliminarElem ( SListaParejas * p_lisObj, int iElem )
 {
-	int iRes;
+	int 		iRes;
+	SPareja * 	p_prjObj;
 
 	if ( ES_VALIDO ( p_lisObj ) )
 	{
-		SPareja * p_prjObj = SLisPrjElemento ( p_lisObj, iElem );
+		p_prjObj = SLisPrjElemento ( p_lisObj, iElem );
 		SPrjDestruir ( &p_prjObj );
 		iRes = SLispEliminarElem ( p_lisObj->p_lisDatos, iElem );
 	}
@@ -146,36 +154,6 @@ int SLisPrjEliminarElem ( SListaParejas * p_lisObj, int iElem )
 	return ( iRes );
 }
 
-int	SLisPrjLiberacionMemoriaActivada ( SListaParejas * p_lisObj )
-{
-	int	iRes;
-
-	if ( ES_VALIDO ( p_lisObj ) ) 
-	{
-		iRes = SLispLiberacionMemoriaActivada ( p_lisObj->p_lisDatos );
-	}
-	else
-	{
-		iRes = 0;
-	}
-	return ( iRes );
-}
-
-void SLisPrjActivarLiberacionMemoria ( SListaParejas * p_lisObj )
-{
-	if ( ES_VALIDO ( p_lisObj ) ) 
-	{
-		SLispActivarLiberacionMemoria ( p_lisObj->p_lisDatos );
-	}
-}
-
-void SLisPrjDesactivarLiberacionMemoria ( SListaParejas * p_lisObj )
-{
-	if ( ES_VALIDO ( p_lisObj ) ) 
-	{
-		SLispDesactivarLiberacionMemoria ( p_lisObj->p_lisDatos );
-	}
-}
 
 
 

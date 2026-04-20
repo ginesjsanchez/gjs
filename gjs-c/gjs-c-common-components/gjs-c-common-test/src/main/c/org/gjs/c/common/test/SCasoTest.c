@@ -61,32 +61,31 @@ int SCasTstEjecutar ( SCasoTest * p_caststObj )
 	if ( ES_VALIDO ( p_caststObj ) )
 	{
 		iRes = RESULTADO_CASO_TEST_OK;
-		AplicLogAnotar( "" );
-		AplicLogAnotar ( "-Caso %s:", p_caststObj->p_cIdCaso );
+		//AplicLogAnotar( "" );
+		//AplicLogAnotar ( "-Caso %s:", p_caststObj->p_cIdCaso );
+		printf ( "  [Caso %s]\n", p_caststObj->p_cIdCaso );
 		if ( ES_VALIDO ( p_caststObj->p_fTestCaso ) )
 		{
-			if ( p_caststObj->p_fTestCaso() == 0)
+			if ( p_caststObj->p_fTestCaso() == 1 ) 
+			{
+				printf ("%s   Resultado: OK%s\n", ANSI_VERDE, ANSI_RESETEAR );
+			}
+			else
 			{
 				iRes = RESULTADO_CASO_TEST_KO;
+				printf ("%s    Resultado: KO%s\n", ANSI_ROJO, ANSI_RESETEAR );
 			}
 		}
 		else
 		{
-			AplicLogAnotarError ( "Funcion no definida para el caso" );
+			//AplicLogAnotarError ( "Funcion no definida para el caso" );
 			iRes = RESULTADO_CASO_TEST_FAIL;
 		}
+		printf ("  [Fin %s]\n", p_caststObj->p_cIdCaso );
 	}
 	else
 	{
 		iRes = RESULTADO_CASO_TEST_FAIL;
-	}
-	if ( iRes == RESULTADO_CASO_TEST_OK )
-	{
-		AplicLogAnotar ( "Caso terminado correctamente" );
-	}
-	else
-	{
-		AplicLogAnotarError ( "Caso terminado con errores" );
 	}
 	return ( iRes );
 }		

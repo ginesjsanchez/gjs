@@ -51,7 +51,7 @@ namespace org
 			time_t Ahora ();
 
 			void InicializarBase();
-			bool PuedeLiberarse ( void * ptr );
+			bool PuedeLiberarse ( const void * ptr );
 
 			int ResolverIP( const string & sIP );
 

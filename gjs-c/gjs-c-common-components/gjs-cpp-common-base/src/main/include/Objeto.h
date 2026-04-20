@@ -22,10 +22,6 @@ public:
 	Objeto ();
 	virtual ~Objeto ();
 
-private:
-	string tipo;
-	size_t tam;
-
 public:
 	string getTipo () const;
 	virtual int hash() const;

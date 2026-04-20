@@ -40,7 +40,7 @@ SCadena * SCadCrear ( int iLong );
 SCadena * SCadGenerar ( const char * p_cValor );
 SCadena * SCadGenerarConFormato ( const char * p_cFormato, ... );
 SCadena * SCadGenerarConFormatoExt ( const char * p_cFormato, va_list valArgumentos );
-SCadena * SCadCrearLLena ( int iLong, char cRelleno );
+SCadena * SCadCrearLlena ( int iLong, char cRelleno );
 
 void SCadDestruir ( SCadena ** p_p_cadObj );
 
@@ -201,6 +201,10 @@ int SCadDistingueTipoLetra ( SCadena * p_cadObj );
 int SCadActivarDistincionTipoLetra ( SCadena * p_cadObj );
 int SCadDesactivarDistincionTipoLetra ( SCadena * p_cadObj );
 
+void SCadImprimir ( SCadena * p_cadObj );
+void SCadImprimirExt ( SCadena * p_cadObj, const char * p_cEtiqueta, char cSep, int iEnvolver );
+void SCadImprimirXml ( SCadena * p_cadObj, const char * p_cEtiqueta );
+void SCadImprimirJson ( SCadena * p_cadObj, const char * p_cEtiqueta );
 
 
 

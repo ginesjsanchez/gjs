@@ -95,10 +95,10 @@ int CadLimpiarExt ( char * p_cAsciiz, char cRelleno, int iMax )
 	int iLong;
 
 	iLong = CadLongitudSeg ( p_cAsciiz, iMax ); 
-	if ( iLong > 0 ) 
+	if ( ( iLong >= 0 ) && ( iMax > 0 ) ) 
 	{
 		iRes = 1;
-		for ( iCar = 0; iCar < iLong;  iCar = iCar + 1 )  
+		for ( iCar = 0; iCar < iMax;  iCar = iCar + 1 )  
 		{
 			p_cAsciiz [ iCar ] = cRelleno;
 		}
@@ -117,10 +117,10 @@ int CadLimpiarDesdeExt ( char * p_cAsciiz, int iPos, char cRelleno, int iMax )
 	int iLong;
 
 	iLong = CadLongitudSeg ( p_cAsciiz, iMax ); 
-	if ( iLong > 0 ) 
+	if ( ( iLong >= 0 ) && ( iMax > 0 ) ) 
 	{
 		iRes = 1;
-		for ( iCar = iPos; iCar < iLong;  iCar = iCar + 1 )  
+		for ( iCar = iPos; iCar < iMax;  iCar = iCar + 1 )  
 		{
 			p_cAsciiz [ iCar ] = cRelleno;
 		}
@@ -146,7 +146,7 @@ int CadLimpiarHastaExt ( char * p_cAsciiz, int iPos, char cRelleno, int iMax )
 	else
 	{
 		iLong = CadLongitudSeg ( p_cAsciiz, iMax ); 
-		if ( iLong > 0 ) 
+		if ( ( iLong >= 0 ) && ( iPos > 0 ) && ( iPos < iMax ) ) 
 		{
 			iRes = 1;
 			for ( iCar = 0; iCar < iPos;  iCar = iCar + 1 )  
@@ -305,7 +305,9 @@ int CadConcatenarExt ( char * p_cAsciiz1, const char * p_cAsciiz2, int iMax1, in
 
 	iLong1 = CadLongitudSeg ( p_cAsciiz1, iMax1 ); 
 	iLong2 = CadLongitudSeg ( p_cAsciiz2, iMax2 ); 
-	if ( ( iLong1 >= 0 ) && ( iLong2 >= 0 ) && ( ( iMax1 == -1 ) || ( iLong1 < iMax1 ) )  )
+	printf ( "## LONG1=%d\n", iLong1 );
+	printf ( "## LONG2=%d\n", iLong2 );
+	if ( ( iLong1 >= 0 ) && ( iLong2 > 0 ) && ( ( iMax1 == -1 ) || ( iLong1 < iMax1 ) )  )
 	{
 		iRes = 1;
 		if ( iMax1 > 0 )
@@ -323,6 +325,7 @@ int CadConcatenarExt ( char * p_cAsciiz1, const char * p_cAsciiz2, int iMax1, in
 		{
 			iMax = iLong1 + iLong2;
 		}
+	printf ( "## MAX=%d\n", iMax );
 		for ( iCar = iLong1; iCar < iMax;  iCar = iCar + 1 )  
 		{
 			p_cAsciiz1 [ iCar ] = p_cAsciiz2 [ iCar - iLong1 ];
@@ -3593,3 +3596,98 @@ static int _EsCadenaValida ( char * p_cCad )
 	return ( iRes );
 }
 
+const char * CadValorNulo ()
+{
+	return ( VALOR_NULO );
+}
+
+void CadImprimir ( const char * p_cAsciiz )
+{
+	if ( ES_VALIDO ( p_cAsciiz ) )
+	{
+		printf ( "%s\n", p_cAsciiz );
+	}
+	else
+	{
+		printf ( "%s\n", VALOR_NULO );
+	}
+}
+
+void CadImprimirExt ( const char * p_cAsciiz, const char * p_cEtiqueta, char cSep, int iEnvolver )
+{
+	const char * p_cVal;
+	const char * p_cEtiq;
+	
+	if ( ES_VALIDO ( p_cAsciiz ) )
+	{
+		p_cVal = p_cAsciiz;
+	}
+	else
+	{
+		p_cVal = VALOR_NULO;
+	}
+	if ( ES_VALIDO ( p_cEtiqueta ) )
+	{
+		p_cEtiq = p_cEtiqueta;
+	}
+	else
+	{
+		p_cEtiq = VALOR_NULO;
+	}
+	if ( iEnvolver == 1 )
+	{
+		printf ( "%s%c[%s]\n", p_cEtiq, cSep, p_cVal );
+	}
+	else
+	{
+		printf ( "%s%c%s\n", p_cEtiq, cSep, p_cVal );
+	}
+}
+
+void CadImprimirXml ( const char * p_cAsciiz, const char * p_cEtiqueta )
+{
+	const char * p_cVal;
+	const char * p_cEtiq;
+	
+	if ( ES_VALIDO ( p_cAsciiz ) )
+	{
+		p_cVal = p_cAsciiz;
+	}
+	else
+	{
+		p_cVal = VALOR_NULO;
+	}
+	if ( ES_VALIDO ( p_cEtiqueta ) )
+	{
+		p_cEtiq = p_cEtiqueta;
+	}
+	else
+	{
+		p_cEtiq = VALOR_NULO;
+	}
+	printf ( "<%s>%s</%s>\n", p_cEtiq, p_cVal, p_cEtiq );
+}
+
+void CadImprimirJson ( const char * p_cAsciiz, const char * p_cEtiqueta )
+{
+	const char * p_cVal;
+	const char * p_cEtiq;
+	
+	if ( ES_VALIDO ( p_cAsciiz ) )
+	{
+		p_cVal = p_cAsciiz;
+	}
+	else
+	{
+		p_cVal = VALOR_NULO;
+	}
+	if ( ES_VALIDO ( p_cEtiqueta ) )
+	{
+		p_cEtiq = p_cEtiqueta;
+	}
+	else
+	{
+		p_cEtiq = VALOR_NULO;
+	}
+	printf ( "\"%s\": \"%s\"\n", p_cEtiq, p_cVal );
+}

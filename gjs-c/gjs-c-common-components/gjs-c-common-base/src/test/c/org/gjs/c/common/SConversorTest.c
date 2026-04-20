@@ -26,7 +26,7 @@ static int TestSConversor01 ()
 int TestSConversor ()
 {
 	int iRes = BOOL_VAL_CIERTO;
-	printf ( "%s[Test SConversior]%s\n", ANSI_AMARILLO,  ANSI_RESETEAR );
+	printf ( "%s[Test SConversor]%s\n", ANSI_AMARILLO,  ANSI_RESETEAR );
 	if ( TestSConversor01() )
 	{
 		printf ( "%sResultado: OK%s\n", ANSI_VERDE, ANSI_RESETEAR );
@@ -36,6 +36,6 @@ int TestSConversor ()
 		printf ( "%sResultado: KO%s\n", ANSI_ROJO, ANSI_RESETEAR );
 		iRes = BOOL_VAL_FALSO;
 	}
-	printf ( "%s[Fin]%s", ANSI_AMARILLO, ANSI_RESETEAR );
+	printf ( "%s[Fin]%s\n", ANSI_AMARILLO, ANSI_RESETEAR );
 	return ( iRes );
 }

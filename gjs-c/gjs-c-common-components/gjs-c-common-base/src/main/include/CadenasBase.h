@@ -42,7 +42,6 @@ int CadEsAlfanumericoValido ( const char * p_cAsciiz );
 int CadEsAlfanumericoValidoExt ( const char * p_cAsciiz, int iMax );
 
 
-void CadImprimir ( const char * p_cAsciiz );
 
 
 #endif

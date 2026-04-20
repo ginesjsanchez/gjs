@@ -30,6 +30,8 @@
 #include <SCadena.h>
 #include <SCadenaConv.h>
 #include <SCadenaNumerica.h>
+
+#include <SListaCadenas.h>
 #include <SLinea.h>
 #include <STexto.h>
 

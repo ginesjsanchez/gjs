@@ -18,7 +18,7 @@ SMensajes * SMsjCrear ()
 		p_msjObj->p_lisMensajes = SLispCrear ();
 		if ( ES_VALIDO ( p_msjObj->p_lisMensajes ) )
 		{
-			SLispActivarLiberacionMemoria ( p_msjObj->p_lisMensajes );
+			SLispDesactivarLiberacionMemoria ( p_msjObj->p_lisMensajes );
 		}
 		else
 		{
@@ -30,15 +30,14 @@ SMensajes * SMsjCrear ()
 
 void SMsjDestruir ( SMensajes ** p_p_msjObj )
 {
-	SMensajes * p_msjObj;
+	SMensajes * 	p_msjObj;
 
 	if ( ES_VALIDO ( p_p_msjObj ) )
 	{
 		p_msjObj = *p_p_msjObj;
-
 		if ( ES_VALIDO ( p_msjObj ) )
 		{
-			SLispVaciar ( p_msjObj->p_lisMensajes );
+			SMsjLimpiar ( p_msjObj );
 			SLispDestruir ( &( p_msjObj->p_lisMensajes ) );
 			MemLiberar ( ( void ** ) p_p_msjObj );
 		}
@@ -162,8 +161,15 @@ SCadena * SMsjTexto ( SMensajes * p_msjObj, unsigned long uiCodigo )
 
 void SMsjLimpiar ( SMensajes * p_msjObj )
 {
+	SEntidadId *	p_entObj;
+
 	if ( ES_VALIDO ( p_msjObj ) )
 	{
+		for ( int iElem = 0; iElem < SLispNumElementos ( p_msjObj->p_lisMensajes ); iElem = iElem + 1 )
+		{
+			p_entObj = ( SEntidadId * ) SLispElemento ( p_msjObj->p_lisMensajes, iElem );
+			SEntIdDestruir ( &p_entObj );
+		}
 		SLispVaciar ( p_msjObj->p_lisMensajes );
 	}
 }

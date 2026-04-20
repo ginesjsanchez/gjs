@@ -16,6 +16,7 @@ extern bool TestBancoTests ();
 
 int main( int argc, char * argv[] )
 {
+	InicializarBase();
 	int iRes = 0;
 	EstablecerManejadorInterrupcionesDefecto ();
 

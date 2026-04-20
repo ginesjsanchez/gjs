@@ -284,10 +284,10 @@ void AplicConEsperarRetorno ()
 	int			iValor;
 # endif
 
+# if ( defined ( VC ) )
 	iFinal = 0;
 	while ( iFinal == 0  )
 	{
-#	  if ( defined ( VC ) )
 		while ( kbhit () == 0 ) 
 		{
 		}
@@ -300,10 +300,10 @@ void AplicConEsperarRetorno ()
 		{
 			printf ( "\b" );
 		}
-#	  else
-		// PENDIENTE:
-#	  endif
 	}
+# else
+    getchar ();
+# endif
 }
 
 int AplicConDibujarLinea ( char cCar )

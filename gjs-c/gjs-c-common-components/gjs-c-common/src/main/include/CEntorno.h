@@ -18,6 +18,9 @@ void EntFinalizar ();
 
 int EntEstaInicializado ();
 
+int EntEstaEnModoTest ();
+void EntActivarModoTest ();
+void EntDesactivarModoTest ();
 
 const char * EntDirectorioDatos ();
 const char * EntDirectorioSeguridad ();
@@ -29,8 +32,6 @@ void EntEstablecerDirectorioLog ( const char * p_cDir );
 void EntEstablecerDirectorioDatosExt ( const char * p_cDir, int iVaciar, int iCrear );
 void EntEstablecerDirectorioSeguridadExt ( const char * p_cDir, int iVaciar, int iCrear );
 void EntEstablecerDirectorioLogExt ( const char * p_cDir, int iVaciar, int iCrear );
-
-
 
 
 #endif

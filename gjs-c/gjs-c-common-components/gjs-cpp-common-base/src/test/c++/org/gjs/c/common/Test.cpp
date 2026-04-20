@@ -23,6 +23,7 @@ extern bool TestConversor ();
 
 int main( int argc, char * argv[] )
 {
+	InicializarBase();
 	int iRes = 0;
 
 	map<string, FUNCION_BOOL> mapTests;

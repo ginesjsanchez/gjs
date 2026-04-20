@@ -35,7 +35,7 @@
 char * CadCrear ( int iLong )
 {
 	char *	p_cCad;
-	//int		iPos;
+	int		iPos;
 
 	p_cCad = NULL;
 	if ( iLong >= 0 )
@@ -43,19 +43,19 @@ char * CadCrear ( int iLong )
 		p_cCad = (char *) MemReservar ( ( iLong + 1 ) * sizeof ( char ) );
 		if ( ES_VALIDO ( p_cCad ) )
 		{
-			//for ( iPos = 0; iPos <= iLong; iPos = iPos + 1 ) 
-			//{	
-			//	p_cCad [ iPos ] = (char) 0; 
-			//}
+			for ( iPos = 0; iPos <= iLong; iPos = iPos + 1 ) 
+			{	
+				p_cCad [ iPos ] = (char) 0; 
+			}
 		}
 		else
 		{
-			ErrEstablecer ( ERR_MEMORIA_INSUFICIENTE );
+			ERROR_ESTABLECER ( ERR_MEMORIA_INSUFICIENTE );
 		}
 	}
 	else
 	{
-		ErrEstablecer ( ERR_PARAMETROS );
+		ERROR_ESTABLECER ( ERR_PARAMETROS );
 	}
 	return ( p_cCad );
 }
@@ -89,7 +89,7 @@ int CadLongitud ( const char * p_cAsciiz )
 	else
 	{
 		iTam = -1;
-		ErrEstablecer ( ERR_PARAMETROS );
+		ERROR_ESTABLECER ( ERR_PARAMETROS );
 	}
 	return ( iTam );
 }
@@ -125,7 +125,7 @@ int CadLongitudSeg ( const char * p_cAsciiz, int iMax )
 	else
 	{
 		iTam = -1;
-		ErrEstablecer ( ERR_PARAMETROS );
+		ERROR_ESTABLECER ( ERR_PARAMETROS );
 	}
 	return ( iTam );
 }
@@ -163,7 +163,7 @@ void CadInicializar ( char * p_cAsciiz, int iMax )
 	}
 	else
 	{
-		ErrEstablecer ( ERR_PARAMETROS );
+		ERROR_ESTABLECER ( ERR_PARAMETROS );
 	}
 }
 
@@ -187,12 +187,12 @@ char * CadDuplicar ( const char * p_cAsciiz )
 		}
 		else
 		{
-			ErrEstablecer ( ERR_MEMORIA_INSUFICIENTE );
+			ERROR_ESTABLECER ( ERR_MEMORIA_INSUFICIENTE );
 		}
 	}
 	else
 	{
-		ErrEstablecer ( ERR_PARAMETROS );
+		ERROR_ESTABLECER ( ERR_PARAMETROS );
 		p_cCopia = NULL;
 	}
 	return ( p_cCopia );
@@ -218,12 +218,12 @@ char * CadDuplicarSeg ( const char * p_cAsciiz, int iMax )
 		}
 		else
 		{
-			ErrEstablecer ( ERR_MEMORIA_INSUFICIENTE );
+			ERROR_ESTABLECER ( ERR_MEMORIA_INSUFICIENTE );
 		}
 	}
 	else
 	{
-		ErrEstablecer ( ERR_PARAMETROS );
+		ERROR_ESTABLECER ( ERR_PARAMETROS );
 		p_cCopia = NULL;
 	}
 	return ( p_cCopia );
@@ -252,12 +252,12 @@ unichar * CadUniCrear ( int iLong )
 		}
 		else
 		{
-			ErrEstablecer ( ERR_MEMORIA_INSUFICIENTE );
+			ERROR_ESTABLECER ( ERR_MEMORIA_INSUFICIENTE );
 		}
 	}
 	else
 	{
-		ErrEstablecer ( ERR_PARAMETROS );
+		ERROR_ESTABLECER ( ERR_PARAMETROS );
 	}
 	return ( p_ucCad );
 # endif 
@@ -292,7 +292,7 @@ int CadUniLongitud ( const unichar * p_ucValor )
 	else
 	{
 		iTam = -1;
-		ErrEstablecer ( ERR_PARAMETROS );
+		ERROR_ESTABLECER ( ERR_PARAMETROS );
 	}
 	return ( iTam );
 }
@@ -328,7 +328,7 @@ int CadUniLongitudSeg ( const unichar * p_ucValor, int iMax )
 	else
 	{
 		iTam = -1;
-		ErrEstablecer ( ERR_PARAMETROS );
+		ERROR_ESTABLECER ( ERR_PARAMETROS );
 	}
 	return ( iTam );
 }
@@ -366,7 +366,7 @@ void CadUniInicializar ( unichar * p_ucValor, int iMax )
 	}
 	else
 	{
-		ErrEstablecer ( ERR_PARAMETROS );
+		ERROR_ESTABLECER ( ERR_PARAMETROS );
 	}
 }
 
@@ -390,12 +390,12 @@ unichar * CadUniDuplicar ( const unichar * p_ucValor )
 		}
 		else
 		{
-			ErrEstablecer ( ERR_MEMORIA_INSUFICIENTE );
+			ERROR_ESTABLECER ( ERR_MEMORIA_INSUFICIENTE );
 		}
 	}
 	else
 	{
-		ErrEstablecer ( ERR_PARAMETROS );
+		ERROR_ESTABLECER ( ERR_PARAMETROS );
 		p_cCopia = NULL;
 	}
 	return ( p_cCopia );
@@ -481,13 +481,7 @@ int CadEsAlfanumericoValidoExt ( const char * p_cAsciiz, int iMax )
 	return ( iRes );
 }
 
-void CadImprimir ( const char * p_cAsciiz )
-{
-	if ( ES_VALIDO ( p_cAsciiz ) )
-	{
-		printf ( "%s\n", p_cAsciiz );
-	}
-}
+
 
 
 

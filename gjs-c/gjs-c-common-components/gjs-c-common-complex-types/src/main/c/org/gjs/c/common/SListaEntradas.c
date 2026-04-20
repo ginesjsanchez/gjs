@@ -13,6 +13,7 @@ SListaEntradas * SLisEtrCrear ()
 	if ( ES_VALIDO ( p_lisObj ) )
 	{
 		p_lisObj->p_lisDatos = SLispCrear ();
+		SLispDesactivarLiberacionMemoria ( p_lisObj->p_lisDatos );
 	}
 	return ( p_lisObj );
 }
@@ -27,6 +28,7 @@ void SLisEtrDestruir ( SListaEntradas ** p_p_lisObj )
 
 		if ( ES_VALIDO ( p_lisObj ) )
 		{
+			SLisEtrVaciar ( p_lisObj );
 			SLispDestruir ( &(p_lisObj->p_lisDatos) );
 			MemLiberar ( (void **) p_p_lisObj );
 		}
@@ -232,6 +234,7 @@ int SLisEtrEliminar ( SListaEntradas * p_lisObj, const char * p_cNombre )
 			{
 				iRes = SLisEtrEliminarElem ( p_lisObj, iElem );
 			}
+			iElem = iElem + 1;
 		}
 	}
 	else
@@ -243,10 +246,13 @@ int SLisEtrEliminar ( SListaEntradas * p_lisObj, const char * p_cNombre )
 
 int SLisEtrEliminarElem ( SListaEntradas * p_lisObj, int iElem )
 {
-	int iRes;
+	int 		iRes;
+	SEntrada * 	p_etrObj;
 
 	if ( ES_VALIDO ( p_lisObj ) )
 	{
+		p_etrObj = SLisEtrElemento ( p_lisObj, iElem );
+		SEtrDestruir ( &p_etrObj );
 		iRes = SLispEliminarElem ( p_lisObj->p_lisDatos, iElem );
 	}
 	else
@@ -258,10 +264,16 @@ int SLisEtrEliminarElem ( SListaEntradas * p_lisObj, int iElem )
 
 int SLisEtrVaciar ( SListaEntradas * p_lisObj )
 {
-	int iRes;
+	int 		iRes;
+	SEntrada * 	p_etrObj;
 
 	if ( ES_VALIDO ( p_lisObj ) )
 	{
+		for ( int iElem = 0; iElem < SLisEtrNumElementos ( p_lisObj ); iElem = iElem + 1 )
+		{
+			p_etrObj = SLisEtrElemento ( p_lisObj, iElem );
+			SEtrDestruir ( &p_etrObj );
+		}
 		iRes = SLispVaciar ( p_lisObj->p_lisDatos );
 	}
 	else
@@ -271,36 +283,6 @@ int SLisEtrVaciar ( SListaEntradas * p_lisObj )
 	return ( iRes );
 }
 
-int	SLisEtrLiberacionMemoriaActivada ( SListaEntradas * p_lisObj )
-{
-	int	iRes;
-
-	if ( ES_VALIDO ( p_lisObj ) ) 
-	{
-		iRes = SLispLiberacionMemoriaActivada ( p_lisObj->p_lisDatos );
-	}
-	else
-	{
-		iRes = 0;
-	}
-	return ( iRes );
-}
-
-void SLisEtrActivarLiberacionMemoria ( SListaEntradas * p_lisObj )
-{
-	if ( ES_VALIDO ( p_lisObj ) ) 
-	{
-		SLispActivarLiberacionMemoria ( p_lisObj->p_lisDatos );
-	}
-}
-
-void SLisEtrDesactivarLiberacionMemoria ( SListaEntradas * p_lisObj )
-{
-	if ( ES_VALIDO ( p_lisObj ) ) 
-	{
-		SLispDesactivarLiberacionMemoria ( p_lisObj->p_lisDatos );
-	}
-}
 
 
 

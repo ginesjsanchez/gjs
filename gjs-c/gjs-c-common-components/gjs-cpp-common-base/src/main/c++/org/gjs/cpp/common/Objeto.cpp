@@ -1,3 +1,6 @@
+#include "BaseConfig.h"
+
+#include <cxxabi.h>
 
 #include "Objeto.h"
 #include "Cadenas.h"
@@ -22,9 +25,6 @@ namespace org
 
 Objeto::Objeto ()
 {
-    const type_info &typeinfo( typeid(*this) );
-    tipo = string ( typeinfo.name() );
-	tam = sizeof(*this);
 }
 
 Objeto::~Objeto ()
@@ -38,12 +38,17 @@ int Objeto::hash () const
 
 string Objeto::getTipo () const
 {
+	const type_info & typeinfo( typeid(*this) );
+	int status;
+	char* demangled = abi::__cxa_demangle( typeinfo.name(), nullptr, nullptr, &status );
+	string tipo = string ( status == 0 ? demangled : typeinfo.name() );
+	free( demangled );
 	return( tipo );
 }
 
 size_t Objeto::getTam () const
 {
-	return( tam );
+	return( sizeof( *this ) );
 }
 
 bool Objeto::esValido () const
@@ -53,7 +58,6 @@ bool Objeto::esValido () const
 
 void Objeto::assignar( Objeto & objeto )
 {
-    tipo = string ( objeto.getTipo() );
 }
 
 
@@ -66,7 +70,12 @@ Objeto * Objeto::clonar()
 
 bool Objeto::equals ( Objeto & objeto ) const
 {
-	return ( hash() == objeto.hash() );
+    bool bRes = false;
+	if ( getTipo ().compare ( objeto.getTipo () ) == 0 )
+	{
+		bRes = ( hash() == objeto.hash() );
+	}
+	return ( bRes );
 }
 
 bool Objeto::equals ( Objeto * objeto ) const
@@ -82,7 +91,7 @@ bool Objeto::equals ( Objeto * objeto ) const
 
 string Objeto::toString ()
 {
-	return ( Concatenar( "[Objeto={Tipo=", tipo, "}]" ) );
+	return ( Concatenar( "[Objeto={Tipo=", getTipo (), "}]" ) );
 }
 
 Objeto & Objeto::operator= ( Objeto & objeto )

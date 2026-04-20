@@ -80,7 +80,7 @@ public:
 	double RealDoble ();
 	long double RealDobleLargo ();
 	const string & Cadena ();
-	string * CadenaHex ();
+	string CadenaHex ();
 
 	void EstablecerValor ( int iValor );
 	void EstablecerValor ( long lValor );

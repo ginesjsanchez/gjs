@@ -1,6 +1,6 @@
 #include "SListaCadenas.h"
 
-#include "TiposDatosConfig.h"
+#include "TextoConfig.h"
 
 
 
@@ -27,6 +27,7 @@ void SLisCadDestruir ( SListaCadenas ** p_p_lisObj )
 
 		if ( ES_VALIDO ( p_lisObj ) )
 		{
+			SLisCadVaciar ( p_lisObj );
 			SLispDestruir ( &(p_lisObj->p_lisDatos) );
 			MemLiberar ( (void **) p_p_lisObj );
 		}
@@ -148,26 +149,39 @@ int SLisCadInsertarAlFinal ( SListaCadenas * p_lisObj, SCadena * p_cadDatos )
 
 int SLisCadEstablecerElemDup ( SListaCadenas * p_lisObj, int iElem, SCadena * p_cadDatos )
 {
-	SCadena *	p_cElem;
-	int		iRes;
-	int		iActLib;
+	SCadena *	p_cadAnt;
+	SCadena *	p_cadElem;
+	int			iRes;
+	int			iActLib;
 
 	if ( ES_VALIDO ( p_lisObj ) && ES_VALIDO ( p_cadDatos ) )
 	{
-		p_cElem = SCadDuplicar ( p_cadDatos );
-		if ( ES_VALIDO ( p_cElem ) )
+		p_cadAnt = SLisCadElemento ( p_lisObj, iElem );
+		if ( ES_VALIDO ( p_cadAnt ) )
 		{
-			iActLib = SLispLiberacionMemoriaActivada ( p_lisObj->p_lisDatos );
-			SLispActivarLiberacionMemoria ( p_lisObj->p_lisDatos );
-			iRes = SLispEstablecerElem ( p_lisObj->p_lisDatos, iElem, (byte *) p_cElem );
-			if ( iActLib == 0 )
+			p_cadElem = SCadDuplicar ( p_cadDatos );
+			if ( ES_VALIDO ( p_cadElem ) )
 			{
+				iActLib = SLispLiberacionMemoriaActivada ( p_lisObj->p_lisDatos );
+				if ( iActLib == 1 ) 
+				{
+					SCadDestruir ( &p_cadAnt );
+				}
 				SLispDesactivarLiberacionMemoria ( p_lisObj->p_lisDatos );
-			}
+				iRes = SLispEstablecerElem ( p_lisObj->p_lisDatos, iElem, (byte *) p_cadElem );
+				if ( iActLib == 1 )
+				{
+					SLispActivarLiberacionMemoria ( p_lisObj->p_lisDatos );
+				}
 
-			if ( iRes != 1 )
+				if ( iRes != 1 )
+				{
+					SCadDestruir ( &p_cadElem );
+				}
+			}
+			else
 			{
-				MemLiberar ( (void **) &p_cElem );
+				iRes = -1;
 			}
 		}
 		else
@@ -184,26 +198,19 @@ int SLisCadEstablecerElemDup ( SListaCadenas * p_lisObj, int iElem, SCadena * p_
 
 int SLisCadInsertarElemDup ( SListaCadenas * p_lisObj, int iPosAnt, SCadena * p_cadDatos )
 {
-	SCadena *	p_cElem;
-	int		iRes;
-	int		iActLib;
+	SCadena *	p_cadElem;
+	int			iRes;
 
 	if ( ES_VALIDO ( p_lisObj ) && ES_VALIDO ( p_cadDatos ) )
 	{
-		p_cElem = SCadDuplicar ( p_cadDatos );
-		if ( ES_VALIDO ( p_cElem ) )
+		p_cadElem = SCadDuplicar ( p_cadDatos );
+		if ( ES_VALIDO ( p_cadElem ) )
 		{
-			iActLib = SLispLiberacionMemoriaActivada ( p_lisObj->p_lisDatos );
-			SLispActivarLiberacionMemoria ( p_lisObj->p_lisDatos );
-			iRes = SLispInsertarElem ( p_lisObj->p_lisDatos, iPosAnt, (byte *) p_cElem );
-			if ( iActLib == 0 )
-			{
-				SLispDesactivarLiberacionMemoria ( p_lisObj->p_lisDatos );
-			}
+			iRes = SLispInsertarElem ( p_lisObj->p_lisDatos, iPosAnt, (byte *) p_cadElem );
 
 			if ( iRes != 1 )
 			{
-				MemLiberar ( (void **) &p_cElem );
+				SCadDestruir ( &p_cadElem );
 			}
 		}
 		else
@@ -220,26 +227,18 @@ int SLisCadInsertarElemDup ( SListaCadenas * p_lisObj, int iPosAnt, SCadena * p_
 
 int SLisCadInsertarDupAlInicio ( SListaCadenas * p_lisObj, SCadena * p_cadDatos )
 {
-	SCadena *	p_cElem;
-	int		iRes;
-	int		iActLib;
+	SCadena *	p_cadElem;
+	int			iRes;
 
 	if ( ES_VALIDO ( p_lisObj ) && ES_VALIDO ( p_cadDatos ) )
 	{
-		p_cElem = SCadDuplicar ( p_cadDatos );
-		if ( ES_VALIDO ( p_cElem ) )
+		p_cadElem = SCadDuplicar ( p_cadDatos );
+		if ( ES_VALIDO ( p_cadElem ) )
 		{
-			iActLib = SLispLiberacionMemoriaActivada ( p_lisObj->p_lisDatos );
-			SLispActivarLiberacionMemoria ( p_lisObj->p_lisDatos );
-			iRes = SLispInsertarElem ( p_lisObj->p_lisDatos, -1, (byte *) p_cElem );
-			if ( iActLib == 0 )
-			{
-				SLispDesactivarLiberacionMemoria ( p_lisObj->p_lisDatos );
-			}
-
+			iRes = SLispInsertarElem ( p_lisObj->p_lisDatos, -1, (byte *) p_cadElem );
 			if ( iRes != 1 )
 			{
-				MemLiberar ( (void **) &p_cElem );
+				SCadDestruir ( &p_cadElem );
 			}
 		}
 		else
@@ -256,28 +255,20 @@ int SLisCadInsertarDupAlInicio ( SListaCadenas * p_lisObj, SCadena * p_cadDatos 
 
 int SLisCadInsertarDupAlFinal ( SListaCadenas * p_lisObj, SCadena * p_cadDatos )
 {
-	SCadena *	p_cElem;
-	int		iRes;
-	int		iActLib;
+	SCadena *	p_cadElem;
+	int			iRes;
 
 	if ( ES_VALIDO ( p_lisObj ) && ES_VALIDO ( p_cadDatos ) )
 	{
-		p_cElem = SCadDuplicar ( p_cadDatos );
-		if ( ES_VALIDO ( p_cElem ) )
+		p_cadElem = SCadDuplicar ( p_cadDatos );
+		if ( ES_VALIDO ( p_cadElem ) )
 		{
-			iActLib = SLispLiberacionMemoriaActivada ( p_lisObj->p_lisDatos );
-			SLispActivarLiberacionMemoria ( p_lisObj->p_lisDatos );
 			iRes = SLispInsertarElem ( p_lisObj->p_lisDatos, 
 									   SLisCadNumElementos ( p_lisObj ), 
-									   (byte *) p_cElem );
-			if ( iActLib == 0 )
-			{
-				SLispDesactivarLiberacionMemoria ( p_lisObj->p_lisDatos );
-			}
-
+									   (byte *) p_cadElem );
 			if ( iRes != 1 )
 			{
-				MemLiberar ( (void **) &p_cElem );
+				SCadDestruir ( &p_cadElem );
 			}
 		}
 		else
@@ -294,11 +285,27 @@ int SLisCadInsertarDupAlFinal ( SListaCadenas * p_lisObj, SCadena * p_cadDatos )
 
 int SLisCadEliminarElem ( SListaCadenas * p_lisObj, int iElem )
 {
-	int iRes;
+	int 		iRes;
+	SCadena * 	p_cadObj;
+	int			iActLib;
 
 	if ( ES_VALIDO ( p_lisObj ) )
 	{
+		iActLib = SLisCadLiberacionMemoriaActivada ( p_lisObj );
+		if ( iActLib == 1 ) 
+		{
+			p_cadObj = SLisCadElemento ( p_lisObj, iElem );
+			if ( ES_VALIDO ( p_cadObj ) ) 
+			{
+				SCadDestruir ( &p_cadObj );	
+			}
+		}
+		SLispDesactivarLiberacionMemoria ( p_lisObj->p_lisDatos );	
 		iRes = SLispEliminarElem ( p_lisObj->p_lisDatos, iElem );
+		if ( iActLib == 1 )
+		{
+			SLispActivarLiberacionMemoria ( p_lisObj->p_lisDatos );
+		}
 	}
 	else
 	{
@@ -309,11 +316,27 @@ int SLisCadEliminarElem ( SListaCadenas * p_lisObj, int iElem )
 
 int SLisCadVaciar ( SListaCadenas * p_lisObj )
 {
-	int iRes;
+	int 		iRes;
+	SCadena * 	p_cadObj;
+	int			iActLib;
 
 	if ( ES_VALIDO ( p_lisObj ) )
 	{
+		iActLib = SLisCadLiberacionMemoriaActivada ( p_lisObj );
+		if ( iActLib == 1 ) 
+		{
+			for ( int iElem = 0; iElem < SLisCadNumElementos ( p_lisObj ); iElem = iElem + 1 )
+			{
+				p_cadObj = SLisCadElemento ( p_lisObj, iElem );
+				SCadDestruir ( &p_cadObj );
+			}
+		}
+		SLispDesactivarLiberacionMemoria( p_lisObj->p_lisDatos );
 		iRes = SLispVaciar ( p_lisObj->p_lisDatos );
+		if ( iActLib == 1 )
+		{
+			SLispActivarLiberacionMemoria ( p_lisObj->p_lisDatos );
+		}
 	}
 	else
 	{
@@ -501,26 +524,39 @@ int SLisCadInsertarDetras ( SListaCadenas * p_lisObj, SCadena * p_cadDatos )
 
 int SLisCadEstablecerDup ( SListaCadenas * p_lisObj, SCadena * p_cadDatos )
 {
-	SCadena *	p_cElem;
-	int		iRes;
-	int		iActLib;
+	SCadena *	p_cadAnt;
+	SCadena *	p_cadElem;
+	int			iRes;
+	int			iActLib;
 
 	if ( ES_VALIDO ( p_lisObj ) && ES_VALIDO ( p_cadDatos ) )
 	{
-		p_cElem = SCadDuplicar ( p_cadDatos );
-		if ( ES_VALIDO ( p_cElem ) )
+		p_cadAnt = SLisCadActual ( p_lisObj );
+		if ( ES_VALIDO ( p_cadAnt ) )
 		{
-			iActLib = SLispLiberacionMemoriaActivada ( p_lisObj->p_lisDatos );
-			SLispActivarLiberacionMemoria ( p_lisObj->p_lisDatos );
-			iRes = SLispEstablecer ( p_lisObj->p_lisDatos, (byte *) p_cElem );
-			if ( iActLib == 0 )
+			p_cadElem = SCadDuplicar ( p_cadDatos );
+			if ( ES_VALIDO ( p_cadElem ) )
 			{
+				iActLib = SLispLiberacionMemoriaActivada ( p_lisObj->p_lisDatos );
+				if ( iActLib == 1 ) 
+				{
+					SCadDestruir ( &p_cadAnt );
+				}
 				SLispDesactivarLiberacionMemoria ( p_lisObj->p_lisDatos );
-			}
+				iRes = SLispEstablecer ( p_lisObj->p_lisDatos, (byte *) p_cadElem );
+				if ( iActLib == 1 )
+				{
+					SLispActivarLiberacionMemoria ( p_lisObj->p_lisDatos );
+				}
 
-			if ( iRes != 1 )
+				if ( iRes != 1 )
+				{
+					SCadDestruir ( &p_cadElem );
+				}
+			}
+			else
 			{
-				MemLiberar ( (void **) &p_cElem );
+				iRes = 0;
 			}
 		}
 		else
@@ -542,26 +578,19 @@ int SLisCadInsertarDup ( SListaCadenas * p_lisObj, SCadena * p_cadDatos )
 
 int SLisCadInsertarDupDelante ( SListaCadenas * p_lisObj, SCadena * p_cadDatos )
 {
-	SCadena *	p_cElem;
-	int		iRes;
-	int		iActLib;
+	SCadena *	p_cadElem;
+	int			iRes;
 
 	if ( ES_VALIDO ( p_lisObj ) && ES_VALIDO ( p_cadDatos ) )
 	{
-		p_cElem = SCadDuplicar ( p_cadDatos );
-		if ( ES_VALIDO ( p_cElem ) )
+		p_cadElem = SCadDuplicar ( p_cadDatos );
+		if ( ES_VALIDO ( p_cadElem ) )
 		{
-			iActLib = SLispLiberacionMemoriaActivada ( p_lisObj->p_lisDatos );
-			SLispActivarLiberacionMemoria ( p_lisObj->p_lisDatos );
-			iRes = SLispInsertarDelante ( p_lisObj->p_lisDatos, (byte *) p_cElem );
-			if ( iActLib == 0 )
-			{
-				SLispDesactivarLiberacionMemoria ( p_lisObj->p_lisDatos );
-			}
+			iRes = SLispInsertarDelante ( p_lisObj->p_lisDatos, (byte *) p_cadElem );
 
 			if ( iRes != 1 )
 			{
-				MemLiberar ( (void **) &p_cElem );
+				SCadDestruir ( &p_cadElem );
 			}
 		}
 		else
@@ -578,26 +607,19 @@ int SLisCadInsertarDupDelante ( SListaCadenas * p_lisObj, SCadena * p_cadDatos )
 
 int SLisCadInsertarDupDetras ( SListaCadenas * p_lisObj, SCadena * p_cadDatos )
 {
-	SCadena *	p_cElem;
-	int		iRes;
-	int		iActLib;
+	SCadena *	p_cadElem;
+	int			iRes;
 
 	if ( ES_VALIDO ( p_lisObj ) && ES_VALIDO ( p_cadDatos ) )
 	{
-		p_cElem = SCadDuplicar ( p_cadDatos );
-		if ( ES_VALIDO ( p_cElem ) )
+		p_cadElem = SCadDuplicar ( p_cadDatos );
+		if ( ES_VALIDO ( p_cadElem ) )
 		{
-			iActLib = SLispLiberacionMemoriaActivada ( p_lisObj->p_lisDatos );
-			SLispActivarLiberacionMemoria ( p_lisObj->p_lisDatos );
-			iRes = SLispInsertarDetras ( p_lisObj->p_lisDatos, (byte *) p_cElem );
-			if ( iActLib == 0 )
-			{
-				SLispDesactivarLiberacionMemoria ( p_lisObj->p_lisDatos );
-			}
+			iRes = SLispInsertarDetras ( p_lisObj->p_lisDatos, (byte *) p_cadElem );
 
 			if ( iRes != 1 )
 			{
-				MemLiberar ( (void **) &p_cElem );
+				SCadDestruir ( &p_cadElem );
 			}
 		}
 		else
@@ -614,11 +636,31 @@ int SLisCadInsertarDupDetras ( SListaCadenas * p_lisObj, SCadena * p_cadDatos )
 
 int SLisCadEliminar ( SListaCadenas * p_lisObj )
 {
-	int iRes;
+	int 		iRes;
+	SCadena * 	p_cadAnt;
+	int			iActLib;
 
 	if ( ES_VALIDO ( p_lisObj ) ) 
 	{
-		iRes = SLispEliminar ( p_lisObj->p_lisDatos );
+		p_cadAnt = SLisCadActual ( p_lisObj );
+		if ( ES_VALIDO ( p_cadAnt ) )
+		{
+			iActLib = SLispLiberacionMemoriaActivada ( p_lisObj->p_lisDatos );
+			if ( iActLib == 1 ) 
+			{
+				SCadDestruir ( &p_cadAnt );
+			}
+			SLispDesactivarLiberacionMemoria ( p_lisObj->p_lisDatos );
+			iRes = SLispEliminar ( p_lisObj->p_lisDatos );
+			if ( iActLib == 1 )
+			{
+				SLispActivarLiberacionMemoria ( p_lisObj->p_lisDatos );
+			}
+		}
+		else
+		{
+			iRes = 0;
+		}
 	}
 	else
 	{

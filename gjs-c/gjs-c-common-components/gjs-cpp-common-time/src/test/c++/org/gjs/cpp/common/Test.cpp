@@ -7,8 +7,8 @@
 
 int main( int argc, char * argv[] )
 {
-	int iRes = 0;
 	InicializarBase();
+	int iRes = 0;
 
 	map<string, FUNCION_BOOL> mapTests;
 	//mapTests[ "ToString" ] = TestToString;

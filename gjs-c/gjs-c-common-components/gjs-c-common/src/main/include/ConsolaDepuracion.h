@@ -17,9 +17,11 @@ int ConDepAbrir ();
 void ConDepCerrar ();
 int ConDepEstaAbierta ();
 
+void ConDepImprimir ( const char * p_cTexto, ... );
 int ConDepEscribir ( const char * p_cTexto, ... );
 int ConDepEscribirLinea ( const char * p_cTexto, ... );
 
+void ConDepEsperar ();
 
 #endif
 

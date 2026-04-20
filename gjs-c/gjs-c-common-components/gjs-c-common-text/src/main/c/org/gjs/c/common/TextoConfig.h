@@ -39,6 +39,7 @@
 #include <TiposCaracter.h>
 
 
+#define VALOR_NULO			"null"
 
 
 #endif

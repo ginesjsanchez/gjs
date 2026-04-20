@@ -168,12 +168,40 @@ string ToString ( float t ) {
 
 
 string ToString ( double t ) {
-    return _ToString<double>( t );
+	try
+	{
+		array<char, 32> buf;
+		to_chars_result result = std::to_chars(buf.data(), buf.data() + buf.size(),
+									   t, std::chars_format::general, numeric_limits<double>::max_digits10 );
+		if ( result.ec != std::errc{} )
+		{
+			throw std::runtime_error ( "to_chars fallo" );
+		}
+		return string( buf.data(), result.ptr );
+	}
+	catch (...)
+	{
+		return ( string( "[Object Error]" ) );
+	}
 }
 
 
 string ToString ( long double t ) {
-    return _ToString<long double>( t );
+	try
+	{
+		array<char, 32> buf;
+		to_chars_result result = std::to_chars(buf.data(), buf.data() + buf.size(),
+									   t, std::chars_format::general, numeric_limits<long double>::max_digits10 );
+		if ( result.ec != std::errc{} )
+		{
+			throw std::runtime_error ( "to_chars fallo" );
+		}
+		return string( buf.data(), result.ptr );
+	}
+	catch (...)
+	{
+		return ( string( "[Object Error]" ) );
+	}
 }
 
 

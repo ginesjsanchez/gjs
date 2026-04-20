@@ -255,6 +255,13 @@ int CadEsIdentificadorValido ( const char * p_cAsciiz );
 int CadEsTokenValidoExt ( const char * p_cAsciiz, int iMax );
 int CadEsIdentificadorValidoExt ( const char * p_cAsciiz, int iMax );
 
+const char * CadValorNulo ();
+
+void CadImprimir ( const char * p_cAsciiz );
+void CadImprimirExt ( const char * p_cAsciiz, const char * p_cEtiqueta, char cSep, int iEnvolver );
+void CadImprimirXml ( const char * p_cAsciiz, const char * p_cEtiqueta );
+void CadImprimirJson ( const char * p_cAsciiz, const char * p_cEtiqueta );
+
 
 #endif
 

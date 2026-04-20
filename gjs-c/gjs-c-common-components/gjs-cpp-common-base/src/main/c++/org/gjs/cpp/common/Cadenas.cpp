@@ -95,7 +95,7 @@ string Limpiar( const string & sCadena )
 string FormatearBlancos ( const string & sCadena )
 {
     regex patron ( "\\s+" );
-    return ( regex_replace( sCadena, patron, " " ) );
+    return ( Trim ( regex_replace( sCadena, patron, " " ) ) );
 }
 
 
@@ -107,41 +107,31 @@ bool ContieneCaracter ( const string & sCadena, char c )
 bool ContieneBlancos ( const string & sCadena )
 {
     regex patron ( "\\s" );
-    smatch comparador;
-    regex_match ( sCadena, comparador, patron );
-    return ( comparador.size() > 0 );
+    return ( regex_search ( sCadena, patron ) );
 }
 
 bool ContieneTabuladores ( const string & sCadena )
 {
     regex patron ( "\\t" );
-    smatch comparador;
-    regex_match ( sCadena, comparador, patron );
-    return ( comparador.size() > 0 );
+    return ( regex_search ( sCadena, patron ) );
 }
 
 bool ContieneCaracteresNoImprimibles ( const string & sCadena )
 {
     regex patron ( "(?![\\n\\t])[^[:print:]]" );
-    smatch comparador;
-    regex_match ( sCadena, comparador, patron );
-    return ( comparador.size() > 0 );
+    return ( regex_search ( sCadena, patron ) );
 }
 
 bool ContieneCaracteresNoAlfanumericos ( const string & sCadena )
 {
     regex patron ( "[^\\w:]" );
-    smatch comparador;
-    regex_match ( sCadena, comparador, patron );
-    return ( comparador.size() > 0 );
+    return ( regex_search ( sCadena, patron ) );
 }
 
 bool ContieneCaracteresNoEstandar ( const string & sCadena )
 {
     regex patron ( "[^\\u0020-\\u007F]" );
-    smatch comparador;
-    regex_match ( sCadena, comparador, patron );
-    return ( comparador.size() > 0 );
+    return ( regex_search ( sCadena, patron ) );
 }
 
 bool CoherenciaParentesis ( const string & sCadena )
@@ -162,13 +152,15 @@ bool CoherenciaCorchetes ( const string & sCadena  )
 bool CoherenciaParejaSignos ( const string & sCadena, char cSigAp, char cSigCl )
 {
   	int iAbiertos = 0;
+	bool bAbierto = false;
     for ( size_t pos = 0; pos < sCadena.size(); pos = pos + 1 )
     {
         if ( sCadena.at( pos ) == cSigAp )
         {
             iAbiertos = iAbiertos + 1;
+			bAbierto = true;
         }
-        else if ( sCadena.at( pos ) == cSigCl )
+        else if ( bAbierto && sCadena.at( pos ) == cSigCl )
         {
             iAbiertos = iAbiertos - 1;
         }
@@ -179,7 +171,7 @@ bool CoherenciaParejaSignos ( const string & sCadena, char cSigAp, char cSigCl )
 string EliminarCaracter ( const string & sCadena, int iCar )
 {
     string sRes = sCadena;
-    if ( ( iCar >= 0 ) && ( iCar < sCadena.size() ) )
+    if ( ( iCar >= 0 ) && ( iCar < (int) sCadena.size() ) )
     {
         sRes.erase ( iCar, 1 );
     }
@@ -189,9 +181,9 @@ string EliminarCaracter ( const string & sCadena, int iCar )
 string EliminarCaracteres ( const string & sCadena, int iPosIni, int iNumCars )
 {
     string sRes = sCadena;
-    if ( ( iPosIni >= 0 ) && ( iPosIni < sCadena.size() ) && ( iNumCars > 0 ) )
+    if ( ( iPosIni >= 0 ) && ( iPosIni < (int) sCadena.size() ) && ( iNumCars > 0 ) )
     {
-        if ( iPosIni + iNumCars > sCadena.size() )
+        if ( iPosIni + iNumCars > (int) sCadena.size() )
         {
             iNumCars = iNumCars - iPosIni - iNumCars + sCadena.size();
         }
@@ -202,17 +194,35 @@ string EliminarCaracteres ( const string & sCadena, int iPosIni, int iNumCars )
 
 string EliminarPrimerosCaracteres ( const string & sCadena, int iNumCars )
 {
-	return ( EliminarCaracteres ( sCadena, 0, iNumCars ) );
+	if ( iNumCars > (int) sCadena.size() )
+	{
+		return ( string ( "" ) );
+	}
+ 	return ( EliminarCaracteres ( sCadena, 0, iNumCars ) );
 }
 
 string EliminarUltimosCaracteres ( const string & sCadena, int iNumCars )
 {
+	if ( iNumCars > (int) sCadena.size() )
+	{
+		return ( string ( "" ) );
+	}
 	return ( EliminarCaracteres ( sCadena, sCadena.size() - iNumCars, iNumCars ) );
+}
+
+string EscaparRegex ( const string& s )
+{
+    static const regex caracteresEspeciales(R"([\.\^\$\*\+\?\(\)\[\]\{\}\|\\])");
+    return regex_replace(s, caracteresEspeciales, R"(\$&)");
 }
 
 string EliminarApariciones ( const string & sCadena1, const string & sCadena2 )
 {
-    regex patron ( format ( "\\{}", sCadena2 ) );
+	if ( sCadena2.size() == 0 ) 
+	{
+		return ( sCadena1 );
+	}
+    regex patron ( sCadena2 );
     return ( regex_replace( sCadena1, patron, "" ) );
 }
 
@@ -228,7 +238,7 @@ string EliminarTabuladores ( const string & sCadena )
 
 string EliminarCaracteresNoAlfanumericos ( const string & sCadena )
 {
-    regex patron ( "[^\\w:]" );
+    regex patron ( "[^\\w]" );
     return ( regex_replace( sCadena, patron, "" ) );
 }
 

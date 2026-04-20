@@ -65,7 +65,7 @@ static bool TestConjuntoValores01 ()
 			if ( ( valor1->getValor().compare( "Vladimiro" ) != 0 ) || 
 				 ( valor2->getValor().compare( "Putin" ) != 0 ) ||
 				 ( valor3->getValor().compare( "0" ) != 0 ) || 
-				 ( valor4->getValor().compare( "-37.02" ) != 0 ) || 
+				 ! valor4->getValor().starts_with( "-37.02" ) || 
 				 ( valor5->getValor().compare( "Falso" ) != 0 ) )
 			{
 				cout << "Error caso 3b: [" << valor1->getValor() << "]-[" << valor2->getValor() << "]-[" << 
@@ -172,7 +172,7 @@ static bool TestConjuntoValores02 ()
 		if ( ( valor1->getValor().compare( "Vladimiro" ) != 0 ) || 
 			 ( valor2->getValor().compare( "Putin" ) != 0 ) ||
 			 ( valor3->getValor().compare( "0" ) != 0 ) || 
-			 ( valor4->getValor().compare( "-37.02" ) != 0 ) )
+			 ! valor4->getValor().starts_with( "-37.02" ) )
 		{
 			cout << "Error caso 2: [" << valor1->getValor() << "]-[" << valor2->getValor() << "]-[" << 
 						valor3->getValor() << "]-[" << valor4->getValor() << "]" << endl;

@@ -52,7 +52,7 @@ int AplicLogInicializarExt ( const char * p_cDirectorio, const char * p_cFichero
 			}
 			else
 			{
-				ErrEstablecer ( ERR_MEMORIA_INSUFICIENTE );
+				ERROR_ESTABLECER ( ERR_MEMORIA_INSUFICIENTE );
 				iRes = 0;
 			}
 		}
@@ -273,7 +273,7 @@ int AplicLogAnotar ( const char * p_cTexto, ... )
 	}
 	else
 	{
-		ErrEstablecer ( ERR_MEMORIA_INSUFICIENTE );
+		ERROR_ESTABLECER ( ERR_MEMORIA_INSUFICIENTE );
 		iRes = 0;
 	}
 	va_end ( valArgumentos );
@@ -296,7 +296,7 @@ int AplicLogAnotarForzado ( const char * p_cTexto, ... )
 	}
 	else
 	{
-		ErrEstablecer ( ERR_MEMORIA_INSUFICIENTE );
+		ERROR_ESTABLECER ( ERR_MEMORIA_INSUFICIENTE );
 		iRes = 0;
 	}
 	va_end ( valArgumentos );
@@ -319,7 +319,7 @@ int AplicLogAnotarDepuracion ( const char * p_cTexto, ... )
 	}
 	else
 	{
-		ErrEstablecer ( ERR_MEMORIA_INSUFICIENTE );
+		ERROR_ESTABLECER ( ERR_MEMORIA_INSUFICIENTE );
 		iRes = 0;
 	}
 	va_end ( valArgumentos );
@@ -342,7 +342,7 @@ int AplicLogAnotarAviso ( const char * p_cTexto, ... )
 	}
 	else
 	{
-		ErrEstablecer ( ERR_MEMORIA_INSUFICIENTE );
+		ERROR_ESTABLECER ( ERR_MEMORIA_INSUFICIENTE );
 		iRes = 0;
 	}
 	va_end ( valArgumentos );
@@ -365,7 +365,7 @@ int AplicLogAnotarError ( const char * p_cTexto, ... )
 	}
 	else
 	{
-		ErrEstablecer ( ERR_MEMORIA_INSUFICIENTE );
+		ERROR_ESTABLECER ( ERR_MEMORIA_INSUFICIENTE );
 		iRes = 0;
 	}
 	va_end ( valArgumentos );

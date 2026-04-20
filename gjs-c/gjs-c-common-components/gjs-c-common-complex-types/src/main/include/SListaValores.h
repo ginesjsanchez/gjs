@@ -35,10 +35,6 @@ int SLisValEstablecerElem ( SListaValores * p_lisObj, int iElem, SValor * p_valD
 int SLisValInsertarElem ( SListaValores * p_lisObj, int iPosAnt, SValor * p_valDatos );
 int SLisValInsertarAlInicio ( SListaValores * p_lisObj, SValor * p_valDatos );
 int SLisValInsertarAlFinal ( SListaValores * p_lisObj, SValor * p_valDatos );
-int SLisValEstablecerElemDup ( SListaValores * p_lisObj, int iElem, SValor * p_valDatos );
-int SLisValInsertarElemDup ( SListaValores * p_lisObj, int iPosAnt, SValor * p_valDatos );
-int SLisValInsertarDupAlInicio ( SListaValores * p_lisObj, SValor * p_valDatos );
-int SLisValInsertarDupAlFinal ( SListaValores * p_lisObj, SValor * p_valDatos );
 
 int SLisValEliminarElem ( SListaValores * p_lisObj, int iElem );
 
@@ -63,18 +59,10 @@ int SLisValEstablecer ( SListaValores * p_lisObj, SValor * p_valDatos );
 int SLisValInsertar ( SListaValores * p_lisObj, SValor * p_valDatos );
 int SLisValInsertarDelante ( SListaValores * p_lisObj, SValor * p_valDatos );
 int SLisValInsertarDetras ( SListaValores * p_lisObj, SValor * p_valDatos );
-int SLisValEstablecerDup ( SListaValores * p_lisObj, SValor * p_valDatos );
-int SLisValInsertarDup ( SListaValores * p_lisObj, SValor * p_valDatos );
-int SLisValInsertarDupDelante ( SListaValores * p_lisObj, SValor * p_valDatos );
-int SLisValInsertarDupDetras ( SListaValores * p_lisObj, SValor * p_valDatos );
 int SLisValEliminar ( SListaValores * p_lisObj );
 
 int SLisValExiste ( SListaValores * p_lisObj, SValor * p_valDatos );
 int SLisValBuscar ( SListaValores * p_lisObj, SValor * p_valDatos );
-
-int	SLisValLiberacionMemoriaActivada ( SListaValores * p_lisObj );
-void SLisValActivarLiberacionMemoria ( SListaValores * p_lisObj );
-void SLisValDesactivarLiberacionMemoria ( SListaValores * p_lisObj );
 
 
 

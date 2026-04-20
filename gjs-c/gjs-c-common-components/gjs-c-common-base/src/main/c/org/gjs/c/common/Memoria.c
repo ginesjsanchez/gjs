@@ -118,19 +118,19 @@ void * MemReservar ( int iNumBytes )
 				if ( HeapValidate ( hMem, 0, NULL ) == FALSE )
 				{
 					// Error grave por heap del proceso corrupto:
-					ErrEstablecer ( ERR_MEMORIA_INVALIDA );
+					ERROR_ESTABLECER ( ERR_MEMORIA_INVALIDA );
 					FinalizarEjecucion ( ERR_GRAVE_TXT_MEMORIA );
 				}
 				else
 				{
-					ErrEstablecer ( ERR_MEMORIA_INSUFICIENTE );
+					ERROR_ESTABLECER ( ERR_MEMORIA_INSUFICIENTE );
 				}
 			}
 		}
 		else
 		{
 			p_vBloque = NULL;
-			ErrEstablecer ( ERR_MEMORIA_INVALIDA );
+			ERROR_ESTABLECER ( ERR_MEMORIA_INVALIDA );
 		}
 #	  else
 		p_vBloque = (void *) malloc ( iNumBytes );
@@ -143,14 +143,14 @@ void * MemReservar ( int iNumBytes )
 		}
 		else
 		{
-			ErrEstablecer ( ERR_MEMORIA_INSUFICIENTE );
+			ERROR_ESTABLECER ( ERR_MEMORIA_INSUFICIENTE );
 		}
 #	  endif
 	}
 	else
 	{
 		p_vBloque = NULL;
-		ErrEstablecer ( ERR_PARAMETROS );
+		ERROR_ESTABLECER ( ERR_PARAMETROS );
 	}
 	return ( p_vBloque );
 }
@@ -197,18 +197,18 @@ int MemRedimensionar ( void ** p_p_vBloque, int iNumBytes )
 				if ( HeapValidate ( hMem, 0, NULL ) == FALSE )
 				{
 					// Error grave por heap del proceso corrupto:
-					ErrEstablecer ( ERR_MEMORIA_INVALIDA );
+					ERROR_ESTABLECER ( ERR_MEMORIA_INVALIDA );
 					FinalizarEjecucion ( ERR_GRAVE_TXT_MEMORIA );
 				}
 				else
 				{
-					ErrEstablecer ( ERR_MEMORIA_INSUFICIENTE );
+					ERROR_ESTABLECER ( ERR_MEMORIA_INSUFICIENTE );
 				}
 			}
 		}
 		else
 		{
-			ErrEstablecer ( ERR_MEMORIA_INVALIDA );
+			ERROR_ESTABLECER ( ERR_MEMORIA_INVALIDA );
 		}
 #	  else
 		*p_p_vBloque = (void *) realloc ( p_vBloque, iNumBytes );
@@ -221,13 +221,13 @@ int MemRedimensionar ( void ** p_p_vBloque, int iNumBytes )
 		}
 		else
 		{
-			ErrEstablecer ( ERR_MEMORIA_INSUFICIENTE );
+			ERROR_ESTABLECER ( ERR_MEMORIA_INSUFICIENTE );
 		}
 #	  endif
 	}
 	else
 	{
-		ErrEstablecer ( ERR_PARAMETROS );
+		ERROR_ESTABLECER ( ERR_PARAMETROS );
 	}
 	return ( iRes );
 }
@@ -260,7 +260,7 @@ int MemLiberar ( void ** p_p_vBloque )
 			else
 			{
 				iRes = 0;
-				//ErrEstablecer ( ERR_MEMORIA_INVALIDA );
+				//ERROR_ESTABLECER ( ERR_MEMORIA_INVALIDA );
 			}
 			*p_p_vBloque = NULL;
 
@@ -359,7 +359,7 @@ int MemLiberarUnicode ( unichar ** p_p_cCadena )
 					else
 					{
 						iRes = 0;
-						//ErrEstablecer ( ERR_MEMORIA_INVALIDA );
+						//ERROR_ESTABLECER ( ERR_MEMORIA_INVALIDA );
 					}
 				}
 				else
@@ -378,13 +378,13 @@ int MemLiberarUnicode ( unichar ** p_p_cCadena )
 			// Ya es un puntero nulo o no valido:
 			iRes = 1;
 			*p_p_cCadena = NULL;
-			//ErrEstablecer ( ERR_MEMORIA_INVALIDA );
+			//ERROR_ESTABLECER ( ERR_MEMORIA_INVALIDA );
 		}
 	}
 	else
 	{
 		iRes = 0;
-		//ErrEstablecer ( ERR_PARAMETROS );
+		//ERROR_ESTABLECER ( ERR_PARAMETROS );
 	}
 	return ( iRes );
 # else
@@ -407,7 +407,7 @@ void MemLimpiar ( void * p_vBloque, int iNumBytes )
 	}
 	else
 	{
-		ErrEstablecer ( ERR_PARAMETROS );
+		ERROR_ESTABLECER ( ERR_PARAMETROS );
 	}
 }
 
@@ -423,7 +423,7 @@ void MemLlenar ( void * p_vBloque, byte byValor, int iNumBytes )
 	}
 	else
 	{
-		ErrEstablecer ( ERR_PARAMETROS );
+		ERROR_ESTABLECER ( ERR_PARAMETROS );
 	}
 }
 
@@ -440,7 +440,7 @@ void MemCopiar ( void * p_vDest, void * p_vOrig, int iNumBytes )
 	}
 	else
 	{
-		ErrEstablecer ( ERR_PARAMETROS );
+		ERROR_ESTABLECER ( ERR_PARAMETROS );
 	}
 }
 

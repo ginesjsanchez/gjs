@@ -33,7 +33,7 @@ int SLisRefExiste ( SListaReferencias * p_lisObj, const char * p_cAlias );
 SReferencia * SLisRefBuscar ( SListaReferencias * p_lisObj, const char * p_cAlias );
 SReferencia * SLisRefElemento ( SListaReferencias * p_lisObj, int iElem );
 const char * SLisRefAliasElemento ( SListaReferencias * p_lisObj, int iElem );
-void * SLisRefDatoElemento ( SListaReferencias * p_lisObj, int iElem );
+void * SLisRefDatosElemento ( SListaReferencias * p_lisObj, int iElem );
 
 int SLisRefInsertar ( SListaReferencias * p_lisObj, SReferencia * p_prjDatos );
 int SLisRefInsertarExt ( SListaReferencias * p_lisObj, const char * p_cAlias, void * p_vDato );

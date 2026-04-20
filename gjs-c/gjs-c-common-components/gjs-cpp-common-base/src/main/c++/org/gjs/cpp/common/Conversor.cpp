@@ -171,11 +171,16 @@ const string & Conversor::Cadena ()
 	return ( sValor );
 }
 
-string * Conversor::CadenaHex ()
+string Conversor::CadenaHex ()
 {
     stringstream conversor;
-    conversor << std::hex << ullValor;
-    return( new string( conversor.str() ) );
+    conversor << std::hex << this->EnteroDobleLargoSinSigno();
+    std::string sHex = conversor.str();
+    if ( sHex.size() % 2 != 0 ) 
+	{
+        sHex.insert ( sHex.begin(), '0' );
+	}
+    return( sHex );
 }
 
 
@@ -292,7 +297,7 @@ void Conversor::EstablecerValor ( long long llValor )
 	else
 	{
 		bConvValida = false;
-		this->ulValor = 0;
+		this->ullValor = 0;
 	}
 	this->ldValor = (long double) ( this->llValor );
 	this->dValor = (double) ( this->llValor );
@@ -344,7 +349,7 @@ void Conversor::EstablecerValor ( unsigned long ulValor )
 {
 	bConvValida = true;
 	this->ulValor = ulValor;
-	this->llValor = (unsigned long long) ulValor;
+	this->ullValor = (unsigned long long) ulValor;
 	if ( ( this->ulValor <= UINT_MAX ) )
 	{
 		this->uiValor = (unsigned int) this->ulValor;
@@ -407,7 +412,7 @@ void Conversor::EstablecerValor ( unsigned long long ullValor )
 	else
 	{
 		bConvValida = false;
-		this->uiValor = 0;
+		this->ulValor = 0;
 	}
 	if ( this->ullValor <= INT_MAX )
 	{
@@ -426,6 +431,15 @@ void Conversor::EstablecerValor ( unsigned long long ullValor )
 	{
 		bConvValida = false;
 		this->lValor = 0;
+	}
+	if ( this->ullValor <= LLONG_MAX )
+	{
+		this->llValor = (long long) this->ullValor;
+	}
+	else
+	{
+		bConvValida = false;
+		this->llValor = 0;
 	}
 	this->ldValor = (long double) ( this->ullValor );
 	this->dValor = (double) ( this->ullValor );
@@ -473,7 +487,7 @@ void Conversor::EstablecerValor ( float fValor )
 	else
 	{
 		bConvValida = false;
-		this->llValor = 0;
+		this->ullValor = 0;
 	}
 	if ( ( this->fValor >= 0 ) && ( this->fValor <= ULONG_MAX ) )
 	{
@@ -544,7 +558,7 @@ void Conversor::EstablecerValor ( double dValor )
 	else
 	{
 		bConvValida = false;
-		this->llValor = 0;
+		this->ullValor = 0;
 	}
 	if ( ( this->dValor >= 0 ) && ( this->dValor <= ULONG_MAX ) )
 	{
@@ -623,7 +637,7 @@ void Conversor::EstablecerValor ( long double ldValor )
 	else
 	{
 		bConvValida = false;
-		this->llValor = 0;
+		this->ullValor = 0;
 	}
 	if ( ( this->ldValor >= 0 ) && ( this->ldValor <= ULONG_MAX ) )
 	{
@@ -678,13 +692,22 @@ void Conversor::EstablecerValor ( const string & sValor )
 			bConvValida = false;
 			this->ldValor = 0.0;
 		}
-        if ( ( fabs ( this->ldValor ) >= FLT_MIN ) && ( fabs ( this->ldValor ) <= FLT_MAX ) )
+		if ( ( fabs ( this->ldValor ) >= DBL_MIN ) && ( fabs ( this->ldValor ) <= DBL_MAX ) )
+		{
+			this->dValor = (double) this->ldValor;
+		}
+		else
+		{
+			bConvValida = false;
+			this->dValor = 0.0;
+		}
+       if ( ( fabs ( this->ldValor ) >= FLT_MIN ) && ( fabs ( this->ldValor ) <= FLT_MAX ) )
         {
             this->fValor = (float) this->ldValor;
         }
         else
         {
-            bConvValida = false;
+           bConvValida = false;
             this->fValor = 0.0;
         }
         if ( ( this->ldValor >= LLONG_MIN ) && ( this->ldValor <= LLONG_MAX ) )
@@ -693,10 +716,19 @@ void Conversor::EstablecerValor ( const string & sValor )
         }
         else
         {
-            bConvValida = false;
+			bConvValida = false;
             this->llValor = 0;
         }
-        if ( ( this->ldValor >= LONG_MIN ) && ( this->ldValor <= LONG_MAX ) )
+         if ( ( this->ldValor >= LLONG_MIN ) && ( this->ldValor <= LLONG_MAX ) )
+        {
+            this->llValor = llround ( ldValor );
+        }
+        else
+        {
+			bConvValida = false;
+            this->llValor = 0;
+        }
+       if ( ( this->ldValor >= LONG_MIN ) && ( this->ldValor <= LONG_MAX ) )
         {
             this->lValor = lround ( this->ldValor );
         }
@@ -721,7 +753,7 @@ void Conversor::EstablecerValor ( const string & sValor )
         else
         {
             bConvValida = false;
-            this->llValor = 0;
+            this->ullValor = 0;
         }
         if ( ( this->ldValor >= 0 ) && ( this->ldValor <= ULONG_MAX ) )
         {
@@ -814,9 +846,19 @@ void Conversor::EstablecerValorHex ( const string & sValor )
             bConvValida = false;
             this->lValor = 0;
         }
+        if ( this->ullValor <= LLONG_MAX )
+        {
+            this->llValor = (long long) this->ullValor;
+        }
+        else
+        {
+            bConvValida = false;
+            this->llValor = 0;
+        }
         this->ldValor = (long double) ( this->ullValor );
         this->dValor = (double) ( this->ullValor );
         this->fValor = (float) ( this->ullValor );
+        this->ldValor = (long double) ( this->ullValor );
 	}
 	else
 	{
@@ -871,6 +913,7 @@ void Conversor::Inicializar ()
 	ullValor = 0;
 	fValor = 0.0;
 	dValor = 0.0;
+	ldValor = 0.0;
 	sValor = "";
 }
 

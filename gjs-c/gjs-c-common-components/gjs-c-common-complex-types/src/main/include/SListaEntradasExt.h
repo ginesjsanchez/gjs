@@ -42,9 +42,6 @@ int SLisEtxEliminarElem ( SListaEntradasExt * p_lisObj, int iElem );
 
 int SLisEtxVaciar ( SListaEntradasExt * p_lisObj );
 
-int	SLisEtxLiberacionMemoriaActivada ( SListaEntradasExt * p_lisObj );
-void SLisEtxActivarLiberacionMemoria ( SListaEntradasExt * p_lisObj );
-void SLisEtxDesactivarLiberacionMemoria ( SListaEntradasExt * p_lisObj );
 
 
 

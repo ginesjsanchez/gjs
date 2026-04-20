@@ -38,6 +38,7 @@
 #include <SMensajes.h>
 
 #include <AplicacionLog.h>
+#include <ConsolaDepuracion.h>
 
 
 
