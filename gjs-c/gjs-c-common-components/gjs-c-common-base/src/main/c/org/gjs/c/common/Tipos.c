@@ -532,6 +532,22 @@ int TipTam ( int iCod )
 	{
 		iRes = 0;
 	}
+	else if ( iCod == TIP_BINARIO_16 ) 
+	{
+		iRes = 2;
+	}
+	else if ( iCod == TIP_BINARIO_32 ) 
+	{
+		iRes = 4;
+	}
+	else if ( iCod == TIP_BINARIO_64 ) 
+	{
+		iRes = 8;
+	}
+	else if ( iCod == TIP_BINARIO_128 ) 
+	{
+		iRes = 16;
+	}
 	else 
 	{
 		iRes = -1;

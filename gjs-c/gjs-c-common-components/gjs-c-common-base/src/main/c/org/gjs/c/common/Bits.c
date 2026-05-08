@@ -6,7 +6,7 @@ byte ByMascaraBitsSuperiores ( int iNumBits )
 {
 	byte byMasc;
 
-	if ( ( iNumBits > 0 ) && ( iNumBits < sizeof ( byte ) ) )
+	if ( ( iNumBits > 0 ) && ( iNumBits < sizeof ( byte ) * 8 ) )
 	{
 		byMasc = 0xFF << iNumBits;
 	}
@@ -21,7 +21,7 @@ byte2 By2MascaraBitsSuperiores ( int iNumBits )
 {
 	byte2 by2Masc;
 
-	if ( ( iNumBits > 0 ) && ( iNumBits < sizeof ( byte2 ) ) )
+	if ( ( iNumBits > 0 ) && ( iNumBits < sizeof ( byte2 ) * 8  ) )
 	{
 		by2Masc = 0xFFFF << iNumBits;
 	}
@@ -36,7 +36,7 @@ byte4 By4MascaraBitsSuperiores ( int iNumBits )
 {
 	byte4 by4Masc;
 
-	if ( ( iNumBits > 0 ) && ( iNumBits < sizeof ( byte4 ) ) )
+	if ( ( iNumBits > 0 ) && ( iNumBits < sizeof ( byte4 ) * 8  ) )
 	{
 		by4Masc = 0xFFFFFFFF << iNumBits;
 	}
@@ -51,9 +51,9 @@ byte ByMascaraBitsInferiores ( int iNumBits )
 {
 	byte byMasc;
 
-	if ( ( iNumBits > 0 ) && ( iNumBits < sizeof ( byte ) ) )
+	if ( ( iNumBits > 0 ) && ( iNumBits < sizeof ( byte ) * 8  ) )
 	{
-		byMasc = 0xFF >> ( sizeof ( byte ) - iNumBits );
+		byMasc = 0xFF >> ( sizeof ( byte ) * 8  - iNumBits );
 	}
 	else
 	{
@@ -66,9 +66,9 @@ byte2 By2MascaraBitsInferiores ( int iNumBits )
 {
 	byte2 by2Masc;
 
-	if ( ( iNumBits > 0 ) && ( iNumBits < sizeof ( byte2 ) ) )
+	if ( ( iNumBits > 0 ) && ( iNumBits < sizeof ( byte2 ) * 8  ) )
 	{
-		by2Masc = 0xFFFF >> ( sizeof ( byte2 ) - iNumBits );
+		by2Masc = 0xFFFF >> ( sizeof ( byte2 ) * 8  - iNumBits );
 	}
 	else
 	{
@@ -81,9 +81,9 @@ byte4 By4MascaraBitsInferiores ( int iNumBits )
 {
 	byte4 by4Masc;
 
-	if ( ( iNumBits > 0 ) && ( iNumBits < sizeof ( byte4 ) ) )
+	if ( ( iNumBits > 0 ) && ( iNumBits < sizeof ( byte4 ) * 8  ) )
 	{
-		by4Masc = 0xFFFFFFFF >> ( sizeof ( byte4 ) - iNumBits );
+		by4Masc = 0xFFFFFFFF >> ( sizeof ( byte4 ) * 8  - iNumBits );
 	}
 	else
 	{

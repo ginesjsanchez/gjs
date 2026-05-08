@@ -40,15 +40,8 @@ SError * SErrCrearForm ( const char * p_cCodigo, const char * p_cFormato, ... )
 
 	va_start ( valArgumentos, p_cFormato );
 	p_cMensaje = CadCrearConFormatoExt ( p_cFormato, valArgumentos );
-	if ( ES_VALIDO ( p_cMensaje ) )
-	{
-		p_errObj = SErrCrear ( p_cCodigo, p_cMensaje );
-		MemLiberar ( (void **) &(p_cMensaje) );
-	}
-	else
-	{
-		p_errObj = NULL;
-	}
+	p_errObj = SErrCrear ( p_cCodigo, p_cMensaje );
+	MemLiberar ( (void **) &(p_cMensaje) );
 	va_end ( valArgumentos );
 	return ( p_errObj );
 }
@@ -61,15 +54,8 @@ SError * SErrCrearAdvertenciaForm ( const char * p_cCodigo, const char * p_cForm
 
 	va_start ( valArgumentos, p_cFormato );
 	p_cMensaje = CadCrearConFormatoExt ( p_cFormato, valArgumentos );
-	if ( ES_VALIDO ( p_cMensaje ) )
-	{
-		p_errObj = SErrCrearAdvertencia ( p_cCodigo, p_cMensaje );
-		MemLiberar ( (void **) &(p_cMensaje) );
-	}
-	else
-	{
-		p_errObj = NULL;
-	}
+	p_errObj = SErrCrearAdvertencia ( p_cCodigo, p_cMensaje );
+	MemLiberar ( (void **) &(p_cMensaje) );
 	va_end ( valArgumentos );
 	return ( p_errObj );
 }

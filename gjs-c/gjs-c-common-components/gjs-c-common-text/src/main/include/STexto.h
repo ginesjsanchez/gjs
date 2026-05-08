@@ -3,6 +3,8 @@
 
 #include <SListaCadenas.h>
 
+#include <SCursor.h>
+
 
 
 typedef struct
@@ -22,7 +24,7 @@ void STxtDestruir ( STexto ** p_p_txtObj );
 
 int STxtEsValido ( STexto * p_txtObj );
 int STxtEstaPosicionado ( STexto * p_txtObj );
-int STxtCursorEsValido ( STexto * p_txtObj );
+int STxtCursorEsValido ( STexto * p_txtObj, SCursor * p_curObj );
 int STxtPosEsValida ( STexto * p_txtObj, int iLinea, int iColumna );
 
 
@@ -31,8 +33,10 @@ void STxtVaciar ( STexto * p_txtObj );
 
 int STxtNumLineas ( STexto * p_txtObj );
 
+SCursor * STxtCursor ( STexto * p_txtObj );
 int STxtCursorLinea ( STexto * p_txtObj );
 int STxtCursorColumna ( STexto * p_txtObj );
+
 void STxtIrInicio ( STexto * p_txtObj );
 void STxtIrFinal ( STexto * p_txtObj );
 int STxtSig ( STexto * p_txtObj );
@@ -44,6 +48,11 @@ void STxtIrUltimaLinea ( STexto * p_txtObj );
 int STxtSigLinea ( STexto * p_txtObj );
 int STxtAntLinea ( STexto * p_txtObj );
 void STxtIrA ( STexto * p_txtObj, int iLinea, int iColumna );
+
+void STxtCursorSig ( STexto * p_txtObj, SCursor * p_curPos );
+void STxtCursorAnt ( STexto * p_txtObj, SCursor * p_curPos );
+void STxtCursorAvanzar ( STexto * p_txtObj, SCursor * p_curPos, int iPosiciones );
+void STxtCursorRetroceder ( STexto * p_txtObj, SCursor * p_curPos, int iPosiciones );
 
 SCadena * STxtLineaActual ( STexto * p_txtObj ); 
 SCadena * STxtLinea ( STexto * p_txtObj, int iLinea ); 

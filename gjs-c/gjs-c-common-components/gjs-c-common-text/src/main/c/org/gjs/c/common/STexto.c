@@ -100,15 +100,15 @@ int STxtEstaPosicionado ( STexto * p_txtObj )
 }
 
 
-int STxtCursorEsValido ( STexto * p_txtObj )
+int STxtCursorEsValido ( STexto * p_txtObj, SCursor * p_curObj )
 {
 	int 		iRes;
 	
 	if ( ES_VALIDO ( p_txtObj ) )
 	{
-		if ( ( p_txtObj->iLineaAct >= 0 ) && ( p_txtObj->iLineaAct < STxtNumLineas ( p_txtObj ) ) )
+		if ( STxtPosEsValida ( p_txtObj, SCurLinea ( p_curObj ), SCurColumna ( p_curObj ) ) == 1 )
 		{
-			iRes = STxtPosEsValida ( p_txtObj, p_txtObj->iLineaAct, p_txtObj->iColumnaAct );
+			iRes = 1;
 		}
 		else
 		{
@@ -216,6 +216,20 @@ int STxtNumLineas ( STexto * p_txtObj )
 	return ( iRes );
 }
 
+SCursor * STxtCursor ( STexto * p_txtObj )
+{
+	SCursor * p_curRes;
+
+	if ( ES_VALIDO ( p_txtObj ) )
+	{
+		p_curRes = SCurCrear ( p_txtObj->iLineaAct, p_txtObj->iColumnaAct );
+	}
+	else
+	{
+		p_curRes = NULL;
+	}
+	return ( p_curRes );
+}
 
 int STxtCursorLinea ( STexto * p_txtObj )
 {
@@ -496,6 +510,244 @@ void STxtIrA ( STexto * p_txtObj, int iLinea, int iColumna )
 	}
 }
 
+void STxtCursorSig ( STexto * p_txtObj, SCursor * p_curPos )
+{
+	SCadena * p_cadLinea;
+	
+	if ( ES_VALIDO ( p_txtObj ) && ES_VALIDO ( p_curPos ) )
+	{
+		int iFin = 0;
+		if ( STxtCursorEsValido ( p_txtObj, p_curPos ) == 1 ) 
+		{
+			p_cadLinea = STxtLinea ( p_txtObj, SCurLinea ( p_curPos ) );
+			if ( ES_VALIDO ( p_cadLinea ) ) 
+			{
+				if ( SCurColumna ( p_curPos ) < SCadLongitud ( p_cadLinea ) - 1 )
+				{
+					SCurEstablecerColumna ( p_curPos, SCurColumna ( p_curPos ) + 1 );
+				}
+				else
+				{
+					int iEnc = 0;
+					while ( ( iFin == 0 ) && ( iEnc == 0 ) ) 
+					{	
+						SCurEstablecerLinea ( p_curPos, SCurLinea ( p_curPos ) + 1 );
+						p_cadLinea = STxtLinea ( p_txtObj, SCurLinea ( p_curPos ) );
+						if ( ES_VALIDO ( p_cadLinea ) ) 
+						{
+							if ( SCadLongitud ( p_cadLinea ) > 0 ) 
+							{
+								iEnc = 1;
+							}
+						}
+						else
+						{
+							iFin = 1;
+						}
+					}
+					if ( iEnc )
+					{
+						SCurEstablecerColumna ( p_curPos, 0 );
+					}
+				}
+			}
+			else
+			{
+				iFin = 1;
+			}
+		}
+		else
+		{
+			iFin = 1;
+		}
+		if ( iFin == 1 )
+		{
+			SCurEstablecer ( p_curPos, -1, -1 );
+		}
+	}		
+}
+
+void STxtCursorAnt ( STexto * p_txtObj, SCursor * p_curPos )
+{
+	SCadena * p_cadLinea;
+	
+	if ( ES_VALIDO ( p_txtObj ) && ES_VALIDO ( p_curPos ) )
+	{
+		int iFin = 0;
+		if ( STxtCursorEsValido ( p_txtObj, p_curPos ) == 1 ) 
+		{
+			p_cadLinea = STxtLinea ( p_txtObj, SCurLinea ( p_curPos ) );
+			if ( ES_VALIDO ( p_cadLinea ) ) 
+			{
+				if ( SCurColumna ( p_curPos ) > 0 )
+				{
+					SCurEstablecerColumna ( p_curPos, SCurColumna ( p_curPos ) - 1 );
+				}
+				else
+				{
+					int iEnc = 0;
+					while ( ( iFin == 0 ) && ( iEnc == 0 ) ) 
+					{	
+						SCurEstablecerLinea ( p_curPos, SCurLinea ( p_curPos ) - 1 );
+						p_cadLinea = STxtLinea ( p_txtObj, SCurLinea ( p_curPos ) );
+						if ( ES_VALIDO ( p_cadLinea ) ) 
+						{
+							if ( SCadLongitud ( p_cadLinea ) > 0 ) 
+							{
+								iEnc = 1;
+							}
+						}
+						else
+						{
+							iFin = 1;
+						}
+					}
+					if ( iEnc )
+					{
+						SCurEstablecerColumna ( p_curPos, SCadLongitud ( p_cadLinea ) - 1 );
+					}
+				}
+			}
+			else
+			{
+				iFin = 1;
+			}
+		}
+		else
+		{
+			iFin = 1;
+		}
+		if ( iFin == 1 )
+		{
+			SCurEstablecer ( p_curPos, -1, -1 );
+		}
+	}		
+}
+
+void STxtCursorAvanzar ( STexto * p_txtObj, SCursor * p_curPos, int iPosiciones )
+{
+	SCadena * p_cadLinea;
+	
+	if ( ES_VALIDO ( p_txtObj ) && ES_VALIDO ( p_curPos ) && ( iPosiciones > 0 ) )
+	{
+		int iFin = 0;
+		if ( STxtCursorEsValido ( p_txtObj, p_curPos ) == 1 ) 
+		{
+			p_cadLinea = STxtLinea ( p_txtObj, SCurLinea ( p_curPos ) );
+			if ( ES_VALIDO ( p_cadLinea ) ) 
+			{
+				if ( SCurColumna ( p_curPos ) < SCadLongitud ( p_cadLinea ) - iPosiciones )
+				{
+					SCurEstablecerColumna ( p_curPos, SCurColumna ( p_curPos ) + iPosiciones );
+				}
+				else
+				{
+					iPosiciones = iPosiciones - SCadLongitud ( p_cadLinea ) + SCurColumna ( p_curPos );
+					int iEnc = 0;
+					while ( ( iFin == 0 ) && ( iEnc == 0 ) ) 
+					{	
+						SCurEstablecerLinea ( p_curPos, SCurLinea ( p_curPos ) + 1 );
+						p_cadLinea = STxtLinea ( p_txtObj, SCurLinea ( p_curPos ) );
+						if ( ES_VALIDO ( p_cadLinea ) ) 
+						{
+							if ( SCadLongitud ( p_cadLinea ) > iPosiciones ) 
+							{
+								iEnc = 1;
+							}
+							else if ( SCadLongitud ( p_cadLinea ) > 0 ) 
+							{
+								iPosiciones = iPosiciones - SCadLongitud ( p_cadLinea );
+							}
+						}
+						else
+						{
+							iFin = 1;
+						}
+					}
+					if ( iEnc )
+					{
+						SCurEstablecerColumna ( p_curPos, iPosiciones );
+					}
+				}
+			}
+			else
+			{
+				iFin = 1;
+			}
+		}
+		else
+		{
+			iFin = 1;
+		}
+		if ( iFin == 1 )
+		{
+			SCurEstablecer ( p_curPos, -1, -1 );
+		}
+	}		
+}
+
+void STxtCursorRetroceder ( STexto * p_txtObj, SCursor * p_curPos, int iPosiciones )
+{
+	SCadena * p_cadLinea;
+	
+	if ( ES_VALIDO ( p_txtObj ) && ES_VALIDO ( p_curPos ) && ( iPosiciones > 0 ) )
+	{
+		int iFin = 0;
+		if ( STxtCursorEsValido ( p_txtObj, p_curPos ) == 1 ) 
+		{
+			p_cadLinea = STxtLinea ( p_txtObj, SCurLinea ( p_curPos ) );
+			if ( ES_VALIDO ( p_cadLinea ) ) 
+			{
+				if ( SCurColumna ( p_curPos ) > - iPosiciones )
+				{
+					SCurEstablecerColumna ( p_curPos, SCurColumna ( p_curPos ) - iPosiciones );
+				}
+				else
+				{
+					iPosiciones = iPosiciones - SCurColumna ( p_curPos );
+					int iEnc = 0;
+					while ( ( iFin == 0 ) && ( iEnc == 0 ) ) 
+					{	
+						SCurEstablecerLinea ( p_curPos, SCurLinea ( p_curPos ) - 1 );
+						p_cadLinea = STxtLinea ( p_txtObj, SCurLinea ( p_curPos ) );
+						if ( ES_VALIDO ( p_cadLinea ) ) 
+						{
+							if ( SCadLongitud ( p_cadLinea ) > iPosiciones ) 
+							{
+								iEnc = 1;
+							}
+							else if ( SCadLongitud ( p_cadLinea ) > 0 ) 
+							{
+								iPosiciones = iPosiciones - SCadLongitud ( p_cadLinea );
+							}
+						}
+						else
+						{
+							iFin = 1;
+						}
+					}
+					if ( iEnc )
+					{
+						SCurEstablecerColumna ( p_curPos, SCadLongitud ( p_cadLinea ) - iPosiciones );
+					}
+				}
+			}
+			else
+			{
+				iFin = 1;
+			}
+		}
+		else
+		{
+			iFin = 1;
+		}
+		if ( iFin == 1 )
+		{
+			SCurEstablecer ( p_curPos, -1, -1 );
+		}
+	}		
+}
+
 SCadena * STxtLineaActual ( STexto * p_txtObj )
 {
 	return ( STxtLinea ( p_txtObj, p_txtObj->iLineaAct ) );
@@ -590,7 +842,7 @@ SCadena * STxtExtraer ( STexto * p_txtObj, int iLinIni, int iColIni, int iLinFin
 		( STxtPosEsValida ( p_txtObj, iLinFin, iColFin ) == 1 ) && 
 			( _STxtPosMenorOIgual ( iLinIni, iColIni, iLinFin, iColFin ) == 1 ) )
 	{
-		printf ( "** ENTRA\n" );
+		printf ( "** ENTRA LinIni %d  Fin %d  ColIni %d Fin %d\n", iLinIni, iLinFin, iColIni, iColFin );
 		p_cadRes = SCadCrearDef ();
 		for ( int iLinea = iLinIni; iLinea <= iLinFin;  iLinea = iLinea + 1 )
 		{
@@ -610,12 +862,13 @@ SCadena * STxtExtraer ( STexto * p_txtObj, int iLinIni, int iColIni, int iLinFin
 			}
 			else 
 			{
-				iPosFin = iColFin - 1;
+				iPosFin = iColFin;
 			}
-			p_cadSubcad = SCadExtraer ( p_cadLinea, iPosIni, iPosFin );	
-			SCadImprimirExt(p_cadSubcad, "** SUB", '=', 1);
+			printf ( "Extrayendo %d a %d\n", iPosIni, iPosFin );
+			p_cadSubcad = SCadExtraer ( p_cadLinea, iPosIni, iPosFin - iPosIni );	
+			SCadImprimirExt( p_cadSubcad, "** SUB", '=', 1);
 			SCadConcatenar ( p_cadRes, p_cadSubcad );
-			SCadImprimirExt(p_cadRes, "** RES", '=', 1);
+			SCadImprimirExt ( p_cadRes, "** RES", '=', 1);
 			SCadDestruir ( &p_cadSubcad );
 		}
 	}

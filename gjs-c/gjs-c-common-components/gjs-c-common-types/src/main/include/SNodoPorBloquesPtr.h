@@ -14,8 +14,8 @@ typedef struct SNodoBlqPtr SNodoBlqPtr;
 
 struct SNodoBlqPtr
 {
-	SNodoBlqPtr *	p_nodPadre;
-	SNodoBlqPtr **	p_p_p_nodHijos [ ARB_NUM_BLOQUES_HIJOS_NODO ];
+	SNodoBlqPtr *	p_nodpPadre;
+	SNodoBlqPtr **	p_p_p_nodpHijos [ ARB_NUM_BLOQUES_HIJOS_NODO ];
 	int				iNumBloques;
 	int				iNumHijos;
 
@@ -54,14 +54,14 @@ int SNodBlqPtrProfundidad ( SNodoBlqPtr * p_nodpObj );
 int SNodBlqPtrNivelesInferiores ( SNodoBlqPtr * p_nodpObj );
 
 int SNodBlqPtrEmpadronar ( SNodoBlqPtr * p_nodpObj, SNodoBlqPtr * p_nodPadre );
-int SNodBlqPtrInsertarHijo ( SNodoBlqPtr * p_nodpObj, SNodoBlqPtr * p_nodHijo );
+int SNodBlqPtrInsertarHijo ( SNodoBlqPtr * p_nodpObj, SNodoBlqPtr * p_nodpHijo );
 void SNodBlqPtrDesempadronar ( SNodoBlqPtr * p_nodpObj );
 int SNodBlqPtrEliminarHijo ( SNodoBlqPtr * p_nodpObj, int iHijo, int iLiberar );
-int SNodBlqPtrEstablecerHijo ( SNodoBlqPtr * p_nodpObj, int iHijo, SNodoBlqPtr * p_nodHijo, int iLiberar );
+int SNodBlqPtrEstablecerHijo ( SNodoBlqPtr * p_nodpObj, int iHijo, SNodoBlqPtr * p_nodpHijo, int iLiberar );
 void SNodBlqPtrLimpiarHijos ( SNodoBlqPtr * p_nodpObj, int iLiberar );
 
 int	SNodBlqPtrEsHijo ( SNodoBlqPtr * p_nodpObj );
-int SNodBlqPtrOrdenDelHijo ( SNodoBlqPtr * p_nodpObj, SNodoBlqPtr * p_nodHijo );
+int SNodBlqPtrOrdenDelHijo ( SNodoBlqPtr * p_nodpObj, SNodoBlqPtr * p_nodpHijo );
 
 int SNodBlqPtrVerificar ( SNodoBlqPtr * p_nodpObj, int iCorregir );
 

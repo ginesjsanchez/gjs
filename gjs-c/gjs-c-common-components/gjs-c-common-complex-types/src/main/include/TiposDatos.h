@@ -51,6 +51,7 @@
 #include <SSecuenciaCadenas.h>
 #include <STablaCadenas.h>
 #include <SPilaCadenas.h>
+#include <SArbolCadenas.h>
 
 #include <SSecuenciaGeneradoresId.h>
 
@@ -65,38 +66,6 @@
 #include <SArbolB.h>
 
 
-
-#if ( defined ( CPP ) )
-
-#	include <CBooleano.h>
-#	include <CValor.h>
-#	include <CParametro.h>
-#	include <CUbicacion.h>
-#	include <CIdAdap.h>
-#	include <CGeneradorIdAdap.h>
-
-#	include <CElementoEntero.h>
-#	include <CElementoEnteroLargo.h>
-#	include <CElementoCadena.h>
-#	include <CElementoRealDoble.h>
-#	include <CElementoValor.h>
-#	include <CElementoParametro.h>
-
-#	include <CListaEnteros.h>
-#	include <CListaEnterosLargos.h>
-#	include <CListaCadenas.h>
-#	include <CListaRealesDobles.h>
-#	include <CListaValores.h>
-#	include <CListaParametros.h>
-#	include <CListaUbicaciones.h>
-#	include <CPilaEnteros.h>
-#	include <CPilaCadenas.h>
-#	include <CTablaEnteros.h>
-
-#	include <SDatosTexto.h>
-
-
-#endif
 
 
 

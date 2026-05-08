@@ -5,7 +5,7 @@
 
 void IntercambiarCaracteres ( char * p_cValorA, char * p_cValorB );
 void IntercambiarEnteros ( int * p_iValorA, int * p_iValorB );
-void IntercambiarEngterosLargos ( long * p_lValorA, long * p_lValorB );
+void IntercambiarEnterosLargos ( long * p_lValorA, long * p_lValorB );
 void IntercambiarEnterosSinSigno ( unsigned int * p_uiValorA, unsigned int * p_uiValorB );
 void IntercambiarEnterosLargosSinSigno ( unsigned long * p_ulValorA, unsigned long * p_ulValorB );
 void IntercambiarReales ( float * p_fValorA, float * p_fValorB );

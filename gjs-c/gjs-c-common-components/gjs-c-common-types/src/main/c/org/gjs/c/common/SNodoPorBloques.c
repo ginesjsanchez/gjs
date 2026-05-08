@@ -433,7 +433,7 @@ SNodoBlq * SNodBlqHijo ( SNodoBlq * p_nodObj, int iHijo )
 {
 	int		iBloque;
 	int		iPos;
-	SNodoBlq *	p_nodHijo;
+	SNodoBlq *	p_nodpHijo;
 	SNodoBlq **	p_p_nodBloque;
 
      if ( ES_VALIDO ( p_nodObj ) )
@@ -447,28 +447,28 @@ SNodoBlq * SNodBlqHijo ( SNodoBlq * p_nodObj, int iHijo )
      			p_p_nodBloque = p_nodObj->p_p_p_nodHijos [ iBloque ];
      			if ( ES_VALIDO ( p_p_nodBloque ) )
      			{
-     				p_nodHijo = p_p_nodBloque [ iPos ];
+     				p_nodpHijo = p_p_nodBloque [ iPos ];
      			}
      			else
      			{
-     				p_nodHijo = NULL;
+     				p_nodpHijo = NULL;
      			}
      		}
      		else
      		{
-     			p_nodHijo = NULL;
+     			p_nodpHijo = NULL;
      		}
      	}
      	else
      	{
-     		p_nodHijo = NULL;
+     		p_nodpHijo = NULL;
      	}
 	}
 	else
 	{
-		p_nodHijo = NULL;
+		p_nodpHijo = NULL;
 	}
-	return ( p_nodHijo );
+	return ( p_nodpHijo );
 }
 
 int SNodBlqTienePadre ( SNodoBlq * p_nodObj )
@@ -606,7 +606,7 @@ int SNodBlqTieneHermanosDer ( SNodoBlq * p_nodObj )
 
 int SNodBlqNodosInferiores ( SNodoBlq * p_nodObj )
 {
-	SNodoBlq *	p_nodHijo;
+	SNodoBlq *	p_nodpHijo;
 	int		iHijo;
 	int		iNodos;
 
@@ -615,10 +615,10 @@ int SNodBlqNodosInferiores ( SNodoBlq * p_nodObj )
      	iNodos = 0;
      	for ( iHijo = 0; iHijo < p_nodObj->iNumHijos; iHijo = iHijo + 1 )
      	{
-     		p_nodHijo = SNodBlqHijo ( p_nodObj, iHijo );
-     		if ( ES_VALIDO ( p_nodHijo  ) )
+     		p_nodpHijo = SNodBlqHijo ( p_nodObj, iHijo );
+     		if ( ES_VALIDO ( p_nodpHijo  ) )
      		{
-     			iNodos = iNodos + 1 + SNodBlqNodosInferiores ( p_nodHijo );
+     			iNodos = iNodos + 1 + SNodBlqNodosInferiores ( p_nodpHijo );
      		}
      	}
      }
@@ -631,7 +631,7 @@ int SNodBlqNodosInferiores ( SNodoBlq * p_nodObj )
 
 int SNodBlqNivelesInferiores ( SNodoBlq * p_nodObj )
 {
-	SNodoBlq *	p_nodHijo;
+	SNodoBlq *	p_nodpHijo;
 	int		iHijo;
 	int		iNiveles;
 	int		iNivelesMax;
@@ -641,10 +641,10 @@ int SNodBlqNivelesInferiores ( SNodoBlq * p_nodObj )
      	iNivelesMax = 0;
      	for ( iHijo = 0; iHijo < p_nodObj->iNumHijos; iHijo = iHijo + 1 )
      	{
-     		p_nodHijo = SNodBlqHijo ( p_nodObj, iHijo );
-     		if ( ES_VALIDO ( p_nodHijo ) )
+     		p_nodpHijo = SNodBlqHijo ( p_nodObj, iHijo );
+     		if ( ES_VALIDO ( p_nodpHijo ) )
      		{
-     			iNiveles = SNodBlqNivelesInferiores ( p_nodHijo );
+     			iNiveles = SNodBlqNivelesInferiores ( p_nodpHijo );
      			if ( iNiveles > iNivelesMax )
      			{
      				iNivelesMax = iNiveles;
@@ -704,7 +704,7 @@ int SNodBlqEmpadronar ( SNodoBlq * p_nodObj, SNodoBlq * p_nodPadre )
 	return ( iRes );
 }
 
-int SNodBlqInsertarHijo ( SNodoBlq * p_nodObj, SNodoBlq * p_nodHijo )
+int SNodBlqInsertarHijo ( SNodoBlq * p_nodObj, SNodoBlq * p_nodpHijo )
 {
 	int	     	iRes;
 	int	     	iBloque;
@@ -713,7 +713,7 @@ int SNodBlqInsertarHijo ( SNodoBlq * p_nodObj, SNodoBlq * p_nodHijo )
 
      if ( ES_VALIDO ( p_nodObj ) )
      {
-     	if ( ( p_nodObj->iNumHijos < ARB_MAX_HIJOS_NODO ) && ES_VALIDO ( p_nodHijo ) )
+     	if ( ( p_nodObj->iNumHijos < ARB_MAX_HIJOS_NODO ) && ES_VALIDO ( p_nodpHijo ) )
      	{
      		iBloque = p_nodObj->iNumHijos / ARB_TAM_BLOQUE_HIJOS_NODO;
      		iPos = p_nodObj->iNumHijos % ARB_TAM_BLOQUE_HIJOS_NODO;
@@ -745,7 +745,8 @@ int SNodBlqInsertarHijo ( SNodoBlq * p_nodObj, SNodoBlq * p_nodHijo )
      			if ( ES_VALIDO ( p_p_nodBloque ) )
      			{
      				p_nodObj->iNumHijos = p_nodObj->iNumHijos + 1;
-     				p_p_nodBloque [ iPos ] = p_nodHijo;
+					p_nodpHijo->p_nodPadre = p_nodObj;
+    				p_p_nodBloque [ iPos ] = p_nodpHijo;
      			}
      			else
      			{
@@ -842,7 +843,7 @@ int SNodBlqEliminarHijo ( SNodoBlq * p_nodObj, int iHijo, int iLiberar )
 	return ( iRes );
 }
 
-int SNodBlqEstablecerHijo ( SNodoBlq * p_nodObj, int iHijo, SNodoBlq * p_nodHijo, int iLiberar )
+int SNodBlqEstablecerHijo ( SNodoBlq * p_nodObj, int iHijo, SNodoBlq * p_nodpHijo, int iLiberar )
 {
 	int		iRes;
 	int		iBloque;
@@ -851,7 +852,7 @@ int SNodBlqEstablecerHijo ( SNodoBlq * p_nodObj, int iHijo, SNodoBlq * p_nodHijo
 
      if ( ES_VALIDO ( p_nodObj ) )
      {
-     	if ( ( iHijo >= 0 ) && ( iHijo < p_nodObj->iNumHijos ) && ES_VALIDO ( p_nodHijo ) )
+     	if ( ( iHijo >= 0 ) && ( iHijo < p_nodObj->iNumHijos ) && ES_VALIDO ( p_nodpHijo ) )
      	{
      		iBloque = iHijo / ARB_NUM_BLOQUES_HIJOS_NODO;
      		iPos = iHijo % ARB_NUM_BLOQUES_HIJOS_NODO;
@@ -867,7 +868,7 @@ int SNodBlqEstablecerHijo ( SNodoBlq * p_nodObj, int iHijo, SNodoBlq * p_nodHijo
      						    SNodBlqDestruir ( &(p_p_nodBloque [ iPos ]), 1 );
      					     }
      				  }
-   				      p_p_nodBloque [ iPos ] = p_nodHijo;
+   				      p_p_nodBloque [ iPos ] = p_nodpHijo;
      				  iRes = 1;
      			}
      			else
@@ -924,7 +925,7 @@ void SNodBlqLimpiarHijos ( SNodoBlq * p_nodObj, int iLiberar )
 
 int	SNodBlqEsHijo ( SNodoBlq * p_nodObj )
 {
-	SNodoBlq *	p_nodHijo;
+	SNodoBlq *	p_nodpHijo;
 	int			iHijo;
 	int			iEnc;
 
@@ -934,8 +935,8 @@ int	SNodBlqEsHijo ( SNodoBlq * p_nodObj )
      	iHijo = 0;
      	while ( ( iHijo < p_nodObj->iNumHijos ) && ( iEnc == 0 ) )
      	{
-     		p_nodHijo = SNodBlqHijo ( p_nodObj, iHijo );
-     		if ( p_nodHijo == p_nodObj )
+     		p_nodpHijo = SNodBlqHijo ( p_nodObj, iHijo );
+     		if ( p_nodpHijo == p_nodObj )
      		{
      			iEnc = 1;
      		}
@@ -952,9 +953,9 @@ int	SNodBlqEsHijo ( SNodoBlq * p_nodObj )
 	return ( iEnc );
 }
 
-int SNodoBlqOrdenDelHijo ( SNodoBlq * p_nodObj, SNodoBlq * p_nodHijo )
+int SNodoBlqOrdenDelHijo ( SNodoBlq * p_nodObj, SNodoBlq * p_nodpHijo )
 {
-	SNodoBlq *  p_nodHijoAux;
+	SNodoBlq *  p_nodpHijoAux;
 	int			iHijo;
 	int			iEnc;
 
@@ -964,8 +965,8 @@ int SNodoBlqOrdenDelHijo ( SNodoBlq * p_nodObj, SNodoBlq * p_nodHijo )
      	iHijo = 0;
      	while ( ( iHijo < p_nodObj->iNumHijos ) && ( iEnc == 0 ) )
      	{
-     		p_nodHijoAux = SNodBlqHijo ( p_nodObj, iHijo );
-     		if ( p_nodHijoAux == p_nodHijo )
+     		p_nodpHijoAux = SNodBlqHijo ( p_nodObj, iHijo );
+     		if ( p_nodpHijoAux == p_nodpHijo )
      		{
      			iEnc = 1;
      		}
@@ -990,7 +991,7 @@ int SNodoBlqOrdenDelHijo ( SNodoBlq * p_nodObj, SNodoBlq * p_nodHijo )
 int SNodBlqVerificar ( SNodoBlq * p_nodObj, int iCorregir )
 {
 	int			iRes;
-	SNodoBlq *  p_nodHijo;
+	SNodoBlq *  p_nodpHijo;
 	int			iHijo;
 
     if ( ES_VALIDO ( p_nodObj ) )
@@ -998,16 +999,16 @@ int SNodBlqVerificar ( SNodoBlq * p_nodObj, int iCorregir )
      	iRes = 1;
      	for ( iHijo = 0; iHijo < p_nodObj->iNumHijos; iHijo = iHijo + 1 )
      	{
-     		p_nodHijo = SNodBlqHijo ( p_nodObj, iHijo );
-     		if ( SNodBlqPadre ( p_nodHijo ) != p_nodObj )
+     		p_nodpHijo = SNodBlqHijo ( p_nodObj, iHijo );
+     		if ( SNodBlqPadre ( p_nodpHijo ) != p_nodObj )
      		{
      			if ( iCorregir == 1 )
      			{
-     				SNodBlqEmpadronar ( p_nodHijo, p_nodObj );
+     				SNodBlqEmpadronar ( p_nodpHijo, p_nodObj );
      			}
      			iRes = 0;
      		}
-     		if ( SNodBlqVerificar ( p_nodHijo, iCorregir ) == 0 )
+     		if ( SNodBlqVerificar ( p_nodpHijo, iCorregir ) == 0 )
      		{
      			iRes = 0;
      		}

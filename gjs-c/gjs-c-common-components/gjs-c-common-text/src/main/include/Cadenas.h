@@ -25,7 +25,6 @@
 #include <stdarg.h>
 
 
-
 char * CadCrearExt ( int iTam, char cCarRelleno );
 char * CadCrearConFormato ( const char * p_cFormato, ... );
 char * CadCrearConFormatoExt ( const char * p_cFormato, va_list valArgumentos );
@@ -257,7 +256,6 @@ int CadEsIdentificadorValidoExt ( const char * p_cAsciiz, int iMax );
 
 const char * CadValorNulo ();
 
-void CadImprimir ( const char * p_cAsciiz );
 void CadImprimirExt ( const char * p_cAsciiz, const char * p_cEtiqueta, char cSep, int iEnvolver );
 void CadImprimirXml ( const char * p_cAsciiz, const char * p_cEtiqueta );
 void CadImprimirJson ( const char * p_cAsciiz, const char * p_cEtiqueta );

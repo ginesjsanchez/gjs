@@ -599,7 +599,8 @@ int SNodBinPtrEstHijoIzq ( SNodoBinPtr * p_nodbpObj, SNodoBinPtr * p_nodbpHijo, 
 		{
 			SNodBinPtrDestruir ( &(p_nodbpObj->p_nodbpHijoIzq), 1 );
 		}
-    	     p_nodbpObj->p_nodbpHijoIzq = p_nodbpHijo;
+		p_nodbpHijo->p_nodbpPadre = p_nodbpObj;
+		p_nodbpObj->p_nodbpHijoIzq = p_nodbpHijo;
      	if ( ES_VALIDO ( p_nodbpObj->p_nodbpHijoIzq ) )
      	{
      		iRes = 1;
@@ -626,7 +627,8 @@ int SNodBinPtrEstHijoDer ( SNodoBinPtr * p_nodbpObj, SNodoBinPtr * p_nodbpHijo, 
 		{
 			SNodBinPtrDestruir ( &(p_nodbpObj->p_nodbpHijoDer), 1 );
 		}
-     	p_nodbpObj->p_nodbpHijoDer = p_nodbpHijo;
+ 		p_nodbpHijo->p_nodbpPadre = p_nodbpObj;
+    	p_nodbpObj->p_nodbpHijoDer = p_nodbpHijo;
      	if ( ES_VALIDO ( p_nodbpObj->p_nodbpHijoDer ) )
      	{
      		iRes = 1;

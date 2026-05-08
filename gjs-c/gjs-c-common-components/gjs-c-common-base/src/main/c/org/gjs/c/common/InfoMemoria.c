@@ -72,19 +72,9 @@ unsigned long MemReservadaBloques ()
 	return ( g_ulTamBloques );
 }
 
-unsigned long MemReservadaObjetos ()
-{
-	return ( g_ulTamObjetos );
-}
-
 unsigned long MemReservadaTotal ()
 {
 	return ( g_ulTamBloques + g_ulTamObjetos );
-}
-
-unsigned long MemNumObjetosActuales ()
-{
-	return ( g_ulNumObjetos );
 }
 
 unsigned long MemNumBloquesReservados ()
@@ -235,7 +225,6 @@ void _GesMemLiberar ( void * p_vDir )
 		}
 	}
 }
-
 
 #endif
 

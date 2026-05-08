@@ -3,9 +3,9 @@
 
 	<parent>
 		<groupId>org.gjs</groupId>
-		<artifactId>gjs-parent</artifactId>
+		<artifactId>gjs-no-java-parent</artifactId>
 		<version>1.0.0-RC.1</version>
-		<relativePath>../../../gjs-parent</relativePath>
+		<relativePath>../../../gjs-no-java-parent</relativePath>
 	</parent>	
 
     <groupId>org.gjs.python</groupId>

@@ -413,36 +413,51 @@ int CadCompararExt ( const char * p_cAsciiz1, const char * p_cAsciiz2, int iMax1
 	int iLong1;
 	int iLong2;
 
-	iLong1 = CadLongitudSeg ( p_cAsciiz1, iMax1 ); 
-	iLong2 = CadLongitudSeg ( p_cAsciiz2, iMax2 ); 
-	if ( ( iLong1 > 0 ) && ( iLong2 > 0 ) )
+	if ( ES_VALIDO (  p_cAsciiz1 ) && ES_VALIDO (  p_cAsciiz2 ) ) 
 	{
+		iLong1 = CadLongitudSeg ( p_cAsciiz1, iMax1 ); 
+		iLong2 = CadLongitudSeg ( p_cAsciiz2, iMax2 ); 
 		if ( iLong1 == iLong2 )
 		{
-			iRes = 1;
+			iRes = COMP_IGUAL;
 			iCar = 0; 
-			while ( ( iCar < iLong1 ) && ( iRes == 1 ) )  
+			while ( ( iCar < iLong1 ) && ( iRes == COMP_IGUAL ) )  
 			{
 				if ( p_cAsciiz1 [ iCar ] < p_cAsciiz2 [ iCar ] )
 				{
-					iRes = 2;
+					iRes = COMP_MENOR;
 				}
 				else if ( p_cAsciiz1 [ iCar ] > p_cAsciiz2 [ iCar ] )
 				{
-					iRes = 3;
+					iRes = COMP_MAYOR;
 				}
 				iCar = iCar + 1;
 			}
 		}
 		else
 		{
-			iRes = 0;
+			if (  iLong1 < iLong2 )
+			{
+				iRes = COMP_MENOR;
+			} 
+			else 
+			{
+				iRes = COMP_MAYOR;
+			} 
 		}
 	}
-	else
+	else if ( ES_NULO ( p_cAsciiz1 ) && ES_NULO ( p_cAsciiz2 ) ) 
 	{
-		iRes = 0;
-	}
+		iRes = COMP_IGUAL;
+	} 
+	else if ( ES_NULO ( p_cAsciiz1 ) )
+	{
+		iRes = COMP_MENOR;
+	} 
+	else 
+	{
+		iRes = COMP_MAYOR;
+	} 
 	return ( iRes );
 }
 
@@ -460,13 +475,13 @@ int CadEsAlfanumericoValidoExt ( const char * p_cAsciiz, int iMax )
 	iLong = CadLongitudSeg ( p_cAsciiz, iMax );
 	if ( iLong > 0 )
 	{
-		iPos = 1;
+		iPos = 0;
 		iRes = 1;
-		while ( ( iRes = 1 ) && ( iPos < iLong ) )
+		while ( ( iRes == 1 ) && ( iPos < iLong ) )
 		{
-			if ( ( ( p_cAsciiz [ iPos ] >= ASCII_MIN_LETRA_MAY ) && ( p_cAsciiz [ iPos ] <= ASCII_MAX_LETRA_MAY ) ) 
+			if ( !( ( ( p_cAsciiz [ iPos ] >= ASCII_MIN_LETRA_MAY ) && ( p_cAsciiz [ iPos ] <= ASCII_MAX_LETRA_MAY ) ) 
 					|| ( ( p_cAsciiz [ iPos ] >= ASCII_MIN_LETRA_MIN ) && ( p_cAsciiz [ iPos ] <= ASCII_MAX_LETRA_MIN ) ) 
-					|| ( ( p_cAsciiz [ iPos ] >= ASCII_MIN_NUMERO ) && ( p_cAsciiz [ iPos ] <= ASCII_MAX_NUMERO ) ) 
+					|| ( ( p_cAsciiz [ iPos ] >= ASCII_MIN_NUMERO ) && ( p_cAsciiz [ iPos ] <= ASCII_MAX_NUMERO ) ) ) 
 				)
 			{
 				iRes = 0;
@@ -481,6 +496,38 @@ int CadEsAlfanumericoValidoExt ( const char * p_cAsciiz, int iMax )
 	return ( iRes );
 }
 
+void CadImprimir ( const char * p_cAsciiz )
+{
+	if ( ES_VALIDO ( p_cAsciiz ) )
+	{
+		printf ( "%s\n", p_cAsciiz );
+	}
+	else
+	{
+		printf ( "%s\n", VALOR_NULO );
+	}
+}
+
+void CadImprimirEnLineas ( const char * p_cAsciiz, int iTamLinea )
+{
+	int iTam;
+	
+	if ( iTamLinea > 6 ) 
+	{
+		if ( ES_VALIDO ( p_cAsciiz ) )
+		{
+			iTam = CadLongitud ( p_cAsciiz );
+			for ( int iCar = 0; iCar < iTam; iCar = iCar + iTamLinea) 
+			{
+				printf ( "%.*s\n", iTamLinea, p_cAsciiz + iCar );
+			}
+		}
+		else
+		{
+			printf ( "%s\n", VALOR_NULO );
+		}
+	}
+}
 
 
 

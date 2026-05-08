@@ -1,23 +1,22 @@
 #include "Base.h"
 
-// TODO
 
-#define NUM_TESTS        0
 
-//extern int TestSId ();
+#define NUM_TESTS        1
+
+extern int TestCadenas ();
 
 char ** testArrayInit()
 {
-    char ** p_p_cTests = (char **) MemReservar ( NUM_TESTS * sizeof( char *) );
-    // p_p_cTests[ 0 ] = CadDuplicar ( "SId" );
+    char ** p_p_cTests = (char **) MemReservar ( NUM_TESTS * sizeof( char *));
+    p_p_cTests[ 0 ] = CadDuplicar ( "Cadenas" );
     return p_p_cTests;
-	
 }
 
 PFUNINTV * functionArrayInit()
 {
-    PFUNINTV* p_fTests = (PFUNINTV *) MemReservar ( NUM_TESTS * sizeof( PFUNINTV ) );
-    // p_fTests[ 0 ] = TestSId;
+    PFUNINTV* p_fTests = (PFUNINTV *) MemReservar ( NUM_TESTS * sizeof( PFUNINTV ));
+    p_fTests[ 0 ] = TestCadenas;
     return p_fTests;
 }
 
@@ -52,6 +51,7 @@ int main( int argc, char * argv[] )
 	char ** p_p_cTests = testArrayInit();
     PFUNINTV * p_fTests = functionArrayInit();
 
+	printf ( "%s[Inicio de los test]%s\n", ANSI_AZUL, ANSI_RESETEAR );
 	char * p_cTest = 0x0;
 	if ( argc > 1 )
 	{
@@ -70,16 +70,25 @@ int main( int argc, char * argv[] )
 		}
 		else
 		{
-			printf( "Test [%s] no encontrado.", p_cTest );
+			printf ( "%sTest [%s] no encontrado.%s\n", ANSI_ROJO, p_cTest, ANSI_RESETEAR );
 			iRes = -1;
 		}
 		return( iRes );
 	}
 
-	//if ( BOOL_ES_FALSO ( TestSId () ) )
-	//{
-	//	iRes = -1;
-	//}
+	if ( ( TestCadenas () == 0 ) )
+	{
+		iRes = -1;
+	}
 	freeArrays( p_p_cTests, p_fTests );
+	printf ( "%s[Fin de los test]%s\n", ANSI_AZUL, ANSI_RESETEAR );
+	if ( iRes == 0 )
+	{
+		printf ("%sResultado global: OK%s\n", ANSI_VERDE, ANSI_RESETEAR );
+	}
+	else
+	{
+		printf ("%sResultado global: KO%s\n", ANSI_ROJO, ANSI_RESETEAR );
+	}
 	return ( iRes );
 }

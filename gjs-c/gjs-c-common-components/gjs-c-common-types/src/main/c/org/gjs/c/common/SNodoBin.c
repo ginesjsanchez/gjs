@@ -819,7 +819,8 @@ int SNodBinEstHijoIzq ( SNodoBin * p_nodbObj, SNodoBin * p_nodbHijo, int iLibera
 		{
 			SNodBinDestruir ( &(p_nodbObj->p_nodbHijoIzq), 1 );
 		}
-    	     p_nodbObj->p_nodbHijoIzq = p_nodbHijo;
+		p_nodbHijo->p_nodbPadre = p_nodbObj;
+    	p_nodbObj->p_nodbHijoIzq = p_nodbHijo;
      	if ( ES_VALIDO ( p_nodbObj->p_nodbHijoIzq ) )
      	{
      		iRes = 1;
@@ -846,6 +847,7 @@ int SNodBinEstHijoDer ( SNodoBin * p_nodbObj, SNodoBin * p_nodbHijo, int iLibera
 		{
 			SNodBinDestruir ( &(p_nodbObj->p_nodbHijoDer), 1 );
 		}
+		p_nodbHijo->p_nodbPadre = p_nodbObj;
      	p_nodbObj->p_nodbHijoDer = p_nodbHijo;
      	if ( ES_VALIDO ( p_nodbObj->p_nodbHijoDer ) )
      	{

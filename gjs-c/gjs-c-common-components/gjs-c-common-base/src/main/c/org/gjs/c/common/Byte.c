@@ -87,7 +87,7 @@ byte HexAByte ( const char * p_cValor )
 	if ( ES_VALIDO ( p_cValor ) )
 	{
 		iVal1 = HexValor ( p_cValor [ 0 ] );
-		iVal0 = HexValor ( p_cValor [ 0 ] );
+		iVal0 = HexValor ( p_cValor [ 1 ] );
 		if ( ( HexEsNumValido ( iVal0 ) == 1 ) && ( HexEsNumValido ( iVal1 ) == 1 ) )
 		{
 			byRes = (byte)( ( iVal1 * 0x10 ) + iVal0 );

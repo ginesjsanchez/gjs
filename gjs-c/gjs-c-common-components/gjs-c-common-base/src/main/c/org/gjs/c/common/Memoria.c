@@ -212,11 +212,11 @@ int MemRedimensionar ( void ** p_p_vBloque, int iNumBytes )
 		}
 #	  else
 		*p_p_vBloque = (void *) realloc ( p_vBloque, iNumBytes );
-		if ( ES_VALIDO ( p_vBloque ) )
+		if ( ES_VALIDO ( p_p_vBloque ) )
 		{
 			iRes = 1;
 #		  if ( defined ( MODO_DEPURACION ) )
-			_MemBloqueReservado ( p_vBloque, (unsigned long) iNumBytes );
+			_MemBloqueReservado ( *p_p_vBloque, (unsigned long) iNumBytes );
 #		  endif
 		}
 		else
@@ -241,6 +241,10 @@ int MemLiberar ( void ** p_p_vBloque )
 #  elif ( defined ( GNU ) )
 	//mcheck_status	mchkInfo;
 #  endif
+#  if ( defined ( MODO_DEPURACION ) )
+	int				iNumBytes;
+#  endif
+
 
 	if ( ES_VALIDO ( p_p_vBloque ) && ( g_iBasMemIniciado == 1 ) )
 	{
@@ -251,6 +255,9 @@ int MemLiberar ( void ** p_p_vBloque )
 			hMem = GetProcessHeap ();
 			if ( hMem != NULL )
 			{
+#			  if ( defined ( MODO_DEPURACION ) )
+				iNumBytes = HeapSize ( hMem, 0, (LPVOID) p_vBloque );
+#			  endif
 				HeapFree ( hMem, 0, (LPVOID) p_vBloque );
 #			  if ( defined ( MODO_DEPURACION ) )
 				_MemBloqueLiberado ( p_vBloque, (unsigned long) iNumBytes );
@@ -267,6 +274,9 @@ int MemLiberar ( void ** p_p_vBloque )
 #		  elif ( defined ( GNU ) )
 
 			iRes = 1;
+#		  if ( defined ( MODO_DEPURACION ) )
+				iNumBytes = malloc_usable_size ( p_vBloque );
+#		  endif
 			//iNumBytes = 0; // _msize ( p_vBloque );
 			// NOTA: Parece que el las primeras versiones de libc.so.6 hay un Bug con
 			// mprobe y mcheck:
@@ -289,7 +299,9 @@ int MemLiberar ( void ** p_p_vBloque )
 
 #		  else // DOS o UNIX (no GNU):
 			iRes = 1;
-			iNumBytes = 0; // _msize ( p_vBloque );
+#		  if ( defined ( MODO_DEPURACION ) )
+				iNumBytes = malloc_usable_size ( p_vBloque );
+#		  endif
 			free ( p_vBloque );
 			*p_p_vBloque = NULL;
 #		   if ( defined ( MODO_DEPURACION ) )
@@ -364,13 +376,13 @@ int MemLiberarUnicode ( unichar ** p_p_cCadena )
 				}
 				else
 				{
-					// No es unicode:
-					iRes = MemLiberar ( (void **) p_p_cCadena );
+					iRes = 0;
 				}
 			}
 			else
 			{
-				iRes = 0;
+				// No es unicode:
+				iRes = MemLiberar ( (void **) p_p_cCadena );
 			}
 		}
 		else
@@ -564,8 +576,8 @@ static void	MemInicializar ()
 
 		if ( getrlimit ( RLIMIT_DATA, &rlimDatos ) == 0 )
 		{
-			p_vBasMemMinDireccionEspProc = (void *) rlim.rlim_min;
-			p_vBasMemMaxDireccionEspProc = (void *) rlim.rlim_max;
+			p_vBasMemMinDireccionEspProc = (void *) rlimDatos.rlim_cur;
+			p_vBasMemMaxDireccionEspProc = (void *) rlimDatos.rlim_max;
 		}
 		else
 		{

@@ -2,10 +2,11 @@
 
 
 
-#define NUM_TESTS        3
+#define NUM_TESTS        43
 
 extern int TestPunteros ();
 extern int TestCadenasBase ();
+extern int TestFormatoCadena ();
 extern int TestSConversor ();
 
 char ** testArrayInit()
@@ -13,7 +14,8 @@ char ** testArrayInit()
     char ** p_p_cTests = (char **) MemReservar ( NUM_TESTS * sizeof( char *));
     p_p_cTests[ 0 ] = CadDuplicar ( "Punteros" );
     p_p_cTests[ 1 ] = CadDuplicar ( "CadenasBase" );
-    p_p_cTests[ 2 ] = CadDuplicar ( "SConversor" );
+	p_p_cTests[ 2 ] = CadDuplicar ( "FormatoCadena" );
+    p_p_cTests[ 3 ] = CadDuplicar ( "SConversor" );
     return p_p_cTests;
 }
 
@@ -22,7 +24,8 @@ PFUNINTV * functionArrayInit()
     PFUNINTV* p_fTests = (PFUNINTV *) MemReservar ( NUM_TESTS * sizeof( PFUNINTV ));
     p_fTests[ 0 ] = TestPunteros;
     p_fTests[ 1 ] = TestCadenasBase;
-    p_fTests[ 2 ] = TestSConversor;
+    p_fTests[ 2 ] = TestFormatoCadena;
+    p_fTests[ 3 ] = TestSConversor;
     return p_fTests;
 }
 
@@ -84,6 +87,7 @@ int main( int argc, char * argv[] )
 
 	if ( ( TestPunteros () == 0 ) ||
 		( TestCadenasBase () == 0 ) ||
+		( TestFormatoCadena () == 0 ) ||
 		( TestSConversor () == 0 ) )
 	{
 		iRes = -1;

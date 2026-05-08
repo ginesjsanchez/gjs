@@ -397,20 +397,20 @@ char * ConvEnteroLargoACadena ( long lVal )
 	int			iPos;
 	int			iOrden;
 	int			iTam;
-	char *	p_cRes;
+	char *		p_cRes;
 	int			iDec;		
 
 	iOrden = NumDigitosEnteroLargo ( lVal );
 	if ( lVal < 0 )
 	{
-		iTam = iOrden + 2;	
+		iTam = iOrden + 1;	
 	}
 	else
 	{
-		iTam = iOrden + 1;
+		iTam = iOrden;
 	}
 	iDec = 0;
-	p_cRes = CadCrear ( iTam - 1 );
+	p_cRes = CadCrear ( iTam );
 	if ( ES_VALIDO ( p_cRes ) )
 	{
 		if ( lVal < 0 )
@@ -525,7 +525,7 @@ char * ConvEnteroDobleLargoACadena ( llong llVal )
 	int			iPos;
 	int			iOrden;
 	int			iTam;
-	char *	p_cRes;
+	char *		p_cRes;
 	int			iDec;		
 
 	iOrden = NumDigitosEnteroDobleLargo ( llVal );
@@ -544,7 +544,6 @@ char * ConvEnteroDobleLargoACadena ( llong llVal )
 		if ( llVal < 0 )
 		{
 			p_cRes [ 0 ] = '-';
-			llVal = (-1) * llVal;
 			if ( llVal == LLONG_MIN )
 			{
 				llVal = LLONG_MAX;
@@ -900,7 +899,7 @@ char * ConvEnteroACadenaHex ( int iVal )
 {
 	char *	p_cRes;
 
-	if ( iVal > 0 )
+	if ( iVal >= 0 )
 	{
 		p_cRes = ConvEnteroSinSignoACadenaHex ( (unsigned int) iVal );
 	}
@@ -915,7 +914,7 @@ char * ConvEnteroLargoACadenaHex ( long lVal )
 {
 	char *	p_cRes;
 
-	if ( lVal > 0 )
+	if ( lVal >= 0 )
 	{
 		p_cRes = ConvEnteroLargoSinSignoACadenaHex ( (unsigned long) lVal );
 	}

@@ -708,5 +708,25 @@ void SLisLitDesactivarLiberacionMemoria ( SListaLiterales * p_lisObj )
 	}
 }
 
+void SLisLitImprimir  ( SListaLiterales * p_lisObj )
+{
+	int iElem;
+	
+	if ( ES_VALIDO ( p_lisObj ) ) 
+	{
+		printf ( "Contenido de la lista: [\n" );
+		iElem = 0;
+		while ( iElem < SLisLitNumElementos ( p_lisObj ) )
+		{
+			printf ( "\t[%s], \n", SLisLitElemento ( p_lisObj, iElem ) );
+			iElem = iElem + 1;
+		}
+		printf ( "]\n" );
+	}
+	else
+	{
+		printf ( "%s\n", VALOR_NULO );
+	}
+}
 
 

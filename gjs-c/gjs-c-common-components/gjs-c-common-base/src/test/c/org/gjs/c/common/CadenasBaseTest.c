@@ -354,6 +354,90 @@ static int TestCadDuplicarSeg01 ()
 	return ( iRes );
 }
 
+static int TestCadComparar01 ()
+{
+	int iRes = BOOL_VAL_CIERTO;
+	printf( "Test CadComparar 01:\n" );
+	char * p_cCadena1 = NULL;
+	char * p_cCadena2 = NULL;
+	int iResult = CadComparar ( p_cCadena1, p_cCadena2 );
+	if ( iResult != COMP_IGUAL )
+	{
+		printf( "Error caso 1: se esperaban iguales el resultado es %d \n", iResult );
+		iRes = BOOL_VAL_FALSO;
+	}
+	p_cCadena1 = CadCrear ( 10 );
+	iResult = CadComparar ( p_cCadena1, p_cCadena2 );
+	if ( iResult != COMP_MAYOR )
+	{
+		printf( "Error caso 2: se esperaba mayor el resultado es %d \n", iResult );
+		iRes = BOOL_VAL_FALSO;
+	}
+	iResult = CadComparar ( p_cCadena2, p_cCadena1 );
+	if ( iResult != COMP_MENOR )
+	{
+		printf( "Error caso 3: se esperaba menor el resultado es %d \n", iResult );
+		iRes = BOOL_VAL_FALSO;
+	}
+	p_cCadena2 = CadCrear ( 10 );
+	iResult = CadComparar ( p_cCadena1, p_cCadena2 );
+	if ( iResult != COMP_IGUAL )
+	{
+		printf( "Error caso 4: se esperaban iguales el resultado es %d \n", iResult );
+		iRes = BOOL_VAL_FALSO;
+	}
+	MemLiberar ( (void **) &p_cCadena1 );
+	MemLiberar ( (void **) &p_cCadena2 );
+	return ( iRes );
+}
+
+static int TestCadComparar02 ()
+{
+	int iRes = BOOL_VAL_CIERTO;
+	printf( "Test CadComparar 01:\n" );
+	char * p_cCadena1 = CadDuplicar ( "Cadena1" );
+	char * p_cCadena2 = CadDuplicar ( "Cadena Mas Larga 2 " );
+	char * p_cCadena3 = CadDuplicar ( "Cadena2" );
+	char * p_cCadena4 = CadDuplicar ( "Cadena1" );
+	int iResult = CadComparar ( p_cCadena1, p_cCadena2 );
+	if ( iResult != COMP_MENOR )
+	{
+		printf( "Error caso 1: se esperaba menor el resultado es %d \n", iResult );
+		iRes = BOOL_VAL_FALSO;
+	}
+	iResult = CadComparar ( p_cCadena2, p_cCadena1 );
+	if ( iResult != COMP_MAYOR )
+	{
+		printf( "Error caso 2: se esperaba mayor el resultado es %d \n", iResult );
+		iRes = BOOL_VAL_FALSO;
+	}
+	iResult = CadComparar ( p_cCadena1, p_cCadena3 );
+	if ( iResult != COMP_MENOR )
+	{
+		printf( "Error caso 3: se esperaba menor el resultado es %d \n", iResult );
+		iRes = BOOL_VAL_FALSO;
+	}
+	iResult = CadComparar ( p_cCadena3, p_cCadena1 );
+	if ( iResult != COMP_MAYOR )
+	{
+		printf( "Error caso 4: se esperaba mayor el resultado es %d \n", iResult );
+		iRes = BOOL_VAL_FALSO;
+	}
+	iResult = CadComparar ( p_cCadena1, p_cCadena4 );
+	if ( iResult != COMP_IGUAL )
+	{
+		printf( "Error caso 4: se esperaban iguales el resultado es %d \n", iResult );
+		iRes = BOOL_VAL_FALSO;
+	}
+	MemLiberar ( (void **) &p_cCadena1 );
+	MemLiberar ( (void **) &p_cCadena2 );
+	MemLiberar ( (void **) &p_cCadena3 );
+	MemLiberar ( (void **) &p_cCadena4 );
+	return ( iRes );
+}
+
+
+
 int TestCadenasBase ()
 {
 	int iRes = BOOL_VAL_CIERTO;
@@ -363,7 +447,9 @@ int TestCadenasBase ()
 			( TestCadLongitudSeg01 () == BOOL_VAL_CIERTO ) &&
 			( TestCadInicializar01 () == BOOL_VAL_CIERTO ) &&
 			( TestCadDuplicar01 () == BOOL_VAL_CIERTO ) &&
-			( TestCadDuplicarSeg01 () == BOOL_VAL_CIERTO ) )
+			( TestCadDuplicarSeg01 () == BOOL_VAL_CIERTO ) &&
+			( TestCadComparar01 () == BOOL_VAL_CIERTO ) &&
+			( TestCadComparar02 () == BOOL_VAL_CIERTO ) )
 	{
 		printf ( "%sResultado: OK%s\n", ANSI_VERDE, ANSI_RESETEAR );
 	}

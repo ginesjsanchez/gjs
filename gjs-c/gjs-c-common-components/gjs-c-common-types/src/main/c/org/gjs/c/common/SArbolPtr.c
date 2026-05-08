@@ -125,7 +125,11 @@ int SArbPtrNumNodos ( SArbolPtr * p_arbpObj )
 	{
 		if ( ES_VALIDO ( p_arbpObj->p_nodRaiz ) )
 		{
+			printf ("Contando desde raiz\n" );
+		fflush(stdout);
 			iNodos = SNodPtrNodosInferiores ( p_arbpObj->p_nodRaiz ) + 1;
+			printf ("Nodos hasta raiz=%d\n", iNodos );
+		fflush(stdout);
 		}
 		else
 		{
@@ -141,26 +145,27 @@ int SArbPtrNumNodos ( SArbolPtr * p_arbpObj )
 
 int SArbPtrVaciar ( SArbolPtr * p_arbpObj )
 {
-	SNodoPtr * p_nodpObj;
 	int		iRes;
 
 	if ( ES_VALIDO ( p_arbpObj ) )
 	{
 		if ( ES_VALIDO ( p_arbpObj->p_nodRaiz ) )
 		{
-			SArbPtrMoverAPrimPreorden ( p_arbpObj );
-			while ( ES_VALIDO ( p_arbpObj->p_nodActual ) )
-			{
-				p_nodpObj = p_arbpObj->p_nodActual;
-				SArbPtrMoverASigPreorden ( p_arbpObj );
-				SNodPtrDestruir ( &p_nodpObj, 0 );
-			}
+				printf("Desrtuyendo\n");
+				fflush(stdout);
+			SNodPtrDestruir ( &(p_arbpObj->p_nodRaiz), 1 );
+				printf("Comporbando destruccion\n");
+				fflush(stdout);
 			if ( SArbPtrNumNodos ( p_arbpObj ) == 0 )
 			{
-				iRes = 1;
+					printf("DESTRUDI OK\n");
+				fflush(stdout);
+			iRes = 1;
 			}
 			else
 			{
+				printf("OJO\n");
+				fflush(stdout);
 				iRes = 0;
 			}
 		}
@@ -205,6 +210,7 @@ void SArbPtrMoverAPadre ( SArbolPtr * p_arbpObj )
 	{
 		if ( ES_VALIDO ( p_arbpObj->p_nodActual ) )
 		{
+			printf ( "Nodo padre=%ld\n", (long) p_arbpObj->p_nodActual->p_nodpPadre );
 			p_arbpObj->p_nodActual = SNodPtrPadre ( p_arbpObj->p_nodActual );
 		}
 	}

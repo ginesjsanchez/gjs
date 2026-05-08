@@ -60,7 +60,7 @@ char * CadCrearConFormatoExt ( const char * p_cFormato, va_list valArgumentos )
 		p_cObj = CadCrear ( iLong );
 		if ( ES_VALIDO ( p_cObj ) )
 		{
-			if ( CadCopiarConFormato ( p_cObj, p_cFormato, valArgumentos ) == 0 )
+			if ( CadCopiarConFormatoExt ( p_cObj, p_cFormato, valArgumentos ) == 0 )
 			{
 				MemLiberar ( (void **) &p_cObj );
 			}
@@ -305,8 +305,6 @@ int CadConcatenarExt ( char * p_cAsciiz1, const char * p_cAsciiz2, int iMax1, in
 
 	iLong1 = CadLongitudSeg ( p_cAsciiz1, iMax1 ); 
 	iLong2 = CadLongitudSeg ( p_cAsciiz2, iMax2 ); 
-	printf ( "## LONG1=%d\n", iLong1 );
-	printf ( "## LONG2=%d\n", iLong2 );
 	if ( ( iLong1 >= 0 ) && ( iLong2 > 0 ) && ( ( iMax1 == -1 ) || ( iLong1 < iMax1 ) )  )
 	{
 		iRes = 1;
@@ -325,7 +323,6 @@ int CadConcatenarExt ( char * p_cAsciiz1, const char * p_cAsciiz2, int iMax1, in
 		{
 			iMax = iLong1 + iLong2;
 		}
-	printf ( "## MAX=%d\n", iMax );
 		for ( iCar = iLong1; iCar < iMax;  iCar = iCar + 1 )  
 		{
 			p_cAsciiz1 [ iCar ] = p_cAsciiz2 [ iCar - iLong1 ];
@@ -3599,18 +3596,6 @@ static int _EsCadenaValida ( char * p_cCad )
 const char * CadValorNulo ()
 {
 	return ( VALOR_NULO );
-}
-
-void CadImprimir ( const char * p_cAsciiz )
-{
-	if ( ES_VALIDO ( p_cAsciiz ) )
-	{
-		printf ( "%s\n", p_cAsciiz );
-	}
-	else
-	{
-		printf ( "%s\n", VALOR_NULO );
-	}
 }
 
 void CadImprimirExt ( const char * p_cAsciiz, const char * p_cEtiqueta, char cSep, int iEnvolver )

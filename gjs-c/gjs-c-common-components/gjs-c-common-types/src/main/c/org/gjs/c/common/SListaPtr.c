@@ -248,18 +248,22 @@ int SLispVaciar ( SListaPtr * p_lisObj )
 {
 	int	iRes;
 
-	if ( SLispEsValida ( p_lisObj ) == 1 ) 
+	iRes = 1;
+	while ( ( p_lisObj->iNumElementos > 0 ) && ( iRes == 1 ) )
 	{
-		iRes = 1;
-		while ( ( p_lisObj->iNumElementos > 0 ) && ( iRes == 1 ) )
-		{
-			SLispInicio ( p_lisObj );
-			iRes = SLispEliminar ( p_lisObj );
-		}
+		SLispInicio ( p_lisObj );
+		iRes = SLispEliminar ( p_lisObj );
+	}
+	p_lisObj->iPos = -1;
+	p_lisObj->p_elpActual = NULL;
+	if ( iRes == 1 )
+	{
+		p_lisObj->p_elpPrimero = NULL;
+		p_lisObj->p_elpUltimo = NULL;
 	}
 	else
 	{
-		iRes = 0;
+		SLispInicio ( p_lisObj );
 	}
 	return ( iRes );
 }
@@ -584,6 +588,7 @@ int SLispEstablecer ( SListaPtr * p_lisObj, byte * p_byDatos )
 			{
 				SElpEncadenarAntecesor ( p_elpObj, SElpAntecesor ( p_lisObj->p_elpActual )  );
 				SElpEncadenarSucesor ( p_elpObj, SElpSucesor ( p_lisObj->p_elpActual ) );
+				p_lisObj->p_elpActual->iLiberar = p_lisObj->iLiberar;
 				SElpDestruir ( &(p_lisObj->p_elpActual) );
 
 				iRes = 1;
@@ -685,7 +690,6 @@ int SLispInsertarDetras ( SListaPtr * p_lisObj, byte * p_byDatos )
 		if ( ES_VALIDO ( p_elpObj ) )
 		{
 			SElpDesencadenar ( p_elpObj );
-
 			if ( p_lisObj->iNumElementos <= 0 )
 			{
 				p_lisObj->p_elpPrimero = p_elpObj;
@@ -749,6 +753,7 @@ int SLispEliminar ( SListaPtr * p_lisObj )
 			p_elpAnt = SElpAntecesor ( p_lisObj->p_elpActual );
 			p_elpSig = SElpSucesor ( p_lisObj->p_elpActual );
 
+			p_lisObj->p_elpActual->iLiberar = p_lisObj->iLiberar;
 			SElpDestruir ( &(p_lisObj->p_elpActual) );
 			p_lisObj->iNumElementos = p_lisObj->iNumElementos - 1;
 
@@ -761,7 +766,14 @@ int SLispEliminar ( SListaPtr * p_lisObj )
 				p_lisObj->p_elpPrimero = p_elpSig;
 			}
 
-			if ( ES_VALIDO ( p_elpSig ) )
+			if ( p_lisObj->iNumElementos == 0 )
+			{
+				p_lisObj->p_elpPrimero = NULL;
+				p_lisObj->p_elpUltimo = NULL;
+				p_lisObj->p_elpActual = NULL;
+				p_lisObj->iPos = -1;
+			}
+			else if ( ES_VALIDO ( p_elpSig ) )
 			{
 				SElpEncadenarAntecesor ( p_elpSig, p_elpAnt );
 				p_lisObj->p_elpActual = p_elpSig;
@@ -772,7 +784,7 @@ int SLispEliminar ( SListaPtr * p_lisObj )
 				p_lisObj->p_elpActual = p_elpAnt;
 				p_lisObj->iPos = p_lisObj->iPos - 1;
 			}
-
+			
 			iRes = 1;
 		}
 		else

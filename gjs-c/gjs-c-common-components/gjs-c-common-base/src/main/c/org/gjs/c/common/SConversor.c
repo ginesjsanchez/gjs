@@ -571,7 +571,7 @@ void SConvEstablecerValorRealDoble ( SConversor * p_convObj, double dValor )
 		if ( ( p_convObj->dValor >= LONG_MIN ) && ( p_convObj->dValor <= LONG_MAX ) )
 		{
 			p_convObj->lValor = ConvRealDobleAEnteroLargo ( p_convObj->dValor, 0 );
-			if ( ( p_convObj->dValor >= INT_MIN ) && ( p_convObj->lValor <= INT_MAX ) )
+			if ( ( p_convObj->dValor >= INT_MIN ) && ( p_convObj->dValor <= INT_MAX ) )
 			{
 				p_convObj->iValor = (int) p_convObj->lValor;
 			}
@@ -631,7 +631,7 @@ void SConvEstablecerValorCadena ( SConversor * p_convObj, char * p_cValor )
 
 void SConvEstablecerValorCadenaConstante ( SConversor * p_convObj, const char * p_cValor )
 {
-	char *		p_cError;
+	char *		p_cUltimoConvertido;
 	int			iCar;
 	int			iCarVal;
 	int			iIni;
@@ -667,8 +667,8 @@ void SConvEstablecerValorCadenaConstante ( SConversor * p_convObj, const char * 
 
 		if ( SConvEsCadenaNumerica ( p_convObj ) == 1 )
 		{
-			p_cError = NULL;
-			p_convObj->dValor = strtod ( p_convObj->p_cValor, &p_cError );
+			p_cUltimoConvertido = NULL;
+			p_convObj->dValor = strtod ( p_convObj->p_cValor, &p_cUltimoConvertido );
 			if ( ( fabs ( p_convObj->dValor ) >= FLT_MIN ) && ( fabs ( p_convObj->dValor ) <= FLT_MAX ) )
 			{
 				p_convObj->fValor = (float) p_convObj->dValor;
@@ -708,7 +708,7 @@ void SConvEstablecerValorCadenaConstante ( SConversor * p_convObj, const char * 
 				p_convObj->lValor = 0;
 				p_convObj->iValor = 0;
 			}
-			if ( ( p_convObj->dValor > 0 ) && ( p_convObj->dValor <= ULONG_MAX ) )
+			if ( ( p_convObj->dValor >= 0 ) && ( p_convObj->dValor <= ULONG_MAX ) )
 			{
 				p_convObj->ulValor = (unsigned long) p_convObj->dValor;
 				if ( p_convObj->dValor <= UINT_MAX )
@@ -727,7 +727,8 @@ void SConvEstablecerValorCadenaConstante ( SConversor * p_convObj, const char * 
 				p_convObj->uiValor = 0;
 				p_convObj->ulValor = 0;
 			}
-			if ( ES_VALIDO ( p_cError ) )
+			// p_cUltimoConvertido 
+			if ( *p_cUltimoConvertido != '\0' )
 			{
 				p_convObj->iConvValida = 0;
 			}
@@ -888,7 +889,7 @@ void SConvEstablecerValorEnteroDobleLargo ( SConversor * p_convObj, llong llValo
 		}
 		if ( ( p_convObj->llValor >= INT_MIN ) && ( p_convObj->llValor <= INT_MAX ) )
 		{
-			p_convObj->iValor = (int) p_convObj->lValor;
+			p_convObj->iValor = (int) p_convObj->llValor;
 		}
 		else
 		{
@@ -1129,7 +1130,7 @@ void InicializarCadena ( SConversor * p_convObj )
 		}
 		else if ( ES_VALIDO ( p_convObj->p_cValor ) )
 		{
-			for ( iCar = 0; iCar < CONV_MAX_TAM_CADENA + 1; iCar = iCar + 1 )
+			for ( iCar = 0; iCar < CONV_MAX_TAM_CADENA; iCar = iCar + 1 )
 			{
 				p_convObj->p_cValor [ iCar ] = (char) 0;
 			}

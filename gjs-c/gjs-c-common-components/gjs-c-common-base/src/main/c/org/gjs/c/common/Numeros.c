@@ -92,7 +92,7 @@ int NumDigitosEnteroDobleLargo ( llong llVal )
 
 int NumDigitosEnteroSinSigno ( unsigned int uiVal )
 {
-	return ( NumDigitosEnteroLargo ( (unsigned long) uiVal ) );
+	return ( NumDigitosEnteroLargoSinSigno ( (unsigned long) uiVal ) );
 }
 
 int NumDigitosEnteroLargoSinSigno ( unsigned long ulVal )

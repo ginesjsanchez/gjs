@@ -351,6 +351,8 @@ typedef byte4	dword;
 #define ERR_MSJ_DEFECTO						"Se ha producido un error."
 
 
+#define VALOR_NULO			"null"
+
 
 #define TIP_TAM_CHAR						sizeof(char)
 #define TIP_TAM_LONG						sizeof(long)

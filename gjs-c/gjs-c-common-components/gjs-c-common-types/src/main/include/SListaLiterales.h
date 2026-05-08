@@ -76,6 +76,7 @@ int	SLisLitLiberacionMemoriaActivada ( SListaLiterales * p_lisObj );
 void SLisLitActivarLiberacionMemoria ( SListaLiterales * p_lisObj );
 void SLisLitDesactivarLiberacionMemoria ( SListaLiterales * p_lisObj );
 
+void SLisLitImprimir  ( SListaLiterales * p_lisObj );
 
 
 #endif

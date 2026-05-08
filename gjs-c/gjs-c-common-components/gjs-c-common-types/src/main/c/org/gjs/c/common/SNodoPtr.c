@@ -55,12 +55,16 @@ void SNodPtrDestruir ( SNodoPtr ** p_p_nodpObj, int iDestruirHijos )
         p_nodpObj = *p_p_nodpObj;
 		if ( ES_VALIDO ( p_nodpObj ) )
 		{
+				printf("Limpiando hijis\n");
+				fflush(stdout);
 			SNodPtrLimpiarHijos ( p_nodpObj, iDestruirHijos );
 			if ( p_nodpObj->iLiberar == 1 )
 			{
 				MemLiberar ( (void **) &(p_nodpObj->p_byDatos) );
 			}
 			MemLiberar ( (void **) p_p_nodpObj );
+				printf("nodo destruido\n");
+				fflush(stdout);
 		}
     }
 }
@@ -344,16 +348,24 @@ int SNodPtrNodosInferiores ( SNodoPtr * p_nodpObj )
 	int		iHijo;
 	int		iNodos;
 
+ 			printf ("SNodPtrNodosInferiores \n" );
+		fflush(stdout);
      if ( ES_VALIDO ( p_nodpObj ) )
      {
      	iNodos = 0;
-     	for ( iHijo = 0; iHijo < p_nodpObj->iNumHijos; iHijo = iHijo + 1 )
+  			printf ("hijos%d\n", p_nodpObj->iNumHijos );
+		fflush(stdout);
+   	for ( iHijo = 0; iHijo < p_nodpObj->iNumHijos; iHijo = iHijo + 1 )
      	{
      		p_nodpHijo = SNodPtrHijo ( p_nodpObj, iHijo );
      		if ( ES_VALIDO ( p_nodpHijo  ) )
      		{
-     			iNodos = iNodos + 1 + SNodPtrNodosInferiores ( p_nodpHijo );
-     		}
+ 			printf ("Contando desde nodo hijo=%d\n", iHijo );
+		fflush(stdout);
+    			iNodos = iNodos + 1 + SNodPtrNodosInferiores ( p_nodpHijo );
+ 			printf ("Nodos hasta hijo=%d\n", iNodos );
+		fflush(stdout);
+    		}
      	}
      }
      else
@@ -449,6 +461,7 @@ int SNodPtrInsertarHijo ( SNodoPtr * p_nodpObj, SNodoPtr * p_nodpHijo )
 			if ( MemRedimensionar ( (void **) &(p_nodpObj->p_p_nodpHijos), sizeof ( SNodoPtr * ) * ( p_nodpObj->iNumHijos + 1 ) ) == 1 )
 			{
   				p_nodpObj->iNumHijos = p_nodpObj->iNumHijos + 1;
+				p_nodpHijo->p_nodpPadre = p_nodpObj;
   				p_nodpObj->p_p_nodpHijos [ p_nodpObj->iNumHijos - 1 ] = p_nodpHijo;
      		}
      		else

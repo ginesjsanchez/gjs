@@ -28,6 +28,7 @@
 #include <SDatos.h>
 
 #include <SContador.h>
+#include <SCursor.h>
 #include <SIndicador.h>
 #include <SIndicador2D.h>
 
@@ -95,6 +96,7 @@
 #include <SPilaRealesDobles.h>
 #include <SArbolEnteros.h>
 #include <SArbolBinEnteros.h>
+#include <SArbolLiterales.h>
 
 
 

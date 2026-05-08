@@ -27,7 +27,7 @@ void IntercambiarEnteros ( int * p_iValorA, int * p_iValorB )
 	}
 }
 
-void IntercambiarEngterosLargos ( long * p_lValorA, long * p_lValorB )
+void IntercambiarEnterosLargos ( long * p_lValorA, long * p_lValorB )
 {
 	long lAux;
 

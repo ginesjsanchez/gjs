@@ -45,7 +45,8 @@ static void CalcularOrdenBytes ()
 	g_iOrdenBytes = BYTE_ORDEN_INVERTIDO;
 #  elif ( BYTE_ORDER == PDP_ENDIAN )
 	g_iOrdenBytes =  BYTE_ORDEN_MIXTO;
-#  elif ( defined ( BYTE4 ) )
+#  else
+#   if ( defined ( BYTE4 ) )
 	byte4			by4Endian;
 	byte *	p_byValor;
 	int		iByte;
@@ -70,7 +71,7 @@ static void CalcularOrdenBytes ()
 	{
 		g_iOrdenBytes =  BYTE_ORDEN_MIXTO;
 	}
-#  elif ( defined ( BYTE2 ) )
+#   elif ( defined ( BYTE2 ) )
 	byte2			by2Endian;
 	byte *	p_byValor;
 	int		iByte;
@@ -91,10 +92,12 @@ static void CalcularOrdenBytes ()
 	{
 		g_iOrdenBytes = BYTE_ORDEN_INVERTIDO;
 	}
-#  else
+#   else
 	g_iOrdenBytes = BYTE_ORDEN_INVERTIDO;
+#   endif
+
 #  endif
-# else
+#else
 #  if ( defined ( BYTE4 ) )
 	byte4			by4Endian;
 	byte *	p_byValor;
@@ -464,8 +467,7 @@ int BytesOrdenar ( byte * p_byValor, int iTam, int iOrden )
 	}
 	else
 	{
-		iRes = 0;
-		ERROR_ESTABLECER ( ERR_PARAMETROS );
+		iRes = 1;
 	}
 	return ( iRes );
 }

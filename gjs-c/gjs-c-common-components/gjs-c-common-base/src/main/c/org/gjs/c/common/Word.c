@@ -26,7 +26,7 @@ byte WordByteSuperior ( word wDato )
 
 word WordComponer ( byte bySup, byte byInf )
 {
-	return ( (word) ( ( ( bySup & WORD_MASC_BYTE_SUP ) * WORD_DESP_BYTE_SUP ) | ( byInf & WORD_MASC_BYTE_INF ) ) );
+	return ( (word) ( ( ( bySup & WORD_MASC_BYTE_INF ) * WORD_DESP_BYTE_SUP ) | ( byInf & WORD_MASC_BYTE_INF ) ) );
 }
 
 

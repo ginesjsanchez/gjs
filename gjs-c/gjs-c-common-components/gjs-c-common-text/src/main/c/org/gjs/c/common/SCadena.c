@@ -422,12 +422,10 @@ int SCadConcatenarLiteral ( SCadena * p_cadObj, const char * p_cValor )
 	{
 		if ( ES_NULO ( p_cadObj->p_cValor ) )
 		{
-			printf ( "CON CASO 1\n" );
 			iRes = SCadCopiarLiteral ( p_cadObj, p_cValor );
 		}
 		else
 		{
-			printf ( "CON CASO 2 %d\n", p_cadObj->iMaxTam );
 			iRes = CadConcatenarExt ( p_cadObj->p_cValor, p_cValor, p_cadObj->iMaxTam, -1 );
 		}
 	}
@@ -444,7 +442,7 @@ int SCadCopiar ( SCadena * p_cadObj, SCadena * p_cadValor )
 
 	if ( ES_VALIDO ( p_cadObj ) && ES_VALIDO ( p_cadValor ) )
 	{
-		iRes = SCadCopiarLiteral ( p_cadObj, SCadValorConstante ( p_cadObj ) );
+		iRes = SCadCopiarLiteral ( p_cadObj, SCadValorConstante ( p_cadValor ) );
 	}
 	else
 	{
@@ -459,7 +457,7 @@ int SCadConcatenar ( SCadena * p_cadObj, SCadena * p_cadValor )
 
 	if ( ES_VALIDO ( p_cadObj ) && ES_VALIDO ( p_cadValor ) )
 	{
-		iRes = SCadConcatenarLiteral ( p_cadValor, SCadValorConstante ( p_cadObj ) );
+		iRes = SCadConcatenarLiteral ( p_cadObj, SCadValorConstante ( p_cadValor ) );
 	}
 	else
 	{
@@ -681,7 +679,7 @@ int SCadInsertar ( SCadena * p_cadObj, int iPos, SCadena * p_cadValor )
 
 	if ( ES_VALIDO ( p_cadObj ) && ES_VALIDO ( p_cadValor ) && ( iPos >= 0 ) )
 	{
-		iRes = SCadInsertarLiteral ( p_cadObj, iPos, SCadValorConstante ( p_cadObj ) );
+		iRes = SCadInsertarLiteral ( p_cadObj, iPos, SCadValorConstante ( p_cadValor ) );
 	}
 	else
 	{
@@ -758,7 +756,7 @@ int SCadEscribir ( SCadena * p_cadObj, int iPos, SCadena * p_cadValor )
 
 	if ( ES_VALIDO ( p_cadObj ) && ES_VALIDO ( p_cadValor ) && ( iPos >= 0 ) )
 	{
-		iRes = SCadEscribirLiteral ( p_cadObj, iPos, SCadValorConstante ( p_cadObj ) );
+		iRes = SCadEscribirLiteral ( p_cadObj, iPos, SCadValorConstante ( p_cadValor ) );
 	}
 	else
 	{

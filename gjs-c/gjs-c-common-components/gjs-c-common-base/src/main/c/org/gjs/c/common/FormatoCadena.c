@@ -63,7 +63,6 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 	int			iArg;
 	double		dArg;
 	long		lArg;
-	//float		fArg;
 	int			iIndLargo;
 	char *	    p_cTmp;
 	char	*	p_cFrmProc;
@@ -284,7 +283,7 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 							iPosTmp = iPosTmp + 1;
 							p_cFrmProc [ iPosFrmP ] = cCarFrm;
 							iPosFrmP = iPosFrmP + 1;
-							iEstado = 41;
+							//iEstado = 4;
 						}
 						else if ( strchr ( _FRM_CODIGOS, cCarFrm ) != NULL )
 						{
@@ -441,16 +440,8 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 									case 'E':
 									case 'G':
 									{
-										if ( iIndLargo == 0 )
-										{
-											dArg = va_arg ( valArgumentos, double );
-											sprintf ( p_cBuffer, p_cFrmProc, dArg );
-										}
-										else
-										{
-											dArg = va_arg ( valArgumentos, double );
-											sprintf ( p_cBuffer, p_cFrmProc, dArg );
-										}
+										dArg = va_arg ( valArgumentos, double );
+										sprintf ( p_cBuffer, p_cFrmProc, dArg );
 										break;
 									}
 									case 'p':
@@ -562,16 +553,16 @@ int FrmCadena ( char * p_cCadena, const char * p_cFormato, va_list valArgumentos
 		{
 			iRes = 0;
 		}
-		MemLiberar ( (void **) &p_cTmp );
-		MemLiberar ( (void **) &p_cFrmProc );
-		MemLiberar ( (void **) &p_cCod );
-		MemLiberar ( (void **) &p_cBuffer );
 	}
 	else
 	{
 		iRes = 0;
 		ERROR_ESTABLECER ( ERR_PARAMETROS );
 	}
+	MemLiberar ( (void **) &p_cTmp );
+	MemLiberar ( (void **) &p_cFrmProc );
+	MemLiberar ( (void **) &p_cCod );
+	MemLiberar ( (void **) &p_cBuffer );
 	return ( iRes );
 }
 
@@ -588,7 +579,7 @@ static int _EsCadenaValida ( char * p_cCad )
 	{
 		iPos = 0;
 		iRes = 1;
-		while ( ( *( p_cCad + iPos ) != (char) 0 ) && ( iPos < CAD_BASE_MAX_TAM ) )
+		while ( ( *( p_cCad + iPos ) != (char) 0 ) && ( iPos < CAD_BASE_MAX_TAM ) && ( iRes == 1 ) )
 		{
 			byCod = (byte)(*( p_cCad + iPos ));
 			if ( ( byCod == 127 )  || ( ( byCod < 32 ) &&  ( ( byCod < 8 ) || ( byCod > 13 ) ) ) )
