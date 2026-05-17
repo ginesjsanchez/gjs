@@ -19,7 +19,7 @@ typedef struct
 
 SPilaPtr * SPilpCrear ();
 
-void SPilpDestruir ( SPilaPtr ** p_p_pilObj );
+void SPilpDestruir ( SPilaPtr ** p_p_pilObj, int iLiberar );
 
 int SPilpEsValida ( SPilaPtr * p_pilObj );
 
@@ -31,7 +31,7 @@ byte * SPilpDesapilar ( SPilaPtr * p_pilObj );
 
 int SPilpApilar ( SPilaPtr * p_pilObj, byte * p_byObj );
 int SPilpEliminarPrimero ( SPilaPtr * p_pilObj );
-int SPilpVaciar ( SPilaPtr * p_pilObj );
+int SPilpVaciar ( SPilaPtr * p_pilObj, int iLiberar );
 
 SListaPtr * SPilpLista ( SPilaPtr * p_pilObj );
 

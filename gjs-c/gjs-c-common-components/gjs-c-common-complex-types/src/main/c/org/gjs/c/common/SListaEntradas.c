@@ -60,7 +60,7 @@ int SLisEtrEstaVacia ( SListaEntradas * p_lisObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }

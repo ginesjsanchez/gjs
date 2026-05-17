@@ -60,7 +60,7 @@ int SLisValEstaVacia ( SListaValores * p_lisObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }
@@ -295,13 +295,13 @@ int SLisValEstaEnFinal ( SListaValores * p_lisObj )
 	return ( iRes );
 }
 
-int SLisValEstaEnIncio ( SListaValores * p_lisObj )
+int SLisValEstaEnInicio ( SListaValores * p_lisObj )
 {
 	int iRes;
 
 	if ( ES_VALIDO ( p_lisObj ) ) 
 	{
-		iRes = SLispEstaEnIncio ( p_lisObj->p_lisDatos );
+		iRes = SLispEstaEnInicio ( p_lisObj->p_lisDatos );
 	}
 	else
 	{

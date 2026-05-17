@@ -45,7 +45,7 @@
 #include <Errores.h>
 #include <Finalizacion.h>
 #include <Intercambios.h>
-
+#include <Hash.h>
 
 #endif
 

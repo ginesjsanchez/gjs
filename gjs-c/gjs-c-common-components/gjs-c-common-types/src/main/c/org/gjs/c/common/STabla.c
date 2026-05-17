@@ -18,6 +18,10 @@ STabla * STabCrear ( int iNumFilas, int iNumColumnas )
 			p_tabObj->iNumFilas = iNumFilas;
 			p_tabObj->iNumColumnas = iNumColumnas;
 			p_tabObj->p_vecElementos = SVecCrear ( iNumFilas * iNumColumnas );
+			if ( ES_NULO ( p_tabObj->p_vecElementos ) ) 
+			{
+				STabDestruir ( &p_tabObj );
+			}
 		}
 	}
 	else
@@ -108,7 +112,7 @@ SContenido * STabElemento ( STabla * p_tabObj, int iFila, int iColumna )
 	int				iElem;
 	SContenido *	p_conRes;
 
-	if ( ES_VALIDO ( p_tabObj ) )
+	if ( STabEsValida ( p_tabObj ) == 1 ) 
 	{
 		if ( ( iFila >= 0 ) && ( iFila < p_tabObj->iNumFilas ) &&
 			 ( iColumna >= 0 ) && ( iColumna < p_tabObj->iNumColumnas ) )
@@ -133,7 +137,7 @@ int STabAsignar ( STabla * p_tabObj, int iFila, int iColumna, SContenido * p_con
 	int	iElem;
 	int	iRes;
 
-	if ( ES_VALIDO ( p_tabObj ) )
+	if ( STabEsValida ( p_tabObj ) == 1 ) 
 	{
 		if ( ( iFila >= 0 ) && ( iFila < p_tabObj->iNumFilas ) &&
 			 ( iColumna >= 0 ) && ( iColumna < p_tabObj->iNumColumnas ) )
@@ -158,7 +162,7 @@ int STabLimpiarElemento ( STabla * p_tabObj, int iFila, int iColumna )
 	int	iElem;
 	int iRes;			
 
-	if ( ES_VALIDO ( p_tabObj ) )
+	if ( STabEsValida ( p_tabObj ) == 1 ) 
 	{
 		if ( ( iFila >= 0 ) && ( iFila < p_tabObj->iNumFilas ) &&
 			 ( iColumna >= 0 ) && ( iColumna < p_tabObj->iNumColumnas ) )
@@ -182,7 +186,7 @@ int STabLimpiar ( STabla * p_tabObj )
 {
 	int	iRes;
 
-	if ( STabEsValida ( p_tabObj ) == 1 ) 
+	if ( ES_VALIDO ( p_tabObj ) )
 	{
 		iRes = SVecLimpiar ( p_tabObj->p_vecElementos );
 	}

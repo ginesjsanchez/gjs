@@ -75,7 +75,7 @@ SIndicador * SInd2DDimension1 ( SIndicador2D * p_indObj )
 	}
 	else
 	{
-		p_indRes = 0;
+		p_indRes = NULL;
 	}
 	return ( p_indRes );
 }
@@ -90,7 +90,7 @@ SIndicador * SInd2DDimension2 ( SIndicador2D * p_indObj )
 	}
 	else
 	{
-		p_indRes = 0;
+		p_indRes = NULL;
 	}
 	return ( p_indRes );
 }
@@ -207,9 +207,11 @@ int SInd2DIncrementar ( SIndicador2D * p_indObj, unsigned long ulValor1, unsigne
 
 	if ( ES_VALIDO ( p_indObj ) )
 	{
-		if ( ( SIndIncrementarExt ( p_indObj->p_indDimension1, ulValor1 ) == 1 ) &&
-			 ( SIndIncrementarExt ( p_indObj->p_indDimension2, ulValor2 ) == 1 ) )
+		if ( ( SIndPuedeIncrementar ( p_indObj->p_indDimension1, ulValor1 ) == 1 ) &&
+			 ( SIndPuedeIncrementar ( p_indObj->p_indDimension2, ulValor2 ) == 1 ) )
 		{
+			SIndIncrementarExt ( p_indObj->p_indDimension1, ulValor1 );
+			SIndIncrementarExt ( p_indObj->p_indDimension2, ulValor2 );
 			iRes = 1;
 		}
 		else
@@ -230,9 +232,11 @@ int SInd2DDecrementar ( SIndicador2D * p_indObj, unsigned long ulValor1, unsigne
 
 	if ( ES_VALIDO ( p_indObj ) )
 	{
-		if ( ( SIndDecrementarExt ( p_indObj->p_indDimension1, ulValor1 ) == 1 ) &&
-			 ( SIndDecrementarExt ( p_indObj->p_indDimension2, ulValor2 ) == 1 ) )
+		if ( ( SIndPuedeDecrementar ( p_indObj->p_indDimension1, ulValor1 ) == 1 ) &&
+			 ( SIndPuedeDecrementar ( p_indObj->p_indDimension2, ulValor2 ) == 1 ) )
 		{
+			SIndDecrementarExt ( p_indObj->p_indDimension1, ulValor1 );
+			SIndDecrementarExt ( p_indObj->p_indDimension2, ulValor2 );
 			iRes = 1;
 		}
 		else
@@ -253,9 +257,11 @@ int SInd2DMoverA ( SIndicador2D * p_indObj, unsigned long ulValor1, unsigned lon
 
 	if ( ES_VALIDO ( p_indObj ) )
 	{
-		if ( ( SIndMoverA ( p_indObj->p_indDimension1, ulValor1 ) == 1 ) &&
-			 ( SIndMoverA ( p_indObj->p_indDimension2, ulValor2 ) == 1 ) )
+		if ( ( SIndPuedeMoverA ( p_indObj->p_indDimension1, ulValor1 ) == 1 ) &&
+			 ( SIndPuedeMoverA ( p_indObj->p_indDimension2, ulValor2 ) == 1 ) )
 		{
+			SIndMoverA ( p_indObj->p_indDimension1, ulValor1 );
+			SIndMoverA ( p_indObj->p_indDimension2, ulValor2 );
 			iRes = 1;
 		}
 		else

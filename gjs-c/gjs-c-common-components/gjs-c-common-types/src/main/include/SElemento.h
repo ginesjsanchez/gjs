@@ -25,7 +25,9 @@ typedef struct
 
 SElemento * SElmCrear ( int iTam );
 SElemento * SElmCrearEntero ();
+SElemento * SElmCrearEnteroSinSigno ();
 SElemento * SElmCrearEnteroLargo ();
+SElemento * SElmCrearEnteroLargoSinSigno ();
 SElemento * SElmCrearReal ();
 SElemento * SElmCrearRealDoble ();
 SElemento * SElmCrearCadena ();
@@ -38,7 +40,9 @@ int SElmEsValido ( SElemento * p_elmObj );
 
 SBloque * SElmDatos ( SElemento * p_elmObj );
 int SElmEntero ( SElemento * p_elmObj );
+unsigned int SElmEnteroSinSigno ( SElemento * p_elmObj );
 long SElmEnteroLargo ( SElemento * p_elmObj );
+unsigned long SElmEnteroLargoSinSigno ( SElemento * p_elmObj );
 float SElmReal ( SElemento * p_elmObj );
 double SElmRealDoble ( SElemento * p_elmObj );
 char * SElmCadena ( SElemento * p_elmObj );
@@ -48,7 +52,9 @@ int SElmModificar ( SElemento * p_elmObj, SBloque * p_blqDatos );
 int SElmModificarDir ( SElemento * p_elmObj, byte * p_byDirDatos, int iTamDatos, int iLiberar );
 int SElmEscribirByte ( SElemento * p_elmObj, int iPos, byte byValor );
 int SElmEscribirEntero ( SElemento * p_elmObj, int iValor );
+int SElmEscribirEnteroSinSigno ( SElemento * p_elmObj, unsigned int uiValor );
 int SElmEscribirEnteroLargo ( SElemento * p_elmObj, long lValor );
+int SElmEscribirEnteroLargoSinSigno ( SElemento * p_elmObj, unsigned long ulValor );
 int SElmEscribirReal ( SElemento * p_elmObj, float fValor );
 int SElmEscribirRealDoble ( SElemento * p_elmObj, double dValor );
 int SElmEscribirCadena ( SElemento * p_elmObj, const char * p_cValor );
@@ -72,5 +78,7 @@ int	SElmLiberacionMemoriaActivada ( SElemento * p_elmObj );
 //void SElmDesactivarLiberacionMemoria ( SElemento * p_elmObj );
 
 SElemento * SElmDuplicar ( SElemento * p_elmObj );
+
+unsigned int SElmHash ( SElemento * p_elmObj );
 
 #endif

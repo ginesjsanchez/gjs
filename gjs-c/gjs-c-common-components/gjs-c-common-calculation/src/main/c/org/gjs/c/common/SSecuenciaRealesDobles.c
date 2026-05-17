@@ -1,7 +1,7 @@
 #include "SSecuenciaRealesDobles.h"
 
-#include "TiposBasicosConfig.h"
-
+#include "CalculoConfig.h"
+#include "CalculoOperaciones.h"
 
 
 
@@ -58,7 +58,7 @@ int SSecRealdEstaVacia ( SSecuenciaRealesDobles * p_secObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }
@@ -202,7 +202,7 @@ int SSecRealdExiste ( SSecuenciaRealesDobles * p_secObj, double dDato )
 		iElem = 0;
 		while ( ( iElem < SSecRealdNumElementos ( p_secObj ) ) && ( iRes == 0 ) )
 		{
-			if ( SSecRealdElemento ( p_secObj, iElem ) == dDato )
+			if ( MatEsIgual ( SSecRealdElemento ( p_secObj, iElem ), dDato ) == 1 )
 			{
 				iRes = 1;
 			}

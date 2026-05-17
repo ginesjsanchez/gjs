@@ -57,7 +57,7 @@ void SLisCadDeposicionar ( SListaCadenas * p_lisObj );
 
 int SLisCadEsNulo ( SListaCadenas * p_lisObj );
 int SLisCadEstaEnFinal ( SListaCadenas * p_lisObj );
-int SLisCadEstaEnIncio ( SListaCadenas * p_lisObj );
+int SLisCadEstaEnInicio ( SListaCadenas * p_lisObj );
 
 int SLisCadEstablecer ( SListaCadenas * p_lisObj, SCadena * p_cadDatos );
 int SLisCadInsertar ( SListaCadenas * p_lisObj, SCadena * p_cadDatos );

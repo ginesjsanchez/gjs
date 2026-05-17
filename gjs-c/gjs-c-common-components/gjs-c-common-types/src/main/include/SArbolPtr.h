@@ -11,8 +11,8 @@
 
 typedef struct
 {
-	SNodoPtr * p_nodRaiz;
-	SNodoPtr * p_nodActual;
+	SNodoPtr * p_nodpRaiz;
+	SNodoPtr * p_nodpActual;
 
 } SArbolPtr;
 
@@ -36,20 +36,21 @@ int SArbPtrVaciar ( SArbolPtr * p_arbpObj );
 
 SNodoPtr * SArbPtrActual ( SArbolPtr * p_arbpObj );
 
-void SArbPtrMoverARaiz ( SArbolPtr * p_arbpObj );
-void SArbPtrMoverAPadre ( SArbolPtr * p_arbpObj );
-void SArbPtrMoverAHijo ( SArbolPtr * p_arbpObj, int iHijo );
-void SArbPtrMoverAPrimHijo ( SArbolPtr * p_arbpObj );
-void SArbPtrMoverAUltHijo ( SArbolPtr * p_arbpObj );
-void SArbPtrMoverAPrimHermano ( SArbolPtr * p_arbpObj );
-void SArbPtrMoverASigHermano ( SArbolPtr * p_arbpObj );
-void SArbPtrMoverAAntHermano ( SArbolPtr * p_arbpObj );
-void SArbPtrMoverAUltHermano ( SArbolPtr * p_arbpObj );
+int SArbPtrMoverARaiz ( SArbolPtr * p_arbpObj );
+int SArbPtrMoverAPadre ( SArbolPtr * p_arbpObj );
+int SArbPtrMoverAHijo ( SArbolPtr * p_arbpObj, int iHijo );
+int SArbPtrMoverAPrimHijo ( SArbolPtr * p_arbpObj );
+int SArbPtrMoverAUltHijo ( SArbolPtr * p_arbpObj );
+int SArbPtrMoverAPrimHermano ( SArbolPtr * p_arbpObj );
+int SArbPtrMoverASigHermano ( SArbolPtr * p_arbpObj );
+int SArbPtrMoverAAntHermano ( SArbolPtr * p_arbpObj );
+int SArbPtrMoverAUltHermano ( SArbolPtr * p_arbpObj );
 
-void SArbPtrMoverAPrimPreorden ( SArbolPtr * p_arbpObj );
-void SArbPtrMoverASigPreorden ( SArbolPtr * p_arbpObj );
-void SArbPtrMoverAAntPreorden ( SArbolPtr * p_arbpObj );
-void SArbPtrMoverAUltPreorden ( SArbolPtr * p_arbpObj );
+int SArbPtrMoverAPrimPreorden ( SArbolPtr * p_arbpObj );
+int SArbPtrMoverASigPreorden ( SArbolPtr * p_arbpObj );
+int SArbPtrMoverAPrimPostorden ( SArbolPtr * p_arbpObj );
+int SArbPtrMoverASigPostorden ( SArbolPtr * p_arbpObj );
+
 
 void SArbPtrDesposicionar ( SArbolPtr * p_arbpObj );
 int	SArbPtrEstaPosicionado ( SArbolPtr * p_arbpObj );

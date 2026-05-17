@@ -14,8 +14,8 @@ SArbolPtr * SArbPtrCrear ()
 	p_arbpObj = (SArbolPtr *) MemReservar ( sizeof ( SArbolPtr ) );
 	if ( ES_VALIDO ( p_arbpObj ) )
 	{
-		p_arbpObj->p_nodRaiz = NULL;
-		p_arbpObj->p_nodActual = NULL;
+		p_arbpObj->p_nodpRaiz = NULL;
+		p_arbpObj->p_nodpActual = NULL;
 	}
 	return ( p_arbpObj );
 }
@@ -41,7 +41,7 @@ SNodoPtr * SArbPtrRaiz ( SArbolPtr * p_arbpObj )
 	
 	if ( ES_VALIDO ( p_arbpObj ) )
 	{
-		p_nodRes = p_arbpObj->p_nodRaiz;
+		p_nodRes = p_arbpObj->p_nodpRaiz;
 	}
 	else
 	{
@@ -56,8 +56,8 @@ int SArbPtrEstablecerRaiz ( SArbolPtr * p_arbpObj, SNodoPtr * p_nodpObj )
 
 	if ( ES_VALIDO ( p_arbpObj ) )
 	{
-		p_arbpObj->p_nodRaiz = p_nodpObj;
-		if ( ES_VALIDO ( p_arbpObj->p_nodRaiz ) )
+		p_arbpObj->p_nodpRaiz = p_nodpObj;
+		if ( ES_VALIDO ( p_arbpObj->p_nodpRaiz ) )
 		{
 			iRes = 1;
 		}
@@ -79,7 +79,7 @@ int SArbPtrEstaVacio ( SArbolPtr * p_arbpObj )
 
 	if ( ES_VALIDO ( p_arbpObj ) )
 	{
-		if ( ES_NULO ( p_arbpObj->p_nodRaiz ) )
+		if ( ES_NULO ( p_arbpObj->p_nodpRaiz ) )
 		{
 			iRes = 1;
 		}
@@ -90,7 +90,7 @@ int SArbPtrEstaVacio ( SArbolPtr * p_arbpObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }
@@ -101,9 +101,9 @@ int SArbPtrNiveles ( SArbolPtr * p_arbpObj )
 
 	if ( ES_VALIDO ( p_arbpObj ) )
 	{
-		if ( ES_VALIDO ( p_arbpObj->p_nodRaiz ) )
+		if ( ES_VALIDO ( p_arbpObj->p_nodpRaiz ) )
 		{
-			iNiveles = SNodPtrNivelesInferiores ( p_arbpObj->p_nodRaiz ) + 1;
+			iNiveles = SNodPtrNivelesInferiores ( p_arbpObj->p_nodpRaiz ) + 1;
 		}
 		else
 		{
@@ -123,11 +123,11 @@ int SArbPtrNumNodos ( SArbolPtr * p_arbpObj )
 
 	if ( ES_VALIDO ( p_arbpObj ) )
 	{
-		if ( ES_VALIDO ( p_arbpObj->p_nodRaiz ) )
+		if ( ES_VALIDO ( p_arbpObj->p_nodpRaiz ) )
 		{
 			printf ("Contando desde raiz\n" );
 		fflush(stdout);
-			iNodos = SNodPtrNodosInferiores ( p_arbpObj->p_nodRaiz ) + 1;
+			iNodos = SNodPtrNodosInferiores ( p_arbpObj->p_nodpRaiz ) + 1;
 			printf ("Nodos hasta raiz=%d\n", iNodos );
 		fflush(stdout);
 		}
@@ -149,11 +149,11 @@ int SArbPtrVaciar ( SArbolPtr * p_arbpObj )
 
 	if ( ES_VALIDO ( p_arbpObj ) )
 	{
-		if ( ES_VALIDO ( p_arbpObj->p_nodRaiz ) )
+		if ( ES_VALIDO ( p_arbpObj->p_nodpRaiz ) )
 		{
 				printf("Desrtuyendo\n");
 				fflush(stdout);
-			SNodPtrDestruir ( &(p_arbpObj->p_nodRaiz), 1 );
+			SNodPtrDestruir ( &(p_arbpObj->p_nodpRaiz), 1 );
 				printf("Comporbando destruccion\n");
 				fflush(stdout);
 			if ( SArbPtrNumNodos ( p_arbpObj ) == 0 )
@@ -187,7 +187,7 @@ SNodoPtr * SArbPtrActual ( SArbolPtr * p_arbpObj )
 	
 	if ( ES_VALIDO ( p_arbpObj ) )
 	{
-		p_nodRes = p_arbpObj->p_nodActual;
+		p_nodRes = p_arbpObj->p_nodpActual;
 	}
 	else
 	{
@@ -196,218 +196,422 @@ SNodoPtr * SArbPtrActual ( SArbolPtr * p_arbpObj )
 	return ( p_nodRes );
 }
 
-void SArbPtrMoverARaiz ( SArbolPtr * p_arbpObj )
+int SArbPtrMoverARaiz ( SArbolPtr * p_arbpObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbpObj ) )
 	{
-		p_arbpObj->p_nodActual = p_arbpObj->p_nodRaiz;
-	}
-}
-
-void SArbPtrMoverAPadre ( SArbolPtr * p_arbpObj )
-{
-	if ( ES_VALIDO ( p_arbpObj ) )
-	{
-		if ( ES_VALIDO ( p_arbpObj->p_nodActual ) )
+		p_arbpObj->p_nodpActual = p_arbpObj->p_nodpRaiz;
+		if ( ES_VALIDO ( p_arbpObj->p_nodpActual ) )
 		{
-			printf ( "Nodo padre=%ld\n", (long) p_arbpObj->p_nodActual->p_nodpPadre );
-			p_arbpObj->p_nodActual = SNodPtrPadre ( p_arbpObj->p_nodActual );
+			iRes = 1;
+		}
+		else
+		{
+			iRes = 0;
 		}
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbPtrMoverAHijo ( SArbolPtr * p_arbpObj, int iHijo )
+int SArbPtrMoverAPadre ( SArbolPtr * p_arbpObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbpObj ) )
 	{
-		if ( ES_VALIDO ( p_arbpObj->p_nodActual ) )
+		if ( ES_VALIDO ( p_arbpObj->p_nodpActual ) )
 		{
-			p_arbpObj->p_nodActual = SNodPtrHijo ( p_arbpObj->p_nodActual, iHijo );
-		}
-	}
-}
-
-void SArbPtrMoverAPrimHijo ( SArbolPtr * p_arbpObj )
-{
-	if ( ES_VALIDO ( p_arbpObj ) )
-	{
-		SArbPtrMoverAHijo ( p_arbpObj, 0 );
-	}
-}
-
-void SArbPtrMoverAUltHijo ( SArbolPtr * p_arbpObj )
-{
-	if ( ES_VALIDO ( p_arbpObj ) )
-	{
-		if ( ES_VALIDO ( p_arbpObj->p_nodActual ) )
-		{
-			SArbPtrMoverAHijo ( p_arbpObj, SNodPtrNumHijos ( p_arbpObj->p_nodActual ) - 1 );
-		}
-	}
-}
-
-void SArbPtrMoverAPrimHermano ( SArbolPtr * p_arbpObj )
-{
-	if ( ES_VALIDO ( p_arbpObj ) )
-	{
-		SArbPtrMoverAPadre ( p_arbpObj );
-		SArbPtrMoverAHijo ( p_arbpObj, 0 );
-	}
-}
-
-void SArbPtrMoverASigHermano ( SArbolPtr * p_arbpObj )
-{
-	int		iHijo;
-	SNodoPtr * p_nodPadre;
-
-	if ( ES_VALIDO ( p_arbpObj ) )
-	{
-		if ( ES_VALIDO ( p_arbpObj->p_nodActual ) )
-		{
-			if ( SNodPtrTienePadre ( p_arbpObj->p_nodActual ) == 1 )
+			p_arbpObj->p_nodpActual = SNodPtrPadre ( p_arbpObj->p_nodpActual );
+			if ( ES_VALIDO ( p_arbpObj->p_nodpActual ) )
 			{
-				p_nodPadre = SNodPtrPadre ( p_arbpObj->p_nodActual );
-				iHijo = SNodPtrOrdenDelHijo ( p_nodPadre, p_arbpObj->p_nodActual );
+				iRes = 1;
+			}
+			else
+			{
+				iRes = 0;
+			}
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SArbPtrMoverAHijo ( SArbolPtr * p_arbpObj, int iHijo )
+{
+	int iRes;
+	
+	if ( ES_VALIDO ( p_arbpObj ) )
+	{
+		if ( ES_VALIDO ( p_arbpObj->p_nodpActual ) )
+		{
+			p_arbpObj->p_nodpActual = SNodPtrHijo ( p_arbpObj->p_nodpActual, iHijo );
+			if ( ES_VALIDO ( p_arbpObj->p_nodpActual ) )
+			{
+				iRes = 1;
+			}
+			else
+			{
+				iRes = 0;
+			}
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SArbPtrMoverAPrimHijo ( SArbolPtr * p_arbpObj )
+{
+	int iRes;
+	
+	if ( ES_VALIDO ( p_arbpObj ) )
+	{
+		iRes = SArbPtrMoverAHijo ( p_arbpObj, 0 );
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SArbPtrMoverAUltHijo ( SArbolPtr * p_arbpObj )
+{
+	int iRes;
+	
+	if ( ES_VALIDO ( p_arbpObj ) )
+	{
+		if ( ES_VALIDO ( p_arbpObj->p_nodpActual ) )
+		{
+			iRes = SArbPtrMoverAHijo ( p_arbpObj, SNodPtrNumHijos ( p_arbpObj->p_nodpActual ) - 1 );
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SArbPtrMoverAPrimHermano ( SArbolPtr * p_arbpObj )
+{
+	int 		iRes;
+	SNodoPtr * 	p_nodpPadre;
+	
+	if ( ES_VALIDO ( p_arbpObj ) )
+	{
+		if ( ES_VALIDO ( p_arbpObj->p_nodpActual ) )
+		{
+			p_nodpPadre = SNodPtrPadre ( p_arbpObj->p_nodpActual );
+			if ( ES_VALIDO ( p_nodpPadre ) )
+			{
+				p_arbpObj->p_nodpActual = SNodPtrHijo ( p_nodpPadre, 0 );
+				if ( ES_VALIDO ( p_arbpObj->p_nodpActual ) )
+				{
+					iRes = 1;
+				}
+				else
+				{
+					iRes = 0;
+				}
+			}
+			else
+			{
+				iRes = 0;
+			}
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SArbPtrMoverASigHermano ( SArbolPtr * p_arbpObj )
+{
+	int 		iRes;
+	int			iHijo;
+	SNodoPtr * 	p_nodpPadre;
+
+	if ( ES_VALIDO ( p_arbpObj ) )
+	{
+		if ( ES_VALIDO ( p_arbpObj->p_nodpActual ) )
+		{
+			if ( SNodPtrTienePadre ( p_arbpObj->p_nodpActual ) == 1 )
+			{
+				p_nodpPadre = SNodPtrPadre ( p_arbpObj->p_nodpActual );
+				iHijo = SNodPtrOrdenDelHijo ( p_nodpPadre, p_arbpObj->p_nodpActual );
 				if ( iHijo >= 0 )
 				{
-					p_arbpObj->p_nodActual = SNodPtrHijo ( p_nodPadre, iHijo + 1 );
-				}
-				else
-				{
-					p_arbpObj->p_nodActual = NULL;
-				}
-			}
-			else
-			{
-				p_arbpObj->p_nodActual = NULL;
-			}
-		}
-	}
-}
-
-void SArbPtrMoverAAntHermano ( SArbolPtr * p_arbpObj )
-{
-	int		iHijo;
-	SNodoPtr * p_nodPadre;
-
-	if ( ES_VALIDO ( p_arbpObj ) )
-	{
-		if ( ES_VALIDO ( p_arbpObj->p_nodActual ) )
-		{
-			if ( SNodPtrTienePadre ( p_arbpObj->p_nodActual ) == 1 )
-			{
-				p_nodPadre = SNodPtrPadre ( p_arbpObj->p_nodActual );
-				iHijo = SNodPtrOrdenDelHijo ( p_nodPadre, p_arbpObj->p_nodActual );
-				if ( iHijo > 0 )
-				{
-					p_arbpObj->p_nodActual = SNodPtrHijo ( p_nodPadre, iHijo - 1 );
-				}
-				else
-				{
-					p_arbpObj->p_nodActual = NULL;
-				}
-			}
-			else
-			{
-				p_arbpObj->p_nodActual = NULL;
-			}
-		}
-	}
-}
-
-void SArbPtrMoverAUltHermano ( SArbolPtr * p_arbpObj )
-{
-	if ( ES_VALIDO ( p_arbpObj ) )
-	{
-		SArbPtrMoverAPadre ( p_arbpObj );
-		SArbPtrMoverAHijo ( p_arbpObj, SNodPtrNumHijos ( p_arbpObj->p_nodActual ) - 1 );
-	}
-}
-
-void SArbPtrMoverAPrimPreorden ( SArbolPtr * p_arbpObj )
-{
-	if ( ES_VALIDO ( p_arbpObj ) )
-	{
-		SArbPtrMoverARaiz ( p_arbpObj );
-		if ( ES_VALIDO ( p_arbpObj->p_nodActual ) )
-		{
-			while ( ES_VALIDO ( p_arbpObj->p_nodActual ) && ( SNodPtrTieneHijos ( p_arbpObj->p_nodActual ) == 1 ) )
-			{
-				SArbPtrMoverAHijo ( p_arbpObj, 0 );
-			}
-		}
-	}
-}
-
-void SArbPtrMoverASigPreorden ( SArbolPtr * p_arbpObj )
-{
-	SNodoPtr * p_nodpObj;
-
-	if ( ES_VALIDO ( p_arbpObj ) )
-	{
-		if ( ES_VALIDO ( p_arbpObj->p_nodActual ) )
-		{
-			p_nodpObj = p_arbpObj->p_nodActual;
-			SArbPtrMoverASigHermano ( p_arbpObj );
-			if ( ES_VALIDO ( p_arbpObj->p_nodActual ) )
-			{
-				while ( ES_VALIDO ( p_arbpObj->p_nodActual ) && ( SNodPtrTieneHijos ( p_arbpObj->p_nodActual ) == 1 ) )
-				{
-					SArbPtrMoverAHijo ( p_arbpObj, 0 );
-				}
-			}
-			else
-			{
-				p_arbpObj->p_nodActual = p_nodpObj;
-				SArbPtrMoverAPadre ( p_arbpObj );
-			}
-		}
-	}
-}
-
-void SArbPtrMoverAAntPreorden ( SArbolPtr * p_arbpObj )
-{
-	SNodoPtr * p_nodpObj;
-
-	if ( ES_VALIDO ( p_arbpObj ) )
-	{
-		if ( ES_VALIDO ( p_arbpObj->p_nodActual ) )
-		{
-			if ( SNodPtrTieneHijos ( p_arbpObj->p_nodActual ) == 1 )
-			{
-				SArbPtrMoverAHijo ( p_arbpObj, SNodPtrNumHijos ( p_arbpObj->p_nodActual ) - 1 );
-			}
-			else
-			{
-				p_nodpObj = p_arbpObj->p_nodActual;
-				SArbPtrMoverAAntHermano ( p_arbpObj );
-				if ( ES_NULO ( p_arbpObj->p_nodActual ) )
-				{
-					p_arbpObj->p_nodActual = p_nodpObj;
-					SArbPtrMoverAPadre ( p_arbpObj );
-					if ( ES_NULO ( p_arbpObj->p_nodActual ) )
+					p_arbpObj->p_nodpActual = SNodPtrHijo ( p_nodpPadre, iHijo + 1 );
+					if ( ES_VALIDO ( p_arbpObj->p_nodpActual ) )
 					{
-						SArbPtrMoverAAntHermano ( p_arbpObj );
+						iRes = 1;
+					}
+					else
+					{
+						iRes = 0;
 					}
 				}
+				else
+				{
+					iRes = 0;
+				}
+			}
+			else
+			{
+				iRes = 0;
 			}
 		}
+		else
+		{
+			iRes = 0;
+		}
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbPtrMoverAUltPreorden ( SArbolPtr * p_arbpObj )
+int SArbPtrMoverAAntHermano ( SArbolPtr * p_arbpObj )
 {
+	int 		iRes;
+	int			iHijo;
+	SNodoPtr *	 p_nodpPadre;
+
 	if ( ES_VALIDO ( p_arbpObj ) )
 	{
-		SArbPtrMoverARaiz ( p_arbpObj );
+		if ( ES_VALIDO ( p_arbpObj->p_nodpActual ) )
+		{
+			if ( SNodPtrTienePadre ( p_arbpObj->p_nodpActual ) == 1 )
+			{
+				p_nodpPadre = SNodPtrPadre ( p_arbpObj->p_nodpActual );
+				iHijo = SNodPtrOrdenDelHijo ( p_nodpPadre, p_arbpObj->p_nodpActual );
+				if ( iHijo > 0 )
+				{
+					p_arbpObj->p_nodpActual = SNodPtrHijo ( p_nodpPadre, iHijo - 1 );
+					if ( ES_VALIDO ( p_arbpObj->p_nodpActual ) )
+					{
+						iRes = 1;
+					}
+					else
+					{
+						iRes = 0;
+					}
+				}
+				else
+				{
+					iRes = 0;
+				}
+			}
+			else
+			{
+				iRes = 0;
+			}
+		}
+		else
+		{
+			iRes = 0;
+		}
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SArbPtrMoverAUltHermano ( SArbolPtr * p_arbpObj )
+{
+	int			iRes;
+	SNodoPtr * 	p_nodpPadre;
+	
+	if ( ES_VALIDO ( p_arbpObj ) )
+	{
+		p_nodpPadre = SNodPtrPadre ( p_arbpObj->p_nodpActual );
+		if ( ES_VALIDO ( p_nodpPadre ) )
+		{
+			p_arbpObj->p_nodpActual = SNodPtrHijo ( p_nodpPadre, SNodPtrNumHijos ( p_nodpPadre ) - 1 );
+			if ( ES_VALIDO ( p_arbpObj->p_nodpActual ) )
+			{
+				iRes = 1;
+			}
+			else
+			{
+				iRes = 0;
+			}
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SArbPtrMoverAPrimPreorden ( SArbolPtr * p_arbpObj )
+{
+	int iRes;
+	
+	if ( ES_VALIDO ( p_arbpObj ) )
+	{
+		iRes = SArbPtrMoverARaiz ( p_arbpObj );
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SArbPtrMoverASigPreorden ( SArbolPtr * p_arbpObj )
+{
+	int 	iRes;
+	
+	if ( ES_VALIDO ( p_arbpObj ) )
+	{
+		if ( ES_VALIDO ( p_arbpObj->p_nodpActual ) )
+		{
+			if ( SNodPtrTieneHijos ( p_arbpObj->p_nodpActual ) == 1 )
+			{
+				iRes = SArbPtrMoverAHijo ( p_arbpObj, 0 );
+			}
+			else if ( SNodPtrTieneHermanosDer ( p_arbpObj->p_nodpActual ) == 1 )
+			{
+				iRes = SArbPtrMoverASigHermano ( p_arbpObj );
+			} 
+			else 
+			{
+				iRes = 1;
+				while ( ( iRes == 1 ) && ( SNodPtrTieneHermanosDer ( p_arbpObj->p_nodpActual ) == 0 ) )
+				{
+					iRes = SArbPtrMoverAPadre ( p_arbpObj );
+				}
+				if ( iRes == 1 )
+				{
+					iRes = SArbPtrMoverASigHermano ( p_arbpObj );
+				}
+				else
+				{
+					p_arbpObj->p_nodpActual = NULL;
+				}
+			}
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SArbPtrMoverAPrimPostorden ( SArbolPtr * p_arbpObj )
+{
+	int 	iRes;
+
+	if ( ES_VALIDO ( p_arbpObj ) )
+	{
+		iRes = SArbPtrMoverARaiz ( p_arbpObj );
+		while ( ES_VALIDO ( p_arbpObj->p_nodpActual ) && ( SNodPtrTieneHijos ( p_arbpObj->p_nodpActual ) == 1 ) )
+		{
+			SArbPtrMoverAHijo ( p_arbpObj, 0 );
+		}
+		if ( ES_VALIDO ( p_arbpObj->p_nodpActual ) )
+		{
+			iRes = 1;
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SArbPtrMoverASigPostorden ( SArbolPtr * p_arbpObj )
+{
+	int 	iRes;
+
+	if ( ES_VALIDO ( p_arbpObj ) )
+	{
+		if ( ES_VALIDO ( p_arbpObj->p_nodpActual ) )
+		{
+			if ( SNodPtrTieneHermanosDer ( p_arbpObj->p_nodpActual ) == 1 )
+			{
+				iRes = SArbPtrMoverASigHermano ( p_arbpObj );
+				while ( ( iRes == 1 ) && ( SNodPtrTieneHijos ( p_arbpObj->p_nodpActual ) == 1 ) )
+				{
+					iRes = SArbPtrMoverAHijo ( p_arbpObj, 0 );
+				}
+			}
+			else if ( SNodPtrTienePadre ( p_arbpObj->p_nodpActual ) == 1 )
+			{
+				iRes = SArbPtrMoverAPadre ( p_arbpObj );
+			}
+			else
+			{
+				iRes = 0;
+			}
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
 void SArbPtrDesposicionar ( SArbolPtr * p_arbpObj )
 {
 	if ( ES_VALIDO ( p_arbpObj ) )
 	{
-		p_arbpObj->p_nodActual = NULL;
+		p_arbpObj->p_nodpActual = NULL;
 	}
 }
 
@@ -417,7 +621,7 @@ int	SArbPtrEstaPosicionado ( SArbolPtr * p_arbpObj )
 
 	if ( ES_VALIDO ( p_arbpObj ) )
 	{
-		if ( ES_VALIDO ( p_arbpObj->p_nodActual ) )
+		if ( ES_VALIDO ( p_arbpObj->p_nodpActual ) )
 		{
 			iRes = 1;
 		}
@@ -439,10 +643,10 @@ int SArbPtrEnraizar ( SArbolPtr * p_arbpObj, SNodoPtr * p_nodpObj )
 
 	if ( ES_VALIDO ( p_arbpObj ) )
 	{
-		if ( ES_VALIDO ( p_arbpObj->p_nodActual ) && ES_VALIDO ( p_nodpObj ) )
+		if ( ES_VALIDO ( p_arbpObj->p_nodpActual ) && ES_VALIDO ( p_nodpObj ) )
 		{
-			SNodPtrEmpadronar ( p_nodpObj, p_arbpObj->p_nodActual );
-			if (  SNodPtrInsertarHijo ( p_arbpObj->p_nodActual, p_nodpObj ) == 1 )
+			SNodPtrEmpadronar ( p_nodpObj, p_arbpObj->p_nodpActual );
+			if (  SNodPtrInsertarHijo ( p_arbpObj->p_nodpActual, p_nodpObj ) == 1 )
 			{
 				iRes = 1;
 				SArbPtrMoverAUltHijo ( p_arbpObj );
@@ -470,9 +674,9 @@ int SArbPtrVerificar ( SArbolPtr * p_arbpObj, int iCorregir )
 
 	if ( ES_VALIDO ( p_arbpObj ) )
 	{
-		if ( ES_VALIDO ( p_arbpObj->p_nodRaiz ) )
+		if ( ES_VALIDO ( p_arbpObj->p_nodpRaiz ) )
 		{
-			iRes = SNodPtrVerificar ( p_arbpObj->p_nodRaiz, iCorregir );
+			iRes = SNodPtrVerificar ( p_arbpObj->p_nodpRaiz, iCorregir );
 		}
 		else
 		{

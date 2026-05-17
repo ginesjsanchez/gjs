@@ -12,7 +12,6 @@ SPilaLiterales * SPilLitCrear ()
 	if ( ES_VALIDO ( p_pilObj ) )
 	{
 		p_pilObj->p_pilDatos = SPilpCrear ();
-		SPilpActivarLiberacionMemoria ( p_pilObj->p_pilDatos );
 	}
 	return ( p_pilObj );
 }
@@ -27,7 +26,7 @@ void SPilLitDestruir ( SPilaLiterales ** p_p_pilObj )
 
 		if ( ES_VALIDO ( p_pilObj ) )
 		{
-			SPilpDestruir ( &(p_pilObj->p_pilDatos) );
+			SPilpDestruir ( &(p_pilObj->p_pilDatos), 1 );
 			MemLiberar ( (void **) p_p_pilObj );
 		}
 	}
@@ -58,7 +57,7 @@ int SPilLitEstaVacia ( SPilaLiterales * p_pilObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }
@@ -136,20 +135,6 @@ int SPilLitApilar ( SPilaLiterales * p_pilObj, char * p_cDato )
 	return ( iRes );
 }
 
-int SPilLitApilarDup ( SPilaLiterales * p_pilObj, const char * p_cDato )
-{
-	int		iRes;
-	char *	p_cValor;
-
-	p_cValor = CadDuplicar ( p_cDato );
-	iRes = SPilLitApilar ( p_pilObj, p_cValor );
-	if ( iRes < 0 )
-	{
-		MemLiberar ( (void **) &p_cValor );
-	}
-	return ( iRes );
-}
-
 int SPilLitEliminarPrimero ( SPilaLiterales * p_pilObj )
 {
 	int iRes;
@@ -171,7 +156,7 @@ int SPilLitVaciar ( SPilaLiterales * p_pilObj )
 
 	if ( ES_VALIDO ( p_pilObj ) )
 	{
-		iRes = SPilpVaciar ( p_pilObj->p_pilDatos );
+		iRes = SPilpVaciar ( p_pilObj->p_pilDatos, 1 );
 	}
 	else
 	{

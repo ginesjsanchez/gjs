@@ -101,7 +101,7 @@ void SBlqDestruir ( SBloque ** p_p_blqObj )
 		{
 			if ( p_blqObj->iLiberar == 1 )
 			{
-				MemLiberar ( (void **) &(p_blqObj->p_byDatos [0]) );
+				MemLiberar ( (void **) &(p_blqObj->p_byDatos) );
 			}
 			MemLiberar ( (void **) p_p_blqObj );
 		}
@@ -595,7 +595,7 @@ int SBlqEscribirCadena ( SBloque * p_blqObj, const char * p_cValor )
 		{
 			iTam = CadLongitud ( p_cValor );
 		}
-		MemCopiar ( &(p_blqObj->p_byDatos [0]), (byte *) &p_cValor, iTam );
+		MemCopiar ( &(p_blqObj->p_byDatos [0]), (byte *) p_cValor, iTam );
 		iRes = 1;
 	}
 	else
@@ -717,7 +717,7 @@ int SBlqCopiar ( SBloque * p_blqDest, SBloque * p_blqOrig )
 	{
 		if ( ( p_blqOrig->iTam > 0 ) && ( p_blqOrig->iTam <= p_blqDest->iTam  ) )
 		{
-			MemCopiar ( &(p_blqDest->p_byDatos [0]), &(p_blqOrig->p_byDatos [0]), p_blqDest->iTam );
+			MemCopiar ( &(p_blqDest->p_byDatos [0]), &(p_blqOrig->p_byDatos [0]), p_blqOrig->iTam );
 			iRes = 1;
 		}
 		else
@@ -804,7 +804,7 @@ int SBlqVolcar ( SBloque * p_blqObj, int iPos, SBloque * p_blqDatos )
 		if ( ( p_blqObj->iTam > 0 ) && ( SBlqTam ( p_blqDatos ) > 0 ) && ( iPos >= 0 ) &&
 			 ( SBlqTam ( p_blqDatos ) + iPos <= p_blqObj->iTam ) )
 		{
-			iRes = SBlqEscribirBuffer ( p_blqDatos, 0, SBlqDatos ( p_blqDatos ), SBlqTam ( p_blqDatos ) );
+			iRes = SBlqEscribirBuffer ( p_blqObj, 0, SBlqDatos ( p_blqDatos ), SBlqTam ( p_blqDatos ) );
 		}
 		else
 		{
@@ -830,7 +830,7 @@ SBloque * SBlqExtraer ( SBloque * p_blqObj, int iPos, int iTam )
 			p_blqDatos = SBlqCrear ( iTam );
 			if ( ES_VALIDO ( p_blqDatos ) )
 			{
-				if ( SBlqEscribirBuffer ( p_blqObj, iPos, SBlqDatosEnPos ( p_blqObj, iPos ), iTam ) == 0 )
+				if ( SBlqEscribirBuffer ( p_blqDatos, iPos, SBlqDatosEnPos ( p_blqObj, iPos ), iTam ) == 0 )
 				{
 					SBlqDestruir ( &p_blqDatos );
 				}
@@ -846,4 +846,15 @@ SBloque * SBlqExtraer ( SBloque * p_blqObj, int iPos, int iTam )
 		p_blqDatos = NULL;
 	}
 	return ( p_blqDatos );
+}
+
+unsigned int SBlqHash ( SBloque * p_blqObj )
+{
+	unsigned int uiRes = 0;
+
+	if ( ES_VALIDO ( p_blqObj ) )
+	{
+		uiRes = HashBinario ( p_blqObj->p_byDatos, p_blqObj->iTam );
+	}
+	return ( uiRes );
 }

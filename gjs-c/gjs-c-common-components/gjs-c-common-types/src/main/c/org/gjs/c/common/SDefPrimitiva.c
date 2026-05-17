@@ -21,7 +21,8 @@ SDefPrimitiva * SDefPrimCrear ( unsigned long ulId, const char * p_cNombre, int 
 			p_dprimObj->ulId = ulId;
 			p_dprimObj->iTipo = iTipo;
 			p_dprimObj->p_cNombre = CadDuplicar ( p_cNombre );
-			p_dprimObj->p_secParametros = NULL;
+			p_dprimObj->p_secParametros = SSecpCrear ();
+			SSecpDesactivarLiberacionMemoria ( p_dprimObj->p_secParametros );
 			p_dprimObj->p_ddatRetorno = NULL;
 		}
 	}
@@ -35,9 +36,9 @@ SDefPrimitiva * SDefPrimCrear ( unsigned long ulId, const char * p_cNombre, int 
 void SDefPrimDestruir ( SDefPrimitiva ** p_p_dprimObj )
 {
 	SDefPrimitiva * p_dprimObj;
-	//int			iNumOpciones;
-	//int			iParam;
-	//SDefDato *	p_ddatObj;
+	int				iNumParams;
+	int				iParam;
+	SDefDato *		p_ddatObj;
 
 	if ( ES_VALIDO ( p_p_dprimObj ) )
 	{
@@ -45,8 +46,13 @@ void SDefPrimDestruir ( SDefPrimitiva ** p_p_dprimObj )
 
 		if ( ES_VALIDO ( p_dprimObj ) )
 		{
-			MemLiberar ( (void **) &(p_dprimObj->p_cNombre [0]) );
-			// PENDIENTE: Vaciar
+			MemLiberar ( (void **) &(p_dprimObj->p_cNombre) );
+			iNumParams = SSecpNumElementos ( p_dprimObj->p_secParametros );
+			for ( iParam = 0; iParam < iNumParams; iParam = iParam + 1 )
+			{
+				p_ddatObj = (SDefDato *) SSecpElemento ( p_dprimObj->p_secParametros, iParam );
+				SDefDatDestruir ( &p_ddatObj ); 				
+			}
 			SSecpDestruir ( &(p_dprimObj->p_secParametros) );
 			SDefDatDestruir ( &(p_dprimObj->p_ddatRetorno) );
 			MemLiberar ( (void **) p_p_dprimObj );
@@ -192,7 +198,7 @@ int SDefPrimDefinirValorRetorno ( SDefPrimitiva * p_dprimObj, int iTipo, int iRe
 	{
 		SDefDatDestruir ( &(p_dprimObj->p_ddatRetorno) );
 		p_dprimObj->p_ddatRetorno = SDefDatCrear ( p_dprimObj->ulId, p_dprimObj->p_cNombre, iTipo, iReferencia, iTam, iDecimales, NULL );
-		iRes = SDefDatEsValida ( p_dprimObj->p_ddatRetorno );
+		iRes = SDefDatEsValido ( p_dprimObj->p_ddatRetorno );
 	}
 	else
 	{
@@ -226,7 +232,7 @@ int SDefPrimCrearParametro ( SDefPrimitiva * p_dprimObj, const char * p_cNombre,
 	{
 		iParam = SSecpNumElementos ( p_dprimObj->p_secParametros ) + 1;
 		p_ddatObj = SDefDatCrear ( iParam, p_cNombre, iTipo, iReferencia, iTam, iDecimales, p_cValorDef );
-		if ( SDefDatEsValida ( p_dprimObj->p_ddatRetorno ) == 1 )
+		if ( SDefDatEsValido ( p_ddatObj ) == 1 )
 		{
 			iRes = SSecpInsertar ( p_dprimObj->p_secParametros, (byte *) p_ddatObj );
 		}

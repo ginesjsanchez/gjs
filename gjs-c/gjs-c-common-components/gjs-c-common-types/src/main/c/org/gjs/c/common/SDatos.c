@@ -18,6 +18,10 @@ SDatos * SDatCrear ( int iTam )
 		if ( ES_VALIDO ( p_datObj ) )
 		{
 			p_datObj->p_bufDatos = SBufCrear ( iTam );
+			if ( ES_NULO ( p_datObj->p_bufDatos ) )
+			{
+				MemLiberar ( (void **) &p_datObj );
+			}
 		}
 	}
 	else
@@ -40,6 +44,21 @@ void SDatDestruir ( SDatos ** p_p_datObj )
 			MemLiberar ( (void **) p_p_datObj );
 		}
     }
+}
+
+int SDatEsValido ( SDatos * p_datObj )
+{
+	int		iRes;
+
+	if ( ES_VALIDO ( p_datObj ) )
+	{
+		iRes = SBufEsValido ( p_datObj->p_bufDatos );
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
 int SDatEstablecerByte ( SDatos * p_datObj, int iPos, byte byVal )
@@ -130,13 +149,13 @@ byte * SDatContenidoEnPos ( SDatos * p_datObj, int iPos, int iTam )
 			p_byRes = SBufDireccion ( p_datObj->p_bufDatos );
 			if ( ES_VALIDO ( p_byRes ) )
 			{
-				p_byRes = p_byRes + iTam;
+				p_byRes = p_byRes + iPos;
 			}
 			else
 			{
 				p_byRes = NULL;
 			}
-	}
+		}
 		else
 		{
 			p_byRes = NULL;
@@ -155,8 +174,14 @@ int SDatAsignar ( SDatos * p_datObj, SDatos * p_datValor )
 
 	if ( ES_VALIDO ( p_datObj ) && ES_VALIDO ( p_datValor ) )
 	{
-		SDatRedimensionar ( p_datObj, SDatTam ( p_datValor ), 0 );
-		iRes = SDatAsignarContenido ( p_datObj, SDatContenido ( p_datValor ), SDatTam ( p_datValor ) );
+		if ( SDatRedimensionar ( p_datObj, SDatTam ( p_datValor ), 0 ) == 1 )
+		{
+			iRes = SDatAsignarContenido ( p_datObj, SDatContenido ( p_datValor ), SDatTam ( p_datValor ) );
+		}
+		else
+		{
+			iRes = 0;
+		}
 	}
 	else
 	{
@@ -329,17 +354,18 @@ char * SDatExtraerCadenaEnPos ( SDatos * p_datObj, int iPos, int iTam )
 	return ( p_cRes );
 }
 
-SDatos * SDatExtraerHastaNulo ( SDatos * p_datObj )
+SDatos * SDatExtraerHastaNulo ( SDatos * p_datObj, int iIncluirNulo )
 {
 	int			iPos;
 	SDatos *	p_datRes;
 
 	if ( ES_VALIDO ( p_datObj ) )
 	{
+		iIncluirNulo = BoolNormalizar ( iIncluirNulo );
 		iPos = SDatPosicionPrimerNulo ( p_datObj );
 		if ( ( iPos > 0 ) && ( iPos < SBufTam ( p_datObj->p_bufDatos ) ) )
 		{
-			p_datRes = SDatExtraerEnPos ( p_datObj, 0, iPos );
+			p_datRes = SDatExtraerEnPos ( p_datObj, 0, iPos + iIncluirNulo );
 		}
 		else
 		{
@@ -497,7 +523,7 @@ int SDatAsignarCadenaHex ( SDatos * p_datObj, const char * p_cHex )
 			{
 				iByte = 0;
 				iError = 0;
-				while ( ( iByte < iTam / 2 ) && ( iError == 1 ) )
+				while ( ( iByte < iTam / 2 ) && ( iError == 0 ) )
 				{
 					p_cVal [ 0 ] = p_cHex [ iByte * 2 ];
 					p_cVal [ 1 ] = p_cHex [ iByte * 2 + 1 ];
@@ -581,5 +607,16 @@ void SDatImprimir ( SDatos * p_datObj )
 	printf ( "\n\n" );
 }
 
+
+unsigned int SDatHash ( SDatos * p_datObj )
+{
+	unsigned int uiRes = 0;
+
+	if ( ES_VALIDO ( p_datObj ) )
+	{
+		uiRes = SBufHash ( p_datObj->p_bufDatos );
+	}
+	return ( uiRes );
+}
 
 

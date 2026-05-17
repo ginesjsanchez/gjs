@@ -37,6 +37,9 @@ int SIndMoverA ( SIndicador * p_indObj, unsigned long ulValor );
 int SIndEstaEnInicio ( SIndicador * p_indObj );
 int SIndEstaEnFinal ( SIndicador * p_indObj );
 
+int SIndPuedeIncrementar ( SIndicador * p_indObj, unsigned long ulValor );
+int SIndPuedeDecrementar ( SIndicador * p_indObj, unsigned long ulValor );
+int SIndPuedeMoverA ( SIndicador * p_indObj, unsigned long ulValor );
 
 
 #endif

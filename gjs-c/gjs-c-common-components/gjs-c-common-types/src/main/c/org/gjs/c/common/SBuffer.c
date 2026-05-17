@@ -43,7 +43,7 @@ void SBufDestruir ( SBuffer ** p_p_bufObj )
 
 		if ( ES_VALIDO ( p_bufObj ) )
 		{
-			MemLiberar ( (void **) &(p_bufObj->p_byContenido [0]) );
+			MemLiberar ( (void **) &(p_bufObj->p_byContenido) );
 			MemLiberar ( (void **) p_p_bufObj );
 		}
 	}
@@ -122,9 +122,9 @@ byte * SBufDuplicarContenido ( SBuffer * p_bufObj, unsigned long ulPos, unsigned
 {
 	byte * p_byRes;
 
-	if ( ES_VALIDO ( p_bufObj ) && ( ulPos >= 0 ) && ( ulTam > 0 ) )
+	if ( ES_VALIDO ( p_bufObj ) && ( ulTam > 0 ) )
 	{
-		if ( ulPos + ulTam < p_bufObj->ulTam ) 
+		if ( ulPos + ulTam <= p_bufObj->ulTam ) 
 		{
 			p_byRes = (byte *) MemReservar ( ulTam );
 			MemCopiar ( p_byRes, p_bufObj->p_byContenido + ulPos, ulTam );
@@ -153,7 +153,7 @@ byte SBufLeer ( SBuffer * p_bufObj, unsigned long ulPos )
 	byRes = 0x00;
 	if ( ES_VALIDO ( p_bufObj ) )
 	{
-		if ( ( ulPos >= 0 ) && ( ulPos < p_bufObj->ulTam ) && ES_VALIDO ( p_bufObj->p_byContenido ) )
+		if ( ( ulPos < p_bufObj->ulTam ) && ES_VALIDO ( p_bufObj->p_byContenido ) )
 		{
 			byRes = p_bufObj->p_byContenido [ ulPos ];
 		}
@@ -167,7 +167,7 @@ int SBufLeerBuffer ( SBuffer * p_bufObj, unsigned long ulPos, byte * p_byConteni
 
 	if ( ES_VALIDO ( p_bufObj ) && ES_VALIDO ( p_byContenido ) && ES_VALIDO ( p_ulTam ) )
 	{
-		if ( ( ulPos >= 0 ) && ( ulPos < p_bufObj->ulTam ) && ( *p_ulTam > 0 ) && ES_VALIDO ( p_bufObj->p_byContenido ) )
+		if ( ( ulPos < p_bufObj->ulTam ) && ( *p_ulTam > 0 ) && ES_VALIDO ( p_bufObj->p_byContenido ) )
 		{
 			if ( ulPos + *p_ulTam >= p_bufObj->ulTam )
 			{
@@ -195,7 +195,7 @@ int SBufEscribir ( SBuffer * p_bufObj, unsigned long ulPos, byte byValor )
 
 	if ( ES_VALIDO ( p_bufObj ) )
 	{
-		if ( ( ulPos >= 0 ) && ( ulPos < p_bufObj->ulTam ) && ES_VALIDO ( p_bufObj->p_byContenido ) )
+		if ( ( ulPos < p_bufObj->ulTam ) && ES_VALIDO ( p_bufObj->p_byContenido ) )
 		{
 			p_bufObj->p_byContenido [ ulPos ] = byValor;
 			iRes = 1;
@@ -218,7 +218,7 @@ int SBufEscribirBuffer ( SBuffer * p_bufObj, unsigned long ulPos, byte * p_byCon
 
 	if ( ES_VALIDO ( p_bufObj ) && ES_VALIDO ( p_byContenido ) && ES_VALIDO ( p_ulTam ) )
 	{
-		if ( ( ulPos >= 0 ) && ( ulPos < p_bufObj->ulTam ) && ( *p_ulTam > 0 ) && ES_VALIDO ( p_bufObj->p_byContenido ) )
+		if ( ( ulPos < p_bufObj->ulTam ) && ( *p_ulTam > 0 ) && ES_VALIDO ( p_bufObj->p_byContenido ) )
 		{
 			if ( ulPos + *p_ulTam >= p_bufObj->ulTam )
 			{
@@ -251,7 +251,7 @@ int SBufLimpiar ( SBuffer * p_bufObj )
 		{
 			ulPos = 0;
 			iRes = 1;
-			while ( ( iRes == 1 ) && ( ulPos < p_bufObj->ulTam ) )
+			while ( ulPos < p_bufObj->ulTam )
 			{
 				p_bufObj->p_byContenido [ ulPos ] = 0x00;
 				ulPos = ulPos + 1;
@@ -313,10 +313,12 @@ int SBufRedimensionar ( SBuffer * p_bufObj, unsigned long ulTam, int iConservarC
 			if ( ES_VALIDO ( p_bufObj->p_byContenido ) )
 			{
 				p_bufObj->ulTam = ulTam;
+				iRes = 1;
 			}
 			else
 			{
 				p_bufObj->ulTam = 0;
+				iRes = 0;
 			}
 		}
 		else
@@ -324,10 +326,12 @@ int SBufRedimensionar ( SBuffer * p_bufObj, unsigned long ulTam, int iConservarC
 			if ( MemRedimensionar ( (void **)&(p_bufObj->p_byContenido), ulTam ) == 1 )
 			{
 				p_bufObj->ulTam = ulTam;
+				iRes = 1;
 			}
 			else
 			{
 				p_bufObj->ulTam = 0;
+				iRes = 0;
 			}
 		}
 	}
@@ -336,4 +340,15 @@ int SBufRedimensionar ( SBuffer * p_bufObj, unsigned long ulTam, int iConservarC
 		iRes = 0;
 	}
 	return ( iRes );
+}
+
+unsigned int SBufHash ( SBuffer * p_bufObj )
+{
+	unsigned int uiRes = 0;
+
+	if ( ES_VALIDO ( p_bufObj ) )
+	{
+		uiRes = HashBinario ( p_bufObj->p_byContenido, p_bufObj->ulTam );
+	}
+	return ( uiRes );
 }

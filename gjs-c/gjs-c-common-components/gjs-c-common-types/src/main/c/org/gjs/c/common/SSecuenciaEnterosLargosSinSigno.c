@@ -58,7 +58,7 @@ int SSecEntLSSEstaVacia ( SSecuenciaEnterosLargosSinSigno * p_secObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }
@@ -88,7 +88,7 @@ unsigned long SSecEntLSSElemento ( SSecuenciaEnterosLargosSinSigno * p_secObj, i
 		p_elmObj = SSecElemento ( p_secObj->p_secDatos, iElem );
 		if ( ES_VALIDO ( p_elmObj ) )
 		{
-			ulRes = SElmEnteroLargo ( p_elmObj );
+			ulRes = SElmEnteroLargoSinSigno ( p_elmObj );
 		}
 		else
 		{
@@ -109,10 +109,10 @@ int SSecEntLSSInsertar ( SSecuenciaEnterosLargosSinSigno * p_secObj, unsigned lo
 
 	if ( ES_VALIDO ( p_secObj ) )
 	{
-		p_elmObj = SElmCrearEntero ();
+		p_elmObj = SElmCrearEnteroLargoSinSigno ();
 		if ( ES_VALIDO ( p_elmObj ) )
 		{
-			if ( SElmEscribirEntero ( p_elmObj, ulDato ) == 1 )
+			if ( SElmEscribirEnteroLargoSinSigno ( p_elmObj, ulDato ) == 1 )
 			{
 				iRes = SSecInsertar ( p_secObj->p_secDatos, p_elmObj );
 			}

@@ -495,13 +495,20 @@ int SFicBloqOrdEstaVacio ( SFicBloquesOrdenados * p_ficObj )
 {
 	int iRes;
 
-	if ( SFicBloqIdEstaVacio ( p_ficObj->p_ficObj ) == 1 )
+	if ( ES_VALIDO ( p_ficObj ) )
 	{
-		iRes = 1;
+		if ( SFicBloqIdEstaVacio ( p_ficObj->p_ficObj ) == 1 )
+		{
+			iRes = 1;
+		}
+		else
+		{
+			iRes = 0;
+		}
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }

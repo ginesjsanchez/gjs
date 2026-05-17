@@ -43,6 +43,8 @@ int SIdEsMenorIgEnt ( SId * p_idObj, unsigned long ulId );
 int SIdEsMayorIgEnt ( SId * p_idObj, unsigned long ulId );
 int SIdEstaEnRangoIgEnt ( SId * p_idObj, unsigned long ulId1, unsigned long ulId2 );
 
+unsigned int SIdHash ( SId * p_idObj );
+
 
 
 

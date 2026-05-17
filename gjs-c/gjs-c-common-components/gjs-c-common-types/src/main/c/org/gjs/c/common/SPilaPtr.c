@@ -11,11 +11,12 @@ SPilaPtr * SPilpCrear ()
 	if ( ES_VALIDO ( p_pilObj ) )
 	{
 		p_pilObj->p_lisObjetos = SLispCrear ();
+		SLispDesactivarLiberacionMemoria ( p_pilObj->p_lisObjetos );
 	}
 	return ( p_pilObj );
 }
 
-void SPilpDestruir ( SPilaPtr ** p_p_pilObj )
+void SPilpDestruir ( SPilaPtr ** p_p_pilObj, int iLiberar )
 {
 	SPilaPtr * p_pilObj;
 	
@@ -25,6 +26,10 @@ void SPilpDestruir ( SPilaPtr ** p_p_pilObj )
 
 		if ( ES_VALIDO ( p_pilObj ) )
 		{
+			if ( iLiberar == 1 )
+			{
+				SLispActivarLiberacionMemoria ( p_pilObj->p_lisObjetos );
+			}
 			SLispDestruir ( &(p_pilObj->p_lisObjetos) );
 			MemLiberar ( (void **) p_p_pilObj );
 		}
@@ -71,7 +76,7 @@ int SPilpEstaVacia ( SPilaPtr * p_pilObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }
@@ -80,7 +85,7 @@ byte * SPilpPrimero ( SPilaPtr * p_pilObj )
 {
 	byte * p_byRes;
 
-	if ( ES_VALIDO ( p_pilObj ) )
+	if ( SPilpEstaVacia ( p_pilObj ) == 0 )
 	{
 		p_byRes = SLispElemento ( p_pilObj->p_lisObjetos, 0 );
 	}
@@ -96,7 +101,7 @@ byte * SPilpDesapilar ( SPilaPtr * p_pilObj )
 	byte *	p_byRes;
 	int		iActLib;
 
-	if ( ES_VALIDO ( p_pilObj ) )
+	if ( SPilpEstaVacia ( p_pilObj ) == 0 )
 	{
 		p_byRes = SLispElemento ( p_pilObj->p_lisObjetos, 0 );
 		if ( ES_VALIDO ( p_byRes ) )
@@ -130,7 +135,7 @@ int SPilpApilar ( SPilaPtr * p_pilObj, byte * p_byObj )
 	}
 	else
 	{
-		iRes = 1;
+		iRes = 0;
 	}
 	return ( iRes );
 }
@@ -139,7 +144,7 @@ int SPilpEliminarPrimero ( SPilaPtr * p_pilObj )
 {
 	int	iRes;
 
-	if ( SPilpEsValida ( p_pilObj ) == 1 ) 
+	if ( SPilpEstaVacia ( p_pilObj ) == 0 )
 	{
 		iRes = SLispEliminarElem ( p_pilObj->p_lisObjetos, 0 );
 	}
@@ -150,13 +155,18 @@ int SPilpEliminarPrimero ( SPilaPtr * p_pilObj )
 	return ( iRes );
 }
 
-int SPilpVaciar ( SPilaPtr * p_pilObj )
+int SPilpVaciar ( SPilaPtr * p_pilObj, int iLiberar )
 {
 	int	iRes;
 
 	if ( SPilpEsValida ( p_pilObj ) == 1 ) 
 	{
+		if ( iLiberar == 1 )
+		{
+			SLispActivarLiberacionMemoria ( p_pilObj->p_lisObjetos );
+		}
 		iRes = SLispVaciar ( p_pilObj->p_lisObjetos );
+		SLispDesactivarLiberacionMemoria ( p_pilObj->p_lisObjetos );
 	}
 	else
 	{
@@ -180,33 +190,3 @@ SListaPtr * SPilpLista ( SPilaPtr * p_pilObj )
 	return ( p_lisRes );
 }
 
-int	SPilpLiberacionMemoriaActivada ( SPilaPtr * p_pilObj )
-{
-	int	iRes;
-
-	if ( SPilpEsValida ( p_pilObj ) == 1 ) 
-	{
-		iRes = SLispLiberacionMemoriaActivada ( p_pilObj->p_lisObjetos );
-	}
-	else
-	{
-		iRes = 0;
-	}
-	return ( iRes );
-}
-
-void SPilpActivarLiberacionMemoria ( SPilaPtr * p_pilObj )
-{
-	if ( SPilpEsValida ( p_pilObj ) == 1 ) 
-	{
-		SLispActivarLiberacionMemoria ( p_pilObj->p_lisObjetos );
-	}
-}
-
-void SPilpDesactivarLiberacionMemoria ( SPilaPtr * p_pilObj )
-{
-	if ( SPilpEsValida ( p_pilObj ) == 1 ) 
-	{
-		SLispDesactivarLiberacionMemoria ( p_pilObj->p_lisObjetos );
-	}
-}

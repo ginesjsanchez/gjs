@@ -473,13 +473,20 @@ int SFicBloqEstaVacio ( SFicBloques * p_ficObj )
 {
 	int iRes;
 
-	if ( SFicBloqTamDatos ( p_ficObj ) == 0 )
+	if ( ES_VALIDO ( p_ficObj ) )
 	{
-		iRes = 1;
+		if ( SFicBloqTamDatos ( p_ficObj ) == 0 )
+		{
+			iRes = 1;
+		}
+		else
+		{
+			iRes = 0;
+		}
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }

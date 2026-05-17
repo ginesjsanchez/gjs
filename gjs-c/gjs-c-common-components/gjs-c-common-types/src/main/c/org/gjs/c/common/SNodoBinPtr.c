@@ -9,7 +9,7 @@
 
 
 
-static void SNodBinPtrIncializar ( SNodoBinPtr * p_nodbpObj, byte * p_byDirDatos, int iLiberar );
+static void SNodBinPtrInicializar ( SNodoBinPtr * p_nodbpObj, byte * p_byDirDatos, int iLiberar );
 
 
 
@@ -37,7 +37,7 @@ SNodoBinPtr * SNodBinPtrCrear ( byte * p_byDatos, int iLiberar ) {
 		p_nodbpObj = (SNodoBinPtr *) MemReservar ( sizeof ( SNodoBinPtr ) );
 		if ( p_nodbpObj != NULL )
 		{
-			SNodBinPtrIncializar ( p_nodbpObj, p_byDatos, iLiberar );
+			SNodBinPtrInicializar ( p_nodbpObj, p_byDatos, iLiberar );
 		}
 	}
 	else
@@ -74,14 +74,7 @@ int SNodBinPtrEsValido ( SNodoBinPtr * p_nodbpObj )
 	{
 		if ( ES_VALIDO ( p_nodbpObj->p_byDatos ) )
 		{
-			if ( ES_VALIDO ( p_nodbpObj->p_byDatos ) )
-			{
-				iRes = 1;
-			}
-			else
-			{
-				iRes = 0;
-			}
+			iRes = 1;
 		}
 		else
 		{
@@ -490,11 +483,11 @@ int SNodBinPtrProfundidad ( SNodoBinPtr * p_nodbpObj )
      {
      	if ( ES_VALIDO ( p_nodbpObj->p_nodbpPadre  ) )
      	{
-     		iProfundidad = 0;
+     		iProfundidad = SNodBinPtrProfundidad ( p_nodbpObj->p_nodbpPadre ) + 1;
      	}
      	else
      	{
-     		iProfundidad = SNodBinPtrProfundidad ( p_nodbpObj->p_nodbpPadre ) + 1;
+     		iProfundidad = 0;
      	}
 	}
 	else
@@ -599,7 +592,10 @@ int SNodBinPtrEstHijoIzq ( SNodoBinPtr * p_nodbpObj, SNodoBinPtr * p_nodbpHijo, 
 		{
 			SNodBinPtrDestruir ( &(p_nodbpObj->p_nodbpHijoIzq), 1 );
 		}
-		p_nodbpHijo->p_nodbpPadre = p_nodbpObj;
+		if ( ES_VALIDO ( p_nodbpHijo ) )
+		{
+			p_nodbpHijo->p_nodbpPadre = p_nodbpObj;
+		}
 		p_nodbpObj->p_nodbpHijoIzq = p_nodbpHijo;
      	if ( ES_VALIDO ( p_nodbpObj->p_nodbpHijoIzq ) )
      	{
@@ -609,7 +605,7 @@ int SNodBinPtrEstHijoIzq ( SNodoBinPtr * p_nodbpObj, SNodoBinPtr * p_nodbpHijo, 
      	{
      		iRes = 0;
      	}
-    	}
+    }
 	else
 	{
 		iRes = 0;
@@ -627,7 +623,10 @@ int SNodBinPtrEstHijoDer ( SNodoBinPtr * p_nodbpObj, SNodoBinPtr * p_nodbpHijo, 
 		{
 			SNodBinPtrDestruir ( &(p_nodbpObj->p_nodbpHijoDer), 1 );
 		}
- 		p_nodbpHijo->p_nodbpPadre = p_nodbpObj;
+		if ( ES_VALIDO ( p_nodbpHijo ) )
+		{
+			p_nodbpHijo->p_nodbpPadre = p_nodbpObj;
+		}
     	p_nodbpObj->p_nodbpHijoDer = p_nodbpHijo;
      	if ( ES_VALIDO ( p_nodbpObj->p_nodbpHijoDer ) )
      	{
@@ -728,31 +727,37 @@ int SNodBinPtrVerificar ( SNodoBinPtr * p_nodbpObj, int iCorregir )
      if ( ES_VALIDO ( p_nodbpObj ) )
      {
      	iRes = 1;
-     	if ( SNodBinPtrPadre ( p_nodbpObj->p_nodbpHijoIzq ) != p_nodbpObj )
-     	{
-     		if ( iCorregir == 1 )
-     		{
-     			SNodBinPtrEmpadronar ( p_nodbpObj->p_nodbpHijoIzq, p_nodbpObj );
-     		}
-     		iRes = 0;
-     	}
-     	if ( SNodBinPtrPadre ( p_nodbpObj->p_nodbpHijoDer ) != p_nodbpObj )
-     	{
-     		if ( iCorregir == 1 )
-     		{
-     			SNodBinPtrEmpadronar ( p_nodbpObj->p_nodbpHijoDer, p_nodbpObj );
-     		}
-     		iRes = 0;
-     	}
-     	if ( SNodBinPtrVerificar ( p_nodbpObj->p_nodbpHijoIzq, iCorregir ) == 0 )
-     	{
-     		iRes = 0;
-     	}
-     	if ( SNodBinPtrVerificar ( p_nodbpObj->p_nodbpHijoDer, iCorregir ) == 0 )
-     	{
-     		iRes = 0;
-     	}
-    	}
+		if ( ES_VALIDO ( p_nodbpObj->p_nodbpHijoIzq ) )
+		{
+			if ( SNodBinPtrPadre ( p_nodbpObj->p_nodbpHijoIzq ) != p_nodbpObj )
+			{
+				if ( iCorregir == 1 )
+				{
+					SNodBinPtrEmpadronar ( p_nodbpObj->p_nodbpHijoIzq, p_nodbpObj );
+				}
+				iRes = 0;
+			}
+			if ( SNodBinPtrVerificar ( p_nodbpObj->p_nodbpHijoIzq, iCorregir ) == 0 )
+			{
+				iRes = 0;
+			}
+		}
+		if ( ES_VALIDO ( p_nodbpObj->p_nodbpHijoDer ) )
+		{
+			if ( SNodBinPtrPadre ( p_nodbpObj->p_nodbpHijoDer ) != p_nodbpObj )
+			{
+				if ( iCorregir == 1 )
+				{
+					SNodBinPtrEmpadronar ( p_nodbpObj->p_nodbpHijoDer, p_nodbpObj );
+				}
+				iRes = 0;
+			}
+			if ( SNodBinPtrVerificar ( p_nodbpObj->p_nodbpHijoDer, iCorregir ) == 0 )
+			{
+				iRes = 0;
+			}
+		}
+    }
 	else
 	{
 		iRes = 0;
@@ -775,7 +780,7 @@ int	SNodBinPtrLiberacionMemoriaActivada ( SNodoBinPtr * p_nodbpObj )
 	return ( iRes );
 }
 
-static void SNodBinPtrIncializar ( SNodoBinPtr * p_nodbpObj, byte * p_byDirDatos, int iLiberar )
+static void SNodBinPtrInicializar ( SNodoBinPtr * p_nodbpObj, byte * p_byDirDatos, int iLiberar )
 {
      if ( ES_VALIDO ( p_nodbpObj ) )
      {

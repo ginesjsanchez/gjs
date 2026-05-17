@@ -1,6 +1,8 @@
 #include "STablaRealesDobles.h"
 
-#include "TiposBasicosConfig.h"
+#include "CalculoConfig.h"
+#include "CalculoOperaciones.h"
+
 
 
 
@@ -15,6 +17,10 @@ STablaRealesDobles * STabRealdCrear ( int iNumFilas, int iNumColumnas )
 		if ( ES_VALIDO ( p_tabObj ) )
 		{
 			p_tabObj->p_tabDatos = STabCrear ( iNumFilas, iNumColumnas );
+			if ( ES_NULO ( p_tabObj->p_tabDatos ) )
+			{
+				STabRealdDestruir ( &p_tabObj );
+			}
 		}
 	}
 	else
@@ -133,7 +139,7 @@ int STabRealdAsignar ( STablaRealesDobles * p_tabObj, int iFila, int iColumna, d
 	if ( ES_VALIDO ( p_tabObj ) )
 	{
 		if ( ( iFila >= 0 ) && ( iFila < STabNumFilas ( p_tabObj->p_tabDatos ) ) &&
-			 ( iColumna >= 0 ) && ( iFila < STabNumColumnas ( p_tabObj->p_tabDatos ) ) )
+			 ( iColumna >= 0 ) && ( iColumna < STabNumColumnas ( p_tabObj->p_tabDatos ) ) )
 		{
 			p_conObj = STabElemento ( p_tabObj->p_tabDatos, iFila, iColumna );
 			if ( ES_NULO ( p_conObj ) )
@@ -185,12 +191,12 @@ int STabRealdInicializar ( STablaRealesDobles * p_tabObj )
 
 	if ( ES_VALIDO ( p_tabObj ) )
 	{
-		iRes = 0;
+		iRes = 1;
 		iFila = 0;
-		while ( ( iFila < STabRealdNumFilas ( p_tabObj ) ) && ( iRes == 0 ) )
+		while ( ( iFila < STabRealdNumFilas ( p_tabObj ) ) && ( iRes == 1 ) )
 		{
 			iColumna = 0;
-			while ( ( iColumna < STabRealdNumColumnas ( p_tabObj ) ) && ( iRes == 0 ) )
+			while ( ( iColumna < STabRealdNumColumnas ( p_tabObj ) ) && ( iRes == 1 ) )
 			{
 				iRes = STabRealdAsignar ( p_tabObj, iFila, iColumna, 0 );
 				iColumna = iColumna + 1;
@@ -220,7 +226,7 @@ int STabRealdExiste ( STablaRealesDobles * p_tabObj, double dDato )
 			iColumna = 0;
 			while ( ( iColumna < STabRealdNumColumnas ( p_tabObj ) ) && ( iRes == 0 ) )
 			{
-				if ( STabRealdElemento ( p_tabObj, iFila, iColumna ) == dDato )
+				if ( MatEsIgual ( STabRealdElemento ( p_tabObj, iFila, iColumna ), dDato ) == 1 )
 				{
 					iRes = 1;
 				}

@@ -203,7 +203,7 @@ int SDescEstaVacio ( SDescripcion * p_descObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }

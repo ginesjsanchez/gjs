@@ -53,7 +53,7 @@ void SLisParDeposicionar ( SListaParametros * p_lisObj );
 
 int SLisParEsNulo ( SListaParametros * p_lisObj );
 int SLisParEstaEnFinal ( SListaParametros * p_lisObj );
-int SLisParEstaEnIncio ( SListaParametros * p_lisObj );
+int SLisParEstaEnInicio ( SListaParametros * p_lisObj );
 
 int SLisParEstablecer ( SListaParametros * p_lisObj, SParametro * p_parDatos );
 int SLisParInsertar ( SListaParametros * p_lisObj, SParametro * p_parDatos );

@@ -208,7 +208,7 @@ int SNomEstaVacio ( SNombre * p_nomObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }

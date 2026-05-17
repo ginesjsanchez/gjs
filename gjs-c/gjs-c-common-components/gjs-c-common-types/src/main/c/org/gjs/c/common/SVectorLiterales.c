@@ -14,7 +14,14 @@ SVectorLiterales * SVecLitCrear ( int iNumElementos )
 		if ( ES_VALIDO ( p_vecObj ) )
 		{
 			p_vecObj->p_vecDatos = SVecpCrear ( iNumElementos );
-			SVecpActivarLiberacionMemoria ( p_vecObj->p_vecDatos );
+			if ( ES_VALIDO ( p_vecObj->p_vecDatos ) )
+			{
+				SVecpActivarLiberacionMemoria ( p_vecObj->p_vecDatos );
+			}
+			else
+			{
+				SVecLitDestruir ( &p_vecObj );
+			}
 		}
 	}
 	else
@@ -113,7 +120,7 @@ int SVecLitAsignarDup ( SVectorLiterales * p_vecObj, int iElem, const char * p_c
 		{
 			iActLib = SVecpLiberacionMemoriaActivada ( p_vecObj->p_vecDatos );
 			SVecpActivarLiberacionMemoria ( p_vecObj->p_vecDatos );
-			iRes = SVecpAsignar ( p_vecObj->p_vecDatos, iElem, (byte *) p_cDato );
+			iRes = SVecpAsignar ( p_vecObj->p_vecDatos, iElem, (byte *) p_cElem );
 			if ( iRes != 1 )
 			{
 				MemLiberar ( (void **) &p_cElem );

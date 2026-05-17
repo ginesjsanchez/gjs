@@ -72,7 +72,6 @@ booleano BoolO ( booleano bValor1, booleano bValor2 );
 
 
 
-
 #endif
 
 

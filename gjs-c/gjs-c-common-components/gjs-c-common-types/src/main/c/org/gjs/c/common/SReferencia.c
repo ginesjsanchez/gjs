@@ -10,6 +10,8 @@ SReferencia * SRefCrear ( const char * p_cAlias, void * p_vDatos )
 	p_refObj = (SReferencia *) MemReservar ( sizeof ( SReferencia ) );
 	if ( ES_VALIDO ( p_refObj ) )
 	{
+		p_refObj->p_cAlias = NULL;
+		p_refObj->p_vDatos = NULL;
 		if ( SRefEstablecerAlias ( p_refObj,  p_cAlias ) == 1 )
 		{
 			p_refObj->p_vDatos = p_vDatos;
@@ -293,6 +295,17 @@ int SRefEsMayorLit ( SReferencia * p_refObj, const char * p_cAlias )
 		iRes = 0;
 	}
 	return ( iRes );
+}
+
+unsigned int SRefHash ( SReferencia * p_refObj )
+{
+	unsigned int uiRes = 0;
+
+	if ( ES_VALIDO ( p_refObj ) )
+	{
+		uiRes = HashCadena ( p_refObj->p_cAlias );
+	}
+	return ( uiRes );
 }
 
 

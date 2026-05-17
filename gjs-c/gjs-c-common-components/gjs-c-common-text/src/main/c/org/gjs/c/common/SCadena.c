@@ -334,12 +334,12 @@ int SCadEstaVacia ( SCadena * p_cadObj )
 		}
 		else
 		{
-			iRes = 0;
+			iRes = 1;
 		}
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }

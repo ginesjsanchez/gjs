@@ -87,7 +87,7 @@ int SArbCnctEstaVacio ( SArbolConectivo * p_arbcObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }

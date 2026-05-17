@@ -57,7 +57,7 @@ int SSecEntLEstaVacia ( SSecuenciaEnterosLargos * p_secObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }
@@ -108,10 +108,10 @@ int SSecEntLInsertar ( SSecuenciaEnterosLargos * p_secObj, long lDato )
 
 	if ( ES_VALIDO ( p_secObj ) )
 	{
-		p_elmObj = SElmCrearEntero ();
+		p_elmObj = SElmCrearEnteroLargo ();
 		if ( ES_VALIDO ( p_elmObj ) )
 		{
-			if ( SElmEscribirEntero ( p_elmObj, lDato ) == 1 )
+			if ( SElmEscribirEnteroLargo ( p_elmObj, lDato ) == 1 )
 			{
 				iRes = SSecInsertar ( p_secObj->p_secDatos, p_elmObj );
 			}

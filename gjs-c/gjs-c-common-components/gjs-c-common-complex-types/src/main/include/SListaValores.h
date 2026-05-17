@@ -53,7 +53,7 @@ void SLisValDeposicionar ( SListaValores * p_lisObj );
 
 int SLisValEsNulo ( SListaValores * p_lisObj );
 int SLisValEstaEnFinal ( SListaValores * p_lisObj );
-int SLisValEstaEnIncio ( SListaValores * p_lisObj );
+int SLisValEstaEnInicio ( SListaValores * p_lisObj );
 
 int SLisValEstablecer ( SListaValores * p_lisObj, SValor * p_valDatos );
 int SLisValInsertar ( SListaValores * p_lisObj, SValor * p_valDatos );

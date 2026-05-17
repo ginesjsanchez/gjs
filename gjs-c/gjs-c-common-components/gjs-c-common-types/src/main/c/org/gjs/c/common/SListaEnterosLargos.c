@@ -240,7 +240,8 @@ long long SLisEntlActual ( SListaEnterosLargos * p_lisObj )
 		}
 		else
 		{
-			llRes = -1;
+			ERROR_ESTABLECER( ERR_POSICION_INVALIDA );
+			llRes = 0;
 		}
 	}
 	else
@@ -328,13 +329,13 @@ int SLisEntlEstaEnFinal ( SListaEnterosLargos * p_lisObj )
 	return ( iRes );
 }
 
-int SLisEntlEstaEnIncio ( SListaEnterosLargos * p_lisObj )
+int SLisEntlEstaEnInicio ( SListaEnterosLargos * p_lisObj )
 {
 	int iRes;
 
 	if ( ES_VALIDO ( p_lisObj ) ) 
 	{
-		iRes = SLisEstaEnIncio ( p_lisObj->p_lisDatos );
+		iRes = SLisEstaEnInicio ( p_lisObj->p_lisDatos );
 	}
 	else
 	{

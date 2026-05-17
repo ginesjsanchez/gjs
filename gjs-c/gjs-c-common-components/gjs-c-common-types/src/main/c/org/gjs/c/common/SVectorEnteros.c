@@ -15,6 +15,10 @@ SVectorEnteros * SVecEntCrear ( int iNumElementos )
 		if ( ES_VALIDO ( p_vecObj ) )
 		{
 			p_vecObj->p_vecDatos = SVecCrear ( iNumElementos );
+			if ( ES_NULO ( p_vecObj->p_vecDatos ) )
+			{
+				SVecEntDestruir ( &p_vecObj );
+			}
 		}
 	}
 	else
@@ -153,9 +157,9 @@ int SVecEntInicializar ( SVectorEnteros * p_vecObj )
 
 	if ( ES_VALIDO ( p_vecObj ) )
 	{
-		iRes = 0;
+		iRes = 1;
 		iElem = 0;
-		while ( ( iElem < SVecEntNumElementos ( p_vecObj ) ) && ( iRes == 0 ) )
+		while ( ( iElem < SVecEntNumElementos ( p_vecObj ) ) && ( iRes == 1 ) )
 		{
 			iRes = SVecEntAsignar ( p_vecObj, iElem, 0 );
 			iElem = iElem + 1;

@@ -39,6 +39,8 @@ int SRefEsIgualLit ( SReferencia * p_refObj, const char * p_cAlias );
 int SRefEsMenorLit ( SReferencia * p_refObj, const char * p_cAlias );
 int SRefEsMayorLit ( SReferencia * p_refObj, const char * p_cAlias );
 
+unsigned int SRefHash ( SReferencia * p_refObj );
+
 
 
 #endif

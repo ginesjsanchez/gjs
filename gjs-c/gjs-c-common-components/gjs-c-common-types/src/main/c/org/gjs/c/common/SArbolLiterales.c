@@ -97,7 +97,7 @@ int SArbLitEstaVacio ( SArbolLiterales * p_arbObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }
@@ -164,116 +164,199 @@ char * SArbLitActual ( SArbolLiterales * p_arbObj )
 	return ( p_cRes );
 }
 
-void SArbLitMoverARaiz ( SArbolLiterales * p_arbObj )
+int SArbLitMoverARaiz ( SArbolLiterales * p_arbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbObj ) )
 	{
-		SArbPtrMoverARaiz ( p_arbObj->p_arbContenido );
+		iRes = SArbPtrMoverARaiz ( p_arbObj->p_arbContenido );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbLitMoverAPadre ( SArbolLiterales * p_arbObj )
+int SArbLitMoverAPadre ( SArbolLiterales * p_arbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbObj ) )
 	{
-		SArbPtrMoverAPadre ( p_arbObj->p_arbContenido );
+		iRes = SArbPtrMoverAPadre ( p_arbObj->p_arbContenido );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbLitMoverAHijo ( SArbolLiterales * p_arbObj, int iHijo )
+int SArbLitMoverAHijo ( SArbolLiterales * p_arbObj, int iHijo )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbObj ) )
 	{
-		SArbPtrMoverAHijo ( p_arbObj->p_arbContenido, iHijo );
+		iRes = SArbPtrMoverAHijo ( p_arbObj->p_arbContenido, iHijo );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbLitMoverAPrimHijo ( SArbolLiterales * p_arbObj )
+int SArbLitMoverAPrimHijo ( SArbolLiterales * p_arbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbObj ) )
 	{
-		SArbPtrMoverAPrimHijo ( p_arbObj->p_arbContenido );
+		iRes = SArbPtrMoverAPrimHijo ( p_arbObj->p_arbContenido );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbLitMoverAUltHijo ( SArbolLiterales * p_arbObj )
+int SArbLitMoverAUltHijo ( SArbolLiterales * p_arbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbObj ) )
 	{
-		SArbPtrMoverAUltHijo ( p_arbObj->p_arbContenido );
+		iRes = SArbPtrMoverAUltHijo ( p_arbObj->p_arbContenido );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbLitMoverAPrimHermano ( SArbolLiterales * p_arbObj )
+int SArbLitMoverAPrimHermano ( SArbolLiterales * p_arbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbObj ) )
 	{
-		SArbPtrMoverAPrimHermano ( p_arbObj->p_arbContenido );
+		iRes = SArbPtrMoverAPrimHermano ( p_arbObj->p_arbContenido );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbLitMoverASigHermano ( SArbolLiterales * p_arbObj )
+int SArbLitMoverASigHermano ( SArbolLiterales * p_arbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbObj ) )
 	{
-		SArbPtrMoverASigHermano ( p_arbObj->p_arbContenido );
+		iRes = SArbPtrMoverASigHermano ( p_arbObj->p_arbContenido );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbLitMoverAAntHermano ( SArbolLiterales * p_arbObj )
+int SArbLitMoverAAntHermano ( SArbolLiterales * p_arbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbObj ) )
 	{
-		SArbPtrMoverAAntHermano ( p_arbObj->p_arbContenido );
+		iRes = SArbPtrMoverAAntHermano ( p_arbObj->p_arbContenido );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbLitMoverAUltHermano ( SArbolLiterales * p_arbObj )
+int SArbLitMoverAUltHermano ( SArbolLiterales * p_arbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbObj ) )
 	{
-		SArbPtrMoverAUltHermano ( p_arbObj->p_arbContenido );
+		iRes = SArbPtrMoverAUltHermano ( p_arbObj->p_arbContenido );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbLitMoverAPrimPreorden ( SArbolLiterales * p_arbObj )
+int SArbLitMoverAPrimPreorden ( SArbolLiterales * p_arbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbObj ) )
 	{
-		SArbPtrMoverAPrimPreorden ( p_arbObj->p_arbContenido );
+		iRes = SArbPtrMoverAPrimPreorden ( p_arbObj->p_arbContenido );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbLitMoverASigPreorden ( SArbolLiterales * p_arbObj )
+int SArbLitMoverASigPreorden ( SArbolLiterales * p_arbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbObj ) )
 	{
-		SArbPtrMoverASigPreorden ( p_arbObj->p_arbContenido );
+		iRes = SArbPtrMoverASigPreorden ( p_arbObj->p_arbContenido );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbLitMoverAAntPreorden ( SArbolLiterales * p_arbObj )
+int SArbLitMoverAPrimPostorden ( SArbolLiterales * p_arbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbObj ) )
 	{
-		SArbPtrMoverAAntPreorden ( p_arbObj->p_arbContenido );
+		iRes = SArbPtrMoverAPrimPostorden ( p_arbObj->p_arbContenido );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbLitMoverAUltPreorden ( SArbolLiterales * p_arbObj )
+int SArbLitMoverASigPostorden ( SArbolLiterales * p_arbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbObj ) )
 	{
-		SArbPtrMoverAUltPreorden ( p_arbObj->p_arbContenido );
+		iRes = SArbPtrMoverASigPostorden ( p_arbObj->p_arbContenido );
 	}
-}
-
-void SArbLitDesposicionar ( SArbolLiterales * p_arbObj )
-{
-	if ( ES_VALIDO ( p_arbObj ) )
+	else
 	{
-		SArbPtrMoverARaiz ( p_arbObj->p_arbContenido );
+		iRes = 0;
 	}
+	return ( iRes );
 }
 
 int	SArbLitEstaPosicionado ( SArbolLiterales * p_arbObj )

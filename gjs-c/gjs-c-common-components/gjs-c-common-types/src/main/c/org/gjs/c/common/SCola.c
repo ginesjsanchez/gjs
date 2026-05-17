@@ -74,7 +74,7 @@ int SColEstaVacia ( SCola * p_colObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }
@@ -83,7 +83,7 @@ SElemento * SColPrimero ( SCola * p_colObj )
 {
 	SElemento * p_elmRes;
 
-	if ( ES_VALIDO ( p_colObj ) )
+	if ( SColEstaVacia ( p_colObj ) == 0 )
 	{
 		p_elmRes = SLisElemento ( p_colObj->p_lisObjetos, 0 );
 	}
@@ -98,7 +98,7 @@ SElemento * SColUltimo ( SCola * p_colObj )
 {
 	SElemento * p_elmRes;
 
-	if ( ES_VALIDO ( p_colObj ) )
+	if ( SColEstaVacia ( p_colObj ) == 0 )
 	{
 		p_elmRes = SLisElemento ( p_colObj->p_lisObjetos, 
 								  SLisNumElementos ( p_colObj->p_lisObjetos ) - 1 );
@@ -114,7 +114,7 @@ SElemento * SColElemento ( SCola * p_colObj, int iElem )
 {
 	SElemento * p_elmRes;
 
-	if ( ES_VALIDO ( p_colObj ) )
+	if ( SColEstaVacia ( p_colObj ) == 0 )
 	{
 		p_elmRes = SLisElemento ( p_colObj->p_lisObjetos, iElem );
 	}
@@ -129,7 +129,7 @@ SElemento * SColDesencolar ( SCola * p_colObj )
 {
 	SElemento * p_elmRes;
 
-	if ( ES_VALIDO ( p_colObj ) )
+	if ( SColEstaVacia ( p_colObj ) == 0 )
 	{
 		p_elmRes = SLisElemento ( p_colObj->p_lisObjetos, 0 );
 		if ( ES_VALIDO ( p_elmRes ) )
@@ -157,7 +157,7 @@ int SColEncolar ( SCola * p_colObj, SElemento * p_elmObj )
 	}
 	else
 	{
-		iRes = 1;
+		iRes = 0;
 	}
 	return ( iRes );
 }
@@ -166,7 +166,7 @@ int SColEliminarPrimero ( SCola * p_colObj )
 {
 	int	iRes;
 
-	if ( SColEsValida ( p_colObj ) == 1 ) 
+	if ( SColEstaVacia ( p_colObj ) == 0 )
 	{
 		iRes = SLisEliminarElem ( p_colObj->p_lisObjetos, 0 );
 	}
@@ -181,7 +181,7 @@ int SColEliminarUltimo ( SCola * p_colObj )
 {
 	int	iRes;
 
-	if ( SColEsValida ( p_colObj ) == 1 ) 
+	if ( SColEstaVacia ( p_colObj ) == 0 )
 	{
 		iRes = SLisEliminarElem ( p_colObj->p_lisObjetos, 
 								  SLisNumElementos ( p_colObj->p_lisObjetos ) - 1 );
@@ -197,7 +197,7 @@ int SColEliminar ( SCola * p_colObj, int iElem )
 {
 	int	iRes;
 
-	if ( SColEsValida ( p_colObj ) == 1 ) 
+	if ( SColEstaVacia ( p_colObj ) == 0 )
 	{
 		iRes = SLisEliminarElem ( p_colObj->p_lisObjetos, iElem );
 	}
@@ -212,7 +212,7 @@ int SColVaciar ( SCola * p_colObj )
 {
 	int	iRes;
 
-	if ( SColEsValida ( p_colObj ) == 1 ) 
+	if ( SColEstaVacia ( p_colObj ) == 0 )
 	{
 		iRes = SLisVaciar ( p_colObj->p_lisObjetos );
 	}

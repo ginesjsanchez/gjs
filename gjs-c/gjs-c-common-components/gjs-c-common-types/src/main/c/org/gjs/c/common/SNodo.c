@@ -8,7 +8,7 @@
 
 
 
-static void SNodIncializar ( SNodo * p_nodObj, int iTamDatos, SBloque * p_blqDatos, byte * p_byDirDatos, int iLiberar );
+static void SNodInicializar ( SNodo * p_nodObj, int iTamDatos, SBloque * p_blqDatos, byte * p_byDirDatos, int iLiberar );
 
 
 
@@ -22,7 +22,7 @@ SNodo * SNodCrear ( int iTamDatos )
 		p_nodObj = (SNodo *) MemReservar ( sizeof ( SNodo ) );
 		if ( ES_VALIDO ( p_nodObj ) )
 		{
-			 SNodIncializar ( p_nodObj, iTamDatos, NULL, NULL, 0 );
+			 SNodInicializar ( p_nodObj, iTamDatos, NULL, NULL, 0 );
 		}
 	}
 	else
@@ -93,7 +93,7 @@ SNodo * SNodEncapsular ( SBloque * p_blqDatos )
 		p_nodObj= (SNodo *) MemReservar ( sizeof ( SNodo ) );
 		if ( ES_VALIDO ( p_nodObj ) )
 		{
-		    SNodIncializar ( p_nodObj, SBlqTam ( p_blqDatos ), p_blqDatos, NULL, 0 );
+		    SNodInicializar ( p_nodObj, SBlqTam ( p_blqDatos ), p_blqDatos, NULL, 0 );
 		}
 	}
 	else
@@ -112,7 +112,7 @@ SNodo * SNodEncapsularDir ( byte * p_byDirDatos, int iTamDatos, int iLiberar )
 		p_nodObj= (SNodo *) MemReservar ( sizeof ( SNodo ) );
 		if ( ES_VALIDO ( p_nodObj ) )
 		{
-		    SNodIncializar ( p_nodObj, iTamDatos, NULL, p_byDirDatos, iLiberar );
+		    SNodInicializar ( p_nodObj, iTamDatos, NULL, p_byDirDatos, iLiberar );
 		}
 	}
 	else
@@ -721,7 +721,7 @@ int SNodInsertarHijo ( SNodo * p_nodObj, SNodo * p_nodHijo )
             if ( MemRedimensionar ( (void **) &(p_nodObj->p_p_nodHijos), sizeof ( SNodo * ) * ( p_nodObj->iNumHijos + 1 ) ) == 1 )
             {
   			    p_nodObj->iNumHijos = p_nodObj->iNumHijos + 1;
-  			p_nodObj->p_p_nodHijos [ p_nodObj->iNumHijos - 1 ] = p_nodHijo;
+				p_nodObj->p_p_nodHijos [ p_nodObj->iNumHijos - 1 ] = p_nodHijo;
      		}
      		else
      		{
@@ -748,7 +748,7 @@ void SNodDesempadronar ( SNodo * p_nodObj )
      }
 }
 
-int SNodEliminarHijo ( SNodo * p_nodObj, int iHijo, int iLiberar )
+int SNodEliminarHijo ( SNodo * p_nodObj, int iHijo, int iLiberarHijos )
 {
 	int	iHijoAux;
 	int	iRes;
@@ -757,7 +757,7 @@ int SNodEliminarHijo ( SNodo * p_nodObj, int iHijo, int iLiberar )
      {
      	if ( ( iHijo >= 0 ) && ( iHijo < p_nodObj->iNumHijos ) )
      	{
-			if ( iLiberar == 1 )
+			if ( iLiberarHijos == 1 )
 			{
 				if ( ES_VALIDO ( p_nodObj->p_p_nodHijos [ iHijo ] ) )
 				{
@@ -765,7 +765,7 @@ int SNodEliminarHijo ( SNodo * p_nodObj, int iHijo, int iLiberar )
 				}
 			}
 
-			for ( iHijoAux = iHijo + 1; iHijoAux < ARB_TAM_BLOQUE_HIJOS_NODO - 1; iHijoAux = iHijoAux + 1 )
+			for ( iHijoAux = iHijo + 1; iHijoAux < p_nodObj->iNumHijos; iHijoAux = iHijoAux + 1 )
 			{
 				p_nodObj->p_p_nodHijos [ iHijoAux - 1 ] = p_nodObj->p_p_nodHijos [ iHijoAux ];
 			}
@@ -784,7 +784,7 @@ int SNodEliminarHijo ( SNodo * p_nodObj, int iHijo, int iLiberar )
 	return ( iRes );
 }
 
-int SNodEstablecerHijo ( SNodo * p_nodObj, int iHijo, SNodo * p_nodHijo, int iLiberar  )
+int SNodEstablecerHijo ( SNodo * p_nodObj, int iHijo, SNodo * p_nodHijo, int iLiberarHijos  )
 {
 	int		iRes;
 
@@ -792,7 +792,7 @@ int SNodEstablecerHijo ( SNodo * p_nodObj, int iHijo, SNodo * p_nodHijo, int iLi
      {
      	if ( ( iHijo >= 0 ) && ( iHijo < p_nodObj->iNumHijos ) && ES_VALIDO ( p_nodHijo ) )
      	{
-			if ( iLiberar == 1 )
+			if ( iLiberarHijos == 1 )
 			{
 				if ( ES_VALIDO ( p_nodObj->p_p_nodHijos [ iHijo ] ) )
 				{
@@ -814,7 +814,7 @@ int SNodEstablecerHijo ( SNodo * p_nodObj, int iHijo, SNodo * p_nodHijo, int iLi
 	return ( iRes );
 }
 
-void SNodLimpiarHijos ( SNodo * p_nodObj, int iLiberar )
+void SNodLimpiarHijos ( SNodo * p_nodObj, int iLiberarHijos )
 {
 	int iHijo;
 
@@ -822,7 +822,7 @@ void SNodLimpiarHijos ( SNodo * p_nodObj, int iLiberar )
     {
 		for ( iHijo = 0; iHijo < p_nodObj->iNumHijos; iHijo = iHijo + 1 )
 		{
-			if ( iLiberar == 1 )
+			if ( iLiberarHijos == 1 )
 			{
 				if ( ES_VALIDO ( p_nodObj->p_p_nodHijos [ iHijo ] ) )
 				{
@@ -978,7 +978,7 @@ SNodo * SNodDuplicar ( SNodo * p_nodObj )
 	return ( p_nodDup );
 }
 
-static void SNodIncializar ( SNodo * p_nodObj, int iTamDatos, SBloque * p_blqDatos, byte * p_byDirDatos, int iLiberar )
+static void SNodInicializar ( SNodo * p_nodObj, int iTamDatos, SBloque * p_blqDatos, byte * p_byDirDatos, int iLiberar )
 {
     if ( ES_VALIDO ( p_nodObj ) )
     {

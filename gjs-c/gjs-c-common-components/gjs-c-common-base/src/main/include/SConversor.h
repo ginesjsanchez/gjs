@@ -20,6 +20,7 @@ typedef struct
 
 # if ( defined ( LLONG ) )
 	llong			llValor;
+	ullong			ullValor;
 # endif
 
 	int				iConvValida;
@@ -37,6 +38,7 @@ SConversor * SConvCrearCadena ( char * p_cValor );
 SConversor * SConvCrearCadenaConstante ( const char * p_cValor );
 # if ( defined ( LLONG ) )
 SConversor * SConvCrearEnteroDobleLargo ( llong llValor );
+SConversor * SConvCrearEnteroDobleLargoSinSigno ( ullong ullValor );
 
 #   define SConvCrear(x) _Generic((x), \
         int : SConvCrearEntero, \
@@ -47,7 +49,8 @@ SConversor * SConvCrearEnteroDobleLargo ( llong llValor );
         double: SConvCrearRealDoble, \
         char *: SConvCrearCadena, \
         const char *: SConvCrearCadenaConstante, \
-        long long: SConvCrearEnteroDobleLargo, \
+        llong: SConvCrearEnteroDobleLargo, \
+        ullong: SConvCrearEnteroDobleLargoSinSigno, \
         default: SConvCrearDef \
     )(x)
 
@@ -77,6 +80,7 @@ const char * SConvCadena ( SConversor * p_convObj );
 const char * SConvCadenaHex ( SConversor * p_convObj );
 # if ( defined ( LLONG ) )
 llong SConvEnteroDobleLargo ( SConversor * p_convObj );
+ullong SConvEnteroDobleLargoSinSigno ( SConversor * p_convObj );
 # endif
 
 void SConvEstablecerValorEntero (  SConversor * p_convObj, int iValor );
@@ -91,6 +95,7 @@ void SConvEstablecerValorCadenaHex ( SConversor * p_convObj, char * p_cValor );
 void SConvEstablecerValorCadenaHexConstante ( SConversor * p_convObj, const char * p_cValor );
 # if ( defined ( LLONG ) )
 void SConvEstablecerValorEnteroDobleLargo ( SConversor * p_convObj, llong llValor );
+void SConvEstablecerValorEnteroDobleLargoSinSigno ( SConversor * p_convObj, ullong ullValor );
 
 #   define SConvEstablecerValor(x, y) _Generic((x), \
         default: _Generic((y), \
@@ -102,7 +107,8 @@ void SConvEstablecerValorEnteroDobleLargo ( SConversor * p_convObj, llong llValo
             double: SConvEstablecerValorRealDoble, \
             char *: SConvEstablecerValorCadena, \
             const char *: SConvEstablecerValorCadenaConstante, \
-            long long: SConvEstablecerValorEnteroDobleLargo ) \
+            llong: SConvEstablecerValorEnteroDobleLargo, \
+            ullong: SConvEstablecerValorEnteroDobleLargoSinSigno ) \
     )(x, y)
 
 #else

@@ -34,7 +34,6 @@ int SHilAriEstaVacio ( SHiloAriadna * p_pilObj );
 
 int SHilAriDesapilar ( SHiloAriadna * p_pilObj );
 int SHilAriApilar ( SHiloAriadna * p_pilObj, char * p_cTexto );
-int SHilAriApilarDup ( SHiloAriadna * p_pilObj, const char * p_cTexto );
 
 int SHilAriVaciar ( SHiloAriadna * p_pilObj );
 

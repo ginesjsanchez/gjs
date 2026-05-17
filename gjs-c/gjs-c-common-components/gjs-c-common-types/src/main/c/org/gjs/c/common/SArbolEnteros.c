@@ -163,108 +163,199 @@ int SArbEntEstActual ( SArbolEnteros * p_arbObj, int iValor )
 	return ( iRes );
 }
 
-void SArbEntMoverARaiz ( SArbolEnteros * p_arbObj )
+int SArbEntMoverARaiz ( SArbolEnteros * p_arbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbObj ) )
 	{
-		SArbMoverARaiz ( p_arbObj->p_arbObj );
+		iRes = SArbMoverARaiz ( p_arbObj->p_arbObj );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbEntMoverAPadre ( SArbolEnteros * p_arbObj )
+int SArbEntMoverAPadre ( SArbolEnteros * p_arbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbObj ) )
 	{
-		SArbMoverAPadre ( p_arbObj->p_arbObj );
+		iRes = SArbMoverAPadre ( p_arbObj->p_arbObj );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbEntMoverAHijo ( SArbolEnteros * p_arbObj, int iHijo )
+int SArbEntMoverAHijo ( SArbolEnteros * p_arbObj, int iHijo )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbObj ) )
 	{
-		SArbMoverAHijo ( p_arbObj->p_arbObj, iHijo );
+		iRes = SArbMoverAHijo ( p_arbObj->p_arbObj, iHijo );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbEntMoverAPrimHijo ( SArbolEnteros * p_arbObj )
+int SArbEntMoverAPrimHijo ( SArbolEnteros * p_arbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbObj ) )
 	{
-		SArbMoverAPrimHijo ( p_arbObj->p_arbObj );
+		iRes = SArbMoverAPrimHijo ( p_arbObj->p_arbObj );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbEntMoverAUltHijo ( SArbolEnteros * p_arbObj )
+int SArbEntMoverAUltHijo ( SArbolEnteros * p_arbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbObj ) )
 	{
-		SArbMoverAUltHijo ( p_arbObj->p_arbObj );
+		iRes = SArbMoverAUltHijo ( p_arbObj->p_arbObj );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbEntMoverAPrimHermano ( SArbolEnteros * p_arbObj )
+int SArbEntMoverAPrimHermano ( SArbolEnteros * p_arbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbObj ) )
 	{
-		SArbMoverAPrimHermano ( p_arbObj->p_arbObj );
+		iRes = SArbMoverAPrimHermano ( p_arbObj->p_arbObj );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbEntMoverASigHermano ( SArbolEnteros * p_arbObj )
+int SArbEntMoverASigHermano ( SArbolEnteros * p_arbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbObj ) )
 	{
-		SArbMoverASigHermano ( p_arbObj->p_arbObj );
+		iRes = SArbMoverASigHermano ( p_arbObj->p_arbObj );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbEntMoverAAntHermano ( SArbolEnteros * p_arbObj )
+int SArbEntMoverAAntHermano ( SArbolEnteros * p_arbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbObj ) )
 	{
-		SArbMoverAAntHermano ( p_arbObj->p_arbObj );
+		iRes = SArbMoverAAntHermano ( p_arbObj->p_arbObj );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbEntMoverAUltHermano ( SArbolEnteros * p_arbObj )
+int SArbEntMoverAUltHermano ( SArbolEnteros * p_arbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbObj ) )
 	{
-		SArbMoverAUltHermano ( p_arbObj->p_arbObj );
+		iRes = SArbMoverAUltHermano ( p_arbObj->p_arbObj );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbEntMoverAPrimPreorden ( SArbolEnteros * p_arbObj )
+int SArbEntMoverAPrimPreorden ( SArbolEnteros * p_arbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbObj ) )
 	{
-		SArbMoverAPrimPreorden ( p_arbObj->p_arbObj );
+		iRes = SArbMoverAPrimPreorden ( p_arbObj->p_arbObj );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbEntMoverASigPreorden ( SArbolEnteros * p_arbObj )
+int SArbEntMoverASigPreorden ( SArbolEnteros * p_arbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbObj ) )
 	{
-		SArbMoverASigPreorden ( p_arbObj->p_arbObj );
+		iRes = SArbMoverASigPreorden ( p_arbObj->p_arbObj );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbEntMoverAAntPreorden ( SArbolEnteros * p_arbObj )
+int SArbEntMoverAPrimPostorden ( SArbolEnteros * p_arbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbObj ) )
 	{
-		SArbMoverAAntPreorden ( p_arbObj->p_arbObj );
+		iRes = SArbMoverAPrimPostorden ( p_arbObj->p_arbObj );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbEntMoverAUltPreorden ( SArbolEnteros * p_arbObj )
+int SArbEntMoverASigPostorden ( SArbolEnteros * p_arbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbObj ) )
 	{
-		SArbMoverAUltPreorden ( p_arbObj->p_arbObj );
+		iRes = SArbMoverASigPostorden ( p_arbObj->p_arbObj );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
 void SArbEntDesposicionar ( SArbolEnteros * p_arbObj )

@@ -435,7 +435,7 @@ SContenido * SConDuplicar ( SContenido * p_conObj )
 			p_conDup = SConCrear ( SBlqTam ( p_blqDatos ) );
 			if ( ES_VALIDO ( p_conDup ) )
 			{
-				p_conDup->p_blqDatos = SBlqDuplicar ( p_blqDatos );
+				SBlqCopiar ( p_conDup->p_blqDatos, p_blqDatos );
 				p_conDup->iLiberar = 1;
 			}
 		}

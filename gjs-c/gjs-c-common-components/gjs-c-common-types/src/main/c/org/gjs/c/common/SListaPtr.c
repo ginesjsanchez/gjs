@@ -111,7 +111,7 @@ int SLispEstaVacia ( SListaPtr * p_lisObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }
@@ -297,6 +297,7 @@ byte * SLispActual ( SListaPtr * p_lisObj )
 		}
 		else
 		{
+			ERROR_ESTABLECER( ERR_POSICION_INVALIDA );
 			p_byRes = NULL;
 		}
 	}
@@ -435,7 +436,7 @@ void SLispMoverA ( SListaPtr * p_lisObj, int iElem )
 				else
 				{
 					p_lisObj->p_elpActual = p_lisObj->p_elpUltimo;
-					p_lisObj->iPos = p_lisObj->iNumElementos;
+					p_lisObj->iPos = p_lisObj->iNumElementos - 1;
 					while ( ( p_lisObj->iPos >= iElem ) && 
 							ES_VALIDO ( p_lisObj->p_elpActual ) )
 					{
@@ -482,8 +483,11 @@ int SLispBuscar ( SListaPtr * p_lisObj, byte * p_byDatos, int iNumBytes )
 			ES_VALIDO ( p_elpObj ) )
 		{
 			iEnc = SElpEsIgualExt ( p_elpObj, p_byDatos, iNumBytes );
-			p_elpObj = SElpSucesor ( p_elpObj );
-			iRes = iRes + 1;
+			if ( iEnc == 0 )
+			{
+				p_elpObj = SElpSucesor ( p_elpObj );
+				iRes = iRes + 1;
+			}
 		}
 		if ( iEnc == 0 )
 		{
@@ -546,7 +550,7 @@ int SLispEstaEnFinal ( SListaPtr * p_lisObj )
 	return ( iRes );
 }
 
-int SLispEstaEnIncio ( SListaPtr * p_lisObj )
+int SLispEstaEnInicio ( SListaPtr * p_lisObj )
 {
 	int iRes;
 
@@ -589,8 +593,17 @@ int SLispEstablecer ( SListaPtr * p_lisObj, byte * p_byDatos )
 				SElpEncadenarAntecesor ( p_elpObj, SElpAntecesor ( p_lisObj->p_elpActual )  );
 				SElpEncadenarSucesor ( p_elpObj, SElpSucesor ( p_lisObj->p_elpActual ) );
 				p_lisObj->p_elpActual->iLiberar = p_lisObj->iLiberar;
+				
+				if ( p_lisObj->p_elpPrimero == p_lisObj->p_elpActual )
+				{
+					p_lisObj->p_elpPrimero = p_elpObj;
+				}
+				if ( p_lisObj->p_elpUltimo == p_lisObj->p_elpActual )
+				{
+					p_lisObj->p_elpUltimo = p_elpObj;
+				}
 				SElpDestruir ( &(p_lisObj->p_elpActual) );
-
+				p_lisObj->p_elpActual = p_elpObj;
 				iRes = 1;
 			}
 			else
@@ -803,7 +816,7 @@ int	SLispLiberacionMemoriaActivada ( SListaPtr * p_lisObj )
 {
 	int	iRes;
 
-	if ( SLispEsValida ( p_lisObj ) == 1 ) 
+	if ( ES_VALIDO ( p_lisObj ) ) 
 	{
 		iRes = p_lisObj->iLiberar;
 	}
@@ -816,23 +829,17 @@ int	SLispLiberacionMemoriaActivada ( SListaPtr * p_lisObj )
 
 void SLispActivarLiberacionMemoria ( SListaPtr * p_lisObj )
 {
-	if ( SLispEsValida ( p_lisObj ) == 1 ) 
+	if ( ES_VALIDO ( p_lisObj ) ) 
 	{
-		if ( p_lisObj->iNumElementos == 0 )
-		{
-			p_lisObj->iLiberar = 1;
-		}
+		p_lisObj->iLiberar = 1;
 	}
 }
 
 void SLispDesactivarLiberacionMemoria ( SListaPtr * p_lisObj )
 {
-	if ( SLispEsValida ( p_lisObj ) == 1 ) 
+	if ( ES_VALIDO ( p_lisObj ) ) 
 	{
-		if ( p_lisObj->iNumElementos == 0 )
-		{
-			p_lisObj->iLiberar = 0;
-		}
+		p_lisObj->iLiberar = 0;
 	}
 }
 

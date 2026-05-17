@@ -30,6 +30,12 @@
 #include <SIntervalo.h>
 #include <SFormaLineal.h>
 
+#include <SListaRealesDobles.h>
+#include <SVectorRealesDobles.h>
+#include <SSecuenciaRealesDobles.h>
+#include <STablaRealesDobles.h>
+#include <SPilaRealesDobles.h>
+
 
 
 #endif

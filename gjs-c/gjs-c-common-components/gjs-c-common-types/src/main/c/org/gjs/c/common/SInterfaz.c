@@ -19,7 +19,8 @@ SInterfaz * SIntrfzCrear ( unsigned long ulId, const char * p_cNombre )
 		{
 			p_intrfzObj->ulId = ulId;
 			p_intrfzObj->p_cNombre = CadDuplicar ( p_cNombre );
-			p_intrfzObj->p_secPrimitivas = NULL;
+			p_intrfzObj->p_secPrimitivas = SSecpCrear ();
+			SSecpDesactivarLiberacionMemoria ( p_intrfzObj->p_secPrimitivas  );
 		}
 	}
 	else
@@ -32,9 +33,9 @@ SInterfaz * SIntrfzCrear ( unsigned long ulId, const char * p_cNombre )
 void SIntrfzDestruir ( SInterfaz ** p_p_intrfzObj )
 {
 	SInterfaz *		p_intrfzObj;
-	//int				iNumPrimitivas;
-	//int				iPrimitiva;
-	//SDefPrimitiva *	p_dprimObj;
+	int				iNumPrimitivas;
+	int				iPrimitiva;
+	SDefPrimitiva *	p_dprimObj;
 	
 	if ( ES_VALIDO ( p_p_intrfzObj ) )
 	{
@@ -42,8 +43,13 @@ void SIntrfzDestruir ( SInterfaz ** p_p_intrfzObj )
 
 		if ( ES_VALIDO ( p_intrfzObj ) )
 		{
-			MemLiberar ( (void **) &(p_intrfzObj->p_cNombre [0]) );
-			// PENDIENTE: Vaciar
+			MemLiberar ( (void **) &(p_intrfzObj->p_cNombre) );
+			iNumPrimitivas = SSecpNumElementos ( p_intrfzObj->p_secPrimitivas );
+			for ( iPrimitiva = 0; iPrimitiva < iNumPrimitivas; iPrimitiva = iPrimitiva + 1 )
+			{
+				p_dprimObj = (SDefPrimitiva *) SSecpElemento ( p_intrfzObj->p_secPrimitivas, iPrimitiva );
+				SDefPrimDestruir ( &p_dprimObj ); 				
+			}
 			SSecpDestruir ( &(p_intrfzObj->p_secPrimitivas) );
 			MemLiberar ( (void **) p_p_intrfzObj );
 		}

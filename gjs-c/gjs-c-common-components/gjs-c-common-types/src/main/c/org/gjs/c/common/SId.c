@@ -12,7 +12,7 @@ SId * SIdCrear ()
 	p_idObj = (SId *) MemReservar ( sizeof ( SId ) );
 	if ( ES_VALIDO ( p_idObj ) )
 	{
-		p_idObj->ulValor = -1;
+		p_idObj->ulValor = 0;
 	}
 	return ( p_idObj );
 }
@@ -56,17 +56,17 @@ int SIdEsValido ( SId * p_idObj )
 
 unsigned long SIdValor ( SId * p_idObj )
 {
-	int iRes;
+	unsigned long ulRes;
 
 	if ( ES_VALIDO ( p_idObj ) )
 	{
-		iRes = p_idObj->ulValor;
+		ulRes = p_idObj->ulValor;
 	}
 	else
 	{
-		iRes = 0;
+		ulRes = 0;
 	}
-	return ( iRes );
+	return ( ulRes );
 }
 
 int SIdEstablecer ( SId * p_idObj, unsigned long ulValor )
@@ -344,5 +344,16 @@ int SIdEstaEnRangoIgEnt ( SId * p_idObj, unsigned long ulId1, unsigned long ulId
 		iRes = 0;
 	}
 	return ( iRes );
+}
+
+unsigned int SIdHash ( SId * p_idObj )
+{
+	unsigned int uiRes = 0;
+
+	if ( ES_VALIDO ( p_idObj ) )
+	{
+		uiRes = HashEnteroLargoSinSigno ( p_idObj->ulValor );
+	}
+	return ( uiRes );
 }
 

@@ -56,7 +56,7 @@ void SLisEntlDeposicionar ( SListaEnterosLargos * p_lisObj );
 
 int SLisEntlEsNulo ( SListaEnterosLargos * p_lisObj );
 int SLisEntlEstaEnFinal ( SListaEnterosLargos * p_lisObj );
-int SLisEntlEstaEnIncio ( SListaEnterosLargos * p_lisObj );
+int SLisEntlEstaEnInicio ( SListaEnterosLargos * p_lisObj );
 
 int SLisEntlInsertar ( SListaEnterosLargos * p_lisObj, long long llDato );
 int SLisEntlInsertarDelante ( SListaEnterosLargos * p_lisObj, long long llDato );

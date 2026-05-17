@@ -79,9 +79,9 @@ int SNodNivelesInferiores ( SNodo * p_nodObj );
 int SNodEmpadronar ( SNodo * p_nodObj, SNodo * p_nodPadre );
 int SNodInsertarHijo ( SNodo * p_nodObj, SNodo * p_nodHijo );
 void SNodDesempadronar ( SNodo * p_nodObj );
-int SNodEliminarHijo ( SNodo * p_nodObj, int iHijo, int iLiberar );
-int SNodEstablecerHijo ( SNodo * p_nodObj, int iHijo, SNodo * p_nodHijo, int iLiberar );
-void SNodLimpiarHijos ( SNodo * p_nodObj, int iLiberar );
+int SNodEliminarHijo ( SNodo * p_nodObj, int iHijo, int iLiberarHijos );
+int SNodEstablecerHijo ( SNodo * p_nodObj, int iHijo, SNodo * p_nodHijo, int iLiberarHijos );
+void SNodLimpiarHijos ( SNodo * p_nodObj, int iLiberarHijos );
 
 int	SNodEsHijo ( SNodo * p_nodObj );
 int SNodOrdenDelHijo ( SNodo * p_nodObj, SNodo * p_nodHijo );

@@ -39,7 +39,6 @@ char * SPilLitPrimero ( SPilaLiterales * p_pilObj );
 char * SPilLitDesapilar ( SPilaLiterales * p_pilObj );
 
 int SPilLitApilar ( SPilaLiterales * p_pilObj, char * p_cDato );
-int SPilLitApilarDup ( SPilaLiterales * p_pilObj, const char * p_cDato );
 int SPilLitEliminarPrimero ( SPilaLiterales * p_pilObj );
 int SPilLitVaciar ( SPilaLiterales * p_pilObj );
 

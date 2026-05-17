@@ -60,7 +60,7 @@ int SLisPrjEstaVacia ( SListaParejas * p_lisObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }
@@ -112,7 +112,19 @@ int SLisPrjInsertar ( SListaParejas * p_lisObj, SPareja * p_prjDatos )
 
 int SLisPrjInsertarExt ( SListaParejas * p_lisObj, void * p_vPrimero, void * p_vSegundo )
 {
-	return ( SLisPrjInsertar ( p_lisObj, SPrjCrearSoloPtr ( p_vPrimero, p_vSegundo ) ) );
+	int 		iRes;
+	SPareja * 	p_prjObj;
+	
+	p_prjObj = SPrjCrearSoloPtr ( p_vPrimero, p_vSegundo );
+	if ( ES_VALIDO ( p_prjObj ) )
+	{
+		iRes = SLisPrjInsertar ( p_lisObj, p_prjObj );
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
 int SLisPrjVaciar ( SListaParejas * p_lisObj )

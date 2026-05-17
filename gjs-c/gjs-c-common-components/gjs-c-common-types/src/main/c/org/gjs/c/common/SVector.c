@@ -17,6 +17,10 @@ SVector * SVecCrear ( int iNumElementos )
 		{
 			p_vecObj->iNumElementos = iNumElementos;
 			p_vecObj->p_p_conElementos = (SContenido **) MemReservar ( iNumElementos * sizeof ( SContenido * ) );
+			if ( ES_NULO ( p_vecObj->p_p_conElementos ) )
+			{
+				MemLiberar ( (void **) &p_vecObj );
+			}
 		}
 	}
 	else

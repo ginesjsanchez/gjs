@@ -109,7 +109,14 @@ int SMatFlgFlag ( SMatrizFlags * p_matfObj, unsigned long ulFil, unsigned long u
 
 	if ( ES_VALIDO ( p_matfObj ) )
 	{
-		iRes = (int) SBufLeer ( p_matfObj->p_bufContenido, ulFil * p_matfObj->ulNumColumnas + ulCol );
+		if ( ulFil < p_matfObj->ulNumFilas && ulCol < p_matfObj->ulNumColumnas )
+		{
+			iRes = (int) SBufLeer ( p_matfObj->p_bufContenido, ulFil * p_matfObj->ulNumColumnas + ulCol );
+		}
+		else
+		{
+			iRes = 0;
+		}
 	}
     else
     {
@@ -124,9 +131,16 @@ int SMatFlgFlagEstaActivo ( SMatrizFlags * p_matfObj, unsigned long ulFil, unsig
 
 	if ( ES_VALIDO ( p_matfObj ) )
 	{
-		if ( (int) SBufLeer ( p_matfObj->p_bufContenido, ulFil * p_matfObj->ulNumColumnas + ulCol ) == 1 )
+		if ( ulFil < p_matfObj->ulNumFilas && ulCol < p_matfObj->ulNumColumnas )
 		{
-			iRes = 1;
+			if ( (int) SBufLeer ( p_matfObj->p_bufContenido, ulFil * p_matfObj->ulNumColumnas + ulCol ) == 1 )
+			{
+				iRes = 1;
+			}
+			else
+			{
+				iRes = 0;
+			}
 		}
 		else
 		{
@@ -146,7 +160,14 @@ int SMatFlgActivarFlag ( SMatrizFlags * p_matfObj, unsigned long ulFil, unsigned
 
 	if ( ES_VALIDO ( p_matfObj ) )
 	{
-		iRes = SBufEscribir ( p_matfObj->p_bufContenido, ulFil * p_matfObj->ulNumColumnas + ulCol, 0x01 );
+		if ( ulFil < p_matfObj->ulNumFilas && ulCol < p_matfObj->ulNumColumnas )
+		{
+			iRes = SBufEscribir ( p_matfObj->p_bufContenido, ulFil * p_matfObj->ulNumColumnas + ulCol, 0x01 );
+		}
+		else
+		{
+			iRes = 0;
+		}
 	}
 	else
 	{
@@ -161,7 +182,14 @@ int SMatFlgDesactivarFlag ( SMatrizFlags * p_matfObj, unsigned long ulFil, unsig
 
 	if ( ES_VALIDO ( p_matfObj ) )
 	{
-		iRes = SBufEscribir ( p_matfObj->p_bufContenido, ulFil * p_matfObj->ulNumColumnas + ulCol, 0x00 );
+		if ( ulFil < p_matfObj->ulNumFilas && ulCol < p_matfObj->ulNumColumnas )
+		{
+			iRes = SBufEscribir ( p_matfObj->p_bufContenido, ulFil * p_matfObj->ulNumColumnas + ulCol, 0x00 );
+		}
+		else
+		{
+			iRes = 0;
+		}
 	}
 	else
 	{

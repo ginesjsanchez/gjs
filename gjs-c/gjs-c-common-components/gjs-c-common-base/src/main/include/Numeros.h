@@ -35,6 +35,7 @@ int NumDigitosEntero ( int iVal );
 int NumDigitosEnteroLargo ( long lVal );
 #if ( defined ( LLONG ) )
 int NumDigitosEnteroDobleLargo ( llong llVal );
+int NumDigitosEnteroDobleLargoSinSigno ( ullong ullVal );
 #endif
 int NumDigitosEnteroSinSigno ( unsigned int uiVal );
 int NumDigitosEnteroLargoSinSigno ( unsigned long ulVal );

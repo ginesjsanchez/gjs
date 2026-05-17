@@ -15,6 +15,10 @@ STablaEnteros * STabEntCrear ( int iNumFilas, int iNumColumnas )
 		if ( ES_VALIDO ( p_tabObj ) )
 		{
 			p_tabObj->p_tabDatos = STabCrear ( iNumFilas, iNumColumnas );
+			if ( ES_NULO ( p_tabObj->p_tabDatos ) )
+			{
+				STabEntDestruir ( &p_tabObj );
+			}
 		}
 	}
 	else
@@ -133,7 +137,7 @@ int STabEntAsignar ( STablaEnteros * p_tabObj, int iFila, int iColumna, int iDat
 	if ( ES_VALIDO ( p_tabObj ) )
 	{
 		if ( ( iFila >= 0 ) && ( iFila < STabNumFilas ( p_tabObj->p_tabDatos ) ) &&
-			 ( iColumna >= 0 ) && ( iFila < STabNumColumnas ( p_tabObj->p_tabDatos ) ) )
+			 ( iColumna >= 0 ) && ( iColumna < STabNumColumnas ( p_tabObj->p_tabDatos ) ) )
 		{
 			p_conObj = STabElemento ( p_tabObj->p_tabDatos, iFila, iColumna );
 			if ( ES_NULO ( p_conObj ) )
@@ -185,12 +189,12 @@ int STabEntInicializar ( STablaEnteros * p_tabObj )
 
 	if ( ES_VALIDO ( p_tabObj ) )
 	{
-		iRes = 0;
+		iRes = 1;
 		iFila = 0;
-		while ( ( iFila < STabEntNumFilas ( p_tabObj ) ) && ( iRes == 0 ) )
+		while ( ( iFila < STabEntNumFilas ( p_tabObj ) ) && ( iRes == 1 ) )
 		{
 			iColumna = 0;
-			while ( ( iColumna < STabEntNumColumnas ( p_tabObj ) ) && ( iRes == 0 ) )
+			while ( ( iColumna < STabEntNumColumnas ( p_tabObj ) ) && ( iRes == 10 ) )
 			{
 				iRes = STabEntAsignar ( p_tabObj, iFila, iColumna, 0 );
 				iColumna = iColumna + 1;

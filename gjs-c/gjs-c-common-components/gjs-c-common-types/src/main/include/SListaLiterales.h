@@ -57,7 +57,7 @@ void SLisLitDeposicionar ( SListaLiterales * p_lisObj );
 
 int SLisLitEsNulo ( SListaLiterales * p_lisObj );
 int SLisLitEstaEnFinal ( SListaLiterales * p_lisObj );
-int SLisLitEstaEnIncio ( SListaLiterales * p_lisObj );
+int SLisLitEstaEnInicio ( SListaLiterales * p_lisObj );
 
 int SLisLitEstablecer ( SListaLiterales * p_lisObj, char * p_cDatos );
 int SLisLitInsertar ( SListaLiterales * p_lisObj, char * p_cDatos );

@@ -1,7 +1,7 @@
 #include "SVectorRealesDobles.h"
 
-#include "TiposBasicosConfig.h"
-
+#include "CalculoConfig.h"
+#include "CalculoOperaciones.h"
 
 
 
@@ -15,6 +15,10 @@ SVectorRealesDobles * SVecRealdCrear ( int iNumElementos )
 		if ( ES_VALIDO ( p_vecObj ) )
 		{
 			p_vecObj->p_vecDatos = SVecCrear ( iNumElementos );
+			if ( ES_NULO ( p_vecObj->p_vecDatos ) )
+			{
+				SVecRealdDestruir ( &p_vecObj );
+			}
 		}
 	}
 	else
@@ -153,9 +157,9 @@ int SVecRealdInicializar ( SVectorRealesDobles * p_vecObj )
 
 	if ( ES_VALIDO ( p_vecObj ) )
 	{
-		iRes = 0;
+		iRes = 1;
 		iElem = 0;
-		while ( ( iElem < SVecRealdNumElementos ( p_vecObj ) ) && ( iRes == 0 ) )
+		while ( ( iElem < SVecRealdNumElementos ( p_vecObj ) ) && ( iRes == 1 ) )
 		{
 			iRes = SVecRealdAsignar ( p_vecObj, iElem, 0 );
 			iElem = iElem + 1;
@@ -179,7 +183,7 @@ int SVecRealdExiste ( SVectorRealesDobles * p_vecObj, double dDato )
 		iElem = 0;
 		while ( ( iElem < SVecRealdNumElementos ( p_vecObj ) ) && ( iRes == 0 ) )
 		{
-			if ( SVecRealdElemento ( p_vecObj, iElem ) == dDato )
+			if ( MatEsIgual ( SVecRealdElemento ( p_vecObj, iElem ), dDato ) )
 			{
 				iRes = 1;
 			}

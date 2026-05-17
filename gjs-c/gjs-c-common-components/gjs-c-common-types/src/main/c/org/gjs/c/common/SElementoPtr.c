@@ -55,7 +55,7 @@ void SElpDestruir ( SElementoPtr ** p_p_elpObj )
 		{
 			if ( p_elpObj->iLiberar == 1 )
 			{
-				MemLiberar ( (void **) &(p_elpObj->p_byDatos [0]) );
+				MemLiberar ( (void **) &(p_elpObj->p_byDatos) );
 			}
 			MemLiberar ( (void **) p_p_elpObj );
 		}
@@ -107,7 +107,7 @@ int SElpModificar ( SElementoPtr * p_elpObj, byte * p_byDatos, int iLiberar )
 	{
 		if ( p_elpObj->iLiberar == 1 )
 		{
-			MemLiberar ( (void **) &(p_elpObj->p_byDatos [0]) );
+			MemLiberar ( (void **) &(p_elpObj->p_byDatos) );
 		}
 
 		p_elpObj->p_byDatos = p_byDatos;
@@ -213,6 +213,7 @@ int SElpEncadenarAntecesor ( SElementoPtr * p_elpObj, SElementoPtr * p_elpAnt )
 			p_elpObj->p_elpAnt = (void *) p_elpAnt;
 			SElpEncadenarSucesor ( p_elpAnt, p_elpObj );
 		}
+		iRes = 1;
 	}
 	else
 	{
@@ -232,6 +233,7 @@ int SElpEncadenarSucesor ( SElementoPtr * p_elpObj, SElementoPtr * p_elpSuc )
 			p_elpObj->p_elpSig = (void *) p_elpSuc;
 			SElpEncadenarAntecesor ( p_elpSuc, p_elpObj );
 		}
+		iRes = 1;
 	}
 	else
 	{
@@ -251,6 +253,7 @@ int SElpDesencadenarAntecesor ( SElementoPtr * p_elpObj )
 			SElpDesencadenarSucesor ( (SElementoPtr *) p_elpObj->p_elpAnt );
 		}
 		p_elpObj->p_elpAnt = NULL;
+		iRes = 1;
 	}
 	else
 	{

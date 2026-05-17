@@ -87,7 +87,7 @@ int SArbBinEntEstaVacio ( SArbolBinEnteros * p_arbbObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }
@@ -340,76 +340,169 @@ int SArbBinEntTieneHermanoDer ( SArbolBinEnteros * p_arbbObj )
 	return ( iRes );
 }
 
-void SArbBinEntMoverARaiz ( SArbolBinEnteros * p_arbbObj )
+int SArbBinEntMoverARaiz ( SArbolBinEnteros * p_arbbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbbObj ) )
 	{
-		SArbBinMoverARaiz ( p_arbbObj->p_arbbObj );
+		iRes = SArbBinMoverARaiz ( p_arbbObj->p_arbbObj );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbBinEntMoverAPadre ( SArbolBinEnteros * p_arbbObj )
+int SArbBinEntMoverAPadre ( SArbolBinEnteros * p_arbbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbbObj ) )
 	{
-		SArbBinMoverAPadre ( p_arbbObj->p_arbbObj );
+		iRes = SArbBinMoverAPadre ( p_arbbObj->p_arbbObj );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbBinEntMoverAHijoIzq ( SArbolBinEnteros * p_arbbObj )
+int SArbBinEntMoverAHijoIzq ( SArbolBinEnteros * p_arbbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbbObj ) )
 	{
-		SArbBinMoverAHijoIzq ( p_arbbObj->p_arbbObj );
+		iRes = SArbBinMoverAHijoIzq ( p_arbbObj->p_arbbObj );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbBinEntMoverAHijoDer ( SArbolBinEnteros * p_arbbObj )
+int SArbBinEntMoverAHijoDer ( SArbolBinEnteros * p_arbbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbbObj ) )
 	{
-		SArbBinMoverAHijoDer ( p_arbbObj->p_arbbObj );
+		iRes = SArbBinMoverAHijoDer ( p_arbbObj->p_arbbObj );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbBinEntMoverAHermano ( SArbolBinEnteros * p_arbbObj )
+int SArbBinEntMoverAHermano ( SArbolBinEnteros * p_arbbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbbObj ) )
 	{
-		SArbBinMoverAHermano ( p_arbbObj->p_arbbObj );
+		iRes = SArbBinMoverAHermano ( p_arbbObj->p_arbbObj );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbBinEntMoverAPrimPreorden ( SArbolBinEnteros * p_arbbObj )
+int SArbBinEntMoverAPrimPreorden ( SArbolBinEnteros * p_arbbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbbObj ) )
 	{
-		SArbBinMoverAPrimPreorden ( p_arbbObj->p_arbbObj );
+		iRes = SArbBinMoverAPrimPreorden ( p_arbbObj->p_arbbObj );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbBinEntMoverASigPreorden ( SArbolBinEnteros * p_arbbObj )
+int SArbBinEntMoverASigPreorden ( SArbolBinEnteros * p_arbbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbbObj ) )
 	{
-		SArbBinMoverASigPreorden ( p_arbbObj->p_arbbObj );
+		iRes = SArbBinMoverASigPreorden ( p_arbbObj->p_arbbObj );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbBinEntMoverAAntPreorden ( SArbolBinEnteros * p_arbbObj )
+int SArbBinEntMoverAPrimPostorden ( SArbolBinEnteros * p_arbbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbbObj ) )
 	{
-		SArbBinMoverAAntPreorden ( p_arbbObj->p_arbbObj );
+		iRes = SArbBinMoverAPrimPostorden ( p_arbbObj->p_arbbObj );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
-void SArbBinEntMoverAUltPreorden ( SArbolBinEnteros * p_arbbObj )
+int SArbBinEntMoverASigPostorden ( SArbolBinEnteros * p_arbbObj )
 {
+	int iRes;
+	
 	if ( ES_VALIDO ( p_arbbObj ) )
 	{
-		SArbBinMoverAUltPreorden ( p_arbbObj->p_arbbObj );
+		iRes = SArbBinMoverASigPostorden ( p_arbbObj->p_arbbObj );
 	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SArbBinEntMoverAPrimInorden ( SArbolBinEnteros * p_arbbObj )
+{
+	int iRes;
+	
+	if ( ES_VALIDO ( p_arbbObj ) )
+	{
+		iRes = SArbBinMoverAPrimInorden ( p_arbbObj->p_arbbObj );
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SArbBinEntMoverASigInorden ( SArbolBinEnteros * p_arbbObj )
+{
+	int iRes;
+	
+	if ( ES_VALIDO ( p_arbbObj ) )
+	{
+		iRes = SArbBinMoverASigInorden ( p_arbbObj->p_arbbObj );
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
 }
 
 void SArbBinEntDesposicionar ( SArbolBinEnteros * p_arbbObj )

@@ -8,21 +8,21 @@
 
 typedef struct
 {
-	unsigned int	uiValor;
+	void * 	p_vValor;
 
-	int				iAnt;
-	int				iSig;
+	int		iAnt;
+	int		iSig;
 } SVLisElem;
 
 
-SVLisElem * SVLisElCrear ( unsigned int	uiValor )
+SVLisElem * SVLisElCrear ( void * p_vValor )
 {
 	SVLisElem * p_liselObj;
 
 	p_liselObj = (SVLisElem *) MemReservar ( sizeof ( SVLisElem ) );
-	if ( ES_VALIDO ( p_liselObj ) )
+	if ( ES_VALIDO ( p_liselObj ) && ES_VALIDO ( p_vValor ) )
 	{
-		p_liselObj->uiValor = uiValor;
+		p_liselObj->p_vValor = p_vValor;
 
 		p_liselObj->iAnt = -1;
 		p_liselObj->iSig = -1;
@@ -59,28 +59,28 @@ int SVLisElEsValido ( SVLisElem * p_liselObj )
 	return ( iRes );
 }
 
-unsigned int SVLisElValor ( SVLisElem * p_liselObj )
+void * SVLisElValor ( SVLisElem * p_liselObj )
 {
-	unsigned int uiRes;
+	void * p_vRes;
 
 	if ( ES_VALIDO ( p_liselObj ) )
 	{
-		uiRes = p_liselObj->uiValor;
+		p_vRes = p_liselObj->p_vValor;
 	}
 	else
 	{
-		uiRes = 0;
+		p_vRes = NULL;
 	}
-	return ( uiRes );
+	return ( p_vRes );
 }
 
-int SVLisElEstablecerValor ( SVLisElem * p_liselObj, unsigned int uiValor )
+int SVLisElEstablecerValor ( SVLisElem * p_liselObj, void * p_vValor )
 {
 	int iRes;
 
 	if ( ES_VALIDO ( p_liselObj ) )
 	{
-		p_liselObj->uiValor = uiValor;
+		p_liselObj->p_vValor = p_vValor;
 		iRes = 1;
 	}
 	else
@@ -120,7 +120,7 @@ int SVLisElSiguiente ( SVLisElem * p_liselObj )
 	return ( iRes );
 }
 
-void  SVLisElEncadenarAnterior ( SVLisElem * p_liselObj, int iAnt )
+void SVLisElEncadenarAnterior ( SVLisElem * p_liselObj, int iAnt )
 {
 	if ( ES_VALIDO ( p_liselObj ) )
 	{
@@ -128,7 +128,7 @@ void  SVLisElEncadenarAnterior ( SVLisElem * p_liselObj, int iAnt )
 	}
 }
 
-void  SVLisElEncadenarSiguiente ( SVLisElem * p_liselObj, int iSig )
+void SVLisElEncadenarSiguiente ( SVLisElem * p_liselObj, int iSig )
 {
 	if ( ES_VALIDO ( p_liselObj ) )
 	{
@@ -136,7 +136,7 @@ void  SVLisElEncadenarSiguiente ( SVLisElem * p_liselObj, int iSig )
 	}
 }
 
-void  SVLisElDesencadenarAnterior ( SVLisElem * p_liselObj )
+void SVLisElDesencadenarAnterior ( SVLisElem * p_liselObj )
 {
 	if ( ES_VALIDO ( p_liselObj ) )
 	{
@@ -144,7 +144,7 @@ void  SVLisElDesencadenarAnterior ( SVLisElem * p_liselObj )
 	}
 }
 
-void  SVLisElDesencadenarSiguiente ( SVLisElem * p_liselObj )
+void SVLisElDesencadenarSiguiente ( SVLisElem * p_liselObj )
 {
 	if ( ES_VALIDO ( p_liselObj ) )
 	{
@@ -154,10 +154,10 @@ void  SVLisElDesencadenarSiguiente ( SVLisElem * p_liselObj )
 
 SVLisElem ** SVLisContenido ( SVLista * p_lisObj )
 {
-    return ( ( SVLisElem ** ) p_lisObj->p_vContenido );
+  return ( ( SVLisElem ** ) p_lisObj->p_vContenido );
 }
 
-SVLista * SVLisCrear ( int iMaxElems )
+SVLista * SVLisCrear ( int iMaxElems, int iLiberar )
 {
 	SVLista * p_lisObj;
 
@@ -174,6 +174,7 @@ SVLista * SVLisCrear ( int iMaxElems )
 			p_lisObj->iUlt = -1;
 			p_lisObj->iLib = 0;
 			p_lisObj->iAct = -1;
+			p_lisObj->iLiberar = BoolNormalizar ( iLiberar );
 		}
 	}
 	else
@@ -309,7 +310,7 @@ int SVLisEstaVacia ( SVLista * p_lisObj )
 	return ( iRes );
 }
 
-int SVLisInsertar ( SVLista * p_lisObj, unsigned int uiValor )
+int SVLisInsertar ( SVLista * p_lisObj, void * p_vValor )
 {
 	SVLisElem *	p_liselAux;
 	SVLisElem *	p_liselObj;
@@ -320,7 +321,7 @@ int SVLisInsertar ( SVLista * p_lisObj, unsigned int uiValor )
 	{
 		if ( p_lisObj->iNumElems < p_lisObj->iMaxElems )
 		{
-			p_liselObj = SVLisElCrear ( uiValor );
+			p_liselObj = SVLisElCrear ( p_vValor );
 			if ( ES_VALIDO ( p_liselObj ) )
 			{
 				if ( p_lisObj->iNumElems == 0 )
@@ -399,7 +400,7 @@ int SVLisInsertar ( SVLista * p_lisObj, unsigned int uiValor )
 								{
 									p_lisObj->iLib = 0;
 								}
-								p_liselAux = SVLisContenido ( p_lisObj ) [ p_lisObj->iPrim ];
+								p_liselAux = SVLisContenido ( p_lisObj ) [ p_lisObj->iLib ];
 								if ( ES_NULO ( p_liselAux ) )
 								{
 									iEnc = 1;
@@ -416,10 +417,10 @@ int SVLisInsertar ( SVLista * p_lisObj, unsigned int uiValor )
 					}
 				}
 			}
-            else
-            {
-                iRes = 0;
-            }
+			else
+			{
+				iRes = 0;
+			}
 		}
 		else
 		{
@@ -567,11 +568,10 @@ int SVListaEstaPosicionado ( SVLista * p_lisObj )
 	return ( iRes );
 }
 
-// PENDIENTE: recoger error!!!
-unsigned int SVLisElementoActual ( SVLista * p_lisObj )
+void * SVLisElementoActual ( SVLista * p_lisObj )
 {
-	SVLisElem *     p_liselObj;
-	unsigned int    uiRes;
+	SVLisElem *   p_liselObj;
+	void *  p_vRes;
 
 	if ( ES_VALIDO ( p_lisObj ) )
 	{
@@ -580,110 +580,121 @@ unsigned int SVLisElementoActual ( SVLista * p_lisObj )
 			p_liselObj = SVLisContenido ( p_lisObj ) [ p_lisObj->iAct ];
 			if ( ES_VALIDO ( p_liselObj ) )
 			{
-				uiRes = p_liselObj->uiValor;
+				p_vRes = p_liselObj->p_vValor;
 			}
 			else
 			{
-				uiRes = 0;
+				ERROR_ESTABLECER( ERR_ESTRUCTURA_INVALIDA );
+				p_vRes = NULL;
 			}
 		}
 		else
 		{
-			uiRes = 0;
+			ERROR_ESTABLECER( ERR_POSICION_INVALIDA );
+			p_vRes = NULL;
 		}
 	}
 	else
 	{
-		uiRes = 0;
+		p_vRes = NULL;
 	}
-	return ( uiRes );
+	return ( p_vRes );
 }
 
 SVLisElem * SVLisObtenerElemento ( SVLista * p_lisObj, int iPos, int * p_iIndice )
 {
 	SVLisElem * p_liselObj;
-	int         iElem;
+	int     	iElem;
 
-    if ( ( iPos >= 0 ) && ( iPos < p_lisObj->iNumElems ) )
-    {
-        iElem = 0;
-        p_liselObj = SVLisContenido ( p_lisObj ) [ p_lisObj->iPrim ];
-        *p_iIndice = p_lisObj->iPrim;
-        while ( ES_VALIDO ( p_liselObj ) && ( iElem < iPos ) && ( p_liselObj->iSig >= 0 ) )
-        {
-            iElem = iElem + 1;
-            p_liselObj = SVLisContenido ( p_lisObj ) [ p_liselObj->iSig ];
-            *p_iIndice = p_liselObj->iSig;
-       }
-        if ( iElem != iPos )
-		{
-            p_liselObj = NULL;
-        }
-    }
-    else
-    {
-        p_liselObj = NULL;
-    }
-    return ( p_liselObj );
-}
-
-unsigned int SVLisElemento ( SVLista * p_lisObj, int iPos )
-{
-	unsigned int    uiRes;
-	int             iIndice;
-	SVLisElem *     p_liselObj;
-
-	if ( ES_VALIDO ( p_lisObj ) )
+	if ( ( iPos >= 0 ) && ( iPos < p_lisObj->iNumElems ) )
 	{
-		p_liselObj = SVLisObtenerElemento ( p_lisObj, iPos, &iIndice );
-		if ( ES_VALIDO ( p_liselObj ) )
+		iElem = 0;
+		p_liselObj = SVLisContenido ( p_lisObj ) [ p_lisObj->iPrim ];
+		*p_iIndice = p_lisObj->iPrim;
+		while ( ES_VALIDO ( p_liselObj ) && ( iElem < iPos ) && ( p_liselObj->iSig >= 0 ) )
 		{
-            uiRes = p_liselObj->uiValor;
+			iElem = iElem + 1;
+			*p_iIndice = p_liselObj->iSig;
+			p_liselObj = SVLisContenido ( p_lisObj ) [ p_liselObj->iSig ];
 		}
-		else
+		if ( iElem != iPos )
 		{
-			uiRes = 0;
+			p_liselObj = NULL;
 		}
 	}
 	else
 	{
-		uiRes = 0;
+		p_liselObj = NULL;
 	}
-	return ( uiRes );
+	return ( p_liselObj );
 }
 
-int SVLisEliminar ( SVLista * p_lisObj, int iPos )
+void * SVLisElemento ( SVLista * p_lisObj, int iPos )
 {
-	int         iRes;
-	int         iIndice;
-	SVLisElem * p_liselObj;
-	SVLisElem * p_liselAnt;
-	SVLisElem * p_liselPos;
+	void *  p_vRes;
+	int       iIndice;
+	SVLisElem *   p_liselObj;
 
 	if ( ES_VALIDO ( p_lisObj ) )
 	{
 		p_liselObj = SVLisObtenerElemento ( p_lisObj, iPos, &iIndice );
 		if ( ES_VALIDO ( p_liselObj ) )
 		{
-		    if ( p_liselObj->iAnt >= 0 )
-            {
-                p_liselAnt = SVLisContenido ( p_lisObj ) [ p_liselObj->iAnt ];
-                p_liselAnt->iSig = p_liselObj->iSig;
-            }
-		    if ( p_liselObj->iSig >= 0 )
-            {
-                p_liselPos = SVLisContenido ( p_lisObj ) [ p_liselObj->iSig ];
-                p_liselPos->iAnt = p_liselObj->iAnt;
-            }
-            if ( p_lisObj->iAct == iIndice )
-            {
-                p_lisObj->iAct = p_liselObj->iSig;
-            }
-            if ( p_lisObj->iLib == 1 )
-            {
-                SVLisElDestruir ( &p_liselObj );
-            }
-            SVLisContenido ( p_lisObj ) [ iIndice ] = NULL;
+			p_vRes = p_liselObj->p_vValor;
+		}
+		else
+		{
+			p_vRes = NULL;
+		}
+	}
+	else
+	{
+		p_vRes = NULL;
+	}
+	return ( p_vRes );
+}
+
+int SVLisEliminar ( SVLista * p_lisObj, int iPos )
+{
+	int     		iRes;
+	int    		 	iIndice;
+	SVLisElem * 	p_liselObj;
+	SVLisElem * 	p_liselAnt;
+	SVLisElem * 	p_liselPos;
+
+	if ( ES_VALIDO ( p_lisObj ) )
+	{
+		p_liselObj = SVLisObtenerElemento ( p_lisObj, iPos, &iIndice );
+		if ( ES_VALIDO ( p_liselObj ) )
+		{
+			if ( p_liselObj->iAnt >= 0 )
+			{
+				p_liselAnt = SVLisContenido ( p_lisObj ) [ p_liselObj->iAnt ];
+				p_liselAnt->iSig = p_liselObj->iSig;
+			}
+			if ( p_liselObj->iSig >= 0 )
+			{
+				p_liselPos = SVLisContenido ( p_lisObj ) [ p_liselObj->iSig ];
+				p_liselPos->iAnt = p_liselObj->iAnt;
+			}
+			if ( p_lisObj->iAct == iIndice )
+			{
+				p_lisObj->iAct = p_liselObj->iSig;
+			}
+			if ( p_lisObj->iPrim == iIndice )
+			{
+				p_lisObj->iPrim = p_liselObj->iSig;
+			}
+			if ( p_lisObj->iUlt == iIndice )
+			{
+				p_lisObj->iUlt = p_liselObj->iAnt;
+			}
+			if ( p_lisObj->iLiberar == 1 )
+			{
+				SVLisElDestruir ( &p_liselObj );
+			}
+			SVLisContenido ( p_lisObj ) [ iIndice ] = NULL;
+			p_lisObj->iNumElems = p_lisObj->iNumElems - 1;
 		}
 		else
 		{
@@ -701,19 +712,51 @@ void SVLisVaciar ( SVLista * p_lisObj )
 {
 	if ( ES_VALIDO ( p_lisObj ) )
 	{
-	    for ( int iElem = 0; iElem < p_lisObj->iMaxElems; iElem = iElem + 1 )
-        {
-            SVLisElem * p_liselObj = SVLisContenido( p_lisObj ) [ iElem ];
-            if ( ES_VALIDO ( p_liselObj ) && ( p_lisObj->iLib == 1 ) )
-            {
-                 SVLisElDestruir ( &p_liselObj );
-            }
-            SVLisContenido( p_lisObj ) [ iElem ] = NULL;
-        }
-        p_lisObj->iNumElems = 0;
-        p_lisObj->iPrim = -1;
-        p_lisObj->iUlt = -1;
-        p_lisObj->iAct = -1;
+		for ( int iElem = 0; iElem < p_lisObj->iMaxElems; iElem = iElem + 1 )
+		{
+			SVLisElem * p_liselObj = SVLisContenido( p_lisObj ) [ iElem ];
+			if ( ES_VALIDO ( p_liselObj ) && ( p_lisObj->iLiberar == 1 ) )
+			{
+				SVLisElDestruir ( &p_liselObj );
+			}
+			SVLisContenido ( p_lisObj ) [ iElem ] = NULL;
+		}
+		p_lisObj->iNumElems = 0;
+		p_lisObj->iPrim = -1;
+		p_lisObj->iUlt = -1;
+		p_lisObj->iAct = -1;
 	}
 
 }
+
+int	SVLisLiberacionMemoriaActivada ( SVLista * p_lisObj )
+{
+	int	iRes;
+
+	if ( ES_VALIDO ( p_lisObj ) ) 
+	{
+		iRes = p_lisObj->iLiberar;
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+void SVLisActivarLiberacionMemoria ( SVLista * p_lisObj )
+{
+	if ( ES_VALIDO ( p_lisObj ) ) 
+	{
+		p_lisObj->iLiberar = 1;
+	}
+}
+
+void SVLisDesactivarLiberacionMemoria ( SVLista * p_lisObj )
+{
+	if ( ES_VALIDO ( p_lisObj ) ) 
+	{
+		p_lisObj->iLiberar = 0;
+	}
+}
+

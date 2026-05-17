@@ -12,7 +12,6 @@ SPilaCadenas * SPilCadCrear ()
 	if ( ES_VALIDO ( p_pilObj ) )
 	{
 		p_pilObj->p_pilDatos = SPilpCrear ();
-		SPilpActivarLiberacionMemoria ( p_pilObj->p_pilDatos );
 	}
 	return ( p_pilObj );
 }
@@ -27,7 +26,8 @@ void SPilCadDestruir ( SPilaCadenas ** p_p_pilObj )
 
 		if ( ES_VALIDO ( p_pilObj ) )
 		{
-			SPilpDestruir ( &(p_pilObj->p_pilDatos) );
+			SPilCadVaciar ( p_pilObj );
+			SPilpDestruir ( &(p_pilObj->p_pilDatos), 0 );
 			MemLiberar ( (void **) p_p_pilObj );
 		}
 	}
@@ -58,7 +58,7 @@ int SPilCadEstaVacia ( SPilaCadenas * p_pilObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }
@@ -173,11 +173,17 @@ int SPilCadEliminarPrimero ( SPilaCadenas * p_pilObj )
 
 int SPilCadVaciar ( SPilaCadenas * p_pilObj )
 {
-	int iRes;
+	SCadena * 	p_cadObj;
+	int 		iRes;
 
 	if ( ES_VALIDO ( p_pilObj ) )
 	{
-		iRes = SPilpVaciar ( p_pilObj->p_pilDatos );
+		while ( SPilCadEstaVacia ( p_pilObj ) == 0 )
+		{
+			p_cadObj = SPilCadDesapilar ( p_pilObj );
+			SCadDestruir ( &p_cadObj );
+		}
+		iRes = SPilpVaciar ( p_pilObj->p_pilDatos, 0 );
 	}
 	else
 	{

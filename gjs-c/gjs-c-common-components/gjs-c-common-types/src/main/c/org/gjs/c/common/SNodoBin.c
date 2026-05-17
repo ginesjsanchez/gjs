@@ -9,7 +9,7 @@
 
 
 
-static void SNodBinIncializar ( SNodoBin * p_nodbObj, int iTamDatos, SBloque * p_blqDatos, byte * p_byDirDatos, int iLiberar );
+static void SNodBinInicializar ( SNodoBin * p_nodbObj, int iTamDatos, SBloque * p_blqDatos, byte * p_byDirDatos, int iLiberar );
 
 
 
@@ -23,7 +23,7 @@ SNodoBin * SNodBinCrearMem ( int iTamDatos )
 		p_nodbObj = (SNodoBin *) MemReservar ( sizeof ( SNodoBin ) );
 		if ( p_nodbObj != NULL )
 		{
-			SNodBinIncializar ( p_nodbObj, iTamDatos, NULL, NULL, 1 );
+			SNodBinInicializar ( p_nodbObj, iTamDatos, NULL, NULL, 1 );
 		}
 	}
 	else
@@ -710,11 +710,11 @@ int SNodBinProfundidad ( SNodoBin * p_nodbObj )
      {
      	if ( ES_VALIDO ( p_nodbObj->p_nodbPadre  ) )
      	{
-     		iProfundidad = 0;
+     		iProfundidad = SNodBinProfundidad ( p_nodbObj->p_nodbPadre ) + 1;
      	}
      	else
      	{
-     		iProfundidad = SNodBinProfundidad ( p_nodbObj->p_nodbPadre ) + 1;
+     		iProfundidad = 0;
      	}
 	}
 	else
@@ -819,7 +819,10 @@ int SNodBinEstHijoIzq ( SNodoBin * p_nodbObj, SNodoBin * p_nodbHijo, int iLibera
 		{
 			SNodBinDestruir ( &(p_nodbObj->p_nodbHijoIzq), 1 );
 		}
-		p_nodbHijo->p_nodbPadre = p_nodbObj;
+		if ( ES_VALIDO ( p_nodbHijo ) )
+		{
+			p_nodbHijo->p_nodbPadre = p_nodbObj;
+		}
     	p_nodbObj->p_nodbHijoIzq = p_nodbHijo;
      	if ( ES_VALIDO ( p_nodbObj->p_nodbHijoIzq ) )
      	{
@@ -847,7 +850,10 @@ int SNodBinEstHijoDer ( SNodoBin * p_nodbObj, SNodoBin * p_nodbHijo, int iLibera
 		{
 			SNodBinDestruir ( &(p_nodbObj->p_nodbHijoDer), 1 );
 		}
-		p_nodbHijo->p_nodbPadre = p_nodbObj;
+		if ( ES_VALIDO ( p_nodbHijo ) )
+		{
+			p_nodbHijo->p_nodbPadre = p_nodbObj;
+		}
      	p_nodbObj->p_nodbHijoDer = p_nodbHijo;
      	if ( ES_VALIDO ( p_nodbObj->p_nodbHijoDer ) )
      	{
@@ -948,31 +954,37 @@ int SNodBinVerificar ( SNodoBin * p_nodbObj, int iCorregir )
      if ( ES_VALIDO ( p_nodbObj ) )
      {
      	iRes = 1;
-     	if ( SNodBinPadre ( p_nodbObj->p_nodbHijoIzq ) != p_nodbObj )
-     	{
-     		if ( iCorregir == 1 )
-     		{
-     			SNodBinEmpadronar ( p_nodbObj->p_nodbHijoIzq, p_nodbObj );
-     		}
-     		iRes = 0;
-     	}
-     	if ( SNodBinPadre ( p_nodbObj->p_nodbHijoDer ) != p_nodbObj )
-     	{
-     		if ( iCorregir == 1 )
-     		{
-     			SNodBinEmpadronar ( p_nodbObj->p_nodbHijoDer, p_nodbObj );
-     		}
-     		iRes = 0;
-     	}
-     	if ( SNodBinVerificar ( p_nodbObj->p_nodbHijoIzq, iCorregir ) == 0 )
-     	{
-     		iRes = 0;
-     	}
-     	if ( SNodBinVerificar ( p_nodbObj->p_nodbHijoDer, iCorregir ) == 0 )
-     	{
-     		iRes = 0;
-     	}
-    	}
+		if ( ES_VALIDO ( p_nodbObj->p_nodbHijoIzq ) )
+		{
+			if ( SNodBinPadre ( p_nodbObj->p_nodbHijoIzq ) != p_nodbObj )
+			{
+				if ( iCorregir == 1 )
+				{
+					SNodBinEmpadronar ( p_nodbObj->p_nodbHijoIzq, p_nodbObj );
+				}
+				iRes = 0;
+			}
+			if ( SNodBinVerificar ( p_nodbObj->p_nodbHijoIzq, iCorregir ) == 0 )
+			{
+				iRes = 0;
+			}
+		}
+ 		if ( ES_VALIDO ( p_nodbObj->p_nodbHijoDer ) )
+		{
+			if ( SNodBinPadre ( p_nodbObj->p_nodbHijoDer ) != p_nodbObj )
+			{
+				if ( iCorregir == 1 )
+				{
+					SNodBinEmpadronar ( p_nodbObj->p_nodbHijoDer, p_nodbObj );
+				}
+				iRes = 0;
+			}
+			if ( SNodBinVerificar ( p_nodbObj->p_nodbHijoDer, iCorregir ) == 0 )
+			{
+				iRes = 0;
+			}
+		}
+    }
 	else
 	{
 		iRes = 0;
@@ -1009,7 +1021,7 @@ SNodoBin * SNodBinDuplicar ( SNodoBin * p_nodbObj )
 			p_nodbDup = SNodBinCrearMem ( SBlqTam ( p_blqDatos ) );
 			if ( ES_VALIDO ( p_nodbDup ) )
 			{
-				p_nodbDup->p_blqDatos = SBlqDuplicar ( p_blqDatos );
+				SBlqCopiar ( p_nodbDup->p_blqDatos, p_blqDatos );
 				p_nodbDup->iLiberar = 1;
 			}
 		}
@@ -1025,7 +1037,7 @@ SNodoBin * SNodBinDuplicar ( SNodoBin * p_nodbObj )
 	return ( p_nodbDup );
 }
 
-static void SNodBinIncializar ( SNodoBin * p_nodbObj, int iTamDatos, SBloque * p_blqDatos, byte * p_byDirDatos, int iLiberar )
+static void SNodBinInicializar ( SNodoBin * p_nodbObj, int iTamDatos, SBloque * p_blqDatos, byte * p_byDirDatos, int iLiberar )
 {
      if ( ES_VALIDO ( p_nodbObj ) )
      {

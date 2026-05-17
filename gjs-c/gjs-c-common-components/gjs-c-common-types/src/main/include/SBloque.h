@@ -79,4 +79,6 @@ int SBlqTamCompatible ( SBloque * p_blqObj, int iTam );
 int SBlqVolcar ( SBloque * p_blqObj, int iPos, SBloque * p_blqDatos );
 SBloque * SBlqExtraer ( SBloque * p_blqObj, int iPos, int iTam );
 
+unsigned int SBlqHash ( SBloque * p_blqObj );
+
 #endif

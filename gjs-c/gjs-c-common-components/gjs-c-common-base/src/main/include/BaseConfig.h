@@ -295,7 +295,8 @@ typedef byte4	dword;
 #elif ( defined ( GNU ) )
 
 #	define LLONG
-	typedef long long llong;
+	typedef long long 			llong;
+	typedef unsigned long long 	ullong;
 
 #	define	atol	atoi
 
@@ -303,10 +304,12 @@ typedef byte4	dword;
 #elif ( defined ( __int64 ) )
 
 #	define LLONG
-	typedef __int64 llong;
+	typedef __int64 			llong;
+	typedef __uint64 			ullong;
 
 #	define LLONG_MIN	_I64_MIN		//(-9223372036854775807i64 - 1)
 #	define LLONG_MAX	_I64_MAX		//9223372036854775807i64
+#	define ULLONG_MAX	_UI64_MAX		
 
 	// PENDIENTE: Ver si está definido atoll o atoi64
 #else
@@ -351,7 +354,7 @@ typedef byte4	dword;
 #define ERR_MSJ_DEFECTO						"Se ha producido un error."
 
 
-#define VALOR_NULO			"null"
+#define VALOR_NULO							"null"
 
 
 #define TIP_TAM_CHAR						sizeof(char)
@@ -393,7 +396,7 @@ typedef byte4	dword;
 
 #include <Tipos.h>
 
-#define TIP_DEFECTO						TIP_CADENA
+#define TIP_DEFECTO							TIP_CADENA
 
 
 

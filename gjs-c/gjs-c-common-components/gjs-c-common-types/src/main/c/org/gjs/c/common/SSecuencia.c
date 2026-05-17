@@ -70,18 +70,11 @@ int SSecEstaVacia ( SSecuencia * p_secObj )
 
 	if ( ES_VALIDO ( p_secObj ) )
 	{
-		if ( SLisNumElementos ( p_secObj->p_lisObjetos ) <= 0 )
-		{
-			iRes = 1;
-		}
-		else
-		{
-			iRes = 0;
-		}
+		iRes = SLisEstaVacia ( p_secObj->p_lisObjetos );
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }
@@ -111,7 +104,7 @@ int SSecInsertar ( SSecuencia * p_secObj, SElemento * p_elmObj )
 	}
 	else
 	{
-		iRes = 1;
+		iRes = 0;
 	}
 	return ( iRes );
 }

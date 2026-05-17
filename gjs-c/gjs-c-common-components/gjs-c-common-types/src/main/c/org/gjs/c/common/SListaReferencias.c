@@ -1,5 +1,4 @@
 #include "SListaReferencias.h"
-#include "SListaReferencias.h"
 
 #include "TiposBasicosConfig.h"
 
@@ -61,7 +60,7 @@ int SLisRefEstaVacia ( SListaReferencias * p_lisObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }
@@ -215,6 +214,7 @@ int SLisRefEliminar ( SListaReferencias * p_lisObj, const char * p_cAlias )
 			{
 				iRes = SLisRefEliminarElem ( p_lisObj, iElem );
 			}
+			iElem = iElem + 1;
 		}
 	}
 	else

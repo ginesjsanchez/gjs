@@ -58,7 +58,7 @@ int SPilEntEstaVacia ( SPilaEnteros * p_pilObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }

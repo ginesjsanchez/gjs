@@ -21,6 +21,8 @@ SDatos * SDatCrear ( int iTam );
 
 void SDatDestruir ( SDatos ** p_p_datObj );
 
+int SDatEsValido ( SDatos * p_datObj );
+
 int SDatEstablecerByte ( SDatos * p_datObj, int iPos, byte byVal );
 byte SDatByte ( SDatos * p_datObj, int iPos );
 
@@ -40,7 +42,7 @@ SDatos * SDatExtraer ( SDatos * p_datObj, int iTam );
 SDatos * SDatExtraerEnPos ( SDatos * p_datObj, int iPos, int iTam );
 char * SDatExtraerCadena ( SDatos * p_datObj, int iTam );
 char * SDatExtraerCadenaEnPos ( SDatos * p_datObj, int iPos, int iTam );
-SDatos * SDatExtraerHastaNulo ( SDatos * p_datObj );
+SDatos * SDatExtraerHastaNulo ( SDatos * p_datObj, int iIncluirNulo );
 
 int SDatTam ( SDatos * p_datObj );
 int SDatPosicionPrimerNulo ( SDatos * p_datObj );
@@ -55,6 +57,8 @@ char * SDatCadenaHex ( SDatos * p_datObj );
 int SDatAsignarCadenaHex ( SDatos * p_datObj, const char * p_cHex );
 
 void SDatImprimir ();
+
+unsigned int SDatHash ( SDatos * p_datObj );
 
 
 

@@ -19,7 +19,7 @@ typedef struct
 
 SColaPtr * SColpCrear ();
 
-void SColpDestruir ( SColaPtr ** p_p_colObj );
+void SColpDestruir ( SColaPtr ** p_p_colObj, int iLiberar );
 
 int SColpEsValida ( SColaPtr * p_colObj );
 
@@ -35,7 +35,7 @@ int SColpEncolar ( SColaPtr * p_colObj, byte * p_byObj );
 int SColpEliminarPrimero ( SColaPtr * p_colObj );
 int SColpEliminarUltimo ( SColaPtr * p_colObj );
 int SColpEliminar ( SColaPtr * p_colObj, int iElem );
-int SColpVaciar ( SColaPtr * p_colObj );
+int SColpVaciar ( SColaPtr * p_colObj, int iLiberar );
 
 SListaPtr * SColpLista ( SColaPtr * p_colObj );
 

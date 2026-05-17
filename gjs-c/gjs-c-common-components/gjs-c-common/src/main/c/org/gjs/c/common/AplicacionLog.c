@@ -342,7 +342,7 @@ int AplicLogAnotarAviso ( const char * p_cTexto, ... )
 	}
 	else
 	{
-		ERROR_ESTABLECER ( ERR_MEMORIA_INSUFICIENTE );
+		ERROR_ESTABLECER ( ERR_PARAMETROS );
 		iRes = 0;
 	}
 	va_end ( valArgumentos );

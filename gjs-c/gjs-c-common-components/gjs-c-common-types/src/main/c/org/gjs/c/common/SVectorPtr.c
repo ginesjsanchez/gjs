@@ -18,6 +18,10 @@ SVectorPtr * SVecpCrear ( int iNumElementos )
 			p_vecObj->iNumElementos = iNumElementos;
 			p_vecObj->p_p_byElementos = (byte **) MemReservar ( iNumElementos * sizeof ( byte * ) );
 			p_vecObj->iLiberar = 0;
+			if ( ES_NULO ( p_vecObj->p_p_byElementos ) )
+			{
+				MemLiberar ( (void **) &p_vecObj );
+			}
 		}
 	}
 	else

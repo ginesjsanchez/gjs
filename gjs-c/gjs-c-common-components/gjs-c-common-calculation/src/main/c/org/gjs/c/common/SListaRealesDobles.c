@@ -1,7 +1,7 @@
 #include "SListaRealesDobles.h"
 
-#include "TiposBasicosConfig.h"
-
+#include "CalculoConfig.h"
+#include "CalculoOperaciones.h"
 
 
 
@@ -58,7 +58,7 @@ int SLisRealdEstaVacia ( SListaRealesDobles * p_lisObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }
@@ -216,12 +216,13 @@ double SLisRealdActual ( SListaRealesDobles * p_lisObj )
 		}
 		else
 		{
-			dRes = 0;
+			ERROR_ESTABLECER( ERR_POSICION_INVALIDA );
+			dRes = 0.0;
 		}
 	}
 	else
 	{
-		dRes = 0;
+		dRes = 0.0;
 	}
 	return ( dRes );
 }
@@ -304,13 +305,13 @@ int SLisRealdEstaEnFinal ( SListaRealesDobles * p_lisObj )
 	return ( iRes );
 }
 
-int SLisRealdEstaEnIncio ( SListaRealesDobles * p_lisObj )
+int SLisRealdEstaEnInicio ( SListaRealesDobles * p_lisObj )
 {
 	int iRes;
 
 	if ( ES_VALIDO ( p_lisObj ) ) 
 	{
-		iRes = SLisEstaEnIncio ( p_lisObj->p_lisDatos );
+		iRes = SLisEstaEnInicio ( p_lisObj->p_lisDatos );
 	}
 	else
 	{
@@ -420,7 +421,7 @@ int SLisRealdExiste ( SListaRealesDobles * p_lisObj, double dDato )
 		iElem = 0;
 		while ( ( iElem < SLisRealdNumElementos ( p_lisObj ) ) && ( iRes == 0 ) )
 		{
-			if ( SLisRealdElemento ( p_lisObj, iElem ) == dDato )
+			if ( MatEsIgual ( SLisRealdElemento ( p_lisObj, iElem ), dDato ) == 1 )
 			{
 				iRes = 1;
 			}
@@ -445,7 +446,7 @@ int SLisRealdBuscar ( SListaRealesDobles * p_lisObj, double dDato )
 		iElem = 0;
 		while ( ( iElem < SLisRealdNumElementos ( p_lisObj ) ) && ( iRes == -1 ) )
 		{
-			if ( SLisRealdElemento ( p_lisObj, iElem ) == dDato )
+			if ( MatEsIgual ( SLisRealdElemento ( p_lisObj, iElem ), dDato ) == 1 )
 			{
 				iRes = iElem;
 			}

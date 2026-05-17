@@ -133,7 +133,7 @@ int SIndIncrementarExt ( SIndicador * p_indObj, unsigned long ulValor )
 
 	if ( ES_VALIDO ( p_indObj ) && ( ulValor > 0 ) )
 	{
-		if ( p_indObj->ulValor + ulValor < p_indObj->ulMax )
+		if ( p_indObj->ulValor + ulValor <= p_indObj->ulMax )
 		{
 			p_indObj->ulValor = p_indObj->ulValor + ulValor;
 			iRes = 1;
@@ -181,7 +181,7 @@ int SIndMoverA ( SIndicador * p_indObj, unsigned long ulValor )
 
 	if ( ES_VALIDO ( p_indObj ) )
 	{
-		if ( ( ulValor >= 0 ) && ( ulValor <= p_indObj->ulMax ) )
+		if ( ulValor <= p_indObj->ulMax )
 		{
 			p_indObj->ulValor = ulValor;
 			iRes = 1;
@@ -242,3 +242,68 @@ int SIndEstaEnInicio ( SIndicador * p_indObj )
 	return ( iRes );
 }
 
+int SIndPuedeIncrementar ( SIndicador * p_indObj, unsigned long ulValor )
+{
+	int iRes;
+
+	if ( ES_VALIDO ( p_indObj ) && ( ulValor > 0 ) )
+	{
+		if ( p_indObj->ulValor + ulValor <= p_indObj->ulMax )
+		{
+			iRes = 1;
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SIndPuedeDecrementar ( SIndicador * p_indObj, unsigned long ulValor )
+{
+	int iRes;
+
+	if ( ES_VALIDO ( p_indObj ) && ( ulValor > 0 ) )
+	{
+		if ( p_indObj->ulValor >= ulValor )
+		{
+			iRes = 1;
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SIndPuedeMoverA ( SIndicador * p_indObj, unsigned long ulValor )
+{
+	int iRes;
+
+	if ( ES_VALIDO ( p_indObj ) )
+	{
+		if ( ulValor <= p_indObj->ulMax )
+		{
+			iRes = 1;
+		}
+		else
+		{
+			iRes = 0;
+		}
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}

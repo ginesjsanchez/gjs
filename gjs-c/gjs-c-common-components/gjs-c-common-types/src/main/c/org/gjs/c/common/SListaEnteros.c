@@ -58,7 +58,7 @@ int SLisEntEstaVacia ( SListaEnteros * p_lisObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }
@@ -240,12 +240,13 @@ int SLisEntActual ( SListaEnteros * p_lisObj )
 		}
 		else
 		{
-			iRes = -1;
+			ERROR_ESTABLECER( ERR_POSICION_INVALIDA );
+			iRes = 0;
 		}
 	}
 	else
 	{
-		iRes = 0;
+		iRes = -1;
 	}
 	return ( iRes );
 }
@@ -328,13 +329,13 @@ int SLisEntEstaEnFinal ( SListaEnteros * p_lisObj )
 	return ( iRes );
 }
 
-int SLisEntEstaEnIncio ( SListaEnteros * p_lisObj )
+int SLisEntEstaEnInicio ( SListaEnteros * p_lisObj )
 {
 	int iRes;
 
 	if ( ES_VALIDO ( p_lisObj ) ) 
 	{
-		iRes = SLisEstaEnIncio ( p_lisObj->p_lisDatos );
+		iRes = SLisEstaEnInicio ( p_lisObj->p_lisDatos );
 	}
 	else
 	{

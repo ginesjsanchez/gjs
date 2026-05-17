@@ -59,7 +59,7 @@ int SLisCadEstaVacia ( SListaCadenas * p_lisObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }
@@ -453,13 +453,13 @@ int SLisCadEstaEnFinal ( SListaCadenas * p_lisObj )
 	return ( iRes );
 }
 
-int SLisCadEstaEnIncio ( SListaCadenas * p_lisObj )
+int SLisCadEstaEnInicio ( SListaCadenas * p_lisObj )
 {
 	int iRes;
 
 	if ( ES_VALIDO ( p_lisObj ) ) 
 	{
-		iRes = SLispEstaEnIncio ( p_lisObj->p_lisDatos );
+		iRes = SLispEstaEnInicio ( p_lisObj->p_lisDatos );
 	}
 	else
 	{

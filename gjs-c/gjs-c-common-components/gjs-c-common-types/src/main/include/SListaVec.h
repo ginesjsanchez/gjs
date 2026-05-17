@@ -16,11 +16,13 @@ typedef struct
 	int					iUlt;
 	int					iLib;
 	int					iAct;
+	
+	int 				iLiberar;
 } SVLista;
 
 
 
-SVLista * SVLisCrear ( int iMaxElems );
+SVLista * SVLisCrear ( int iMaxElems, int iLiberar );
 
 void SVLisDestruir ( SVLista ** p_p_lisObj );
 
@@ -30,7 +32,7 @@ int SVLisMaxElementos ( SVLista * p_lisObj );
 int SVLisEstaLlena ( SVLista * p_lisObj );
 int SVLisEstaVacia ( SVLista * p_lisObj );
 
-int SVLisInsertar ( SVLista * p_lisObj, unsigned int uiValor );
+int SVLisInsertar ( SVLista * p_lisObj, void * p_vValor );
 
 void SVLisInicio ( SVLista * p_lisObj );
 void SVLisFinal ( SVLista * p_lisObj );
@@ -40,12 +42,16 @@ int SVListaEstaEnPrincipio ( SVLista * p_lisObj );
 int SVListaEstaEnFinal ( SVLista * p_lisObj );
 int SVListaEstaPosicionado ( SVLista * p_lisObj );
 
-unsigned int SVLisElementoActual ( SVLista * p_lisObj );
-unsigned int SVLisElemento ( SVLista * p_lisObj, int iPos );
+void * SVLisElementoActual ( SVLista * p_lisObj );
+void * SVLisElemento ( SVLista * p_lisObj, int iPos );
 
 int SVLisEliminar ( SVLista * p_lisObj, int iPos );
 
 void SVLisVaciar ( SVLista * p_lisObj );
+
+int	SVLisLiberacionMemoriaActivada ( SVLista * p_lisObj );
+void SVLisActivarLiberacionMemoria ( SVLista * p_lisObj );
+void SVLisDesactivarLiberacionMemoria ( SVLista * p_lisObj );
 
 
 #endif

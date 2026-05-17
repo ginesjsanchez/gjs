@@ -88,6 +88,26 @@ int NumDigitosEnteroDobleLargo ( llong llVal )
 	}
 	return ( iDigs );
 }
+
+int NumDigitosEnteroDobleLargoSinSigno ( ullong ullVal )
+{
+	int iDigs;
+
+	if ( ullVal == 0 )
+	{
+		iDigs = 1;
+	}
+	else
+	{
+		iDigs = 0;
+		while ( ullVal > 0 )
+		{
+			iDigs = iDigs + 1;
+			ullVal = ullVal / 10;
+		}
+	}
+	return ( iDigs );
+}
 #endif
 
 int NumDigitosEnteroSinSigno ( unsigned int uiVal )

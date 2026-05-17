@@ -57,7 +57,7 @@ int SSecGenIdEstaVacia ( SSecuenciaGeneradoresId * p_secObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }

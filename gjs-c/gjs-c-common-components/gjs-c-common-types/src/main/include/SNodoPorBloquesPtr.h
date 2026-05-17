@@ -60,7 +60,7 @@ int SNodBlqPtrEliminarHijo ( SNodoBlqPtr * p_nodpObj, int iHijo, int iLiberar );
 int SNodBlqPtrEstablecerHijo ( SNodoBlqPtr * p_nodpObj, int iHijo, SNodoBlqPtr * p_nodpHijo, int iLiberar );
 void SNodBlqPtrLimpiarHijos ( SNodoBlqPtr * p_nodpObj, int iLiberar );
 
-int	SNodBlqPtrEsHijo ( SNodoBlqPtr * p_nodpObj );
+int	SNodBlqPtrEsHijo ( SNodoBlqPtr * p_nodpObj, SNodoBlqPtr * p_nodPposible );
 int SNodBlqPtrOrdenDelHijo ( SNodoBlqPtr * p_nodpObj, SNodoBlqPtr * p_nodpHijo );
 
 int SNodBlqPtrVerificar ( SNodoBlqPtr * p_nodpObj, int iCorregir );

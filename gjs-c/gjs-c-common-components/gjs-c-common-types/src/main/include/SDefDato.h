@@ -27,7 +27,7 @@ SDefDato * SDefDatCrear ( unsigned long	ulId, const char * p_cNombre, int iTipo,
 
 void SDefDatDestruir ( SDefDato ** p_p_ddatObj );
 
-int SDefDatEsValida ( SDefDato * p_ddatObj );
+int SDefDatEsValido ( SDefDato * p_ddatObj );
 
 unsigned long SDefDatId ( SDefDato * p_ddatObj );
 int SDefDatTipo ( SDefDato * p_ddatObj );

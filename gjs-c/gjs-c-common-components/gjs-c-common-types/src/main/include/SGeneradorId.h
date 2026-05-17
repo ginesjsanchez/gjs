@@ -40,6 +40,7 @@ typedef struct
 
 
 SGeneradorId * SGenIdCrear ( unsigned long ulIdInicial, unsigned long ulUltimoId, unsigned long ulIdFinal );
+SGeneradorId * SGenIdCrearDef ();
 
 void SGenIdDestruir ( SGeneradorId ** p_p_genidObj );
 

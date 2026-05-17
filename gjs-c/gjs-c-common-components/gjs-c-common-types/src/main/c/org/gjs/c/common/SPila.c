@@ -74,7 +74,7 @@ int SPilEstaVacia ( SPila * p_pilObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }
@@ -126,7 +126,7 @@ int SPilApilar ( SPila * p_pilObj, SElemento * p_elmObj )
 	}
 	else
 	{
-		iRes = 1;
+		iRes = 0;
 	}
 	return ( iRes );
 }

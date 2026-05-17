@@ -110,7 +110,7 @@ int SLisEstaVacia ( SLista * p_lisObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }
@@ -237,7 +237,7 @@ int SLisVaciar ( SLista * p_lisObj )
 {
 	int	iRes;
 
-	if ( SLisEsValida ( p_lisObj ) == 1 ) 
+	if ( ES_VALIDO ( p_lisObj ) ) 
 	{
 		iRes = 1;
 		while ( ( p_lisObj->iNumElementos > 0 ) && ( iRes == 1 ) )
@@ -275,6 +275,10 @@ SElemento * SLisActual ( SLista * p_lisObj )
 	if ( SLisEsValida ( p_lisObj ) == 1 ) 
 	{
 		p_elmRes = p_lisObj->p_elmActual;
+		if ( ES_NULO ( p_elmRes ) )
+		{
+			ERROR_ESTABLECER( ERR_POSICION_INVALIDA );
+		}
 	}
 	else
 	{
@@ -298,11 +302,6 @@ void SLisInicio ( SLista * p_lisObj )
 			p_lisObj->p_elmActual = NULL;
 		}
 	}
-	else
-	{
-		p_lisObj->iPos = -1;
-		p_lisObj->p_elmActual = NULL;
-	}
 }
 
 void SLisFinal ( SLista * p_lisObj )
@@ -319,11 +318,6 @@ void SLisFinal ( SLista * p_lisObj )
 			p_lisObj->iPos = -1;
 			p_lisObj->p_elmActual = NULL;
 		}
-	}
-	else
-	{
-		p_lisObj->iPos = -1;
-		p_lisObj->p_elmActual = NULL;
 	}
 }
 
@@ -342,11 +336,6 @@ void SLisSiguiente ( SLista * p_lisObj )
 			p_lisObj->p_elmActual = NULL;
 		}
 	}
-	else
-	{
-		p_lisObj->iPos = -1;
-		p_lisObj->p_elmActual = NULL;
-	}
 }
 
 void SLisAnterior ( SLista * p_lisObj )
@@ -364,16 +353,11 @@ void SLisAnterior ( SLista * p_lisObj )
 			p_lisObj->p_elmActual = NULL;
 		}
 	}
-	else
-	{
-		p_lisObj->iPos = -1;
-		p_lisObj->p_elmActual = NULL;
-	}
 }
 
 void SLisMoverA ( SLista * p_lisObj, int iElem )
 {
-	if ( ES_VALIDO ( p_lisObj ) )
+	if ( SLisEsValida ( p_lisObj ) == 1 ) 
 	{
 		if ( ( iElem >= 0 ) && ( iElem < p_lisObj->iNumElementos ) )
 		{
@@ -411,7 +395,7 @@ void SLisMoverA ( SLista * p_lisObj, int iElem )
 				else
 				{
 					p_lisObj->p_elmActual = p_lisObj->p_elmUltimo;
-					p_lisObj->iPos = p_lisObj->iNumElementos;
+					p_lisObj->iPos = p_lisObj->iNumElementos - 1;
 					while ( ( p_lisObj->iPos >= iElem ) && 
 							ES_VALIDO ( p_lisObj->p_elmActual ) )
 					{
@@ -426,11 +410,6 @@ void SLisMoverA ( SLista * p_lisObj, int iElem )
 			p_lisObj->iPos = -1;
 			p_lisObj->p_elmActual = NULL;
 		}
-	}
-	else
-	{
-		p_lisObj->iPos = -1;
-		p_lisObj->p_elmActual = NULL;
 	}
 }
 
@@ -458,8 +437,11 @@ int SLisBuscar ( SLista * p_lisObj, SBloque * p_blqDatos )
 			ES_VALIDO ( p_elmObj ) )
 		{
 			iEnc = SElmEsIgualBlq ( p_elmObj, p_blqDatos );
-			p_elmObj = SElmSucesor ( p_elmObj );
-			iRes = iRes + 1;
+			if ( iEnc == 0 )
+			{
+				p_elmObj = SElmSucesor ( p_elmObj );
+				iRes = iRes + 1;
+			}
 		}
 		if ( iEnc == 0 )
 		{
@@ -488,8 +470,11 @@ int SLisBuscarExt ( SLista * p_lisObj, byte * p_byDatos )
 			ES_VALIDO ( p_elmObj ) )
 		{
 			iEnc = SElmEsIgualExt ( p_elmObj, p_byDatos );
-			p_elmObj = SElmSucesor ( p_elmObj );
-			iRes = iRes + 1;
+			if ( iEnc == 0 )
+			{
+				p_elmObj = SElmSucesor ( p_elmObj );
+				iRes = iRes + 1;
+			}
 		}
 		if ( iEnc == 0 )
 		{
@@ -552,7 +537,7 @@ int SLisEstaEnFinal ( SLista * p_lisObj )
 	return ( iRes );
 }
 
-int SLisEstaEnIncio ( SLista * p_lisObj )
+int SLisEstaEnInicio ( SLista * p_lisObj )
 {
 	int iRes;
 
@@ -729,12 +714,12 @@ int SLisEliminar ( SLista * p_lisObj )
 			}
 			else
 			{
+				SElmEncadenarAntecesor ( p_elmSig, p_elmAnt );
 				p_lisObj->p_elmPrimero = p_elmSig;
 			}
 
 			if ( ES_VALIDO ( p_elmSig ) )
 			{
-				SElmEncadenarAntecesor ( p_elmSig, p_elmAnt );
 				p_lisObj->p_elmActual = p_elmSig;
 			}
 			else

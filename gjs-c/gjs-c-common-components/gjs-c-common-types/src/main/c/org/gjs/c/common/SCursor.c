@@ -95,7 +95,7 @@ int SCurEstablecer ( SCursor * p_curObj, int iLinea, int iColumna )
 	{
 		p_curObj->iLinea = iLinea;
 		p_curObj->iColumna = iColumna;
-		iRes = 1;
+		iRes = SCurEsValido ( p_curObj );
 	}
 	else
 	{
@@ -111,7 +111,7 @@ int SCurEstablecerLinea ( SCursor * p_curObj, int iLinea )
 	if ( ES_VALIDO ( p_curObj ) )
 	{
 		p_curObj->iLinea = iLinea;
-		iRes = 1;
+		iRes = SCurEsValido ( p_curObj );
 	}
 	else
 	{
@@ -127,7 +127,7 @@ int SCurEstablecerColumna ( SCursor * p_curObj, int iColumna )
 	if ( ES_VALIDO ( p_curObj ) )
 	{
 		p_curObj->iColumna = iColumna;
-		iRes = 1;
+		iRes = SCurEsValido ( p_curObj );
 	}
 	else
 	{
@@ -142,8 +142,7 @@ int SCurAsignar ( SCursor * p_curObj, SCursor * p_curVal )
 
 	if ( ES_VALIDO ( p_curObj ) && ES_VALIDO ( p_curVal ) )
 	{
-		SCurEstablecer ( p_curObj, SCurLinea ( p_curVal ), SCurColumna ( p_curVal ) );
-		iRes = 1;
+		iRes = SCurEstablecer ( p_curObj, SCurLinea ( p_curVal ), SCurColumna ( p_curVal ) );
 	}
 	else
 	{

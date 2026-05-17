@@ -41,9 +41,19 @@ SElemento * SElmCrearEntero ()
 	return ( SElmCrear ( sizeof ( int ) ) );
 }
 
+SElemento * SElmCrearEnteroSinSigno ()
+{
+	return ( SElmCrear ( sizeof ( unsigned int ) ) );
+}
+
 SElemento * SElmCrearEnteroLargo ()
 {
 	return ( SElmCrear ( sizeof ( long ) ) );
+}
+
+SElemento * SElmCrearEnteroLargoSinSigno ()
+{
+	return ( SElmCrear ( sizeof ( unsigned long ) ) );
 }
 
 SElemento * SElmCrearReal ()
@@ -192,6 +202,21 @@ int SElmEntero ( SElemento * p_elmObj )
 	return ( iRes );
 }
 
+unsigned int SElmEnteroSinSigno ( SElemento * p_elmObj )
+{
+	unsigned int uiRes;
+
+	if ( ES_VALIDO ( p_elmObj ) )
+	{
+		uiRes = SBlqEnteroSinSigno ( p_elmObj->p_blqDatos );
+	}
+	else
+	{
+		uiRes = 0;
+	}
+	return ( uiRes );
+}
+
 long SElmEnteroLargo ( SElemento * p_elmObj )
 {
 	long lRes;
@@ -205,6 +230,21 @@ long SElmEnteroLargo ( SElemento * p_elmObj )
 		lRes = 0;
 	}
 	return ( lRes );
+}
+
+unsigned long SElmEnteroLargoSinSigno ( SElemento * p_elmObj )
+{
+	unsigned long ulRes;
+
+	if ( ES_VALIDO ( p_elmObj ) )
+	{
+		ulRes = SBlqEnteroLargoSinSigno ( p_elmObj->p_blqDatos );
+	}
+	else
+	{
+		ulRes = 0;
+	}
+	return ( ulRes );
 }
 
 float SElmReal ( SElemento * p_elmObj )
@@ -357,6 +397,21 @@ int SElmEscribirEntero ( SElemento * p_elmObj, int iValor )
 	return ( iRes );
 }
 
+int SElmEscribirEnteroSinSigno ( SElemento * p_elmObj, unsigned int uiValor )
+{
+	int iRes;
+
+	if ( ES_VALIDO ( p_elmObj ) )
+	{
+		iRes = SBlqEscribirEnteroSinSigno ( p_elmObj->p_blqDatos, uiValor );
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
 int SElmEscribirEnteroLargo ( SElemento * p_elmObj, long lValor )
 {
 	int iRes;
@@ -364,6 +419,21 @@ int SElmEscribirEnteroLargo ( SElemento * p_elmObj, long lValor )
 	if ( ES_VALIDO ( p_elmObj ) )
 	{
 		iRes = SBlqEscribirEnteroLargo ( p_elmObj->p_blqDatos, lValor );
+	}
+	else
+	{
+		iRes = 0;
+	}
+	return ( iRes );
+}
+
+int SElmEscribirEnteroLargoSinSigno ( SElemento * p_elmObj, unsigned long ulValor )
+{
+	int iRes;
+
+	if ( ES_VALIDO ( p_elmObj ) )
+	{
+		iRes = SBlqEscribirEnteroLargoSinSigno ( p_elmObj->p_blqDatos, ulValor );
 	}
 	else
 	{
@@ -497,8 +567,12 @@ int SElmEncadenarAntecesor ( SElemento * p_elmObj, SElemento * p_elmAnt )
 
 	if ( ES_VALIDO ( p_elmObj ) && ES_VALIDO ( p_elmAnt ) )
 	{
-		p_elmObj->p_elmAnt = (void *) p_elmAnt;
-		SElmEncadenarSucesor ( p_elmAnt, p_elmObj );
+		if ( p_elmObj->p_elmAnt != p_elmAnt )
+		{
+			p_elmObj->p_elmAnt = (void *) p_elmAnt;
+			SElmEncadenarSucesor ( p_elmAnt, p_elmObj );
+		}
+		iRes = 1;
 	}
 	else
 	{
@@ -513,8 +587,12 @@ int SElmEncadenarSucesor ( SElemento * p_elmObj, SElemento * p_elmSuc )
 
 	if ( ES_VALIDO ( p_elmObj ) && ES_VALIDO ( p_elmSuc ) )
 	{
-		p_elmObj->p_elmSig = (void *) p_elmSuc;
-		SElmEncadenarAntecesor ( p_elmSuc, p_elmObj );
+		if ( p_elmObj->p_elmSig != p_elmSuc )
+		{
+			p_elmObj->p_elmSig = (void *) p_elmSuc;
+			iRes = SElmEncadenarAntecesor ( p_elmSuc, p_elmObj );
+		}
+		iRes = 1;
 	}
 	else
 	{
@@ -534,6 +612,7 @@ int SElmDesencadenarAntecesor ( SElemento * p_elmObj )
 			SElmDesencadenarSucesor ( (SElemento *) p_elmObj->p_elmAnt );
 		}
 		p_elmObj->p_elmAnt = NULL;
+		iRes = 1;
 	}
 	else
 	{
@@ -553,6 +632,7 @@ int SElmDesencadenarSucesor ( SElemento * p_elmObj )
 			SElmDesencadenarAntecesor ( (SElemento *) p_elmObj->p_elmSig );
 		}
 		p_elmObj->p_elmSig = NULL;
+		iRes = 1;
 	}
 	else
 	{
@@ -578,6 +658,7 @@ int SElmDesencadenar ( SElemento * p_elmObj )
 
 		p_elmObj->p_elmAnt = NULL;
 		p_elmObj->p_elmSig = NULL;
+		iRes = 1;
 	}
 	else
 	{
@@ -657,12 +738,7 @@ SElemento * SElmDuplicar ( SElemento * p_elmObj )
 		p_blqDatos = p_elmObj->p_blqDatos;
 		if ( ES_VALIDO ( p_blqDatos ) )
 		{
-			p_elmDup = SElmCrear ( SBlqTam ( p_blqDatos ) );
-			if ( ES_VALIDO ( p_elmDup ) )
-			{
-				p_elmDup->p_blqDatos = SBlqDuplicar ( p_blqDatos );
-				p_elmDup->iLiberar = 1;
-			}
+			p_elmDup = SElmEncapsular ( p_blqDatos );
 		}
 		else
 		{
@@ -674,6 +750,17 @@ SElemento * SElmDuplicar ( SElemento * p_elmObj )
 		p_elmDup = NULL;
 	}
 	return ( p_elmDup );
+}
+
+unsigned int SElmHash ( SElemento * p_elmObj )
+{
+	unsigned int uiRes = 0;
+
+	if ( ES_VALIDO ( p_elmObj ) )
+	{
+		uiRes = SBlqHash ( p_elmObj->p_blqDatos );
+	}
+	return ( uiRes );
 }
 
 

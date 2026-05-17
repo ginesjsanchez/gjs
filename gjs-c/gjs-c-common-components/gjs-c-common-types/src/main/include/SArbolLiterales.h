@@ -35,20 +35,20 @@ int SArbLitVaciar ( SArbolLiterales * p_arbObj );
 
 char * SArbLitActual ( SArbolLiterales * p_arbObj );
 
-void SArbLitMoverARaiz ( SArbolLiterales * p_arbObj );
-void SArbLitMoverAPadre ( SArbolLiterales * p_arbObj );
-void SArbLitMoverAHijo ( SArbolLiterales * p_arbObj, int iHijo );
-void SArbLitMoverAPrimHijo ( SArbolLiterales * p_arbObj );
-void SArbLitMoverAUltHijo ( SArbolLiterales * p_arbObj );
-void SArbLitMoverAPrimHermano ( SArbolLiterales * p_arbObj );
-void SArbLitMoverASigHermano ( SArbolLiterales * p_arbObj );
-void SArbLitMoverAAntHermano ( SArbolLiterales * p_arbObj );
-void SArbLitMoverAUltHermano ( SArbolLiterales * p_arbObj );
+int SArbLitMoverARaiz ( SArbolLiterales * p_arbObj );
+int SArbLitMoverAPadre ( SArbolLiterales * p_arbObj );
+int SArbLitMoverAHijo ( SArbolLiterales * p_arbObj, int iHijo );
+int SArbLitMoverAPrimHijo ( SArbolLiterales * p_arbObj );
+int SArbLitMoverAUltHijo ( SArbolLiterales * p_arbObj );
+int SArbLitMoverAPrimHermano ( SArbolLiterales * p_arbObj );
+int SArbLitMoverASigHermano ( SArbolLiterales * p_arbObj );
+int SArbLitMoverAAntHermano ( SArbolLiterales * p_arbObj );
+int SArbLitMoverAUltHermano ( SArbolLiterales * p_arbObj );
 
-void SArbLitMoverAPrimPreorden ( SArbolLiterales * p_arbObj );
-void SArbLitMoverASigPreorden ( SArbolLiterales * p_arbObj );
-void SArbLitMoverAAntPreorden ( SArbolLiterales * p_arbObj );
-void SArbLitMoverAUltPreorden ( SArbolLiterales * p_arbObj );
+int SArbLitMoverAPrimPreorden ( SArbolLiterales * p_arbObj );
+int SArbLitMoverASigPreorden ( SArbolLiterales * p_arbObj );
+int SArbLitMoverAPrimPostorden ( SArbolLiterales * p_arbObj );
+int SArbLitMoverASigPostorden ( SArbolLiterales * p_arbObj );
 
 void SArbLitDesposicionar ( SArbolLiterales * p_arbObj );
 int	SArbLitEstaPosicionado ( SArbolLiterales * p_arbObj );

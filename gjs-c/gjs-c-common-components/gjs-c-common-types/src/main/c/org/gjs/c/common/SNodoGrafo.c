@@ -18,10 +18,12 @@ SNodoGrafo * SNodGrfCrear ( int iMaxAristas )
 
 	if ( ( iMaxAristas > 0 ) && ( iMaxAristas <= GRAF_MAX_ARISTAS_NODO ) )
 	{
-		p_nodgObj = (SNodoGrafo *) malloc ( sizeof ( SNodoGrafo ) );
+		p_nodgObj = (SNodoGrafo *) MemReservar ( sizeof ( SNodoGrafo ) );
 		if ( ES_VALIDO ( p_nodgObj ) )
 		{
 			p_nodgObj->iMaxAristas = iMaxAristas;
+			p_nodgObj->p_p_arigEntrada = NULL;
+			p_nodgObj->p_p_arigSalida = NULL;
 			SNodGfrInicializar ( p_nodgObj );
 		}
 	}
@@ -458,7 +460,7 @@ int SNodGrfUltimaAristaEntradaRecorrida ( SNodoGrafo * p_nodgObj )
 	if ( ES_VALIDO ( p_nodgObj ) )
 	{
 		iRes = -1;
-		iArista = p_nodgObj->iNumAristasEnt;
+		iArista = p_nodgObj->iNumAristasEnt - 1;
 		while ( ( iArista >= 0 ) && ( iRes < 0 ) )
 		{
 			p_arigRes = p_nodgObj->p_p_arigEntrada [ iArista ];
@@ -686,8 +688,7 @@ int SNodGrfDesconectarAristaSalidaObj ( SNodoGrafo * p_nodgObj, SAristaGrafo * p
 
 			if ( iAristaDesc >= 0 )
 			{
-				p_nodgObj->p_p_arigEntrada [ iAristaDesc ] = NULL;
-
+				p_nodgObj->p_p_arigSalida [ iAristaDesc ] = NULL;
 				for ( iArista = iAristaDesc + 1; iArista < p_nodgObj->iNumAristasSal; iArista = iArista + 1 )
 				{
 					p_nodgObj->p_p_arigSalida [ iArista - 1 ] = p_nodgObj->p_p_arigSalida [ iArista ];
@@ -754,6 +755,7 @@ void SNodGrfLimpiarAristasEntrada ( SNodoGrafo * p_nodgObj )
 			}
 			p_nodgObj->p_p_arigEntrada [ iArista ] = NULL;
 		}
+		p_nodgObj->iNumAristasEnt = 0;
 	}
 }
 
@@ -776,6 +778,7 @@ void SNodGrfLimpiarAristasSalida ( SNodoGrafo * p_nodgObj, int iLiberar )
 			}
 			p_nodgObj->p_p_arigSalida [ iArista ] = NULL;
 		}
+		p_nodgObj->iNumAristasSal = 0;
 	}
 }
 
@@ -785,8 +788,8 @@ static void SNodGfrInicializar ( SNodoGrafo * p_nodgObj )
 	{
 		MemLiberar ( (void **) &(p_nodgObj->p_p_arigEntrada) );
 		MemLiberar ( (void **) &(p_nodgObj->p_p_arigSalida) );
-		p_nodgObj->p_p_arigEntrada = (SAristaGrafo **) MemReservarVector ( p_nodgObj->iMaxAristas, sizeof ( SAristaGrafo ) );
-		p_nodgObj->p_p_arigSalida = (SAristaGrafo **) MemReservarVector ( p_nodgObj->iMaxAristas, sizeof ( SAristaGrafo ) );
+		p_nodgObj->p_p_arigEntrada = (SAristaGrafo **) MemReservarVector ( p_nodgObj->iMaxAristas, sizeof ( SAristaGrafo *) );
+		p_nodgObj->p_p_arigSalida = (SAristaGrafo **) MemReservarVector ( p_nodgObj->iMaxAristas, sizeof ( SAristaGrafo *) );
 		p_nodgObj->iNumAristasEnt = 0;
 		p_nodgObj->iNumAristasSal = 0;
 		p_nodgObj->iId = -1;

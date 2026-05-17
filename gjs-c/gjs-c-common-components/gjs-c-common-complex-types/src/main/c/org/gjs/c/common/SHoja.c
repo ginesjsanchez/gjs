@@ -65,7 +65,7 @@ int SHojEstaVacia ( SHoja * p_hojObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }
@@ -343,7 +343,7 @@ int SHojEstaVacia ( SHoja * p_hojObj )
  	}
  	else
  	{
- 	 	iRes = 0;
+ 	 	iRes = 1;
  	}
  	return ( iRes );
 }

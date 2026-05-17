@@ -36,20 +36,20 @@ int SArbCadVaciar ( SArbolCadenas * p_arbpObj );
 
 SCadena * SArbCadActual ( SArbolCadenas * p_arbpObj );
 
-void SArbCadMoverARaiz ( SArbolCadenas * p_arbpObj );
-void SArbCadMoverAPadre ( SArbolCadenas * p_arbpObj );
-void SArbCadMoverAHijo ( SArbolCadenas * p_arbpObj, int iHijo );
-void SArbCadMoverAPrimHijo ( SArbolCadenas * p_arbpObj );
-void SArbCadMoverAUltHijo ( SArbolCadenas * p_arbpObj );
-void SArbCadMoverAPrimHermano ( SArbolCadenas * p_arbpObj );
-void SArbCadMoverASigHermano ( SArbolCadenas * p_arbpObj );
-void SArbCadMoverAAntHermano ( SArbolCadenas * p_arbpObj );
-void SArbCadMoverAUltHermano ( SArbolCadenas * p_arbpObj );
+int SArbCadMoverARaiz ( SArbolCadenas * p_arbpObj );
+int SArbCadMoverAPadre ( SArbolCadenas * p_arbpObj );
+int SArbCadMoverAHijo ( SArbolCadenas * p_arbpObj, int iHijo );
+int SArbCadMoverAPrimHijo ( SArbolCadenas * p_arbpObj );
+int SArbCadMoverAUltHijo ( SArbolCadenas * p_arbpObj );
+int SArbCadMoverAPrimHermano ( SArbolCadenas * p_arbpObj );
+int SArbCadMoverASigHermano ( SArbolCadenas * p_arbpObj );
+int SArbCadMoverAAntHermano ( SArbolCadenas * p_arbpObj );
+int SArbCadMoverAUltHermano ( SArbolCadenas * p_arbpObj );
 
-void SArbCadMoverAPrimPreorden ( SArbolCadenas * p_arbpObj );
-void SArbCadMoverASigPreorden ( SArbolCadenas * p_arbpObj );
-void SArbCadMoverAAntPreorden ( SArbolCadenas * p_arbpObj );
-void SArbCadMoverAUltPreorden ( SArbolCadenas * p_arbpObj );
+int SArbCadMoverAPrimPreorden ( SArbolCadenas * p_arbpObj );
+int SArbCadMoverASigPreorden ( SArbolCadenas * p_arbpObj );
+int SArbCadMoverAPrimPostorden ( SArbolCadenas * p_arbpObj );
+int SArbCadMoverASigPostorden ( SArbolCadenas * p_arbpObj );
 
 void SArbCadDesposicionar ( SArbolCadenas * p_arbpObj );
 int	SArbCadEstaPosicionado ( SArbolCadenas * p_arbpObj );

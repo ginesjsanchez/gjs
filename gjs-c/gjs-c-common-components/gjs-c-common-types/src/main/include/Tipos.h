@@ -51,6 +51,14 @@
 #include <SCola.h>
 #include <SColaPtr.h>
 
+#include <SComparador.h>
+
+#include <SListaOrdenada.h>
+#include <SListaOrdenadaPtr.h>
+#include <SListaHash.h>
+#include <SConjunto.h>
+#include <SConjuntoPtr.h>
+
 #include <SId.h>
 #include <SGeneradorId.h>
 
@@ -79,21 +87,16 @@
 #include <SListaLiterales.h>
 #include <SListaEnteros.h>
 #include <SListaEnterosLargos.h>
-#include <SListaRealesDobles.h>
 #include <SVectorLiterales.h>
 #include <SVectorEnteros.h>
-#include <SVectorRealesDobles.h>
 #include <SSecuenciaLiterales.h>
 #include <SSecuenciaEnteros.h>
 #include <SSecuenciaEnterosLargos.h>
 #include <SSecuenciaEnteroslargosSinSigno.h>
-#include <SSecuenciaRealesDobles.h>
 #include <STablaLiterales.h>
 #include <STablaEnteros.h>
-#include <STablaRealesDobles.h>
 #include <SPilaLiterales.h>
 #include <SPilaEnteros.h>
-#include <SPilaRealesDobles.h>
 #include <SArbolEnteros.h>
 #include <SArbolBinEnteros.h>
 #include <SArbolLiterales.h>

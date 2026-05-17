@@ -295,13 +295,13 @@ int SLisParEstaEnFinal ( SListaParametros * p_lisObj )
 	return ( iRes );
 }
 
-int SLisParEstaEnIncio ( SListaParametros * p_lisObj )
+int SLisParEstaEnInicio ( SListaParametros * p_lisObj )
 {
 	int iRes;
 
 	if ( ES_VALIDO ( p_lisObj ) ) 
 	{
-		iRes = SLispEstaEnIncio ( p_lisObj->p_lisDatos );
+		iRes = SLispEstaEnInicio ( p_lisObj->p_lisDatos );
 	}
 	else
 	{

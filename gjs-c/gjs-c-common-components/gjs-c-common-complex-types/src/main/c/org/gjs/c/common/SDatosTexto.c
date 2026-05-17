@@ -177,7 +177,7 @@ int SDatTxtEstaVacio ( SDatosTexto * p_datObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }

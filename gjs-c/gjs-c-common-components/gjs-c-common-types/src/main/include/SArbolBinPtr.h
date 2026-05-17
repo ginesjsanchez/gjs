@@ -56,16 +56,18 @@ int SArbBinPtrTieneHijoDer ( SArbolBinPtr * p_arbbpObj );
 int SArbBinPtrTieneHermanoIzq ( SArbolBinPtr * p_arbbpObj );
 int SArbBinPtrTieneHermanoDer ( SArbolBinPtr * p_arbbpObj );
 
-void SArbBinPtrMoverARaiz ( SArbolBinPtr * p_arbbpObj );
-void SArbBinPtrMoverAPadre ( SArbolBinPtr * p_arbbpObj );
-void SArbBinPtrMoverAHijoIzq ( SArbolBinPtr * p_arbbpObj );
-void SArbBinPtrMoverAHijoDer ( SArbolBinPtr * p_arbbpObj );
-void SArbBinPtrMoverAHermano ( SArbolBinPtr * p_arbbpObj );
+int SArbBinPtrMoverARaiz ( SArbolBinPtr * p_arbbpObj );
+int SArbBinPtrMoverAPadre ( SArbolBinPtr * p_arbbpObj );
+int SArbBinPtrMoverAHijoIzq ( SArbolBinPtr * p_arbbpObj );
+int SArbBinPtrMoverAHijoDer ( SArbolBinPtr * p_arbbpObj );
+int SArbBinPtrMoverAHermano ( SArbolBinPtr * p_arbbpObj );
 
-void SArbBinPtrMoverAPrimPreorden ( SArbolBinPtr * p_arbbpObj );
-void SArbBinPtrMoverASigPreorden ( SArbolBinPtr * p_arbbpObj );
-void SArbBinPtrMoverAAntPreorden ( SArbolBinPtr * p_arbbpObj );
-void SArbBinPtrMoverAUltPreorden ( SArbolBinPtr * p_arbbpObj );
+int SArbBinPtrMoverAPrimPreorden ( SArbolBinPtr * p_arbbpObj );
+int SArbBinPtrMoverASigPreorden ( SArbolBinPtr * p_arbbpObj );
+int SArbBinPtrMoverAPrimPostorden ( SArbolBinPtr * p_arbbpObj );
+int SArbBinPtrMoverASigPostorden ( SArbolBinPtr * p_arbbpObj );
+int SArbBinPtrMoverAPrimInorden ( SArbolBinPtr * p_arbbpObj );
+int SArbBinPtrMoverASigInorden ( SArbolBinPtr * p_arbbpObj );
 
 void SArbBinPtrDesposicionar ( SArbolBinPtr * p_arbbpObj );
 int	SArbBinPtrEstaPosicionado ( SArbolBinPtr * p_arbbpObj );

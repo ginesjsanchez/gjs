@@ -14,11 +14,12 @@ SColaPtr * SColpCrear ()
 	if ( ES_VALIDO ( p_colObj ) )
 	{
 		p_colObj->p_lisObjetos = SLispCrear ();
+		SLispDesactivarLiberacionMemoria ( p_colObj->p_lisObjetos );
 	}
 	return ( p_colObj );
 }
 
-void SColpDestruir ( SColaPtr ** p_p_colObj )
+void SColpDestruir ( SColaPtr ** p_p_colObj, int iLiberar )
 {
 	SColaPtr * p_colObj;
 	
@@ -28,6 +29,10 @@ void SColpDestruir ( SColaPtr ** p_p_colObj )
 
 		if ( ES_VALIDO ( p_colObj ) )
 		{
+			if ( iLiberar == 1 )
+			{
+				SLispActivarLiberacionMemoria ( p_colObj->p_lisObjetos );
+			}
 			SLispDestruir ( &(p_colObj->p_lisObjetos) );
 			MemLiberar ( (void **) p_p_colObj );
 		}
@@ -74,7 +79,7 @@ int SColpEstaVacia ( SColaPtr * p_colObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }
@@ -83,7 +88,7 @@ byte * SColpPrimero ( SColaPtr * p_colObj )
 {
 	byte * p_bymRes;
 
-	if ( ES_VALIDO ( p_colObj ) )
+	if ( SColpEstaVacia ( p_colObj ) == 0 )
 	{
 		p_bymRes = SLispElemento ( p_colObj->p_lisObjetos, 0 );
 	}
@@ -98,7 +103,7 @@ byte * SColpUltimo ( SColaPtr * p_colObj )
 {
 	byte * p_bymRes;
 
-	if ( ES_VALIDO ( p_colObj ) )
+	if ( SColpEstaVacia ( p_colObj ) == 0 )
 	{
 		p_bymRes = SLispElemento ( p_colObj->p_lisObjetos, 
 								  SLispNumElementos ( p_colObj->p_lisObjetos ) - 1 );
@@ -114,7 +119,7 @@ byte * SColpElemento ( SColaPtr * p_colObj, int iElem )
 {
 	byte * p_bymRes;
 
-	if ( ES_VALIDO ( p_colObj ) )
+	if ( SColpEstaVacia ( p_colObj ) == 0 )
 	{
 		p_bymRes = SLispElemento ( p_colObj->p_lisObjetos, iElem );
 	}
@@ -129,7 +134,7 @@ byte * SColpDesencolar ( SColaPtr * p_colObj )
 {
 	byte * p_bymRes;
 
-	if ( ES_VALIDO ( p_colObj ) )
+	if ( SColpEstaVacia ( p_colObj ) == 0 )
 	{
 		p_bymRes = SLispElemento ( p_colObj->p_lisObjetos, 0 );
 		if ( ES_VALIDO ( p_bymRes ) )
@@ -157,7 +162,7 @@ int SColpEncolar ( SColaPtr * p_colObj, byte * p_bymObj )
 	}
 	else
 	{
-		iRes = 1;
+		iRes = 0;
 	}
 	return ( iRes );
 }
@@ -166,7 +171,7 @@ int SColpEliminarPrimero ( SColaPtr * p_colObj )
 {
 	int	iRes;
 
-	if ( SColpEsValida ( p_colObj ) == 1 ) 
+	if ( SColpEstaVacia ( p_colObj ) == 0 )
 	{
 		iRes = SLispEliminarElem ( p_colObj->p_lisObjetos, 0 );
 	}
@@ -181,7 +186,7 @@ int SColpEliminarUltimo ( SColaPtr * p_colObj )
 {
 	int	iRes;
 
-	if ( SColpEsValida ( p_colObj ) == 1 ) 
+	if ( SColpEstaVacia ( p_colObj ) == 0 )
 	{
 		iRes = SLispEliminarElem ( p_colObj->p_lisObjetos, 
 								  SLispNumElementos ( p_colObj->p_lisObjetos ) - 1 );
@@ -197,7 +202,7 @@ int SColpEliminar ( SColaPtr * p_colObj, int iElem )
 {
 	int	iRes;
 
-	if ( SColpEsValida ( p_colObj ) == 1 ) 
+	if ( SColpEstaVacia ( p_colObj ) == 0 )
 	{
 		iRes = SLispEliminarElem ( p_colObj->p_lisObjetos, iElem );
 	}
@@ -208,13 +213,18 @@ int SColpEliminar ( SColaPtr * p_colObj, int iElem )
 	return ( iRes );
 }
 
-int SColpVaciar ( SColaPtr * p_colObj )
+int SColpVaciar ( SColaPtr * p_colObj, int iLiberar )
 {
 	int	iRes;
 
-	if ( SColpEsValida ( p_colObj ) == 1 ) 
+	if ( SColpEstaVacia ( p_colObj ) == 0 )
 	{
+		if ( iLiberar == 1 )
+		{
+			SLispActivarLiberacionMemoria ( p_colObj->p_lisObjetos );
+		}
 		iRes = SLispVaciar ( p_colObj->p_lisObjetos );
+		SLispDesactivarLiberacionMemoria ( p_colObj->p_lisObjetos );
 	}
 	else
 	{

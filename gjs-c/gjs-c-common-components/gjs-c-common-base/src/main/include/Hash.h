@@ -1,0 +1,36 @@
+#ifndef _ORG_GJS_C_CC_HASH_H
+#define _ORG_GJS_C_CC_HASH_H
+
+
+
+
+#include <BaseConfig.h>
+
+
+
+
+
+unsigned int HashByte ( byte byVal );
+unsigned int HashCaracter ( char cVal );
+unsigned int HashBinario ( byte * p_byVal, int iTam );
+unsigned int HashEntero ( int iVal );
+unsigned int HashEnteroLargo ( long lVal );
+unsigned int HashEnteroSinSigno ( unsigned int uiVal );
+unsigned int HashEnteroLargoSinSigno ( unsigned long ulVal );
+#if ( defined ( LLONG ) )
+unsigned int HashEnteroDobleLargo ( llong llVal );
+unsigned int HashEnteroDobleLargoSinSigno ( llong ullVal );
+#endif
+unsigned int HashReal ( float fVal );
+unsigned int HashRealDoble ( double dVal );
+
+unsigned int HashCadena ( const char * p_cVal );
+
+
+#endif
+
+
+
+
+
+

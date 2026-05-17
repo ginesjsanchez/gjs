@@ -18,13 +18,13 @@ booleano BoolNormalizar ( booleano bValor )
 {
 	booleano bRes;
 
-	if ( bValor == 0 )
+	if ( bValor > 0 )
 	{
-		bRes = BOOL_VAL_FALSO;
+		bRes = BOOL_VAL_CIERTO;
 	}
 	else
 	{
-		bRes = BOOL_VAL_CIERTO;
+		bRes = BOOL_VAL_FALSO;
 	}
 	return ( bRes );
 }

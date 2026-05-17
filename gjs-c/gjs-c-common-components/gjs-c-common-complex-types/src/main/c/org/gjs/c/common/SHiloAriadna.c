@@ -57,7 +57,7 @@ int SHilAriEstaVacio ( SHiloAriadna * p_pilObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }
@@ -109,21 +109,6 @@ int SHilAriApilar ( SHiloAriadna * p_pilObj, char * p_cTexto )
 	if ( ES_VALIDO ( p_pilObj ) && ES_VALIDO ( p_cTexto ) )
 	{
 		iRes = SPilLitApilar ( p_pilObj->p_pilTextos, p_cTexto );
-	}
-	else
-	{
-		iRes = -1;
-	}
-	return ( iRes );
-}
-
-int SHilAriApilarDup ( SHiloAriadna * p_pilObj, const char * p_cTexto )
-{
-	int	iRes;
-
-	if ( ES_VALIDO ( p_pilObj ) && ES_VALIDO ( p_cTexto ) )
-	{
-		iRes = SPilLitApilarDup ( p_pilObj->p_pilTextos, p_cTexto );
 	}
 	else
 	{

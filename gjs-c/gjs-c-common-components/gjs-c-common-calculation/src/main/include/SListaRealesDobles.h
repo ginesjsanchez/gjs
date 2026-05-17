@@ -1,5 +1,5 @@
-#ifndef _ORG_GJS_C_CC_SLISTAREALESDOBLE_H
-#define _ORG_GJS_C_CC_SLISTAREALESDOBLE_H
+#ifndef _ORG_GJS_C_CC_SLISTAREALESDOBLES_H
+#define _ORG_GJS_C_CC_SLISTAREALESDOBLES_H
 
 
 
@@ -55,7 +55,7 @@ void SLisRealdDeposicionar ( SListaRealesDobles * p_lisObj );
 
 int SLisRealdEsNulo ( SListaRealesDobles * p_lisObj );
 int SLisRealdEstaEnFinal ( SListaRealesDobles * p_lisObj );
-int SLisRealdEstaEnIncio ( SListaRealesDobles * p_lisObj );
+int SLisRealdEstaEnInicio ( SListaRealesDobles * p_lisObj );
 
 int SLisRealdInsertar ( SListaRealesDobles * p_lisObj, double dDato );
 int SLisRealdInsertarDelante ( SListaRealesDobles * p_lisObj, double dDato );

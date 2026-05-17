@@ -14,7 +14,14 @@ STablaLiterales * STabLitCrear ( int iNumFilas, int iNumColumnas )
 		if ( ES_VALIDO ( p_tabObj ) )
 		{
 			p_tabObj->p_tabDatos = STabpCrear ( iNumFilas, iNumColumnas );
-			STabpActivarLiberacionMemoria ( p_tabObj->p_tabDatos );
+			if ( ES_VALIDO ( p_tabObj->p_tabDatos ) )
+			{
+				STabpActivarLiberacionMemoria ( p_tabObj->p_tabDatos );
+			}
+			else
+			{
+				STabLitDestruir ( &p_tabObj );
+			}
 		}
 	}
 	else
@@ -143,7 +150,7 @@ int STabLitAsignarDup ( STablaLiterales * p_tabObj, int iFila, int iColumna, con
 		{
 			iActLib = STabpLiberacionMemoriaActivada ( p_tabObj->p_tabDatos );
 			STabpActivarLiberacionMemoria ( p_tabObj->p_tabDatos );
-			iRes = STabpAsignar ( p_tabObj->p_tabDatos, iFila, iColumna, (byte *) p_cDatos );
+			iRes = STabpAsignar ( p_tabObj->p_tabDatos, iFila, iColumna, (byte *) p_cElem );
 			if ( iRes != 1 )
 			{
 				MemLiberar ( (void **) &p_cElem );
@@ -234,7 +241,6 @@ int STabLitExiste ( STablaLiterales * p_tabObj, const char * p_cDato )
 
 	if ( ES_VALIDO ( p_tabObj ) && ES_VALIDO ( p_cDato )  ) 
 	{
-		iRes = 0;
 		iRes = 0;
 		iFila = 0;
 		while ( ( iFila < STabLitNumFilas ( p_tabObj ) ) && ( iRes == 0 ) )

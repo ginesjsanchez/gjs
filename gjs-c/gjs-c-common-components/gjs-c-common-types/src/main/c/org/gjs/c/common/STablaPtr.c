@@ -18,6 +18,10 @@ STablaPtr * STabpCrear ( int iNumFilas, int iNumColumnas )
 			p_tabObj->iNumFilas = iNumFilas;
 			p_tabObj->iNumColumnas = iNumColumnas;
 			p_tabObj->p_vecElementos = SVecpCrear ( iNumFilas * iNumColumnas );
+			if ( ES_NULO ( p_tabObj->p_vecElementos ) ) 
+			{
+				STabpDestruir ( &p_tabObj );
+			}
 		}
 	}
 	else
@@ -182,7 +186,7 @@ int STabpLimpiar ( STablaPtr * p_tabObj )
 {
 	int	iRes;
 
-	if ( STabpEsValida ( p_tabObj ) == 1 ) 
+	if ( ES_VALIDO ( p_tabObj ) )
 	{
 		iRes = SVecpLimpiar ( p_tabObj->p_vecElementos );
 	}

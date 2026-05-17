@@ -89,6 +89,9 @@ typedef int (* PFUNINTIIII)(int,int,int,int);
 typedef int (* PFUNINTIIIII)(int,int,int,int,int);
 typedef int (* PFUNINTIIIIII)(int,int,int,int,int,int);
 
+typedef int (* PFUNINTPVPV)(void *,void *);
+
+
 
 typedef long (* PFUNLONGV)(void);
 typedef long (* PFUNLONGI)(long);

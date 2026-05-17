@@ -98,6 +98,43 @@ llong ConvRealAEnteroDobleLargo ( float fVal, int iTruncar )
 	return ( llRes );
 }
 
+ullong ConvRealAEnteroDobleLargoSinSigno ( float fVal, int iTruncar )
+{
+	ullong	ullRes;
+	float	fEntero;
+
+	fEntero = NumParteEnteraReal ( fVal );
+	if ( iTruncar == 0 )
+	{
+		if ( fVal >= 0.0 )
+		{
+			if ( fVal - fEntero >= 0.5 )
+			{
+				fEntero = (float) ceil ( fVal );
+			}
+		}
+		else
+		{
+			if ( fVal - fEntero <= -0.5 )
+			{
+				fEntero = (float) floor ( fVal );
+			}
+		}
+	}
+	if ( fEntero > ULLONG_MAX )
+	{
+		ullRes = ULLONG_MAX;
+	}
+	else if ( fEntero > 0 )
+	{
+		ullRes = (ullong) fEntero;
+	}
+	else
+	{
+		ullRes = 0;
+	}
+	return ( ullRes );
+}
 #endif
 
 long ConvRealAEnteroLargo ( float fVal, int iTruncar )
@@ -180,6 +217,44 @@ llong ConvRealDobleAEnteroDobleLargo ( double dVal, int iTruncar )
 		llRes = (llong) dEntero;
 	}
 	return ( llRes );
+}
+
+ullong ConvRealDobleAEnteroDobleLargoSinSigno ( double dVal, int iTruncar )
+{
+	ullong	ullRes;
+	double	dEntero;
+
+	dEntero = NumParteEnteraRealDoble ( dVal );
+	if ( iTruncar == 0 )
+	{
+		if ( dVal >= 0.0 )
+		{
+			if ( dVal - dEntero >= 0.5 )
+			{
+				dEntero = ceil ( dVal );
+			}
+		}
+		else
+		{
+			if ( dVal - dEntero <= -0.5 )
+			{
+				dEntero = floor ( dVal );
+			}
+		}
+	}
+	if ( dEntero > ULLONG_MAX )
+	{
+		ullRes = ULLONG_MAX;
+	}
+	else if ( dEntero > 0 )
+	{
+		ullRes = (ullong) dEntero;
+	}
+	else
+	{
+		ullRes = 0;
+	}
+	return ( ullRes );
 }
 #endif
 
@@ -383,6 +458,46 @@ llong ConvCadenaAEnteroDobleLargo ( const char * p_cVal )
 	}
 	return ( llVal );
 }
+
+ullong ConvCadenaAEnteroDobleLargoSinSigno ( const char * p_cVal )
+{
+	llong	ullVal;
+	int		iPos;
+	llong	ullPeso;
+	int		iRes;
+	int		iDig;
+
+	if ( ES_VALIDO ( p_cVal ) )
+	{
+		iPos = CadLongitud ( p_cVal ) - 1;
+		ullVal = 0;
+		ullPeso = 1;
+		iRes = 1;
+		while ( ( iPos >= 0 ) && ( iRes == 1 ) )
+		{
+			if ( ( p_cVal [ iPos ] >= '0' ) && ( p_cVal [ iPos ] <= '9' ) )
+			{
+				iDig = ((int) p_cVal [ iPos ]) - ((int) '0');
+				ullVal = ullVal + iDig * ullPeso;
+				ullPeso = ullPeso * 10;
+				iPos = iPos - 1;
+			}
+			else
+			{
+				iRes = 0;
+			}
+		}	
+		if ( iRes == 0 )
+		{
+			ullVal = 0;
+		}
+	}
+	else
+	{
+		ullVal = 0;
+	}
+	return ( ullVal );
+}
 #endif
 
 char * ConvEnteroACadena ( int iVal )
@@ -581,6 +696,55 @@ char * ConvEnteroDobleLargoACadena ( llong llVal )
 				iPos = iPos - 1;
 			}	
 			if ( llVal > 0 )
+			{
+				/* Error : */
+				MemLiberar ( (void **) &p_cRes );
+				p_cRes = NULL;
+			}
+		}
+	}
+	return ( p_cRes );
+}
+
+char * ConvEnteroDobleLargoSinSignoACadena ( ullong ullVal )
+{
+	int			iDig;
+	int			iPosMin;
+	int			iPos;
+	int			iOrden;
+	int			iTam;
+	char *		p_cRes;
+	int			iDec;		
+
+	iOrden = NumDigitosEnteroDobleLargoSinSigno ( ullVal );
+	iTam = iOrden + 1;
+	iDec = 0;
+	p_cRes = CadCrear ( iTam - 1 );
+	if ( ES_VALIDO ( p_cRes ) )
+	{
+		iPosMin = 0;
+		if ( ullVal == 0 )
+		{
+			p_cRes [ 0 ] = (char) 48;
+		}
+		else
+		{
+			iPos = iTam - 2;
+			while ( ( ullVal > 0 ) && ( iPos >= iPosMin ) )
+			{
+				iDig = (int) ( ullVal % 10 );
+				ullVal = ullVal / 10;
+				if ( iPos == iTam - 2 )
+				{
+					if ( iDec == 1 )
+					{
+						iDig = iDig + 1;
+					}
+				}
+				p_cRes [ iPos ] = (char) ( 48 + iDig );
+				iPos = iPos - 1;
+			}	
+			if ( ullVal > 0 )
 			{
 				/* Error : */
 				MemLiberar ( (void **) &p_cRes );
@@ -1007,7 +1171,34 @@ long ConvCadenaHexAEnteroLargo ( const char * p_cVal )
 	return ( (long) ConvCadenaHexAEnteroLargoSinSigno ( p_cVal ) );
 }
 
+#if ( defined ( LLONG ) )
+ullong ConvCadenaHexAEnteroDobleLargoSinSigno ( const char * p_cVal )
+{
+	ullong ullVal;
 
+	if ( ES_VALIDO ( p_cVal ) )
+	{
+		if ( p_cVal [ 0 ] == '&' )
+		{
+			sscanf ( p_cVal, "&%llx", &ullVal );
+		}
+		else
+		{
+			sscanf ( p_cVal, "%llx", &ullVal );
+		}
+	}
+	else
+	{
+		ullVal = 0;
+	}
+	return ( ullVal );
+}
+
+llong ConvCadenaHexAEnteroDobleLargo( const char * p_cVal )
+{
+	return ( (llong) ConvCadenaHexAEnteroLargoSinSigno ( p_cVal ) );
+}
+#endif
 
 
 

@@ -58,7 +58,7 @@ int SLispBuscar ( SListaPtr * p_lisObj, byte * p_byDatos, int iNumBytes );
 
 int SLispEsNulo ( SListaPtr * p_lisObj );
 int SLispEstaEnFinal ( SListaPtr * p_lisObj );
-int SLispEstaEnIncio ( SListaPtr * p_lisObj );
+int SLispEstaEnInicio ( SListaPtr * p_lisObj );
 
 int SLispEstablecer ( SListaPtr * p_lisObj, byte * p_byDatos );
 int SLispInsertar ( SListaPtr * p_lisObj, byte * p_byDatos );

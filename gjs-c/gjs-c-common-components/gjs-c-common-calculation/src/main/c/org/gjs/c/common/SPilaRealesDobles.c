@@ -1,7 +1,7 @@
 #include "SPilaRealesDobles.h"
 
-#include "TiposBasicosConfig.h"
-
+#include "CalculoConfig.h"
+#include "CalculoOperaciones.h"
 
 
 
@@ -58,7 +58,7 @@ int SPilRealdEstaVacia ( SPilaRealesDobles * p_pilObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }

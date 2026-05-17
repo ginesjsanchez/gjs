@@ -41,20 +41,21 @@ int SArbVaciar ( SArbol * p_arbObj );
 
 SNodo * SArbActual ( SArbol * p_arbObj );
 
-void SArbMoverARaiz ( SArbol * p_arbObj );
-void SArbMoverAPadre ( SArbol * p_arbObj );
-void SArbMoverAHijo ( SArbol * p_arbObj, int iHijo );
-void SArbMoverAPrimHijo ( SArbol * p_arbObj );
-void SArbMoverAUltHijo ( SArbol * p_arbObj );
-void SArbMoverAPrimHermano ( SArbol * p_arbObj );
-void SArbMoverASigHermano ( SArbol * p_arbObj );
-void SArbMoverAAntHermano ( SArbol * p_arbObj );
-void SArbMoverAUltHermano ( SArbol * p_arbObj );
+int SArbMoverARaiz ( SArbol * p_arbObj );
+int SArbMoverAPadre ( SArbol * p_arbObj );
+int SArbMoverAHijo ( SArbol * p_arbObj, int iHijo );
+int SArbMoverAPrimHijo ( SArbol * p_arbObj );
+int SArbMoverAUltHijo ( SArbol * p_arbObj );
+int SArbMoverAPrimHermano ( SArbol * p_arbObj );
+int SArbMoverASigHermano ( SArbol * p_arbObj );
+int SArbMoverAAntHermano ( SArbol * p_arbObj );
+int SArbMoverAUltHermano ( SArbol * p_arbObj );
 
-void SArbMoverAPrimPreorden ( SArbol * p_arbObj );
-void SArbMoverASigPreorden ( SArbol * p_arbObj );
-void SArbMoverAAntPreorden ( SArbol * p_arbObj );
-void SArbMoverAUltPreorden ( SArbol * p_arbObj );
+int SArbMoverAPrimPreorden ( SArbol * p_arbObj );
+int SArbMoverASigPreorden ( SArbol * p_arbObj );
+int SArbMoverAPrimPostorden ( SArbol * p_arbObj );
+int SArbMoverASigPostorden ( SArbol * p_arbObj );
+
 
 void SArbDesposicionar ( SArbol * p_arbObj );
 int	SArbEstaPosicionado ( SArbol * p_arbObj );

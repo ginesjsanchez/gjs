@@ -33,7 +33,7 @@ SDefDato * SDefDatCrear ( unsigned long	ulId, const char * p_cNombre, int iTipo,
 			{
 				p_ddatObj->ulId = ulId;
 				p_ddatObj->iTipo = iTipo;
-				if ( iReferencia == 1 )
+				if ( iReferencia > 0 )
 				{
 					p_ddatObj->iReferencia = 1;
 				}
@@ -97,14 +97,14 @@ void SDefDatDestruir ( SDefDato ** p_p_ddatObj )
 
 		if ( ES_VALIDO ( p_ddatObj ) )
 		{
-			MemLiberar ( (void **) &(p_ddatObj->p_cNombre [0]) );
-			MemLiberar ( (void **) &(p_ddatObj->p_cValorDef [0]) );
+			MemLiberar ( (void **) &(p_ddatObj->p_cNombre) );
+			MemLiberar ( (void **) &(p_ddatObj->p_cValorDef) );
 			MemLiberar ( (void **) p_p_ddatObj );
 		}
 	}
 }
 
-int SDefDatEsValida ( SDefDato * p_ddatObj )
+int SDefDatEsValido ( SDefDato * p_ddatObj )
 {
 	int iRes;
 

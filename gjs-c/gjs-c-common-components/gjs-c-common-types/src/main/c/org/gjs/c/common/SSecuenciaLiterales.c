@@ -58,7 +58,7 @@ int SSecLitEstaVacia ( SSecuenciaLiterales * p_secObj )
 	}
 	else
 	{
-		iRes = 0;
+		iRes = 1;
 	}
 	return ( iRes );
 }
@@ -121,7 +121,7 @@ int SSecLitInsertarDup ( SSecuenciaLiterales * p_secObj, const char * p_cDatos )
 		{
 			iActLib = SSecpLiberacionMemoriaActivada ( p_secObj->p_secDatos );
 			SSecpActivarLiberacionMemoria ( p_secObj->p_secDatos );
-			iRes = SSecpInsertar ( p_secObj->p_secDatos, (byte *) p_cDatos );
+			iRes = SSecpInsertar ( p_secObj->p_secDatos, (byte *) p_cElem );
 			if ( iRes != 1 )
 			{
 				MemLiberar ( (void **) &p_cElem );
